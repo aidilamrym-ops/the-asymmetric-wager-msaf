@@ -429,7 +429,7 @@ prove things.
 | requirement | state |
 |---|---|
 | suite 11/11 exit 0 | **yes** — `passed=11 failed=0 not_run=0 of 11` as of F5 (2026-10-05), exit 0, run as the final act of F5 |
-| F3 and F4 gates exit 0 | yes — 10 conditions, P1…P9 |
+| F3 and F4 gates exit 0 | yes — 10 conditions, P1…P9, as of F5 (2026-10-05) |
 | every sub-task has an injection that **fails** | F5-1 B1–B4, F5-2 20/20, F5-3 7/7, F5-4 14/14, F5-5 `--fast` exit 2 |
 | encoding 0 problems | yes |
 | report + `Brain.MD` in sync | `Brain.MD` at v1.7 |

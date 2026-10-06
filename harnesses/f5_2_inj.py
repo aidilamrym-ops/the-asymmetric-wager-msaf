@@ -11,7 +11,17 @@ Proves every claim the new P9 conditions make:
   * a missing licence basis, an unresolvable snapshot pointer, a snapshot
     aimed at a non-archived source, an unknown evidence pointer, a record
     dropped from the ledger and a record added but never cited are each caught
-  * the other gate stays green for every mutation, so nothing breaks sideways
+  * mutations that do not touch what the other gate re-derives leave that
+    other gate green, so nothing breaks sideways
+
+A9 added `P11 LIVENESS_RECORD` to `provenance_check.py`.  P11 re-derives its
+URL expectations from the same `archive` section of `theorem_provenance.json`
+that these register mutations touch, so G3 (layer relabelled), G4 (illegal
+layer) and G9 (archive list removed) are now caught by **both** gates: f4 via
+P9 ARCHIVE_CONSISTENCY, f3 via P11.  That is a second detector over the same
+register, not a sideways break, and those three cases are therefore expected
+to fail both.  The "other gate stays green" clause still holds for every case
+whose mutation P11 does not restate.
 
 Pattern counts were measured in the live files before being written here, and
 two controls prove the harness is not simply failing everything.
@@ -165,10 +175,10 @@ CASES = [
     ("G2  flip one byte of that snapshot", "f4", 1,
      [lambda: flip_byte("wikipedia_ihara_zeta_function.html")],
      []),
-    ("G3  archive layer A -> B, access unchanged", "f4", 1, [],
+    ("G3  archive layer A -> B, access unchanged", "both", 1, [],
      [(TP, in_obj(TP, '"identifier": "%s"' % IHARA,
                   '"layer": "A"', '"layer": "B"'))]),
-    ("G4  archive layer set to an illegal value", "f4", 1, [],
+    ("G4  archive layer set to an illegal value", "both", 1, [],
      [(TP, in_obj(TP, '"identifier": "%s"' % RS,
                   '"layer": "C"', '"layer": "Z"'))]),
     ("G5  archive licence basis key removed", "f4", 1, [],
@@ -194,7 +204,7 @@ CASES = [
                '      "license_basis": "test record",\n'
                '      "retrieved_utc": "2026-10-05"\n'
                '    },\n'))]),
-    ("G9  archive list removed from the register", "f4", 1, [],
+    ("G9  archive list removed from the register", "both", 1, [],
      [(TP, sub(TP, '"archive": [', '"archiveXX": ['))]),
 ]
 
@@ -245,7 +255,8 @@ def main():
                 fails.append("%s: %s" % (label, why))
                 sys.stdout.write("\n".join(
                     "      " + l for l in detail.splitlines()
-                    if "P9" in l or "FAIL " in l or "Traceback" in l)[:1400]
+                    if "P9" in l or "P11" in l or "FAIL " in l
+                    or "Traceback" in l)[:1400]
                     + "\n")
             for path, blob in restores:
                 write(path, blob)

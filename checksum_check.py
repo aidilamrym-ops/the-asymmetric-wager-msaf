@@ -5,8 +5,8 @@ WHY THIS EXISTS
 ---------------
 `guinand-weil-rigorous-numerics-main/CHECKSUM.sha256` pins 116 files, and every
 one of its entries names a file *inside that sub-repository*. Nothing in it
-reaches the workspace root, and no gate read it, so the 39 root artefacts
-(the registers, the reports, the gates themselves) plus `provenance/` and
+reaches the workspace root, and no gate read it, so the root artefacts (the
+registers, the reports, the gates themselves) plus `provenance/` and
 `harnesses/` had no recorded integrity baseline at all -- F0 residual 4 and
 F5 residual F5-R6. This closes both.
 
@@ -15,7 +15,7 @@ SCOPE
     root files          every regular file directly under HERE, except
                         CHECKSUM.sha256 itself (a manifest never hashes itself)
     provenance/         the layered evidence archive, recursively
-    harnesses/          the thirteen fault-injection harnesses, recursively
+    harnesses/          the proof harnesses, recursively
 
 Sub-repositories are deliberately NOT covered: BootLoops-ai/, Dream-RSI-main/,
 guinand-weil-rigorous-numerics-main/, hexagon_mhv_symbol_weight_18/, mcp/ and

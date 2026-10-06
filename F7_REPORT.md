@@ -264,10 +264,10 @@ and §5.5 says precisely which two files are.
 
 | check | command | result |
 |---|---|---|
-| external provenance gate | `python provenance_check.py` | exit **0**, `GATE: PASS -- 5 quantities, 8 evidence snapshots, 5 reference facts, 10 conditions` |
+| external provenance gate | `python provenance_check.py` | exit **0** as of 2026-10-06, `GATE: PASS -- 5 quantities, 8 evidence snapshots, 5 reference facts, 10 conditions` |
 | borrowed-authority gate | `python theorem_provenance_check.py` | exit **0**, `P9 ARCHIVE_CONSISTENCY 15 archived sources, layers agree with access, every layer-A snapshot hash-verifies, no uncited record`, `THEOREM PROVENANCE CHECK: every borrowed authority is registered, evidenced and closed.` |
 | layered-archive injection | `harnesses/f5_2_inj.py` | exit **0**, `HARNESS: PASS -- 20/20 cases behaved as expected, registers byte-identical, both gates green at the end`, `registers restored byte-identical: True`, `final: f3=0 f4=0` |
-| report/prose gate | `python report_claim_check.py` | exit **0** as of 2026-10-06, `report_claim_check: PASS` — header `suite=14`, `harnesses=21`, `manifest=81`, `brain=v1.14`, `P8 Brain.MD names every one of the 52 files at the workspace root` |
+| report/prose gate | `python report_claim_check.py` | exit **0** as of 2026-10-06, `report_claim_check: PASS` — header `suite=14`, `harnesses=21`, `manifest=81`, `brain=v1.13`, `P8 Brain.MD names every one of the 52 files at the workspace root` |
 | manifest | `python checksum_check.py` | exit **0** as of 2026-10-06, `ok   CHECKSUM  matched 81/81 listed, 81 on disk`, `CHECKSUM: PASS -- 81 files match CHECKSUM.sha256` |
 | harness rig | `python harness_check.py` | exit **0** as of 2026-10-06, `passed=21  failed=0  not_run=0  of 21  |  workspace byte-identical`, `HARNESS: PASS -- 21/21 behaved as expected, workspace byte-identical` |
 | full suite | `python suite_check.py --with-harness` | exit **0** as of 2026-10-06, `passed=15  failed=0  not_run=0  of 15`, `SUITE: PASS -- every listed gate returned 0` |
@@ -311,7 +311,7 @@ how a report starts claiming things it did not do.
 
 It was registered, because the gates require that: `report_claim_check.py` P8
 demands that `Brain.MD` name every root file, and P3 demands that the manifest
-list every file in scope. So the manifest moved from 80 to 81 rows and the map
+list every file in scope. So, as of F7 (2026-10-06), the manifest moved from 80 to 81 rows and the map
 gained a row that says, in as many words, that the file is a queued task and not
 a corpus artefact.
 
@@ -332,7 +332,7 @@ did not author is a worse surprise than recording the fact. It is `F7-R4`.
 |---|---|---|
 | `F7-R1` | the $N=400$ evidence exists only in this workspace, never upstream | **recorded, not closed** — §5.6 names the eight files and says why. Publishing them upstream is an operator decision about someone else's repository, not a correction of this one |
 | `F7-R2` | the Planck parameter table is still not archived | **unchanged from F3** — the authority is layer C and the arXiv snapshot carries no occurrence of `diameter` or `comoving`, so `D_obs` still rests on a declared `probe_waived` reason. A snapshot of the table remains the candidate follow-up |
-| `F7-R3` | re-fetching is manual | the register records a date, not a liveness guarantee; no URL monitor runs in this workspace. `provenance_check.py` P2 verifies *bytes*, which is the property a gate can actually hold |
+| `F7-R3` | re-fetching is manual | **CLOSED 2026-10-06 (A9).** `url_liveness_check.py` re-fetches every URL the register knows and writes `provenance/url_liveness.json`; `provenance_check.py` P11 holds that record to the register offline (exact URL-set equality, restated pins, no unresolved contradiction). The probe is deliberately **not** a suite gate — the suite stays offline — and `DIVERGED` (a page edited upstream since the snapshot) is recorded but never fails, because the register pins a snapshot at `retrieved_utc`, not today's bytes. See `F8_REPORT.md` |
 | `F7-R4` | `Tugas tambahan.md` carries CRLF line endings | **recorded, not fixed** — §7.1. Normalising it would edit bytes this phase did not write; no gate reads its line endings. Inside the sub-repo the same scan reports 40 CR files, 1 BOM and 8 non-UTF-8 files, already carried by `F2` |
 
 ---

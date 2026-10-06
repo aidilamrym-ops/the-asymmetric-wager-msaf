@@ -23,6 +23,16 @@ znone_check.py and from the F2-7 hardening notes):
 Scope note: this gate does not re-derive the subjects of msaf_zeta_check.py,
 landauer_check.py or gw_verify_production.py. Those remain the gates of record
 for their own claims; this gate certifies the external provenance chain.
+
+A9 addition (P11): the register used to carry a *retrieval date* and nothing
+else about a source's present state, so learning that a cited URL had moved
+meant rereading it by hand -- F7-R3. `url_liveness_check.py` now re-fetches the
+whole set on demand and writes `provenance/url_liveness.json`; P11 is the
+offline half, and it is what keeps this gate a gate: the record must exist,
+must cover exactly the register's URL set, must restate the register's own
+pins rather than its own, and must not sit on top of a contradiction the probe
+already found.  The probe itself is deliberately outside this file, because a
+gate whose answer depends on a publisher's uptime is not a gate.
 """
 
 import hashlib
@@ -43,6 +53,26 @@ SF_CAP = 40
 HERE = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = os.path.join(HERE, "external_constants.json")
 REFS_PATH = os.path.join(HERE, "REFERENCES.md")
+LIVENESS_PATH = os.path.join(HERE, "provenance", "url_liveness.json")
+
+# One entry per numbered condition P1..P11, so the "N conditions" line cannot
+# drift away from the checks that actually run.  "Conditions" counts the
+# numbers, not the print statements: P3 and P4 share one section header and
+# one "delta" line, and F3_REPORT.md §9 records the convention ("the 9th is
+# P9 LAYER_CONSISTENCY, the 10th is P10 REF_MARKERS").
+CONDITIONS = (
+    "P1  SCHEMA",
+    "P2  EVIDENCE_HASH",
+    "P3  SITE_FOUND",
+    "P4  SITE_VALUE",
+    "P5  DERIVED",
+    "P6  PROVENANCE",
+    "P7  REFERENCES_COVERAGE",
+    "P8  REFERENCE_FACT_VALUE",
+    "P9  LAYER_CONSISTENCY",
+    "P10 REF_MARKERS",
+    "P11 LIVENESS_RECORD",
+)
 
 failures = []
 notes = []
@@ -771,6 +801,147 @@ def main(argv):
           % ("ok  " if len(failures) == p10_base else "FAIL  ",
              len(failures) - p10_base, markers_seen, stray))
 
+    # ------------------------------------------------ P11 LIVENESS_RECORD ---
+    # The offline half of F7-R3.  `url_liveness_check.py` re-fetches every URL
+    # the register knows about and writes provenance/url_liveness.json; this
+    # condition refuses to let that record drift away from the register or sit
+    # on top of a contradiction the probe has already found.
+    #
+    # Deliberately NOT checked here:
+    #   * freshness -- the record carries `checked_utc`, and a gate that fails
+    #     by the clock would break the offline contract the suite exists to
+    #     keep.  Age is reported by the probe, not judged by this gate.
+    #   * whether the live bodies still match the archived snapshots -- see
+    #     "WHY DIVERGED DOES NOT FAIL" in url_liveness_check.py: the register
+    #     pins a snapshot taken at `retrieved_utc`, and P2 already verifies
+    #     those bytes on disk.
+    p11_base = len(failures)
+    if not check(os.path.isfile(LIVENESS_PATH),
+                 "P11  LIVENESS_RECORD: %s is missing -- run "
+                 "python url_liveness_check.py and commit the record"
+                 % os.path.relpath(LIVENESS_PATH, HERE).replace("\\", "/")):
+        doc = None
+    else:
+        doc = load_or_die(LIVENESS_PATH, "provenance/url_liveness.json")
+    if doc is None and os.path.isfile(LIVENESS_PATH):
+        pass  # load_or_die already recorded the reason
+    elif doc is not None:
+        check(isinstance(doc, dict),
+              "P11  LIVENESS_RECORD: the record is not a JSON object")
+        if isinstance(doc, dict):
+            check(doc.get("schema") == "msaf-url-liveness/v1",
+                  "P11  LIVENESS_RECORD: unexpected schema %r"
+                  % doc.get("schema"))
+            stamp = doc.get("generated_utc")
+            check(isinstance(stamp, str) and stamp.endswith("Z") and len(stamp) >= 19,
+                  "P11  LIVENESS_RECORD: generated_utc is missing or malformed: %r"
+                  % stamp)
+            check(doc.get("tool") == "url_liveness_check.py",
+                  "P11  LIVENESS_RECORD: tool field is %r"
+                  % doc.get("tool"))
+            check(doc.get("probe") in ("network", "fixture"),
+                  "P11  LIVENESS_RECORD: probe field is %r" % doc.get("probe"))
+            recs = doc.get("records")
+            check(isinstance(recs, list) and recs,
+                  "P11  LIVENESS_RECORD: records is missing or empty")
+            recs = recs if isinstance(recs, list) else []
+            by_url = {}
+            for rec in recs:
+                if not check(isinstance(rec, dict),
+                             "P11  LIVENESS_RECORD: a record is not an object"):
+                    continue
+                u = rec.get("url")
+                if not check(isinstance(u, str) and u.startswith(("http://", "https://")),
+                             "P11  LIVENESS_RECORD: a record has no http url: %r" % (u,)):
+                    continue
+                check(u not in by_url,
+                      "P11  LIVENESS_RECORD: %s is probed twice" % u)
+                by_url[u] = rec
+                v = rec.get("verdict")
+                check(v in ("OK", "CHANGED", "UNREACHABLE", "DIVERGED"),
+                      "P11  LIVENESS_RECORD: %s has verdict %r" % (u, v))
+                st = rec.get("status")
+                check(st is None or isinstance(st, int),
+                      "P11  LIVENESS_RECORD: %s has status %r" % (u, st))
+                check(isinstance(rec.get("checked_utc"), str)
+                      and rec.get("checked_utc").endswith("Z"),
+                      "P11  LIVENESS_RECORD: %s has no checked_utc" % u)
+                check("sources" in rec and "bytes" in rec
+                      and "body_sha256" in rec and "detail" in rec
+                      and "error" in rec,
+                      "P11  LIVENESS_RECORD: %s is missing a recorded field" % u)
+            # The record must name exactly the register's URL set: a gap is a
+            # source nobody re-checked, an extra is a source this register has
+            # never heard of.
+            expected = {}
+            try:
+                import url_liveness_check as ulc
+            except Exception as exc:
+                ulc = None
+                fail("P11  LIVENESS_RECORD: url_liveness_check.py cannot be "
+                     "imported: %s" % exc)
+            if ulc is not None:
+                for u, srcs in ulc.collect_urls():
+                    expected[u] = srcs
+                missing = sorted(set(expected) - set(by_url))
+                extra = sorted(set(by_url) - set(expected))
+                check(not missing,
+                      "P11  LIVENESS_RECORD: %d URL(s) the register knows are "
+                      "absent from the record: %s"
+                      % (len(missing), ", ".join(missing[:5])))
+                check(not extra,
+                      "P11  LIVENESS_RECORD: %d URL(s) are in the record but "
+                      "not in the register: %s"
+                      % (len(extra), ", ".join(extra[:5])))
+                exp = ulc.expectations()
+                for u, e in exp.items():
+                    rec = by_url.get(u)
+                    if rec is None:
+                        continue
+                    if e.get("expected_status") is not None:
+                        check(rec.get("expected_status") == e["expected_status"],
+                              "P11  LIVENESS_RECORD: %s restates status %r, "
+                              "the register says %r"
+                              % (u, rec.get("expected_status"),
+                                 e["expected_status"]))
+                    if e.get("layer"):
+                        check(rec.get("layer") == e["layer"],
+                              "P11  LIVENESS_RECORD: %s restates layer %r, "
+                              "the register says %r"
+                              % (u, rec.get("layer"), e["layer"]))
+                    if e.get("archived_sha256"):
+                        check(rec.get("archived_sha256") == e["archived_sha256"],
+                              "P11  LIVENESS_RECORD: %s restates sha256 %r, "
+                              "the register pins %r -- the record may not "
+                              "invent its own pin"
+                              % (u, rec.get("archived_sha256"),
+                                 e["archived_sha256"]))
+                    if e.get("retrieved_utc"):
+                        check(rec.get("retrieved_utc") == e["retrieved_utc"],
+                              "P11  LIVENESS_RECORD: %s restates retrieved_utc "
+                              "%r, the register says %r"
+                              % (u, rec.get("retrieved_utc"),
+                                 e["retrieved_utc"]))
+                # A contradiction the probe already saw and the record kept is
+                # an unresolved defect, not a fact to be filed away.
+                contradictions = sorted(
+                    u for u, rec in by_url.items()
+                    if rec.get("verdict") in ("CHANGED", "UNREACHABLE"))
+                check(not contradictions,
+                      "P11  LIVENESS_RECORD: %d URL(s) recorded as contradicting "
+                      "the register are still in the record: %s -- fix the "
+                      "register or the source, then re-run the probe"
+                      % (len(contradictions), ", ".join(contradictions[:5])))
+            n_div = sum(1 for rec in by_url.values()
+                        if rec.get("verdict") == "DIVERGED")
+            n_ok = sum(1 for rec in by_url.values() if rec.get("verdict") == "OK")
+            print("%s P11  LIVENESS_RECORD          delta: %d (urls: %d, "
+                  "ok: %d, diverged: %d)"
+                  % ("ok  " if len(failures) == p11_base else "FAIL  ",
+                     len(failures) - p11_base, len(by_url), n_ok, n_div))
+    else:
+        print("FAIL  P11  LIVENESS_RECORD          record unreadable")
+
     # ------------------------------------------------------ verdict --------
     if failures:
         print("")
@@ -781,7 +952,8 @@ def main(argv):
         return 1
     print("")
     print("GATE: PASS -- %d quantities, %d evidence snapshots, %d reference "
-          "facts, 10 conditions" % (len(qu_list), len(ev_list), len(rf_list)))
+          "facts, %d conditions"
+          % (len(qu_list), len(ev_list), len(rf_list), len(CONDITIONS)))
     return 0
 
 

@@ -1,0 +1,499 @@
+{
+  "schema": "msaf-url-liveness/v1",
+  "tool": "url_liveness_check.py",
+  "generated_utc": "2026-10-06T13:42:49Z",
+  "probe": "network",
+  "urls": 24,
+  "tally": {
+    "OK": 21,
+    "CHANGED": 0,
+    "UNREACHABLE": 0,
+    "DIVERGED": 3
+  },
+  "records": [
+    {
+      "url": "https://arxiv.org/abs/1410.3926",
+      "sources": [
+        "external_constants.json:evidence",
+        "REFERENCES.md:url"
+      ],
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1410.3926",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 39360,
+      "body_sha256": "dff8840502d028d597f1ab9ab2c59f12cd5609eaba4601e8c968e599a6522419",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/1807.06209",
+      "sources": [
+        "external_constants.json:evidence",
+        "REFERENCES.md:url"
+      ],
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1807.06209",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 78846,
+      "body_sha256": "a8f46f86ddaea582f60500ab7708ec801a4e8d86b3be6ca9825ce9ca139e7c4d",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2004.09765",
+      "sources": [
+        "external_constants.json:evidence",
+        "REFERENCES.md:url"
+      ],
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2004.09765",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 39398,
+      "body_sha256": "c137519d02a5cbf7146fed1499c73e03943ce8cd75f9bf78f4d82d65bcc16bc7",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2410.17036",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2410.17036",
+      "expected_final_url": "https://arxiv.org/abs/2410.17036",
+      "final_url_changed": false,
+      "bytes": 80834,
+      "body_sha256": "3cfd55774be0d393479effc742b9cf23c55aa0712da793045e6476a86ba4f05f",
+      "expected_status": null,
+      "layer": "A",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": "3cfd55774be0d393479effc742b9cf23c55aa0712da793045e6476a86ba4f05f",
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://doi.org/10.1007/s40993-023-00498-y",
+      "sources": [
+        "external_constants.json:evidence"
+      ],
+      "status": 200,
+      "final_url": "https://link.springer.com/10.1007/s40993-023-00498-y",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 3038,
+      "body_sha256": "32ed63159c77e21ee19ca1b9aa3213ccf0218eb59539560b132a8e68ef0e18ea",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://doi.org/10.1016/j.jnt.2015.05.012",
+      "sources": [
+        "external_constants.json:evidence"
+      ],
+      "status": 200,
+      "final_url": "https://linkinghub.elsevier.com/retrieve/pii/S0022314X15001948",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 2709,
+      "body_sha256": "b73b5577139561b50110dad5db271dd9a5b901b0a8c2b3a3ffbdcde1863a902d",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://doi.org/10.1051/0004-6361/201833910",
+      "sources": [
+        "external_constants.json:evidence"
+      ],
+      "status": 403,
+      "final_url": "https://www.aanda.org/10.1051/0004-6361/201833910",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 772,
+      "body_sha256": "0ef2c40d0f8a7b57c6cea8e16a51efac0f7320804bda33364c0f773be8ce2607",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://doi.org/10.1090/mcom/3198",
+      "sources": [
+        "external_constants.json:evidence"
+      ],
+      "status": 200,
+      "final_url": "https://pubs.ams.org/journals/mcom/2017-86-307/S0025-5718-2017-03198-7",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 12939159,
+      "body_sha256": "b687a533b2cab9cf5e53bfa64d3f51eebcc49807bbece310492cdb1941aa2a3d",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://doi.org/10.1098/rspa.1970.0021",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 403,
+      "final_url": "https://royalsocietypublishing.org/rspa/article/314/1519/529/13052/The-singularities-of-gravitational-collapse-and",
+      "expected_final_url": "https://doi.org/10.1098/rspa.1970.0021",
+      "final_url_changed": true,
+      "bytes": 6017,
+      "body_sha256": "a46f378956d46e1eb2160f516cda45d5c2100db29bad6eff67b77b1ed7f2fe8b",
+      "expected_status": 403,
+      "layer": "C",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+      "expected_final_url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+      "final_url_changed": false,
+      "bytes": 650737,
+      "body_sha256": "19e8af44d5fd896bd2f69551039e13f1e6ac502f3cf641f5c3eeabb718e89079",
+      "expected_status": null,
+      "layer": "A",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": "ee981b8ab51d0b246de95a9a0c4e22956b5cb55fec5234eb3859fdd67c53c926",
+      "verdict": "DIVERGED",
+      "detail": "status unchanged; live body sha256 19e8af44d5fd896b... differs from the archived snapshot ee981b8ab51d0b24..., which P2 still verifies on disk",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+      "expected_final_url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+      "final_url_changed": false,
+      "bytes": 118173,
+      "body_sha256": "28960b50a10dbb25ddf69574cea4f2b0e06ea763b0201b60eedd8345807d8104",
+      "expected_status": null,
+      "layer": "A",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": "8b133039b9dca0a5265cd4d0c9fdf2a1e2502f0836a0a48a2e88a1405faf7587",
+      "verdict": "DIVERGED",
+      "detail": "status unchanged; live body sha256 28960b50a10dbb25... differs from the archived snapshot 8b133039b9dca0a5..., which P2 still verifies on disk",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+      "expected_final_url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+      "final_url_changed": false,
+      "bytes": 134101,
+      "body_sha256": "271e62d238ae21da4d6a5896312d768c974c36f3d59e521db68d4601bc5d6a37",
+      "expected_status": null,
+      "layer": "A",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": "763d430caeaee225ef4669a57494a40ff2fe7185a1fe0896e66b2442e1877f15",
+      "verdict": "DIVERGED",
+      "detail": "status unchanged; live body sha256 271e62d238ae21da... differs from the archived snapshot 763d430caeaee225..., which P2 still verifies on disk",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+      "sources": [
+        "external_constants.json:evidence",
+        "REFERENCES.md:url"
+      ],
+      "status": 200,
+      "final_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 40801,
+      "body_sha256": "77fb90e66c40db3e6eb16630bc9c88e4c7c8beddbe5e71be406f2f26e3f67e67",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/goedel-incompleteness",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://plato.stanford.edu/entries/goedel-incompleteness/",
+      "expected_final_url": "https://plato.stanford.edu/entries/goedel-incompleteness/",
+      "final_url_changed": false,
+      "bytes": 143846,
+      "body_sha256": "1700465a3cd0f84ce892a4379ef90bc68be4e6b60143031b50d0171f030989f1",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/intuitionism",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://plato.stanford.edu/entries/intuitionism/",
+      "expected_final_url": "https://plato.stanford.edu/entries/intuitionism/",
+      "final_url_changed": false,
+      "bytes": 101842,
+      "body_sha256": "15c83574cbaa428a7c7c8d097d512af45a6162c34e3f58b5baae47c487bf6328",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://plato.stanford.edu/entries/paradox-zeno",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://plato.stanford.edu/entries/paradox-zeno/",
+      "expected_final_url": "https://plato.stanford.edu/entries/paradox-zeno/",
+      "final_url_changed": false,
+      "bytes": 97054,
+      "body_sha256": "694684e0b9ec62d421d86c9eb2d785576b7d6096d58a59bdb225b9bad22b5637",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://plato.stanford.edu/info.html",
+      "sources": [
+        "theorem_provenance.json:license_basis_url"
+      ],
+      "status": 200,
+      "final_url": "https://plato.stanford.edu/info.html",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 30116,
+      "body_sha256": "77722bcf974d9ff37ea0f508520fcc4670466f2cd4569295b8ab025aa40b533c",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+      "expected_final_url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+      "final_url_changed": false,
+      "bytes": 47086,
+      "body_sha256": "2fbd49d8681a2341ba8029d28f536a99b4a3bd3c473c88701ae58d62197036e0",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-06",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "expected_final_url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "final_url_changed": false,
+      "bytes": 4338685,
+      "body_sha256": "7ab3e511110daa2877203996776930ce4a008dfe0dfd928e47f7d92ffc7188dc",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www.claymath.org/millennium-problems/",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www.claymath.org/millennium-problems/",
+      "expected_final_url": "https://www.claymath.org/millennium-problems/",
+      "final_url_changed": false,
+      "bytes": 90145,
+      "body_sha256": "8a347c1e469feca76460ed1f8e3954ba86957c5fe1ac202d76aa88afa3e043ce",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "expected_final_url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "final_url_changed": false,
+      "bytes": 366296,
+      "body_sha256": "6e4e3411984f3edf99dbfe8b941cb5e8a321379ff0cae6ae5c1f592ad8882ca8",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+      "expected_final_url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+      "final_url_changed": false,
+      "bytes": 360750,
+      "body_sha256": "cfcccd537c34abe4c90ecc9e34bb9e41a498621379759560d2050d5404a61e44",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+      "expected_final_url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+      "final_url_changed": false,
+      "bytes": 86192,
+      "body_sha256": "d8bc7cfc34eb4684563b5a1d9ca1126f50e3dc5b8094e35e13d531c2bc9bf7ef",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    },
+    {
+      "url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "sources": [
+        "theorem_provenance.json:archive"
+      ],
+      "status": 200,
+      "final_url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "expected_final_url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "final_url_changed": false,
+      "bytes": 1797930,
+      "body_sha256": "15ca156d83bb0fd24f759d05027d4937c91025e800e4e1a11a733c27ecf195dc",
+      "expected_status": 200,
+      "layer": "B",
+      "retrieved_utc": "2026-10-05",
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T13:42:49Z"
+    }
+  ]
+}

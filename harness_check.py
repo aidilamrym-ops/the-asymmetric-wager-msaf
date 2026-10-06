@@ -67,6 +67,17 @@ HARNESSES = [
     # Brain.MD version string.  Every target is reverted byte-for-byte and the
     # baseline is required to be green again afterwards.
       ("a3_report_inj.py",      "verifier",  0, "HARNESS: PASS -- 10/10 cases caught",    True),
+    # A9.  Proves both A9 additions are gates and not decorations.  Seven
+    # liveness cases: the record missing, a URL dropped, a pin invented, a
+    # contradiction the probe already found left in the record, a fixture that
+    # contradicts the register, a fixture that reaches nothing, and a fixture
+    # that agrees.  Fourteen prose-pattern cases: the keyed header field by
+    # field, N-gate and N-harness compounds, x of y pairs, an ordinal past
+    # "twentieth", spelled entries, a stale cardinal before "gates", a spelled
+    # manifest count with no determiner, a corrupted word list, and one control
+    # that must stay green.  Numbers are read from the live rig, so the harness
+    # cannot rot when a gate or a harness is added.
+    ("a9_drift_inj.py",        "verifier",  0, "HARNESS: PASS -- 21/21 cases behaved as expected", True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is
