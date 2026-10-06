@@ -111,7 +111,8 @@ assumption.
 | `Brain.MD` (registration row + run instruction) | 21222 | `3bb62a6d2ec96c13395625bd74fbaf844288d26e30d9d4f5c783dd302031a965` |
 
 All five are **new or root-level**; none is inside the sub-repository, so
-`CHECKSUM.sha256` (113 rows) is untouched.
+`CHECKSUM.sha256` (113 rows as the manifest stood at F3 on 2026-10-05) is
+untouched.
 
 Evidence snapshot provenance: `https://physics.nist.gov/cuu/Constants/Table/allascii.txt`,
 40801 bytes, retrieved 2026-10-05, SHA-256 `77fb90e66c40db3e6eb16630bc9c88e4c7c8beddbe5e71be406f2f26e3f67e67`.

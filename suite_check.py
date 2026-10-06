@@ -6,8 +6,8 @@
 #          2 = at least one gate did not run, or a gate returned 2
 #              (TOOL NOT RUN is never reported as success)
 # READ-ONLY: this runner never writes to the corpus.
-# --with-harness: append harness_check.py as the fourteenth entry.  It is off
-#          by default because the thirteen gates above are a read-only
+# --with-harness: append harness_check.py as the fifteenth entry.  It is off
+#          by default because the fourteen gates above are a read-only
 #          contract, while the injection harnesses mutate the corpus and
 #          restore it -- that difference must stay visible in the invocation,
 #          not hidden in a default.  The flag is forwarded, so --fast reaches
@@ -50,6 +50,11 @@ GATES = [
     # stale log cannot vouch for edited bytes.  Placed immediately before the
     # manifest gate so that anything it wrote would still be caught.
     ("protocol_09_check.py",        os.path.join(HERE, "protocol_09_check.py"),       [],         120),
+    # Reads the prose.  Every other gate checks an artefact; this one checks
+    # the sentences that describe the artefacts, because a correct gate behind
+    # a stale sentence still lets a reader quote the wrong number.  Placed
+    # ahead of the manifest gate so that its own verdict is re-hashed afterwards.
+    ("report_claim_check.py",       os.path.join(HERE, "report_claim_check.py"),      [],          60),
     # Deliberately last.  It re-hashes the workspace root against
     # CHECKSUM.sha256, so placing it after every other gate turns the manifest
     # from a baseline snapshot into a mutation detector across the whole run:

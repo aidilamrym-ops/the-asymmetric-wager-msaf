@@ -378,8 +378,9 @@ shp_mcp_bridge_v4.py            9755469673e5e55bea841ea201f5a70c3243cd9f4c2ccc27
    with the halting claim as the **last** assertion so the circularity auditor
    audits the sentence this report documents. `protocol_09.log` records the
    run and is bound to the script by `sha256`, so a stale log cannot vouch for
-   edited bytes. `protocol_09_check.py` — the twelfth gate, inserted
-   immediately ahead of the manifest gate — recomputes all eight conditions
+   edited bytes. `protocol_09_check.py` — the twelfth gate (2026-10-06, A1),
+   inserted immediately ahead of the manifest gate — recomputes all eight
+   conditions
    rather than trusting any of them: script unsat, context alone **sat** (not
    `VACUOUS`), context + negated claim **sat** (the context refutes the claim
    rather than everything), each of the three core axioms load-bearing when
@@ -389,7 +390,7 @@ shp_mcp_bridge_v4.py            9755469673e5e55bea841ea201f5a70c3243cd9f4c2ccc27
    clobbered log hash, a removed axiom and a removed marker, requires exit 1
    with the matching condition each time, and requires the gate to pass again
    on the restored bytes — `6/6`, with both artefacts byte-identical
-   afterwards. It is registered as the fourteenth harness in
+   afterwards. It is registered as the fourteenth harness (2026-10-06, A1) in
    `harness_check.py`. The two obstructions
    recorded in §5 F0-3 are carried in the script's header rather than dropped:
    the `SCAN, i > P09` branch is unreachable under A3 and is proved so, so
@@ -430,8 +431,8 @@ shp_mcp_bridge_v4.py            9755469673e5e55bea841ea201f5a70c3243cd9f4c2ccc27
    `harnesses\p09_inj.py` joined with A1) — against the root
    `CHECKSUM.sha256`, reports a listed file that is
    absent, a size that moved, a digest that differs and a file present but
-   never listed, and is registered as the thirteenth and last gate of
-   `suite_check.py`
+   never listed, and is registered as the thirteenth and last gate (A2,
+   2026-10-05) of `suite_check.py`
    so that it runs *after* every other gate. A manifest that is missing exits
    2 rather than 0: integrity cannot be claimed without a baseline. The
    sub-repository manifest is deliberately out of scope — it pins its own 116

@@ -1092,7 +1092,8 @@ from and the difference has to be visible:
 
 `harness_check.py` runs all twenty harnesses — the fourteen that already
 existed plus these six — sequentially, snapshots the workspace before and
-after each, and exits 0 only if every marker appeared and no byte moved:
+after each, and exits 0 only if every marker appeared and no byte moved
+(run recorded 2026-10-06, A2, when the rig held twenty harnesses):
 
 ```
 passed=20  failed=0  not_run=0  of 20  |  workspace byte-identical

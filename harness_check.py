@@ -60,6 +60,13 @@ HARNESSES = [
     ("f2_4_inj.py",          "verifier",  0, "HARNESS: PASS -- 14/14 mutants, 4/4 controls",   True),
     ("f2_6_inj.py",          "verifier",  0, "HARNESS: PASS -- 11/11 mutants, 3/3 controls",   True),
     ("f2_7_inj.py",          "verifier",  0, "HARNESS: PASS -- 26/26 fault-injection cases (24 mutants, 2 controls), 4/4 missing-document", False),
+    # A3.  Proves report_claim_check.py is a gate and not a reviewer's habit:
+    # six defects aimed at six different conditions -- a canonical gate count,
+    # a canonical harness count, the appended-entry ordinal, an unanchored
+    # stale tally, a citation of a harness that does not exist, and a second
+    # Brain.MD version string.  Every target is reverted byte-for-byte and the
+    # baseline is required to be green again afterwards.
+    ("a3_report_inj.py",      "verifier",  0, "HARNESS: PASS -- 6/6 cases caught",      True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

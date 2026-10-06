@@ -70,7 +70,7 @@ return value, not in a comment.
 > baseline snapshot into a mutation detector across the whole run: any gate
 > that had written a tracked file would surface there instead of being
 > silently absorbed. `--with-harness` therefore folds the harness runner in
-> as a thirteenth entry.
+> as a thirteenth entry (2026-10-05, A2).
 >
 > **Amendment, 2026-10-06 (A1).** `protocol_09_check.py` — the gate that
 > machine-proves the encoding of $\Phi$ — was registered ahead of the manifest
@@ -384,8 +384,8 @@ prove things.
 
 | check | command | result |
 |---|---|---|
-| **suite, full** | `python suite_check.py` | `passed=11 failed=0 not_run=0 of 11`, `SUITE: PASS -- every listed gate returned 0`, **exit 0**, 1607 s — includes `gw_final_gate.py` (1211 s) and `gw_mont_pipeline_check.py` (387 s) |
-| rig, partial | `python suite_check.py --fast` | `passed=10 failed=0 not_run=1 of 11`, **exit 2** (never 0 — `--fast` cannot be quoted as a pass) |
+| **suite, full** | `python suite_check.py` | `passed=11 failed=0 not_run=0 of 11` as of F5 (2026-10-05), `SUITE: PASS -- every listed gate returned 0`, **exit 0**, 1607 s — includes `gw_final_gate.py` (1211 s) and `gw_mont_pipeline_check.py` (387 s) |
+| rig, partial | `python suite_check.py --fast` | `passed=10 failed=0 not_run=1 of 11` as of F5 (2026-10-05), **exit 2** (never 0 — `--fast` cannot be quoted as a pass) |
 | snapshots | sha256 + size vs both registers | **8 of 8** Layer-A files match (4 in `external_constants.json`, 4 in `theorem_provenance.json`), 0 problems |
 | F3 gate | `python provenance_check.py` | exit **0**, `GATE: PASS -- 4 quantities, 7 evidence snapshots, 5 reference facts, 10 conditions` |
 | F4 gate | `python theorem_provenance_check.py` | exit **0**, P1…P9 including `ARCHIVE_CONSISTENCY` |
@@ -400,18 +400,22 @@ prove things.
 | F4 paraphrase | `harnesses\f4_brittleness.py` | 21 patterns × 60 variants, **clean** |
 | markers | byte inspection | `markers seen: 11, stray: 0`, 8 lines, 3 documents, `CR = 0`, no BOM; idempotent re-run = 0 bytes |
 | encoding | byte inspection on every file written in F5 | `CR = 0`, `BOM = False`, UTF-8 strict |
-| **harness suite, full** | `python harness_check.py` | `passed=13 failed=0 not_run=0 of 13`, `HARNESS: PASS -- 13/13 behaved as expected, workspace byte-identical`, **exit 0** |
+| **harness suite, full** | `python harness_check.py` | `passed=13 failed=0 not_run=0 of 13` as of F5 (2026-10-05), `HARNESS: PASS -- 13/13 behaved as expected, workspace byte-identical`, **exit 0** |
 | harness rig, partial | `python harness_check.py --fast` | 5 multi-second suites reported `NOT RUN`, **exit 2** (never 0) |
 | harness rig, self-test | `python harness_check.py --selftest` | **13/13**, exit 0 — a silent harness, a wrong exit code, a file left behind and a missing file all still fail |
 | builder rebuild | `python harnesses\f4_build_register.py` | register rebuilt **byte-identical** (39750 B, `sha256 7dc524cf…`), `archive=kept 15`, `uncovered=0` |
 | harness location | sha256 of source vs copy | **13/13 byte-identical**, 112977 B, `CR = 0`, `BOM = False` |
-| suite + harnesses | `python suite_check.py --with-harness` | 12 entries, `--fast` forwarded to the harness runner |
+| suite + harnesses | `python suite_check.py --with-harness` | 12 entries as of F5 (2026-10-05), `--fast` forwarded to the harness runner |
 
 > **Amendment, 2026-10-06 (A1).** The rows above are F5's own record and are
-> left as they stood. Two things have since grown: `protocol_09_check.py`
-> joined the suite as the twelfth gate (so `--with-harness` now enumerates 14
-> entries) and `harnesses\p09_inj.py` joined the harness rig as the fourteenth
-> proof harness, taking `harness_check.py` to `passed=14`.
+> left as they stood. Two things grew afterwards: `protocol_09_check.py`
+> joined the suite as the twelfth gate (2026-10-06, A1) and
+> `harnesses\p09_inj.py` joined the harness rig as the fourteenth proof
+> harness, taking `harness_check.py` to `passed=14` as of 2026-10-06 (A1).
+>
+> **Amendment, 2026-10-06 (A3).** `report_claim_check.py` joined the suite as
+> the fourteenth gate, so `--with-harness` now enumerates 15 entries, and
+> `harnesses\a3_report_inj.py` took `harness_check.py` to `passed=21`.
 
 ---
 
@@ -419,7 +423,7 @@ prove things.
 
 | requirement | state |
 |---|---|
-| suite 11/11 exit 0 | **yes** — `passed=11 failed=0 not_run=0 of 11`, exit 0, run as the final act of F5 |
+| suite 11/11 exit 0 | **yes** — `passed=11 failed=0 not_run=0 of 11` as of F5 (2026-10-05), exit 0, run as the final act of F5 |
 | F3 and F4 gates exit 0 | yes — 10 conditions, P1…P9 |
 | every sub-task has an injection that **fails** | F5-1 B1–B4, F5-2 20/20, F5-3 7/7, F5-4 14/14, F5-5 `--fast` exit 2 |
 | encoding 0 problems | yes |
@@ -469,10 +473,10 @@ alone is not a pass. It hashes the workspace before and after every harness,
 so a byte that does not come back, a file that disappears, or a file that
 appears is a failure regardless of what the harness printed. `--selftest`
 exercises all of those paths against fixtures; `suite_check.py
---with-harness` folds the runner in as a fourteenth entry, off by default
-because the thirteen gates are read-only and the harnesses are not.
+--with-harness` folds the runner in as a fifteenth entry, off by default
+because the fourteen gates are read-only and the harnesses are not.
 
-Two of the thirteen are **one-shot migrations**, not verifiers.
+Two of the twenty-one are **one-shot migrations**, not verifiers.
 `f5_1_stagea.py` and `f5_1_stagec.py` assert the *pre*-F5-1 text still exists
 and rewrite it; since F5-1 already applied them, they must now refuse, exit 1,
 and change nothing. Encoding that as the expected outcome turns them into a
