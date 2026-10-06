@@ -478,8 +478,7 @@ alone is not a pass. It hashes the workspace before and after every harness,
 so a byte that does not come back, a file that disappears, or a file that
 appears is a failure regardless of what the harness printed. `--selftest`
 exercises all of those paths against fixtures; `suite_check.py
---with-harness` folds the runner in as a fifteenth entry, off by default
-because the fourteen gates are read-only and the harnesses are not.
+--with-harness` folded the runner in as a fifteenth entry as of A3 (2026-10-06), off by default because the fourteen gates then in service were a read-only contract while the harnesses were not. (A10, 2026-10-07: the live suite is now fifteen gates and a sixteenth harness entry.)
 
 Two of the twenty-one are **one-shot migrations**, not verifiers.
 `f5_1_stagea.py` and `f5_1_stagec.py` assert the *pre*-F5-1 text still exists

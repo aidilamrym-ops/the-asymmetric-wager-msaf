@@ -266,7 +266,7 @@ where it lived.
 After those five fixes the harness reports
 `HARNESS: PASS -- 21/21 cases behaved as expected, every tool green before
 and after, every target byte-identical`, and `harness_check.py` re-runs it as
-the twenty-second harness in the folder.
+the twenty-second harness in the folder as of A9 (2026-10-06). (A10, 2026-10-07: `a10_tahu_inj.py` is now the twenty-third.)
 
 ### 6.8 `f5_2_inj.py` still demanded `f3=0` for mutations P11 now restates
 
@@ -307,13 +307,13 @@ stale artefact — not the new gate — is what must change.
 | P11 negative ×4 | delete record / drop URL / invent pin / leave CHANGED | exit 1 each, needle named |
 | patterns | temp-copy injections (keyed, compound, of-y, ordinal, spelled entries, spelled manifest, control) | every injected defect caught; controls stay green |
 | vocabulary guard | corrupt `_CARD_ONES` in a copy | gate exits 2, not 0 |
-| harness | `python harnesses/a9_drift_inj.py` | `HARNESS: PASS -- 21/21 cases behaved as expected, every tool green before and after, every target byte-identical` |
+| harness | `python harnesses/a9_drift_inj.py` | as of A9 (2026-10-06) `HARNESS: PASS -- 21/21 cases behaved as expected, every tool green before and after, every target byte-identical` |
 | manifest | `python checksum_check.py` then `--update` then verify | header `TOTAL FILES` equals scope; both directions green |
 | gate | `python provenance_check.py` (11 conditions) | exit 0 |
 | gate | `python theorem_provenance_check.py` | exit 0 |
 | gate | `python report_claim_check.py` | `report_claim_check: PASS` |
-| gate | `python harness_check.py` | 22 harnesses, PASS |
-| suite | `python suite_check.py --with-harness` | 15/15 |
+| gate | `python harness_check.py` | as of A9 (2026-10-06) 22 harnesses, PASS (23 since A10) |
+| suite | `python suite_check.py --with-harness` | as of A9 (2026-10-06) 15/15 (16/16 since A10) |
 | AC Gate | last, after the last edit | see §9 |
 
 ---

@@ -146,14 +146,49 @@ CASES = [
 ]
 
 
+def live_marker_count():
+    """Independent recount of every REF marker provenance_check P10 can see."""
+    import json
+    with io.open(os.path.join(R, "external_constants.json"),
+                 encoding="utf-8") as fh:
+        reg = json.load(fh)
+    site_files = sorted({s.get("file")
+                         for q in (reg.get("quantities") or [])
+                         if isinstance(q, dict)
+                         for s in (q.get("sites") or [])
+                         if isinstance(s, dict) and s.get("file")})
+    total = 0
+    for fname in site_files:
+        path = os.path.join(R, str(fname))
+        if os.path.isfile(path):
+            with io.open(path, encoding="utf-8") as fh:
+                total += len(REF_RE.findall(fh.read()))
+    for name in sorted(os.listdir(R)):
+        if not name.lower().endswith(".md"):
+            continue
+        if name in site_files:
+            continue
+        with io.open(os.path.join(R, name), encoding="utf-8") as fh:
+            total += len(REF_RE.findall(fh.read()))
+    return total
+
+
 def main():
     saved = {n: read(n).encode("utf-8") for n in TARGETS}
     base3, out3 = run(F3)
     base4, out4 = run(F4)
-    print("baseline: f3=%d f4=%d  markers seen in Skill.md: %d"
-          % (base3, base4, len(REF_RE.findall(saved[SKILL].decode("utf-8")))))
-    if base3 != 0 or base4 != 0 or "markers seen: 12" not in out3:
-        print("BLOCKED: baseline not green or marker count wrong")
+    skill_markers = len(REF_RE.findall(saved[SKILL].decode("utf-8")))
+    m = re.search(r"markers seen: (\d+)", out3)
+    live = int(m.group(1)) if m else -1
+    independent = live_marker_count()
+    print("baseline: f3=%d f4=%d  markers in Skill.md: %d  "
+          "gate markers seen: %d  independent recount: %d"
+          % (base3, base4, skill_markers, live, independent))
+    if (base3 != 0 or base4 != 0 or live < 1 or independent < 1
+            or live != independent):
+        print("BLOCKED: baseline not green or marker count wrong "
+              "(skill=%d gate=%d independent=%d)"
+              % (skill_markers, live, independent))
         return 1
     bad = 0
     try:

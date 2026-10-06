@@ -78,6 +78,15 @@ HARNESSES = [
     # that must stay green.  Numbers are read from the live rig, so the harness
     # cannot rot when a gate or a harness is added.
     ("a9_drift_inj.py",        "verifier",  0, "HARNESS: PASS -- 21/21 cases behaved as expected", True),
+    # A10.  Proves tahap_uji_audit.py is a gate and not a reviewer's habit:
+    # eight defects aimed at eight different conditions of the two rewritten
+    # `tahap uji` documents -- a zero-error claim, a clobbered density needle,
+    # a deleted "remains open", a deleted "dimensionless", Navier--Stokes sold
+    # as proven, Gate 2 sold as implemented, Gate 3 sold as blessing every
+    # prose claim, and a reintroduced "dirty renormalisation" -- plus the
+    # baseline and the restored baseline.  Both documents come back
+    # byte-for-byte.
+    ("a10_tahu_inj.py",         "verifier",  0, "HARNESS: PASS -- 8/8 cases",             True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

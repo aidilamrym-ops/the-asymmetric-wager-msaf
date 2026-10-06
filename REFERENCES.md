@@ -61,7 +61,9 @@ at the Bristol research portal but its licence field reads *Unspecified*, which
 is not a redistribution permission, so that record also stays at layer B.
 
 **Tally at A7: 23 records, A = 9, B = 12, C = 2** (22 records, A = 8, B = 11,
-C = 3 at F5-2, 2026-10-05).
+C = 3 at F5-2, 2026-10-05). **A10 (2026-10-07) added one further layer-A
+record** — `WIKIPEDIA_DARK_ENERGY` — taking the tally to **24 records,
+A = 10, B = 12, C = 2**.
 
 ### NIST_CODATA_2022_TABLE
 
@@ -292,6 +294,113 @@ Symbol $k_B$. Value `1.380649e-23` J K^-1, 7 significant figures as written,
   that *uses* $k_B$; this entry answers a different question -- where the
   constant itself is quoted in the corpus, and whether that quotation matches
   the archived source.
+
+### REDUCED_PLANCK_CONSTANT
+
+Symbol $\hbar$. Value `1.054571817e-34` J s, **exact** (SI 2019 defining
+constant).
+
+* Authority: CODATA 2022 / SI 2019 exact defining constant.
+* Evidence: `NIST_CODATA_2022_TABLE`. Probe needles `reduced Planck constant`
+  and `1.054 571 817` on the CODATA ASCII table (L304), where the uncertainty
+  column reads `(exact)`.
+* Retrieved (UTC): 2026-10-05
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md`
+  (`1{,}054571817 \times 10^{-34}`).
+* Added 2026-10-07 (A10), so the vacuum-cutoff density has a declared input.
+
+### SPEED_OF_LIGHT
+
+Symbol $c$. Value `2.99792458e8` m/s, **exact** (SI 2019 defining constant).
+
+* Authority: SI 2019 defining constant, exact by definition; listed in the
+  CODATA 2022 adjustment.
+* Evidence: `NIST_CODATA_2022_TABLE`. Probe needles `speed of light in vacuum`
+  and `299 792 458` (L330).
+* Retrieved (UTC): 2026-10-05
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md`
+  (`2{,}99792458 \times 10^{8}`).
+* Added 2026-10-07 (A10).
+
+### DARK_ENERGY_DENSITY
+
+Symbol $\rho_\Lambda$. Value `6e-10` J/m^3, 1 significant figure, **measured**.
+
+* Uncertainty: 1 s.f.; the source states `6x10^-10 J/m^3` (mass-energy) and
+  `7x10^-30 g/cm^3`.
+* Authority: Wikipedia, *Dark energy* (CC BY-SA 4.0), quoting the
+  observational dark-energy density.
+* Evidence: `WIKIPEDIA_DARK_ENERGY`. Local copy
+  `provenance/evidence/wikipedia_dark_energy.html`, 731853 bytes, sha256
+  `20944a6e98453fa38aec178b7522182def3659555785d7d174bf75a38a067e41`.
+  Probe needles `6e-10` and `J/m&lt;sup&gt;3&lt;/sup&gt;` (L1026 of the snapshot).
+* Retrieved (UTC): 2026-10-07
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md` (`6 \times 10^{-10}`).
+* Added 2026-10-07 (A10). Layer **A** because Wikipedia states CC BY-SA 4.0.
+
+### PLANCK_FREQUENCY
+
+Symbol $\omega_P = c/\ell_P$. Value `1.854859e43` s^-1, derived.
+
+* Kind: derived. `derived_from = [SPEED_OF_LIGHT, PLANCK_LENGTH]`,
+  `recompute = quotient`. The gate recomputes the quotient at 100 dps.
+* Authority: derived from the two declared inputs.
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md`
+  (`1{,}854859 \times 10^{43}`).
+* Added 2026-10-07 (A10). This is a **cutoff frequency**, not a claim that
+  the vacuum integral equals this frequency.
+
+### PLANCK_VACUUM_DENSITY
+
+Symbol $\rho_{\mathrm{Planck}} = \hbar c / (8\pi^2 \ell_P^4)$. Value
+`5.867696e111` J/m^3, derived.
+
+* Kind: derived. `derived_from = [REDUCED_PLANCK_CONSTANT, SPEED_OF_LIGHT,
+  PLANCK_LENGTH]`, `recompute = planck_vacuum_cutoff`. The gate recomputes
+  $\hbar c / (8\pi^2 \ell_P^4)$ at 100 dps.
+* Authority: derived zero-point density with Planck angular-frequency cutoff
+  $\omega_P = c/\ell_P$.
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md`
+  (`5{,}867696 \times 10^{111}`).
+* Added 2026-10-07 (A10). Order of magnitude $10^{111}$; **not** equal to
+  $\rho_\Lambda$. The ratio $\rho_{\mathrm{Planck}}/\rho_\Lambda \approx 9.8
+  \times 10^{120}$ remains an open discrepancy in this corpus.
+
+### RECIPROCAL_UNIVERSE_PIXEL
+
+Symbol $1/\Delta_{\mathrm{univ}}$. Value `5.444685e61`, derived,
+**dimensionless**.
+
+* Kind: derived. `derived_from = [OBSERVABLE_UNIVERSE_DIAMETER,
+  PLANCK_LENGTH]`, `recompute = quotient`.
+* Authority: reciprocal of the registered universe pixel constant
+  $\Delta_{\mathrm{univ}} = \ell_P / D_{\mathrm{obs}}$.
+* Site: `THE_VACUUM_CATASTROPHE_SOLUTION.md`
+  (`5{,}444685 \times 10^{61}`).
+* Added 2026-10-07 (A10). The reciprocal is **dimensionless**; it must not be
+  used as a physical frequency bound $\omega$ without an explicit unit
+  conversion. The Planck cutoff frequency is a separate registered quantity
+  (`PLANCK_FREQUENCY`).
+
+### WIKIPEDIA_DARK_ENERGY
+
+Wikipedia, *Dark energy*. Publisher: Wikimedia Foundation.
+Retrieved from `https://en.wikipedia.org/wiki/Dark_energy`.
+
+* Retrieved (UTC): 2026-10-07
+* Bytes: 731853
+* SHA-256: `20944a6e98453fa38aec178b7522182def3659555785d7d174bf75a38a067e41`
+* Local copy: `provenance/evidence/wikipedia_dark_energy.html`
+* Access class: `full_text_local_copy` — layer **A**
+* Licence basis: CC BY-SA 4.0 (Wikipedia Terms of Use)
+* Quantity sourced from this snapshot: `DARK_ENERGY_DENSITY`
+  (`6e-10` J/m$^{3}$), probe needles `6e-10` and `J/m&lt;sup&gt;3&lt;/sup&gt;`
+  on the line carrying the density value.
+* Added 2026-10-07 (A10) so the vacuum-catastrophe document has a registered,
+  hash-verified observational density rather than an unsourced order of
+  magnitude.
+
+---
 
 ---
 

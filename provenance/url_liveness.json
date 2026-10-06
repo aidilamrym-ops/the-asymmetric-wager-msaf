@@ -1,14 +1,14 @@
 {
   "schema": "msaf-url-liveness/v1",
   "tool": "url_liveness_check.py",
-  "generated_utc": "2026-10-06T13:42:49Z",
+  "generated_utc": "2026-10-06T18:03:02Z",
   "probe": "network",
-  "urls": 24,
+  "urls": 25,
   "tally": {
-    "OK": 21,
+    "OK": 23,
     "CHANGED": 0,
     "UNREACHABLE": 0,
-    "DIVERGED": 3
+    "DIVERGED": 2
   },
   "records": [
     {
@@ -30,7 +30,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://arxiv.org/abs/1807.06209",
@@ -51,7 +51,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://arxiv.org/abs/2004.09765",
@@ -72,7 +72,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://arxiv.org/abs/2410.17036",
@@ -92,7 +92,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://doi.org/10.1007/s40993-023-00498-y",
@@ -112,7 +112,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://doi.org/10.1016/j.jnt.2015.05.012",
@@ -124,7 +124,7 @@
       "expected_final_url": null,
       "final_url_changed": false,
       "bytes": 2709,
-      "body_sha256": "b73b5577139561b50110dad5db271dd9a5b901b0a8c2b3a3ffbdcde1863a902d",
+      "body_sha256": "53d6ee3a7ea82025ad232d354c95acd7de7ed5d9fc353f2cfc5f64d4f02854e4",
       "expected_status": null,
       "layer": null,
       "retrieved_utc": null,
@@ -132,7 +132,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://doi.org/10.1051/0004-6361/201833910",
@@ -144,7 +144,7 @@
       "expected_final_url": null,
       "final_url_changed": false,
       "bytes": 772,
-      "body_sha256": "0ef2c40d0f8a7b57c6cea8e16a51efac0f7320804bda33364c0f773be8ce2607",
+      "body_sha256": "2ec0dd3378774d750de719a81cc08a02310dcf1d908e391a5c0802c0813d2c63",
       "expected_status": null,
       "layer": null,
       "retrieved_utc": null,
@@ -152,7 +152,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://doi.org/10.1090/mcom/3198",
@@ -164,7 +164,7 @@
       "expected_final_url": null,
       "final_url_changed": false,
       "bytes": 12939159,
-      "body_sha256": "b687a533b2cab9cf5e53bfa64d3f51eebcc49807bbece310492cdb1941aa2a3d",
+      "body_sha256": "f9b290878f27236ebc47b9d011831ce9b221c5be4e6eb812de1e88685a4ff5e9",
       "expected_status": null,
       "layer": null,
       "retrieved_utc": null,
@@ -172,7 +172,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://doi.org/10.1098/rspa.1970.0021",
@@ -184,7 +184,7 @@
       "expected_final_url": "https://doi.org/10.1098/rspa.1970.0021",
       "final_url_changed": true,
       "bytes": 6017,
-      "body_sha256": "a46f378956d46e1eb2160f516cda45d5c2100db29bad6eff67b77b1ed7f2fe8b",
+      "body_sha256": "88bbcf7fd77f2a7ba8d86df90dba96cfcfb6b6a967b15a39fea388a4670b9f28",
       "expected_status": 403,
       "layer": "C",
       "retrieved_utc": "2026-10-05",
@@ -192,7 +192,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
@@ -203,16 +203,36 @@
       "final_url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
       "expected_final_url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
       "final_url_changed": false,
-      "bytes": 650737,
-      "body_sha256": "19e8af44d5fd896bd2f69551039e13f1e6ac502f3cf641f5c3eeabb718e89079",
+      "bytes": 650480,
+      "body_sha256": "ee981b8ab51d0b246de95a9a0c4e22956b5cb55fec5234eb3859fdd67c53c926",
       "expected_status": null,
       "layer": "A",
       "retrieved_utc": "2026-10-05",
       "archived_sha256": "ee981b8ab51d0b246de95a9a0c4e22956b5cb55fec5234eb3859fdd67c53c926",
-      "verdict": "DIVERGED",
-      "detail": "status unchanged; live body sha256 19e8af44d5fd896b... differs from the archived snapshot ee981b8ab51d0b24..., which P2 still verifies on disk",
+      "verdict": "OK",
+      "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Dark_energy",
+      "sources": [
+        "external_constants.json:evidence"
+      ],
+      "status": 200,
+      "final_url": "https://en.wikipedia.org/wiki/Dark_energy",
+      "expected_final_url": null,
+      "final_url_changed": false,
+      "bytes": 731853,
+      "body_sha256": "20944a6e98453fa38aec178b7522182def3659555785d7d174bf75a38a067e41",
+      "expected_status": null,
+      "layer": null,
+      "retrieved_utc": null,
+      "archived_sha256": null,
+      "verdict": "OK",
+      "detail": "",
+      "error": null,
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
@@ -223,16 +243,16 @@
       "final_url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
       "expected_final_url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
       "final_url_changed": false,
-      "bytes": 118173,
-      "body_sha256": "28960b50a10dbb25ddf69574cea4f2b0e06ea763b0201b60eedd8345807d8104",
+      "bytes": 118258,
+      "body_sha256": "052c9913c150c2afac7463d2e608e4e8e7b500b83bf6b5312f8df36905b3f88b",
       "expected_status": null,
       "layer": "A",
       "retrieved_utc": "2026-10-05",
       "archived_sha256": "8b133039b9dca0a5265cd4d0c9fdf2a1e2502f0836a0a48a2e88a1405faf7587",
       "verdict": "DIVERGED",
-      "detail": "status unchanged; live body sha256 28960b50a10dbb25... differs from the archived snapshot 8b133039b9dca0a5..., which P2 still verifies on disk",
+      "detail": "status unchanged; live body sha256 052c9913c150c2af... differs from the archived snapshot 8b133039b9dca0a5..., which P2 still verifies on disk",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
@@ -243,16 +263,16 @@
       "final_url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
       "expected_final_url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
       "final_url_changed": false,
-      "bytes": 134101,
-      "body_sha256": "271e62d238ae21da4d6a5896312d768c974c36f3d59e521db68d4601bc5d6a37",
+      "bytes": 134175,
+      "body_sha256": "da370931b8296a969b412b78fb007a1cf7cff4334b6221ae1708868aa8c89280",
       "expected_status": null,
       "layer": "A",
       "retrieved_utc": "2026-10-05",
       "archived_sha256": "763d430caeaee225ef4669a57494a40ff2fe7185a1fe0896e66b2442e1877f15",
       "verdict": "DIVERGED",
-      "detail": "status unchanged; live body sha256 271e62d238ae21da... differs from the archived snapshot 763d430caeaee225..., which P2 still verifies on disk",
+      "detail": "status unchanged; live body sha256 da370931b8296a96... differs from the archived snapshot 763d430caeaee225..., which P2 still verifies on disk",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
@@ -273,7 +293,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://plato.stanford.edu/entries/goedel-incompleteness",
@@ -293,7 +313,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://plato.stanford.edu/entries/intuitionism",
@@ -313,7 +333,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://plato.stanford.edu/entries/paradox-zeno",
@@ -333,7 +353,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://plato.stanford.edu/info.html",
@@ -353,7 +373,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
@@ -373,7 +393,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
@@ -393,7 +413,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www.claymath.org/millennium-problems/",
@@ -405,7 +425,7 @@
       "expected_final_url": "https://www.claymath.org/millennium-problems/",
       "final_url_changed": false,
       "bytes": 90145,
-      "body_sha256": "8a347c1e469feca76460ed1f8e3954ba86957c5fe1ac202d76aa88afa3e043ce",
+      "body_sha256": "cb1874c4714e2c9d5310018d9a71f4321936af1129c27861a0c973c0c3767406",
       "expected_status": 200,
       "layer": "B",
       "retrieved_utc": "2026-10-05",
@@ -413,7 +433,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
@@ -433,7 +453,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
@@ -453,7 +473,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
@@ -473,7 +493,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     },
     {
       "url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
@@ -493,7 +513,7 @@
       "verdict": "OK",
       "detail": "",
       "error": null,
-      "checked_utc": "2026-10-06T13:42:49Z"
+      "checked_utc": "2026-10-06T18:03:02Z"
     }
   ]
 }

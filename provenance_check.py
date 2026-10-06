@@ -506,6 +506,35 @@ def main(argv):
                          % (qid, mp.nstr(val, 20), q.get("value"))):
                 continue
             print("ok    P5  DERIVED %s = %s" % (qid, mp.nstr(val, 30)))
+        elif mode == "planck_vacuum_cutoff":
+            # rho = hbar * c / (8 * pi^2 * lP^4): the zero-point density with
+            # the Planck angular-frequency cutoff omega_P = c / lP.  Added A10
+            # so the vacuum-catastrophe document cites a recomputeable number
+            # rather than an order-of-magnitude assertion.
+            deps = q.get("derived_from") or []
+            if not all(d in q_by_id for d in deps):
+                fail("P5  DERIVED: %s derived_from %s not resolvable"
+                     % (qid, deps))
+                continue
+            if not have_mp:
+                continue
+            try:
+                hbar = mp.mpf(q_by_id["REDUCED_PLANCK_CONSTANT"]["value"])
+                cval = mp.mpf(q_by_id["SPEED_OF_LIGHT"]["value"])
+                lp = mp.mpf(q_by_id["PLANCK_LENGTH"]["value"])
+                got = hbar * cval / (8 * mp.pi ** 2 * lp ** 4)
+            except Exception as exc:
+                fail("P5  DERIVED: %s recomputation failed: %s" % (qid, exc))
+                continue
+            _sf = sf_of(q.get("sig_figs"))
+            if _sf is None:
+                continue
+            if not check(agrees(mp.nstr(got, 40), q.get("value"), _sf),
+                         "P5  DERIVED: %s recomputes to %s, declared %s "
+                         "at %s s.f." % (qid, mp.nstr(got, 20),
+                                         q.get("value"), _sf)):
+                continue
+            print("ok    P5  DERIVED %s = %s" % (qid, mp.nstr(got, 16)))
         elif mode:
             fail("P5  DERIVED: %s unknown recompute mode %r" % (qid, mode))
     print("%s P5  DERIVED                    delta: %d"

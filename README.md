@@ -131,17 +131,18 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Finite Guinand–Weil truncations positive definite | `gw_verify_production.py`, `gw_verify_results.py`, `gw_final_gate.py`, `gw_mont_pipeline_check.py` | Certified row checks for $N=400$ and $N=800$; final gate’s two conditions; production fault-injection counts recorded in `F1_REPORT.md` / `F2_REPORT.md` |
 | Protocol 09 ($\Phi$ / Gödelian compliance loop) encoding | `protocol_09_check.py` | FSM over `QF_LIA`; log bound to script by sha256; context sat, claim unsat, each core axiom load-bearing; auditor verdict `GENUINE` |
 | Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor |
-| Workspace integrity | `checksum_check.py` | **85** files in scope (53 root + 10 `provenance/` + 22 `harnesses/`); last suite gate so mutations are detected |
-| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **22** proof harnesses, run sequentially with before/after workspace hashes |
+| `tahap uji` honesty (A10) | `tahap_uji_audit.py` | Two documents rewritten to English and to claims the machine gates support; Planck-cutoff density recomputed; zero-error / dirty-renormalisation / "NS proven" / Gate-3-misread classes rejected |
+| Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
+| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **23** proof harnesses, run sequentially with before/after workspace hashes |
 
-**Offline verification contract (as of 2026-10-06, Fase A9):**
+**Offline verification contract (as of 2026-10-07, Fase A10):**
 
-- Suite gates: **14** (`suite_check.py`)
-- `--with-harness` entry: **15**
-- Proof harnesses: **22**
-- Manifest scope: **85** files
+- Suite gates: **15** (`suite_check.py`)
+- `--with-harness` entry: **16**
+- Proof harnesses: **23**
+- Manifest scope: **89** files
 - `provenance_check.py`: **11** conditions (P1–P11)
-- Full offline suite with harnesses last run: **15/15 PASS**
+- Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + Protocol 09: **GENUINE**, not circular
 
 ### 4.2 Theoretical / epistemological achievements
@@ -207,10 +208,10 @@ Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
 git clone https://github.com/aidilamrym-ops/the-asymmetric-wager-msaf.git
 cd the-asymmetric-wager-msaf
 
-REM Offline suite — 14 gates, fixed order
+REM Offline suite — 15 gates, fixed order
 python suite_check.py
 
-REM Same, plus the 22 proof harnesses (mutates then restores; do not parallelise)
+REM Same, plus the 23 proof harnesses (mutates then restores; do not parallelise)
 python suite_check.py --with-harness
 
 REM Individual gates an examiner often wants first
@@ -277,6 +278,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Stat
 | A7 | 2026-10-06 | Archive policy + upstream history (`F7_REPORT.md`); `F5-R5` ESTABLISHED | Complete |
 | A8 | 2026-10-06 | `Tugas tambahan.md` symbol-rename assessment | **Deferred** (missing dictionary; name collisions) |
 | A9 | 2026-10-06 | URL liveness tool + `P11`; prose-pattern closure (`F8_REPORT.md`); `F7-R3`/`F6-R5` closed | Complete |
+| A10 | 2026-10-07 | `tahap uji` honesty rewrite + `tahap_uji_audit.py` + ρ_Λ/ħ/c/Planck-vacuum provenance + harness `a10_tahu_inj.py` | Complete |
 
 **Forward research blueprint** (from `Perluasan Visi Ilmiah (Extended Thesis Blueprint).md` — roadmap, not results):
 
@@ -338,4 +340,4 @@ Sub-repositories also present (supporting / derivative material, not proof engin
 ---
 
 *MSAF — scale-bound modular mathematics. Null narrative. Deterministic equilibrium.*  
-*Suite contract as of 2026-10-06 (Fase A9): 14 gates, 22 harnesses, 85-file manifest, 11 provenance conditions.*
+*Suite contract as of 2026-10-07 (Fase A10): 15 gates, 23 harnesses, 89-file manifest, 11 provenance conditions.*

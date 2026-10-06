@@ -6,8 +6,8 @@
 #          2 = at least one gate did not run, or a gate returned 2
 #              (TOOL NOT RUN is never reported as success)
 # READ-ONLY: this runner never writes to the corpus.
-# --with-harness: append harness_check.py as the fifteenth entry.  It is off
-#          by default because the fourteen gates above are a read-only
+# --with-harness: append harness_check.py as the sixteenth entry.  It is off
+#          by default because the fifteen gates above are a read-only
 #          contract, while the injection harnesses mutate the corpus and
 #          restore it -- that difference must stay visible in the invocation,
 #          not hidden in a default.  The flag is forwarded, so --fast reaches
@@ -50,6 +50,14 @@ GATES = [
     # stale log cannot vouch for edited bytes.  Placed immediately before the
     # manifest gate so that anything it wrote would still be caught.
     ("protocol_09_check.py",        os.path.join(HERE, "protocol_09_check.py"),       [],         120),
+    # A10 (2026-10-07): honesty gate over the two `tahap uji` documents.
+    # Reads every condition out of those documents and out of
+    # external_constants.json / protocol_09.log, recomputes the Planck-cutoff
+    # vacuum density at 50 dps, and fails on the dishonesty classes the A10
+    # audit found (zero-error claims, "dirty renormalisation", NS sold as
+    # proven, Gate 3 misread as "all SAT").  Placed ahead of the prose gate
+    # and the manifest gate so its own verdict is re-hashed afterwards.
+    ("tahap_uji_audit.py",          os.path.join(HERE, "tahap_uji_audit.py"),         [],          60),
     # Reads the prose.  Every other gate checks an artefact; this one checks
     # the sentences that describe the artefacts, because a correct gate behind
     # a stale sentence still lets a reader quote the wrong number.  Placed
