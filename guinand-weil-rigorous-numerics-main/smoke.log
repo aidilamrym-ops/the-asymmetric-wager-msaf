@@ -1,0 +1,197 @@
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=9000  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 25.6 s
+  max entry radius   : 1.6483778469117e-2697  at (1, 1)
+  exact symmetry dev : 1.0325681430601e-2697  at (0, 1) -> NOT EXACT
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  [ldlt] pivot 35/41  elapsed=0s  eta=0s
+  [ldlt] pivot 40/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.2 s
+  n_pos=41  n_neg=0  undetermined_pivot=None  max_pivot_rad=4.2088524792518e-2579
+  lambda_min >= L.inv() failed: matrix is singular   (0.1 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : FALSIFICATION SIGNAL: ASYMMETRIC: max|A-A^T| upper bound = 1.032568143060117446366750e-2697 (real-symmetry theorem no longer excludes Im != 0)
+------------------------------------------------------------------------------------------------
+*** ANOMALY CONFIRMED at N=20 -- halting sweep ***
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       9000     0      1.648377846911 None           FALSIFICATION SIGNAL: ASYMMETRIC: max|A-A^T| upper bound = 1.032568143060117446366750e-2697 (real-symmetry theorem no longer excludes Im != 0)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_results.json
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=9000  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 25.2 s
+  max entry radius   : 1.6483778469117e-2697  at (1, 1)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  [ldlt] pivot 35/41  elapsed=0s  eta=0s
+  [ldlt] pivot 40/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.2 s
+  n_pos=41  n_neg=0  undetermined_pivot=None  max_pivot_rad=4.2088524792518e-2579
+  lambda_min >= 2.242744590787258303906149e-62   (0.4 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       9000     0      1.648377846911 2.242744590787 VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_results.json
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=9000  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 25.2 s
+  max entry radius   : 1.6483778469117e-2697  at (1, 1)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  [ldlt] pivot 35/41  elapsed=0s  eta=0s
+  [ldlt] pivot 40/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.2 s
+  n_pos=41  n_neg=0  undetermined_pivot=None  max_pivot_rad=4.2088524792518e-2579
+  lambda_min >= 2.242744590787258303906149e-62   (0.4 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       9000     0      1.648377846911 2.242744590787 VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_results.json
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=9000  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 25.3 s
+  max entry radius   : 1.6483778469117e-2697  at (1, 1)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  [ldlt] pivot 35/41  elapsed=0s  eta=0s
+  [ldlt] pivot 40/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.2 s
+  n_pos=41  n_neg=0  undetermined_pivot=None  max_pivot_rad=4.2088524792518e-2579
+  lambda_min >= 2.242744590787258303906149e-62   (0.4 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       9000     0      1.648377846911 2.242744590787 VERIFIED POSITIVE DEFINITE  (n+=41, n-=0, 41/41 certified)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_results.json

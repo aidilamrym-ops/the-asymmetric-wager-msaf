@@ -1,0 +1,48 @@
+[
+  {
+    "c": 100,
+    "N": 20,
+    "dim": 41,
+    "prec": 400,
+    "attempts": [
+      {
+        "attempt": 1,
+        "prec": 200,
+        "build_s": 0.2,
+        "ldlt_s": 0.0,
+        "n_pos": 17,
+        "n_neg": 0,
+        "undetermined_pivot": 17,
+        "max_entry_radius": "4.1110196790947055637e-57",
+        "max_pivot_radius": "1.0618389725805810582e-23"
+      },
+      {
+        "attempt": 2,
+        "prec": 400,
+        "build_s": 0.3,
+        "ldlt_s": 0.0,
+        "n_pos": 32,
+        "n_neg": 0,
+        "undetermined_pivot": 32,
+        "max_entry_radius": "8.9149062921401653435e-117",
+        "max_pivot_radius": "1.0896647682780182697e-30"
+      }
+    ],
+    "n_pos": 32,
+    "n_neg": 0,
+    "undetermined_pivot": 32,
+    "max_entry_radius": "8.914906292140165343532032e-117",
+    "max_pivot_radius": "1.089664768278018269720940e-30",
+    "symmetry_dev": "0",
+    "symmetry_exact": true,
+    "caveats": [],
+    "lambda_min_lower_bound": null,
+    "bound_detail": "not formed: LDL^T unresolved",
+    "anomalies": [],
+    "anomaly": false,
+    "non_result_reason": "UNDETERMINED after precision escalation to 400 bits",
+    "non_result": true,
+    "peak_mb": 37.277696,
+    "sha256": "579bd40900e02aae550704d569a36d57f028b0e2a24db2ad4ef50774f9bc75eb"
+  }
+]

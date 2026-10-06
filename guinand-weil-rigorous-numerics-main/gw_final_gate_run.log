@@ -1,0 +1,59 @@
+====================================================================================================
+# FINAL GATE (psi'): integral vs mpmath closed  vs  series closed
+# c = 100, N = 40, dps = 160, R = 1000.0, K = 732, order = 224
+# lambda_min target = 1.32105051975e-102 ; gate requires residual < that
+====================================================================================================
+  head at order 224 : 833.6 s,  full precision = 15.6309184651489577853482741392084394491
+  E1 = 0.006092555666356286762015170967463425245763
+  E2 = 0.0000000004407349616644564638774197507636037572668 (last 2.3367669e-172, 39 terms, turned=False)
+  integral = pref*(head + E1 - E2) = 2.16166395469797473428500986030118480849702392418250941699381
+
+----------------------------------------------------------------------------------------------------
+CLOSED VALUES
+----------------------------------------------------------------------------------------------------
+  gw_deep_v2.closed_dpsi (mpmath pieces) = 2.16166395469797473428500986030118480849702392418250941699381
+  reconstructed from defining series      = (2.16166395469797473428500986030118480849702392418250941699381 + 0.0j)
+  |mpmath - series|                       = 3.391109217077509e-102
+
+----------------------------------------------------------------------------------------------------
+DECISIVE: |integral - closed|
+----------------------------------------------------------------------------------------------------
+  |integral - mpmath closed| = 3.391109217077509e-102
+  |integral - series closed| = 3.912055399093736e-159
+  the disputed residual      = 3.391109217077509e-102
+  gate (lambda_min)          = 1.32105051975e-102
+  best of the two residuals  = 3.912055399093736e-159
+
+  VERDICT: the integral agrees with the SERIES reconstruction.
+           gw_deep_v2.closed_dpsi is the outlier.
+
+----------------------------------------------------------------------------------------------------
+lerchphi(z, 2, an): defining series  vs  mpmath, over increasing dps
+----------------------------------------------------------------------------------------------------
+  dps  160 : series terms = 42  |mp - series| = 8.42831291456e-100     Re = -3.12332701278e-100      Im = -7.82823651642e-100      dy(prev) = 0.0
+  dps  224 : series terms = 58  |mp - series| = 8.42831291456e-100     Re = -3.12332701278e-100      Im = -7.82823651642e-100      dy(prev) = 7.0583959e-165
+  dps  288 : series terms = 74  |mp - series| = 1.69901166253e-127     Re = -1.40146580193e-127      Im = 9.60486457702e-128       dy(prev) = 8.4283129e-100
+  dps  384 : series terms = 98  |mp - series| = 1.69901166253e-127     Re = -1.40146580193e-127      Im = 9.60486457702e-128       dy(prev) = 3.1862694e-294
+
+  d(closed)/d(Re L2) = -2 * (1/L) * (-e^{-L/2}/4) = 0.0108573620475813
+  predicted |d closed| from the lerchphi gap = 3.391109217077509e-102
+  observed  |closed_mpmath - closed_series|  = 3.391109217077509e-102
+
+----------------------------------------------------------------------------------------------------
+GATE
+----------------------------------------------------------------------------------------------------
+  G1  some side resolves below lambda_min
+      criterion : best residual < 1.32105051975e-102
+      observed  : 3.912055399093736e-159
+      -> PASS
+  G2  mpmath side REJECTED; its excess must be the lerchphi gap
+      criterion : |predicted - observed| / observed <= 1.0e-6
+      predicted : 3.391109217077509e-102
+      observed  : 3.391109217077509e-102
+      relative  : 8.37662e-59
+      -> PASS
+
+  GATE: PASS -- the discriminating side resolves below lambda_min
+        and the rejected side is accounted for.
+  exit status = 0
+====================================================================================================

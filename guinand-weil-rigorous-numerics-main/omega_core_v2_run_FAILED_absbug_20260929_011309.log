@@ -1,0 +1,58 @@
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[400, 800]  start_prec=9000  escalations=3  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=400  dim=801 x 801  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[400, 800]  start_prec=9000  escalations=3  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=400  dim=801 x 801  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 7261.6 s
+  max entry radius   : 2.1547598290585e-2577  at (0, 0)
+
+*** EXCEPTION at N=400: AttributeError("'flint.types.arb.arb' object has no attribute 'abs'") ***
+
+------------------------------------------------------------------------------------------------
+VERDICT N=400 : ERROR: AttributeError("'flint.types.arb.arb' object has no attribute 'abs'")
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+TARGET c=100 N=800  dim=1601 x 1601  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---

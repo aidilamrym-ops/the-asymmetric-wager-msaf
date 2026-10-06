@@ -1,0 +1,6 @@
+[2026-09-28 22:37:41] WATCHDOG start pid=12188 interval=5s
+[2026-09-28 22:37:46] pid=12188 ACTIVE cpu=459.8s(+459.8s) ws=92MB hb={"stage": "build_arb_tau:start", "ts": "2026-09-28 22:29:46", "age_s": 480.9}
+[2026-09-28 22:37:51] pid=12188 ACTIVE cpu=464.5s(+4.7s) ws=91MB hb={"stage": "build_arb_tau:start", "ts": "2026-09-28 22:29:46", "age_s": 486.0}
+[2026-09-28 22:37:56] pid=12188 ACTIVE cpu=468.4s(+3.9s) ws=90MB hb={"stage": "build_arb_tau:start", "ts": "2026-09-28 22:29:46", "age_s": 491.0}
+[2026-09-28 22:38:01] pid=12188 ACTIVE cpu=472.8s(+4.3s) ws=89MB hb={"stage": "build_arb_tau:start", "ts": "2026-09-28 22:29:46", "age_s": 496.0}
+[2026-09-28 22:38:06] pid=12188 ACTIVE cpu=477.3s(+4.5s) ws=89MB hb={"stage": "build_arb_tau:start", "ts": "2026-09-28 22:29:46", "age_s": 501.0}

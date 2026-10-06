@@ -1,0 +1,13 @@
+# Byte-stable checkouts -- store and restore files exactly as committed.
+#
+# This repository has no uniform end-of-line convention: README.md and most
+# other files are LF, while six run logs are CRLF as Python wrote them on
+# Windows.  core.autocrlf (true in the system gitconfig) normalised those
+# logs to LF on commit, so a fresh clone with core.autocrlf=false produced
+# files whose SHA-256 no longer matched PROVENANCE.txt and CHECKSUM.sha256.
+#
+# "* -text" disables EOL conversion on both add and checkout: git stores the
+# bytes on disk verbatim and restores them verbatim on any platform, so the
+# recorded hashes hold for every clone regardless of core.autocrlf.  No file
+# content is modified by this setting.
+* -text

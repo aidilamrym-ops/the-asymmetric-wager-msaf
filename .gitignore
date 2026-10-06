@@ -1,0 +1,23 @@
+# THE ASYMMETRIC WAGER — tracking rules
+# Only work produced inside this workspace is committed.
+
+# Third-party corpora and pre-existing research dumps (not our work)
+Dream-RSI-main/
+BootLoops-ai/
+hexagon_mhv_symbol_weight_18/
+Theory_of_Everything_Derivations/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Machine-local resume state, not evidence (F2_REPORT.md section 7.10)
+guinand-weil-rigorous-numerics-main/ckpt_N400/
+*.ckpt
+
+# Editor and OS noise
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini

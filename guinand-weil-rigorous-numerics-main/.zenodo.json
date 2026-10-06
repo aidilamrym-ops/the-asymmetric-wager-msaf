@@ -1,0 +1,24 @@
+{
+  "title": "Rigorous Ball Arithmetic and Bandwidth-Calibrated Spectral Analysis of the Guinand-Weil Operator Framework",
+  "upload_type": "software",
+  "description": "This repository provides a fully reproducible, deterministic, and rigorously verified numerical framework for the Guinand-Weil explicit formula matrix operators. Utilizing high-precision ball arithmetic (arbitrary precision via FLINT/Arb) on consumer-grade hardware, this codebase verifies positive definiteness and inertia constraints (201+200=401) up to precision bounds of 10^-398 to 10^-1170. It also ships a bandwidth-calibrated spectral-correlation instrument (S1/S2) whose unfolding bandwidth is swept at sigma_u = 0.3, 0.5, 1.0: power is >= 90% at sigma_u = 1.0 and 0% at sigma_u <= 0.5, so the bandwidth, not the sample size N, is the binding constraint. On the real spectrum at this resolution the instrument returns S1 = INCONCLUSIVE and S2 = INCONSISTENT WITH MONTGOMERY; neither is a confirmation of Montgomery's conjecture. Includes complete forensic audit trails and cryptographic provenance manifests, together with an explicit register of known residual defects (cacat 18, cacat 19, and the unexplained K5 row of the pipeline report). No claim is made about the Riemann Hypothesis, Weil positivity, prime counting, or integer factorisation.",
+  "creators": [
+    {
+      "name": "Amry, Muhammad Aidil",
+      "affiliation": "Independent Researcher | South Sulawesi, Indonesia",
+      "orcid": "0009-0002-9718-9710"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "version": "v1.0.0-certified",
+  "keywords": [
+    "Guinand-Weil Formula",
+    "Ball Arithmetic",
+    "Arbitrary Precision",
+    "Spectral Analysis",
+    "Random Matrix Theory",
+    "FLINT/Arb",
+    "Rigorous Numerics"
+  ]
+}

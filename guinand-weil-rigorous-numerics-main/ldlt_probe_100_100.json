@@ -1,0 +1,15 @@
+{
+  "c": 100,
+  "N": 100,
+  "prec": 9000,
+  "dim": 201,
+  "n_pos": 201,
+  "n_neg": 0,
+  "undetermined_pivot": null,
+  "build_s": 490.8,
+  "ldlt_s": 23.7,
+  "max_entry_radius": "2.5233772783144590482e-2678",
+  "min_abs_pivot": 1.2026769498304185e-67,
+  "verdict": "CERTIFIED POSITIVE DEFINITE",
+  "sha256": "4b5cac3ab19ecf31b068e331776457da2d69efc67e71e2501600c53dcc99d260"
+}

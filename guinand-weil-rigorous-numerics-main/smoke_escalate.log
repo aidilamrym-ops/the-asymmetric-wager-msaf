@@ -1,0 +1,174 @@
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=200  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=200 bits
+================================================================================================
+
+--- attempt 1 : prec = 200 bits (~66 digits) ---
+  build_arb_tau      : 0.2 s
+  max entry radius   : 4.1110196790947e-57  at (5, 5)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=17  n_neg=0  undetermined_pivot=17  max_pivot_rad=1.0618389725806e-23
+  UNDETERMINED pivot at index 17 -> escalating precision
+
+--- attempt 2 : prec = 400 bits (~133 digits) ---
+  build_arb_tau      : 0.3 s
+  max entry radius   : 8.9149062921402e-117  at (11, 11)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=32  n_neg=0  undetermined_pivot=32  max_pivot_rad=1.0896647682780e-30
+  UNDETERMINED pivot at index 32 -> escalating precision
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       400      0      8.914906292140 None           NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_escalate.json
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=200  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=200 bits
+================================================================================================
+
+--- attempt 1 : prec = 200 bits (~66 digits) ---
+  build_arb_tau      : 0.2 s
+  max entry radius   : 4.1110196790947e-57  at (5, 5)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=17  n_neg=0  undetermined_pivot=17  max_pivot_rad=1.0618389725806e-23
+  UNDETERMINED pivot at index 17 -> escalating precision
+
+--- attempt 2 : prec = 400 bits (~133 digits) ---
+  build_arb_tau      : 0.3 s
+  max entry radius   : 8.9149062921402e-117  at (11, 11)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=32  n_neg=0  undetermined_pivot=32  max_pivot_rad=1.0896647682780e-30
+  UNDETERMINED pivot at index 32 -> escalating precision
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       400      0      8.914906292140 None           NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_escalate.json
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[20]  start_prec=200  escalations=1  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=20  dim=41 x 41  starting prec=200 bits
+================================================================================================
+
+--- attempt 1 : prec = 200 bits (~66 digits) ---
+  build_arb_tau      : 0.2 s
+  max entry radius   : 4.1110196790947e-57  at (5, 5)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=17  n_neg=0  undetermined_pivot=17  max_pivot_rad=1.0618389725806e-23
+  UNDETERMINED pivot at index 17 -> escalating precision
+
+--- attempt 2 : prec = 400 bits (~133 digits) ---
+  build_arb_tau      : 0.3 s
+  max entry radius   : 8.9149062921402e-117  at (11, 11)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 5/41  elapsed=0s  eta=0s
+  [ldlt] pivot 10/41  elapsed=0s  eta=0s
+  [ldlt] pivot 15/41  elapsed=0s  eta=0s
+  [ldlt] pivot 20/41  elapsed=0s  eta=0s
+  [ldlt] pivot 25/41  elapsed=0s  eta=0s
+  [ldlt] pivot 30/41  elapsed=0s  eta=0s
+  certified_inertia  : 0.0 s
+  n_pos=32  n_neg=0  undetermined_pivot=32  max_pivot_rad=1.0896647682780e-30
+  UNDETERMINED pivot at index 32 -> escalating precision
+
+------------------------------------------------------------------------------------------------
+VERDICT N=20 : NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+20      41       400      0      8.914906292140 None           NOT DETERMINED (precision escalation exhausted)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\smoke_escalate.json

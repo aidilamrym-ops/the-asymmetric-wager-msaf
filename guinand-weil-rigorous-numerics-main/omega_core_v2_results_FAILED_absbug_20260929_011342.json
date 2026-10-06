@@ -1,0 +1,9 @@
+[
+  {
+    "c": 100,
+    "N": 400,
+    "error": "AttributeError(\"'flint.types.arb.arb' object has no attribute 'abs'\")",
+    "anomaly": false,
+    "non_result": true
+  }
+]

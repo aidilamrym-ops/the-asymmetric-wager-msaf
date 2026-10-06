@@ -1,0 +1,126 @@
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[400, 800]  start_prec=9000  escalations=3  bound=on
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=400  dim=801 x 801  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 6191.3 s
+  max entry radius   : 2.1547598290585e-2577  at (0, 0)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 100/801  elapsed=55s  eta=385s
+  [ldlt] pivot 200/801  elapsed=200s  eta=600s
+  [ldlt] pivot 300/801  elapsed=402s  eta=671s
+  [ldlt] pivot 400/801  elapsed=629s  eta=630s
+  [ldlt] pivot 500/801  elapsed=847s  eta=510s
+  [ldlt] pivot 600/801  elapsed=1031s  eta=345s
+  [ldlt] pivot 700/801  elapsed=1154s  eta=167s
+  certified_inertia  : 1171.8 s
+  n_pos=723  n_neg=0  undetermined_pivot=723  max_pivot_rad=6.5054156664262e-38
+  UNDETERMINED pivot at index 723 -> escalating precision
+
+--- attempt 2 : prec = 18000 bits (~6000 digits) ---
+  build_arb_tau      : 15939.7 s
+  max entry radius   : 1.3985514392045e-5266  at (0, 0)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 100/801  elapsed=157s  eta=1101s
+  [ldlt] pivot 200/801  elapsed=567s  eta=1705s
+  [ldlt] pivot 300/801  elapsed=1138s  eta=1901s
+  [ldlt] pivot 400/801  elapsed=1795s  eta=1799s
+  [ldlt] pivot 500/801  elapsed=2486s  eta=1497s
+  [ldlt] pivot 600/801  elapsed=3080s  eta=1032s
+  [ldlt] pivot 700/801  elapsed=3468s  eta=500s
+  [ldlt] pivot 800/801  elapsed=3614s  eta=5s
+  certified_inertia  : 3614.3 s
+  n_pos=801  n_neg=0  undetermined_pivot=None  max_pivot_rad=1.1357906142745e-2384
+  lambda_min >= 6.747092398972142917175307e-509   (2425.0 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=400 : VERIFIED POSITIVE DEFINITE  (n+=801, n-=0, 801/801 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+TARGET c=100 N=800  dim=1601 x 1601  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 33497.2 s
+  max entry radius   : 1.2552676217360e-2520  at (1, 1)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 200/1601  elapsed=596s  eta=4175s
+  [ldlt] pivot 400/1601  elapsed=2130s  eta=6395s
+  [ldlt] pivot 600/1601  elapsed=4454s  eta=7431s
+  [ldlt] pivot 800/1601  elapsed=6819s  eta=6828s
+  [ldlt] pivot 1000/1601  elapsed=8928s  eta=5366s
+  certified_inertia  : 9743.2 s
+  n_pos=1087  n_neg=0  undetermined_pivot=1087  max_pivot_rad=1.0794407411883e-46
+  UNDETERMINED pivot at index 1087 -> escalating precision
+
+--- attempt 2 : prec = 18000 bits (~6000 digits) ---
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[800]  start_prec=18000  escalations=0  bound=on
+# checkpoint: D:\gw_ckpt
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=800  dim=1601 x 1601  starting prec=18000 bits
+================================================================================================
+
+--- attempt 1 : prec = 18000 bits (~6000 digits) ---
+  build_arb_tau      : 85213.3 s (session)   85213.3 s (total)
+  build checkpoint   : rows recorded, 2.92 GB on disk
+  max entry radius   : 6.0534411927294e-5144  at (0, 0)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 200/1601  elapsed=1435s  eta=10053s
+  [ldlt] pivot 400/1601  elapsed=5230s  eta=15704s
+  [ldlt] pivot 600/1601  elapsed=11023s  eta=18390s
+  [ldlt] pivot 800/1601  elapsed=17492s  eta=17513s
+  [ldlt] pivot 1000/1601  elapsed=27454s  eta=16500s
+  [ldlt] pivot 1200/1601  elapsed=33307s  eta=11130s
+  [ldlt] pivot 1400/1601  elapsed=36850s  eta=5291s
+  [ldlt] pivot 1600/1601  elapsed=38024s  eta=24s
+  ldlt checkpoint    : 2.41 GB on disk
+  certified_inertia  : 38024.0 s (session)   38024.0 s (total)
+  n_pos=1601  n_neg=0  undetermined_pivot=None  max_pivot_rad=7.4241227599612e-803
+  lambda_min >= 8.675260988678553428928910e-2877   (10354.0 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=800 : VERIFIED POSITIVE DEFINITE  (n+=1601, n-=0, 1601/1601 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+800     1601     18000    0      6.053441192729 8.675260988678 VERIFIED POSITIVE DEFINITE  (n+=1601, n-=0, 1601/1601 certified)
+------------------------------------------------------------------------------------------------
+Results -> C:\Users\usER\oracle-toe\GUINAND_WEIL\omega_core_v2_results.json

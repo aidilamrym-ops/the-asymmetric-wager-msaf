@@ -1,0 +1,76 @@
+################################################################################################
+# OMEGA -- EVEN SECTOR vs SOURCE PACKAGE (option 1, closes the last derived link)
+# (c, N, dps, prec) = (100, 200, 400, 2000)   even block 201x201
+################################################################################################
+
+PRE-REGISTERED DECISION RULE (identical to option (a)):
+  V1  delta_rel < 1e-300          -> EQUIVALENT TO >=300 DIGITS
+  V2  1e-300 <= delta_rel < 1e-6  -> DIFFERENT BEYOND ROUNDING
+  V3  delta_rel >= 1e-6           -> STRUCTURALLY DIFFERENT
+  V4  source code fails           -> NOT COMPARABLE
+PRE-REGISTERED PREDICTION (reported, NOT a threshold):
+  delta_pred = sqrt(2) * 4.1137004583661995868e-398 = 5.81765097976e-398
+  (GW_STATUS 7f.7, written before this run)
+
+================================================================================================
+PROVENANCE
+================================================================================================
+  sha256(source_arb_ldlt_certify.py)
+    computed = 33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb
+    pinned   = 33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb  (12863 bytes, git bfa40dc, the 2026-09-30 resume copy that ran N=800)
+    MATCH -- documented local extension: three default-preserving
+             resume kwargs added 2026-09-30, no arithmetic changed.
+             The verbatim upstream copy is at git b76be0d and is
+             what this check printed when it ran on 2026-09-27.
+
+================================================================================================
+OUR SIDE -- even block rebuilt at dps 400
+================================================================================================
+  mp.mp.dps = 400 (set AFTER importing gw_qinf)
+  blocks built in 58.7 s
+  even block 201x201 built in 79.8 s
+
+================================================================================================
+SOURCE SIDE -- build_arb_tau(prec 2000 bits)
+================================================================================================
+  imported source_arb_ldlt_certify.py
+  build_arb_tau done in 187.4 s, dimension 401
+  extracting midpoints at 592 significant decimals ...
+  (mp.mp.dps raised to 612 for the source-side parse)
+  done in 5.1 s
+  max arb radius on source side (full matrix): [1.804883838451106391418316595342690609636296899645495236555735912826489501282576598355849140090558684135123211774638656832169191182103947568454432626934830666740350436782455682721436095930672900484923705929156739700772348825016315855855887466047249287575784032032662364430352315385847353359278214460136377652709953158247459518552765932027369399604449591093560297186679225916718115643567231958182235725646594162404984429232187028558815182864722845816876504439354779952509162855192687113790192385096602270501055097417142061353395267692472158157647997549860258014373012722358296489853540018403465743187725e-567 +/- 4.49e-1168]
+
+================================================================================================
+ENTRYWISE DIFF (201 x 201 = 40401 entries)
+================================================================================================
+  diff completed in 1.5 s
+
+  max |source|          = 7.6760346386039244984
+  max |ours|            = 7.6760346386039244984
+  delta = max|ours-src| = 4.1096198322900148045e-398   at (173, 173), interior (no sqrt2)
+  delta_rel             = 5.35383179698e-399
+  delta_flip = max|ours+src| = 15.352069277207848997   (= 2*max => same sign at peak)
+  entries with OPPOSITE sign  = 0 / 40401   -> NO SIGN FLIP
+  median per-entry ratio ours/source = 1.0   (large => global scale)
+
+  our working-precision floor = 10^-400 = 1.0e-400
+  delta is 2.6138 orders ABOVE the working-precision floor
+
+------------------------------------------------------------------------------------------------
+PREDICTION CHECK (reported; does NOT decide the verdict)
+  predicted (7f.7, pre-run) = 5.81765097976e-398
+  measured (this run)       = 4.1096198322900148045e-398
+  measured / predicted      = 0.706405359584
+  0.150946 orders BELOW the pre-registered prediction
+------------------------------------------------------------------------------------------------
+
+################################################################################################
+# VERDICT -- EVEN SECTOR vs SOURCE PACKAGE
+################################################################################################
+  V1 EQUIVALENT TO >=300 DIGITS
+  every even-sector entry agrees with the source package to >=300 digits.
+  The section 7f.7 DERIVED bound (~5.82e-398) is now MEASURED.
+
+TOOL STATUS: python 3.14 + mpmath + python-flint 0.9.0.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
+SCOPE: one preprint's even sector. Not RH, not Weil positivity.

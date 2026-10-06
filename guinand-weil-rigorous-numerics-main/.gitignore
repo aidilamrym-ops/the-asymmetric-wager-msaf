@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------------------
+# Publication .gitignore -- Guinand-Weil verification chain
+#
+# IMPORTANT: this file deliberately does NOT contain `*.json` or `*.log`.
+#
+# The parent monorepo's root .gitignore ignores BOTH globally (root .gitignore
+# lines 47 and 63), which is why the input spectrum, the certified eigen matrix
+# and all 12 forensic run logs were never tracked there -- `git ls-files
+# "*.json"` and `git ls-files "*.log"` both return 0 in the monorepo.
+#
+# The Zenodo record for this release promises "complete forensic audit trails
+# and cryptographic provenance manifests". Shipping a repository with zero
+# logs would make that promise false, so the two rules are not inherited here.
+# ---------------------------------------------------------------------------
+
+# --- runtime / build artefacts (never sources) -----------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+*.tmp
+*.tmp.*
+Thumbs.db
+.vscode/
+.idea/
+
+# --- secrets (never publish) ----------------------------------------------
+.env
+*.env
+.env.*
+auth.json
+*.key
+*.pem
+*secret*
+*token*
+*token*.json
+credentials*.json
+
+# --- local databases (state, not source) ----------------------------------
+*.db
+*.db-wal
+*.db-shm
+*.dump

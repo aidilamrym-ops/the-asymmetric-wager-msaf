@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "OMEGA Framework: Certified Enclosure of Guinand-Weil Matrices at Extreme Scale"
+type: software
+
+authors:
+  - family-names: Amry
+    given-names: Muhammad Aidil
+    orcid: "https://orcid.org/0009-0002-9718-9710"
+    affiliation: "Independent Researcher, South Sulawesi, Indonesia"
+
+version: 1.0.0
+date-released: 2026-09-27
+
+license: MIT
+repository-code: "https://github.com/aidilamrym-ops/guinand-weil-rigorous-numerics"
+keywords:
+  - ball-arithmetic
+  - verified-numerics
+  - interval-eigen-solver
+  - guinand-weil-matrix
+  - smallest-eigenvalue
+  - eigenvalue-localisation
+  - python-flint
+  - mpmath
+
+abstract: >-
+  Certified enclosure of the smallest eigenvalue of the Guinand-Weil test
+  matrix Q_{100,40} at 1024 working bits, giving
+  lambda_min = +1.32105051975174632728899314595e-102. Two ball-arithmetic
+  routes are executed: (A1) an arb enclosure combined with Weyl propagation of
+  a dps-doubling entry-error estimate, certifying positivity with a margin of
+  74.446 orders over the required tolerance rho* = 1.63092656759474834688247443633e-104;
+  and (A2) the validated interval eigen-solver acb_mat.eig, which isolates all
+  81 eigenvalues under both rump and vdhoeven_mourrain and returns an enclosure
+  strictly positive with zero imaginary part, agreeing with the mpmath value to
+  79 significant decimal digits. Route A1 is conditional on a measured
+  dps-doubling estimate, stated as such. The record also documents a defect in
+  mp.lerchphi propagating into the matrix diagonal, reaching
+  1.4618493934897842764e-93 (1.1e9 times lambda_min) while shifting the
+  eigenvalue by only 7.363831306276056e-118, because the perturbation vanishes
+  identically for |n| <= 10 where the eigenvector is localised. Eight
+  self-retracted claims are preserved. Scope: a matrix constraint only - not a
+  proof of the Riemann Hypothesis, Weil positivity, prime counting, or
+  factorisation; the source preprint disclaims all four. The numerics are not
+  kernel-checked by a proof assistant: Coq and Isabelle were not run, and ball
+  arithmetic is an automatic numerics tool. Added 2026-10-02 as a separate
+  layer, Track C: a Lean 4 module (OMEGATrackC.lean) type-checked over the
+  literals printed above, and seven exact-rational side conditions discharged
+  by the Z3 SMT solver - see README section 4.1 for what that layer does and
+  does not cover.
+
+references:
+  - type: article
+    title: "Primary source for the Guinand-Weil matrix statement"
+    url: "https://arxiv.org/html/2607.02828v3"
+    notes: "The mathematical definition of Q is adopted verbatim from this source and never reconstructed."

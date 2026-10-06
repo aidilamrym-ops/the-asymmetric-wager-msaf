@@ -1,0 +1,18 @@
+track_c_make_smt.py  2026-10-04T08:12:08+00:00
+readme = README.md
+lean   = OMEGATrackC.lean
+  lambdaMin   lean=1.32105051975174632728899314595e-102  readme=found  -> MATCH
+  rhoActual   lean=5.83986112334288261e-179  readme=found  -> MATCH
+  rhoStar     lean=1.63092656759474834688247443633e-104  readme=found  -> MATCH
+wrote track_c_side_conditions.smt2 (1532 bytes, 7 claims)
+z3   = E:\4_TOOLS_INSTALLER\z3-4.16.0-x64-win\bin\z3.exe
+z3ver = Z3 version 4.16.0 - 64 bit
+  combined conjunction of 7 negations                                          UNSAT (as required)
+  measured_within_tolerance          rhoActual <= rhoStar                     UNSAT (as required)
+  margin_at_least_74_orders          rhoActual * 10^74 <= rhoStar             UNSAT (as required)
+  margin_satisfies_master_theorem    rhoActual * 401 < lambdaMin              UNSAT (as required)
+  tolerance_fails_the_coarse_bound   not (rhoStar * 401 < lambdaMin)          UNSAT (as required)
+  implied_constant_ge_81             rhoStar * 81 <= lambdaMin                UNSAT (as required)
+  implied_constant_lt_82             lambdaMin < rhoStar * 82                 UNSAT (as required)
+  tolerance_positive                 0 < rhoStar                              UNSAT (as required)
+RESULT: PASS -- 7/7 negations UNSAT (individually) plus the combined conjunction; literal cross-check MATCH on all 3 constants.

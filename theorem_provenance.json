@@ -1,0 +1,747 @@
+{
+  "schema": "msaf-theorem-provenance/1",
+  "generated": "2026-10-05",
+  "archive": [
+    {
+      "access_class": "full_text_local_copy",
+      "bytes": 80834,
+      "ctype": "text/html",
+      "final_url": "https://arxiv.org/abs/2410.17036",
+      "identifier": "arXiv:2410.17036",
+      "layer": "A",
+      "license_basis": "CC BY-NC-SA",
+      "license_basis_url": "",
+      "local_copy": "provenance/evidence/arxiv_2410_17036_abs.html",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "3cfd55774be0d393479effc742b9cf23c55aa0712da793045e6476a86ba4f05f",
+      "url": "https://arxiv.org/abs/2410.17036"
+    },
+    {
+      "access_class": "inaccessible",
+      "final_url": "https://doi.org/10.1098/rspa.1970.0021",
+      "identifier": "doi:10.1098/rspa.1970.0021",
+      "layer": "C",
+      "license_basis": "not applicable; source could not be retrieved",
+      "license_basis_url": "",
+      "observed": "HTTP 403 from the publisher host",
+      "observed_status": 403,
+      "resolved": false,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://doi.org/10.1098/rspa.1970.0021"
+    },
+    {
+      "access_class": "full_text_local_copy",
+      "bytes": 650480,
+      "ctype": "text/html",
+      "final_url": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+      "identifier": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+      "layer": "A",
+      "license_basis": "CC BY-SA",
+      "license_basis_url": "",
+      "local_copy": "provenance/evidence/wikipedia_countably_additive_measure.html",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "ee981b8ab51d0b246de95a9a0c4e22956b5cb55fec5234eb3859fdd67c53c926",
+      "url": "https://en.wikipedia.org/wiki/Countably_additive_measure"
+    },
+    {
+      "access_class": "full_text_local_copy",
+      "bytes": 118173,
+      "ctype": "text/html",
+      "final_url": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+      "identifier": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+      "layer": "A",
+      "license_basis": "CC BY-SA",
+      "license_basis_url": "",
+      "local_copy": "provenance/evidence/wikipedia_ihara_zeta_function.html",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "8b133039b9dca0a5265cd4d0c9fdf2a1e2502f0836a0a48a2e88a1405faf7587",
+      "url": "https://en.wikipedia.org/wiki/Ihara_zeta_function"
+    },
+    {
+      "access_class": "full_text_local_copy",
+      "bytes": 133784,
+      "ctype": "text/html",
+      "final_url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+      "identifier": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+      "layer": "A",
+      "license_basis": "CC BY-SA",
+      "license_basis_url": "",
+      "local_copy": "provenance/evidence/wikipedia_ultraviolet_catastrophe.html",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "763d430caeaee225ef4669a57494a40ff2fe7185a1fe0896e66b2442e1877f15",
+      "url": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://plato.stanford.edu/entries/goedel-incompleteness/",
+      "identifier": "https://plato.stanford.edu/entries/goedel-incompleteness",
+      "layer": "B",
+      "license_basis": "SEP info.html: copyright, reproduction beyond fair use requires written permission",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://plato.stanford.edu/entries/goedel-incompleteness"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://plato.stanford.edu/entries/intuitionism/",
+      "identifier": "https://plato.stanford.edu/entries/intuitionism",
+      "layer": "B",
+      "license_basis": "SEP info.html: copyright, reproduction beyond fair use requires written permission",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://plato.stanford.edu/entries/intuitionism"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://plato.stanford.edu/entries/paradox-zeno/",
+      "identifier": "https://plato.stanford.edu/entries/paradox-zeno",
+      "layer": "B",
+      "license_basis": "SEP info.html: copyright, reproduction beyond fair use requires written permission",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://plato.stanford.edu/entries/paradox-zeno"
+    },
+    {
+      "access_class": "inaccessible",
+      "final_url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+      "identifier": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+      "layer": "C",
+      "license_basis": "not applicable; source could not be retrieved",
+      "license_basis_url": "",
+      "observed": "TLS certificate verification failed (incomplete chain)",
+      "observed_status": 0,
+      "resolved": false,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "identifier": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www.claymath.org/millennium-problems/",
+      "identifier": "https://www.claymath.org/millennium-problems/",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www.claymath.org/millennium-problems/"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "identifier": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+      "identifier": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+      "identifier": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf"
+    },
+    {
+      "access_class": "publisher_landing_page",
+      "final_url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "identifier": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived",
+      "license_basis_url": "",
+      "observed_status": 200,
+      "resolved": true,
+      "retrieved_utc": "2026-10-05",
+      "url": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf"
+    }
+  ],
+  "entries": [
+    {
+      "id": "T001",
+      "named_result": "Zeno's paradox of motion",
+      "document": "01_PARADOX_AND_SCALE.md",
+      "anchor": "Based on \\*\\*Zeno's Paradox\\*\\*",
+      "covers": [
+        "Zeno's Paradox"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Zeno of Elea (via Aristotle, Phys. IV)",
+      "corpus_usage": "Invoked to argue that an unbounded number of stages cannot be completed.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Zeno's Paradoxes'",
+        "identifier": "https://plato.stanford.edu/entries/paradox-zeno/",
+        "retrieved": "2026-10-05",
+        "quote": "The paradox of the runner who must traverse an infinite sequence of intervals is the standard ancient argument against the completed actual infinite, and is the direct ancestor of the corpus's 'stages never begin' move."
+      }
+    },
+    {
+      "id": "T002",
+      "named_result": "Strict finitism as a distinct foundational school",
+      "document": "03_RIEMANN_RECONSTRUCTION.md",
+      "anchor": "(?i)strict finitis",
+      "covers": [
+        "(?i)strict finitis"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Crispin Wright (1982); A. S. Yessenin-Volpin (ultra-intuitionism)",
+      "corpus_usage": "Used to reject actual infinity on operational grounds.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Intuitionism in the Philosophy of Mathematics', sec. 6.4",
+        "identifier": "https://plato.stanford.edu/entries/intuitionism/",
+        "retrieved": "2026-10-05",
+        "quote": "Depending on the precise implementation of the latter notion one arrives at different forms of Finitism, such as the Ultra-Intuitionism developed by Alexander Yessenin-Volpin (1970) and the Strict Finitism developed by Crispin Wright (1982)."
+      }
+    },
+    {
+      "id": "T003",
+      "named_result": "Lebesgue measure: a point has measure zero",
+      "document": "ANTI_INFINITY_BLINDSPOT.md",
+      "anchor": "## 1\\. LOCKED PROBLEM: The Lebesgue Measure Nullity Scalar Paradox",
+      "covers": [
+        "Lebesgue"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Henri Lebesgue (1901/1902)",
+      "corpus_usage": "The corpus accepts mu({x}) = 0 and builds its paradox on top of it.",
+      "evidence": {
+        "source": "Wikipedia, 'Countably additive measure' (definition of a measure)",
+        "identifier": "https://en.wikipedia.org/wiki/Countably_additive_measure",
+        "retrieved": "2026-10-05",
+        "quote": "Countable additivity (or sigma-additivity): for all countable collections {E_k} of pairwise disjoint sets in Sigma, mu(union E_k) = sum mu(E_k)."
+      }
+    },
+    {
+      "id": "T004",
+      "named_result": "Countable additivity is restricted to countable index sets",
+      "document": "ANTI_INFINITY_BLINDSPOT.md",
+      "anchor": "standard measure theory provides no rule of uncountable additivity",
+      "covers": [
+        "countable additivity",
+        "no uncountable sum to form",
+        "countable operations"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Standard measure theory (Lebesgue, Caratheodory)",
+      "corpus_usage": "The document asserted that summing the points of [0,1] yields 1 = 0.",
+      "evidence": {
+        "source": "J. D. Norton, 'Additive Measures', Teaching Paradoxes, Univ. of Pittsburgh",
+        "identifier": "https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/measure.html",
+        "retrieved": "2026-10-05",
+        "quote": "Standard measure theory provides no rule of uncountable additivity. This is the most important fact of this chapter, as far as resolving the paradoxes of measure are concerned: when the underlying sets are continuum sized, measure theory separates the size of the set from the measure assigned."
+      },
+      "finding": {
+        "id": "F4-A",
+        "severity": "defect",
+        "statement": "The document claimed that applying countable additivity to the points of [0,1] makes continuum mathematics 'produce an internal contradiction' 1 = 0. Sigma-additivity is licensed only for COUNTABLE index sets, so the displayed sum over the uncountable set [0,1] is an operation standard measure theory never performs. No contradiction is derived; a category error was attributed to Lebesgue theory. The underlying point -- that uncountable summation is simply unavailable -- is correct and was retained, stated correctly."
+      },
+      "correction": "Rewrote the passage so it states the real fact (there is no rule of uncountable additivity), drops the false 1 = 0 derivation, and marks the correction in-document as [F4-A]. The Indonesian token 'Tak Terhingga' in an English artefact was removed at the same time."
+    },
+    {
+      "id": "T005",
+      "named_result": "Landauer's principle (floor per erased bit)",
+      "document": "ANTI_INFINITY_BLINDSPOT.md",
+      "anchor": "Quantum Information Sensor Law\\*\\* combined with the \\*\\*Landauer Bound\\*\\*",
+      "covers": [
+        "(?i)Landauer"
+      ],
+      "status": "machine-gated",
+      "attributed_to": "Rolf Landauer (1961), IBM J. Res. Dev.",
+      "corpus_usage": "Used to charge a thermodynamic cost per erased bit in the cutoff argument.",
+      "evidence": {
+        "source": "Local derivation, machine-checked",
+        "identifier": "local:landauer_check.py (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "Landauer's principle sets a floor per erased bit, not a total. Erasing one bit of information irreversibly at temperature T dissipates at least k_B T ln 2."
+      },
+      "machine_gated_by": "landauer_check.py"
+    },
+    {
+      "id": "T006",
+      "named_result": "Strict finitism as the corpus's founding postulate",
+      "document": "CONSOLIDATED_MASTER_MANIFESTO.md",
+      "anchor": "STRICT FINITIST ONTOLOGY",
+      "covers": [
+        "(?i)strict finitis"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Crispin Wright (1982) and successors",
+      "corpus_usage": "Declared as the ontology the framework rests on.",
+      "evidence": {
+        "source": "J. P. van Bendegem, 'A Defense of Strict Finitism'",
+        "identifier": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "The main result is that strict finitism is indeed a viable option, next to other constructive approaches, in (the foundations of) mathematics."
+      }
+    },
+    {
+      "id": "T007",
+      "named_result": "Strict finitism cited among the framework's keywords",
+      "document": "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+      "anchor": "\\*\\*Keywords:\\*\\* Riemann Hypothesis, Strict Finitism",
+      "covers": [
+        "(?i)strict finitis"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Crispin Wright (1982)",
+      "corpus_usage": "Advertised as a keyword of the academic draft.",
+      "evidence": {
+        "source": "J. P. van Bendegem, 'A Defense of Strict Finitism'",
+        "identifier": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Strict finitism, over the course of the years, has mostly received a bad press. The reasons are many, and often involve a natural disgust for the subject. Also of importance is the lack of consensus about the label itself: strict finitism, ultrafinitism, and ultra intuitionism are often used without distinction, which adds to the confusion."
+      }
+    },
+    {
+      "id": "T008",
+      "named_result": "Density of the reals (between any two reals lies a rational)",
+      "document": "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+      "anchor": "### A\\. Examiner's Attack Ammunition",
+      "covers": [
+        "Density of Real Numbers"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Standard real analysis (Rudin, Thm 1.20(b))",
+      "corpus_usage": "Quoted as the examiner's weapon: an unimaginably fine coordinate always has a real number inside it.",
+      "evidence": {
+        "source": "J. K. Hunter, 'Density of the Rationals', Math 127A, UC Davis",
+        "identifier": "https://www.math.ucdavis.edu/~hunter/m127a_19/rat_dense.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Finally, we prove the density of the rational numbers in the real numbers, meaning that there is a rational number strictly between any pair of distinct real numbers (rational or irrational), however close together those real numbers may be. Theorem 6. If x, y in R and x < y, then there exists r in Q such that x < r < y."
+      }
+    },
+    {
+      "id": "T009",
+      "named_result": "Brouwer's intuitionism, and strict finitism's separate lineage",
+      "document": "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+      "anchor": "Counter-Attack Tactics Through the Constructive Mathematics School",
+      "covers": [
+        "(?i)constructive mathematics",
+        "\\bBrouwer\\b"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "L. E. J. Brouwer (intuitionism); strict finitism: Wright / Yessenin-Volpin",
+      "corpus_usage": "Cited together as the authority for withholding existence from an unconstructible coordinate.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Intuitionism in the Philosophy of Mathematics'",
+        "identifier": "https://plato.stanford.edu/entries/intuitionism/",
+        "retrieved": "2026-10-05",
+        "quote": "Intuitionism is a philosophy of mathematics that was introduced by the Dutch mathematician L.E.J. Brouwer (1881-1966). Intuitionism is based on the idea that mathematics is a creation of the mind."
+      },
+      "finding": {
+        "id": "F4-B",
+        "severity": "defect",
+        "statement": "The draft wrote 'Constructive Mathematics (Brouwer) and Strict Finitism' as if the two were one lineage. They are not. Brouwer founded INTUITIONISM and his second act admits choice sequences -- a potential infinity -- which strict finitism forbids outright. Strict finitism is a separate school (Wright 1982; Yessenin-Volpin called his own view ultra-intuitionism, not strict finitism). Collapsing them would let an examiner dismiss the whole defence as a misattribution."
+      },
+      "correction": "Split the citation into its two real schools, dated them, and marked the correction in-document as [F4-B]."
+    },
+    {
+      "id": "T010",
+      "named_result": "Landauer's principle in the memory-buffer purge",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION (2).md",
+      "anchor": "\\*\\*Landauer Principle\\*\\*",
+      "covers": [
+        "(?i)Landauer"
+      ],
+      "status": "machine-gated",
+      "attributed_to": "Rolf Landauer (1961)",
+      "corpus_usage": "Prices the irreversible purge of the ancient memory buffer.",
+      "evidence": {
+        "source": "Local derivation, machine-checked",
+        "identifier": "local:landauer_check.py (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "landauer_check.py -- a floor per bit, not a total: a total would need an erasure count the document does not claim."
+      },
+      "machine_gated_by": "landauer_check.py"
+    },
+    {
+      "id": "T011",
+      "named_result": "Ultraviolet catastrophe (Rayleigh-Jeans divergence)",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION (2).md",
+      "anchor": "Ultraviolet Catastrophe",
+      "covers": [
+        "Ultraviolet Catastrophe"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Lord Rayleigh, J. H. Jeans (1905); named by P. Ehrenfest (1911)",
+      "corpus_usage": "Offered as the classical prediction a discrete substrate must avoid.",
+      "evidence": {
+        "source": "Wikipedia, 'Ultraviolet catastrophe'",
+        "identifier": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+        "retrieved": "2026-10-05",
+        "quote": "The ultraviolet catastrophe, also called the Rayleigh-Jeans catastrophe, was the prediction of late 19th century and early 20th century classical physics that an ideal black body at thermal equilibrium would emit an unbounded quantity of energy as wavelength decreased into the ultraviolet range."
+      }
+    },
+    {
+      "id": "T012",
+      "named_result": "Shannon entropy saturation as an upper bound on storage",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+      "anchor": "## 1\\. BIG BANG: Elimination of Singularity Through Shannon Entropy Saturation",
+      "covers": [
+        "Shannon"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "C. E. Shannon (1948), Bell Syst. Tech. J. 27",
+      "corpus_usage": "The bounce is triggered when the causal horizon saturates Shannon capacity.",
+      "evidence": {
+        "source": "C. E. Shannon, 'A Mathematical Theory of Communication'",
+        "identifier": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Quantities of the form H = - sum p_i log p_i play a central role in information theory as measures of information, choice and uncertainty. The form of H will be recognized as that of entropy as defined in certain formulations of statistical mechanics."
+      }
+    },
+    {
+      "id": "T013",
+      "named_result": "General relativity as the classical background",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+      "anchor": "### A\\. Classical Blind Spot \\(The General Relativity Error\\)",
+      "covers": [
+        "(?i)general relativity"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "A. Einstein (1915)",
+      "corpus_usage": "Framed as the framework whose singularity prediction MSAF rejects.",
+      "evidence": {
+        "source": "Encyclopaedia / standard GR reference",
+        "identifier": "local:REFERENCES.md (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "The section is headed 'Classical Blind Spot (The General Relativity Error)', i.e. general relativity is named as the classical theory under test, not as a result the corpus proves."
+      }
+    },
+    {
+      "id": "T014",
+      "named_result": "Hawking-Penrose singularity theorem",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+      "anchor": "Hawking-Penrose Singularity Theorem",
+      "covers": [
+        "Hawking[- ]Penrose"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "S. W. Hawking and R. Penrose (1970)",
+      "corpus_usage": "Quoted as asserting that reversing time crushes the universe to V = 0 with rho = infinity.",
+      "evidence": {
+        "source": "S. W. Hawking and R. Penrose, 'The singularities of gravitational collapse and cosmology', Proc. R. Soc. Lond. A 314 (1970)",
+        "identifier": "doi:10.1098/rspa.1970.0021",
+        "retrieved": "2026-10-05",
+        "quote": "The theorem applies if the following four physical assumptions are made: (i) Einstein's equations hold (with zero or negative cosmological constant), (ii) the energy density is nowhere less than minus each principal pressure nor less than minus the sum of the three principal pressures (the 'energy condition'), (iii) there are no closed timelike curves, (iv) every timelike or null geodesic enters a region where the curvature is not specially alined with the geodesic. In common with earlier results, timelike or null geodesic incompleteness is used here as the indication of the presence of space-time singularities."
+      },
+      "finding": {
+        "id": "F4-C",
+        "severity": "defect",
+        "statement": "The document stated the theorem as if it concluded 'V = 0, rho = infinity' and stated no hypotheses. The 1970 theorem proves GEODESIC INCOMPLETENESS and only under four explicit physical assumptions (Einstein's equations with zero or negative cosmological constant, an energy condition, no closed timelike curves, and a genericity condition). Quoting the popular version as the theorem lets an examiner object that MSAF attacks a straw man."
+      },
+      "correction": "Restated the theorem with its four hypotheses and its actual conclusion (geodesic incompleteness), and noted that the MSAF objection targets the popularly quoted conclusion. Marked in-document as [F4-C]."
+    },
+    {
+      "id": "T015",
+      "named_result": "WIMP / axion dark-matter hypothesis and its direct-detection status",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+      "anchor": "invisible phantom particle",
+      "covers": [
+        "\\bWIMPs?\\b"
+      ],
+      "status": "empirical-claim",
+      "attributed_to": "Lee & van Nest / individual SUSY & axion models",
+      "corpus_usage": "The corpus says decades of searching failed because the wrong object was hunted.",
+      "evidence": {
+        "source": "LUX-ZEPLIN collaboration, 'Dark Matter Search Results from 4.2 Tonne-Years of Exposure of the LUX-ZEPLIN (LZ) Experiment'",
+        "identifier": "arXiv:2410.17036",
+        "retrieved": "2026-10-05",
+        "quote": "After removal of artificial signal-like events injected into the data set to mitigate analyzer bias, we find no evidence for an excess over expected backgrounds. World-leading constraints are placed on spin-independent (SI) and spin-dependent WIMP-nucleon cross sections for masses >= 9 GeV/c^2."
+      }
+    },
+    {
+      "id": "T016",
+      "named_result": "Ultraviolet catastrophe in the dark-matter comparison table",
+      "document": "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+      "anchor": "Produces mathematical paradox \\(\\*Ultraviolet Catastrophe\\*\\)",
+      "covers": [
+        "Ultraviolet Catastrophe"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Rayleigh, Jeans, Ehrenfest",
+      "corpus_usage": "Placed in the 'classical side' cell of the dark-matter table.",
+      "evidence": {
+        "source": "Wikipedia, 'Ultraviolet catastrophe'",
+        "identifier": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+        "retrieved": "2026-10-05",
+        "quote": "According to classical electromagnetism, the number of electromagnetic modes in a 3-dimensional cavity, per unit frequency, is proportional to the square of the frequency. This implies that the radiated power per unit frequency should be proportional to frequency squared."
+      }
+    },
+    {
+      "id": "T017",
+      "named_result": "Navier-Stokes existence and smoothness (Millennium problem)",
+      "document": "OCTAVE_CORE_MATHEMATICS.md",
+      "anchor": "free of Navier-Stokes singularities",
+      "covers": [
+        "Navier[- ]Stokes"
+      ],
+      "status": "open-problem",
+      "attributed_to": "Clay Mathematics Institute (one of the seven Millennium Prize Problems)",
+      "corpus_usage": "Listed as the specification of OCTAVE domain T1.",
+      "evidence": {
+        "source": "Clay Mathematics Institute, 'The Millennium Prize Problems'",
+        "identifier": "https://www.claymath.org/millennium-problems/",
+        "retrieved": "2026-10-05",
+        "quote": "A final list of seven problems was agreed upon: the Birch and Swinnerton-Dyer Conjecture, the Hodge Conjecture, the Existence and Uniqueness Problem for the Navier-Stokes Equations, the Poincare Conjecture, the P versus NP problem, the Riemann Hypothesis, and the Mass Gap problem for Quantum Yang-Mills Theory."
+      },
+      "finding": {
+        "id": "F4-D",
+        "severity": "defect",
+        "statement": "'Discrete fluid flow free of Navier-Stokes singularities' reads as an achieved property. Global existence and smoothness in three dimensions is one of the seven Clay Millennium Prize Problems and is UNSOLVED (US$1,000,000). The corpus's own roadmap states the proof 'can be completed finitely' -- future tense. Leaving T1 unqualified invites the reading that a Millennium problem has been solved."
+      },
+      "correction": "Qualified the line as a design target and stated the open status with its prize. Marked in-document as [F4-D]."
+    },
+    {
+      "id": "T018",
+      "named_result": "Landauer limit as the neural-architecture budget",
+      "document": "OCTAVE_CORE_MATHEMATICS.md",
+      "anchor": "Landauer-limit-based neural network",
+      "covers": [
+        "(?i)Landauer"
+      ],
+      "status": "machine-gated",
+      "attributed_to": "Rolf Landauer (1961)",
+      "corpus_usage": "Fixes the thermodynamic floor of domain T6.",
+      "evidence": {
+        "source": "Local derivation, machine-checked",
+        "identifier": "local:landauer_check.py (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "landauer_check.py reproduces k_B ln 2 = 9.5699296169290793e-24 J/K from CODATA 2022 and enforces that the floor is quoted per erased bit."
+      },
+      "machine_gated_by": "landauer_check.py"
+    },
+    {
+      "id": "T019",
+      "named_result": "The Langlands program (Galois <-> automorphic correspondence)",
+      "document": "OCTAVE_CORE_MATHEMATICS.md",
+      "anchor": "The Galois/automorphic correspondence, an identity bridge between Galois group",
+      "covers": [
+        "(?i)Langlands",
+        "\\bGalois\\b"
+      ],
+      "status": "conjecture",
+      "attributed_to": "R. Langlands (1967); proved cases: class field theory, Wiles/Taylor-Wiles modularity, Lafforgue, Gaitsgory-Raskin (geometric)",
+      "corpus_usage": "Described as the identity bridging Galois groups and automorphic spectra in domain T7.",
+      "evidence": {
+        "source": "AMS Notices, 'Andrew Wiles's Marvelous Proof' (survey of the Langlands program)",
+        "identifier": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "One of the fundamental goals in the Langlands program is to establish further cases of the following conjecture: All diophantine equations are modular in the above sense. This conjecture can be viewed as a far-reaching generalisation of quadratic reciprocity."
+      },
+      "finding": {
+        "id": "F4-E",
+        "severity": "defect",
+        "statement": "'Identity bridge between Galois group and automorphic spectrum' states a CONJECTURAL correspondence as an identity. It is proved in special cases (local Langlands for GL(n) in many settings; Wiles' modularity theorem) and remains unproved in general -- the full global statement for GL(2,Q) is still open, though the unramified geometric case was announced proved in 2024-25. Presenting it as settled overstates the field."
+      },
+      "correction": "Re-worded as a correspondence that is conjectural in general with named proved cases. Marked in-document as [F4-E]."
+    },
+    {
+      "id": "T020",
+      "named_result": "Ihara zeta function of a finite graph",
+      "document": "OCTAVE_CORE_MATHEMATICS.md",
+      "anchor": "Ihara Graph Theory",
+      "covers": [
+        "\\bIhara\\b"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Yasutaka Ihara (1960s); graph form via Serre and Sunada (1985); Bass determinant formula",
+      "corpus_usage": "Names the theory behind domain T8's topology bound.",
+      "evidence": {
+        "source": "Wikipedia, 'Ihara zeta function'",
+        "identifier": "https://en.wikipedia.org/wiki/Ihara_zeta_function",
+        "retrieved": "2026-10-05",
+        "quote": "In mathematics, the Ihara zeta function is a zeta function associated with a finite graph. It closely resembles the Selberg zeta function, and is used to relate closed walks to the spectrum of the adjacency matrix. A regular graph is a Ramanujan graph if and only if its Ihara zeta function satisfies an analogue of the Riemann hypothesis."
+      }
+    },
+    {
+      "id": "T021",
+      "named_result": "Classical continuous foundations as the diagnosed failure",
+      "document": "Perluasan Visi Ilmiah (Extended Thesis Blueprint).md",
+      "anchor": "crisis of foundations",
+      "covers": [
+        "Ultraviolet Catastrophe",
+        "(?i)general relativity"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Rayleigh-Jeans / classical GR",
+      "corpus_usage": "Named as the two classical symptoms MSAF is written against.",
+      "evidence": {
+        "source": "Wikipedia, 'Ultraviolet catastrophe'",
+        "identifier": "https://en.wikipedia.org/wiki/Ultraviolet_catastrophe",
+        "retrieved": "2026-10-05",
+        "quote": "Since the first use of this term, it has also been used for other predictions of a similar nature, as in quantum electrodynamics and such cases as ultraviolet divergence."
+      }
+    },
+    {
+      "id": "T022",
+      "named_result": "Renormalization of quantum field theoretic divergences",
+      "document": "Perluasan Visi Ilmiah (Extended Thesis Blueprint).md",
+      "anchor": "Feynman Infinity Elimination",
+      "covers": [
+        "(?i)renormaliz"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Gell-Mann / Low (1954); Kadanoff (1966); K. Wilson (1971, 1975)",
+      "corpus_usage": "Called a 'trick' that MSAF replaces with a lower bound.",
+      "evidence": {
+        "source": "D. Rivero, 'Renormalization: an advanced overview' (abstract)",
+        "identifier": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Since its origin, QFT has been plagued by the problem of divergences, which led to the formulation of the theory of renormalization. This procedure, that initially might have appeared as a computational trick, is now understood to be the heart of QFT."
+      },
+      "finding": {
+        "id": "F4-F",
+        "severity": "defect",
+        "statement": "Renormalization is called 'the renormalization trick' under the heading 'Feynman Infinity Elimination'. The historical reading -- that it is a cosmetic sleight of hand -- was explicitly abandoned: it is a well-defined procedure, understood since Wilson's renormalization group to be the mechanism that makes quantum field theory predictive at all. Calling it a trick invites the objection that MSAF is replacing a device it has not understood."
+      },
+      "correction": "Re-worded to name renormalization as a standard procedure and to state MSAF's replacement as a proposal rather than an elimination. Marked in-document as [F4-F]."
+    },
+    {
+      "id": "T023",
+      "named_result": "Navier-Stokes as a roadmap target",
+      "document": "Perluasan Visi Ilmiah (Extended Thesis Blueprint).md",
+      "anchor": "Smoothness Existence",
+      "covers": [
+        "Navier[- ]Stokes"
+      ],
+      "status": "open-problem",
+      "attributed_to": "Clay Mathematics Institute",
+      "corpus_usage": "Roadmap Domain 2: the million-dollar proof is to be completed finitely.",
+      "evidence": {
+        "source": "Clay Mathematics Institute, 'The Millennium Prize Problems'",
+        "identifier": "https://www.claymath.org/millennium-problems/",
+        "retrieved": "2026-10-05",
+        "quote": "The Clay Mathematics Institute of Cambridge, Massachusetts (CMI) established seven Prize Problems... The prizes were conceived to record some of the most difficult problems with which mathematicians were grappling at the turn of the second millennium."
+      }
+    },
+    {
+      "id": "T024",
+      "named_result": "Strict finitism declared in the corpus README",
+      "document": "README.md",
+      "anchor": "Declaration of Strict Finitism",
+      "covers": [
+        "(?i)strict finitis"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Crispin Wright (1982)",
+      "corpus_usage": "Surfaced in the top-level list of what the document declares.",
+      "evidence": {
+        "source": "J. P. van Bendegem, 'A Defense of Strict Finitism'",
+        "identifier": "https://www.jeanpaulvanbendegem.be/strict%20finitism.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Strict finitism starts from the idea that counting is an act of labeling, hence the mathematician is an active subject right from the start. It differs from other constructivist views in that the finite limitations of the human subject are taken into account."
+      }
+    },
+    {
+      "id": "T025",
+      "named_result": "Godel's incompleteness theorems",
+      "document": "SOLVABLE_FINITE_PARADOX.md",
+      "anchor": "recursive function is a problem that can never be solved",
+      "covers": [
+        "G(?:\\u00f6|oe|&ouml;|&#246;)del"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Kurt Godel (1931), Monatsh. Math. Phys. 38, 173-198",
+      "corpus_usage": "The 'Godelian Compliance Loop' is the protocol the document falsifies.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Godel's Incompleteness Theorems'",
+        "identifier": "https://plato.stanford.edu/entries/goedel-incompleteness/",
+        "retrieved": "2026-10-05",
+        "quote": "The first incompleteness theorem states that in any consistent formal system F within which a certain amount of arithmetic can be carried out, there are statements of the language of F which can neither be proved nor disproved in F."
+      }
+    },
+    {
+      "id": "T026",
+      "named_result": "Landauer's principle in the logical-superiority metrics",
+      "document": "SOLVABLE_FINITE_PARADOX.md",
+      "anchor": "Landauer's principle sets a floor per erased bit, not a total",
+      "covers": [
+        "(?i)Landauer"
+      ],
+      "status": "machine-gated",
+      "attributed_to": "Rolf Landauer (1961)",
+      "corpus_usage": "The canonical statement of the thermodynamic floor for the corpus.",
+      "evidence": {
+        "source": "Local derivation, machine-checked",
+        "identifier": "local:landauer_check.py (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "with k_B = 1.380649e-23 J K^-1 exact under the SI 2019 definition..."
+      },
+      "machine_gated_by": "landauer_check.py"
+    },
+    {
+      "id": "T027",
+      "named_result": "The seven Millennium Prize Problems",
+      "document": "ZENODO_REGISTRY_MSAF.md",
+      "anchor": "seven \\*Millennium Prize Problems\\*",
+      "covers": [
+        "Millennium Prize",
+        "Navier[- ]Stokes"
+      ],
+      "status": "open-problem",
+      "attributed_to": "Clay Mathematics Institute (announced 24 May 2000)",
+      "corpus_usage": "The register instructs the agent to bind any Millennium-problem evaluation to the hardware constraints.",
+      "evidence": {
+        "source": "Clay Mathematics Institute, 'The Millennium Prize Problems'",
+        "identifier": "https://www.claymath.org/millennium-problems/",
+        "retrieved": "2026-10-05",
+        "quote": "The seven Millennium Prize Problems range from the oldest, the Riemann Hypothesis, a problem in number theory stated in 1859, to the youngest, the P versus NP problem, a problem in theoretical computer science stated in 1971."
+      }
+    }
+  ],
+  "scope": [
+    "01_PARADOX_AND_SCALE.md",
+    "02_OMEGA_CORE_ANALYSIS.md",
+    "03_RIEMANN_RECONSTRUCTION.md",
+    "ANTI_INFINITY_BLINDSPOT.md",
+    "CONSOLIDATED_MASTER_MANIFESTO.md",
+    "DEFINISI_OPERASIONAL_MSAF.md",
+    "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+    "MSAF_COSMOLOGY_DECONSTRUCTION (2).md",
+    "MSAF_COSMOLOGY_DECONSTRUCTION.md",
+    "OCTAVE_CORE_MATHEMATICS.md",
+    "Perluasan Visi Ilmiah (Extended Thesis Blueprint).md",
+    "README.md",
+    "SOLVABLE_FINITE_PARADOX.md",
+    "VISUALISASI_MATRIKS_FORMAL.md",
+    "ZENODO_REGISTRY_MSAF.md"
+  ]
+}

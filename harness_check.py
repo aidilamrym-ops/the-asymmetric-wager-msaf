@@ -1,0 +1,348 @@
+# FILE: harness_check.py
+# PURPOSE: run every proof harness of the workspace in one place, sequentially,
+#          from harnesses\ inside the workspace.  The injection harnesses are
+#          part of the evidence, not scratch scripts, so they are checked in
+#          and rerun from a location the reports can cite.
+# EXIT:    0 = every listed harness ran and behaved as expected
+#          1 = at least one harness failed, or the workspace was left dirty
+#          2 = at least one harness did not run (never reported as success)
+# MUTATION: the injection harnesses deliberately mutate the corpus and then
+#           restore it.  This runner proves the restore happened: any byte that
+#           does not come back, any file that disappears, and any file that
+#           appears is a failure of the run, whatever the harness printed.
+# SEQUENTIAL: never parallel.  Two harnesses writing at once can leave a
+#             register half-written, and the half-written file still parses.
+# --selftest: proves this runner can still fail (see bottom).
+
+import hashlib
+import os
+import subprocess
+import sys
+import time
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+HDIR = os.path.join(HERE, "harnesses")
+PY = sys.executable
+
+# (filename, kind, expected exit, marker that must appear in stdout, slow?)
+# expected exit is not always 0:
+#   f5_1_stagea / f5_1_stagec are one-shot migrations.  They assert the
+#   PRE-fix text still exists and rewrite it.  F5-1 already applied them, so
+#   in the current corpus they must refuse (exit 1) and change nothing -- which
+#   also makes them a revert detector: if the corpus is ever rolled back they
+#   would start succeeding, and this runner would report the difference.
+HARNESSES = [
+    ("f1_mut.py",            "verifier",  0, "gate caught 19 / 20 injected defects",   False),
+    ("f3_inj.py",            "verifier",  0, "HARNESS: PASS -- 29/29 mutants caught",  True),
+    ("f3_vacuity.py",        "verifier",  0, "SUMMARY: 11 probes, 0 FALSE-PASS",       False),
+    ("f3_a1.py",             "verifier",  0, "final rc=0 restored=True",              False),
+    ("f4_inj.py",            "verifier",  0, "HARNESS: PASS -- 31 mutants caught",     True),
+    ("f4_brittleness.py",    "verifier",  0, "BRITTLENESS: clean",                    False),
+    ("f4_build_register.py", "builder",   0, "uncovered=0",                           False),
+    ("f5_1_stagea.py",       "migration", 1, "STAGE A: FAIL",                         False),
+    ("f5_1_stageb.py",       "verifier",  0, "STAGE B: PASS",                         False),
+    ("f5_1_stagec.py",       "migration", 1, "STAGE C: FAIL",                         False),
+    ("f5_2_inj.py",          "verifier",  0, "HARNESS: PASS -- 20/20 cases",           True),
+    ("f5_3_inj.py",          "verifier",  0, "HARNESS: PASS -- 7/7 cases",             True),
+    ("f5_4_inj.py",          "verifier",  0, "HARNESS: PASS -- 14/14 cases",           True),
+    # A1.  Proves protocol_09_check.py is a gate and not a rubber stamp: four
+    # defects aimed at four different conditions (vacuous context, stale log,
+    # removed axiom, removed marker) plus the baseline and the restored
+    # baseline.  Both tracked artefacts come back byte-for-byte.
+    ("p09_inj.py",           "verifier",  0, "HARNESS: PASS -- 6/6 cases",             True),
+    # A2 (F2 8.3).  The six F2 stages published fault-injection counts with no
+    # harness behind them ("recorded, not reproducible").  Each entry below
+    # re-produces one published table: mutants caught, controls still passing,
+    # baseline and restored baseline both green, corpus byte-identical after.
+    ("f2_1_inj.py",          "verifier",  0, "HARNESS: PASS -- 28/28 mutants, 6/6 controls",   False),
+    ("f2_2_inj.py",          "verifier",  0, "HARNESS: PASS -- 15/15 mutants, 3/3 controls",   False),
+    ("f2_3_inj.py",          "verifier",  0, "HARNESS: PASS -- 14/14 mutants, 3/3 controls",   False),
+    ("f2_4_inj.py",          "verifier",  0, "HARNESS: PASS -- 14/14 mutants, 4/4 controls",   True),
+    ("f2_6_inj.py",          "verifier",  0, "HARNESS: PASS -- 11/11 mutants, 3/3 controls",   True),
+    ("f2_7_inj.py",          "verifier",  0, "HARNESS: PASS -- 26/26 fault-injection cases (24 mutants, 2 controls), 4/4 missing-document", False),
+]
+
+# Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is
+# deliberately out of scope: no harness here writes into it, and hashing it
+# would dominate the run.
+MUTABLE = ("provenance", "harnesses")
+
+OK, FAIL, NOTRUN = "ok", "FAIL", "NOTRUN"
+PER_HARNESS_TIMEOUT = 900
+
+
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def snapshot(root):
+    """Hash every root-level file plus the mutable sub-trees."""
+    snap = {}
+    for name in sorted(os.listdir(root)):
+        p = os.path.join(root, name)
+        if os.path.isfile(p):
+            snap[name] = sha256(p)
+    for sub in MUTABLE:
+        for dirpath, dirnames, filenames in os.walk(os.path.join(root, sub)):
+            dirnames.sort()
+            for fn in sorted(filenames):
+                p = os.path.join(dirpath, fn)
+                snap[os.path.relpath(p, root).replace(os.sep, "/")] = sha256(p)
+    return snap
+
+
+def drift(before, after):
+    """What changed between two snapshots, attributed by relative path."""
+    out = []
+    for k in sorted(before):
+        if k not in after:
+            out.append("MISSING %s (no longer there after the run)" % k)
+        elif after[k] != before[k]:
+            out.append("CHANGED %s (not restored to its original bytes)" % k)
+    for k in sorted(after):
+        if k not in before:
+            out.append("NEW     %s (appeared during the run)" % k)
+    return out
+
+
+def run_one(entry, root, hdir, py=PY):
+    """Run one harness.  Returns (status, seconds, problems, output tail).
+
+    Never raises: a harness that cannot be started is a failure of the run,
+    not a reason for the runner itself to crash.
+    """
+    name, kind, want_rc, marker, slow = entry
+    path = os.path.join(hdir, name)
+    if not os.path.isfile(path):
+        return FAIL, 0.0, ["file is missing: %s" % path], []
+    before = snapshot(root)
+    t0 = time.time()
+    try:
+        p = subprocess.run([py, path], cwd=root, capture_output=True,
+                           timeout=PER_HARNESS_TIMEOUT)
+        out = ((p.stdout or b"") + (p.stderr or b"")).decode("utf-8", "replace")
+        rc = p.returncode
+    except subprocess.TimeoutExpired:
+        out, rc = "TIMEOUT", -99
+    except Exception as exc:
+        out, rc = "runner exception: %r" % (exc,), -98
+    dt = time.time() - t0
+    problems = []
+    if rc != want_rc:
+        problems.append("exit=%s but expected %d" % (rc, want_rc))
+    if marker not in out:
+        problems.append("stdout never reported %r" % marker)
+    problems.extend(drift(before, snapshot(root)))
+    tail = [ln for ln in out.splitlines() if ln.strip()][-6:]
+    if problems:
+        return FAIL, dt, problems, tail
+    return OK, dt, [], tail
+
+
+def report(status, name, kind, dt, problems, width=24):
+    if status == OK:
+        note = "refused re-apply, workspace untouched" if kind == "migration" \
+            else "behaved as expected"
+        print("%-6s %-*s %-9s %5.1fs  %s" % ("ok", width, name, kind, dt, note))
+        return
+    if status == NOTRUN:
+        print("%-6s %-*s %-9s        %s" % ("NOTRUN", width, name, kind,
+                                            "(not run)"))
+    else:
+        print("%-6s %-*s %-9s %5.1fs" % ("FAIL", width, name, kind, dt))
+    for line in problems:
+        print("        " + line)
+
+
+def verdict(passed, failed, not_run, total, fast, clean):
+    print()
+    print("passed=%d  failed=%d  not_run=%d  of %d  |  workspace %s"
+          % (len(passed), len(failed), len(not_run), total,
+             "byte-identical" if clean else "DIRTY"))
+    if failed:
+        print("FAILED: " + ", ".join(failed))
+        print("HARNESS: FAIL")
+        return 1
+    if not clean:
+        print("FAILED: workspace integrity")
+        print("HARNESS: FAIL")
+        return 1
+    if not_run:
+        print("NOT RUN: " + ", ".join(not_run))
+        print("HARNESS: INCOMPLETE -- not every harness was executed")
+        return 2
+    print("HARNESS: PASS -- %d/%d behaved as expected, workspace byte-identical"
+          % (len(passed), total) + (" (partial list)" if fast else ""))
+    return 0
+
+
+def run_batch(selected, root, fast, hdir=HDIR, py=PY):
+    slow_names = [e[0] for e in selected if e[4]]
+    print("=" * 90)
+    print("HARNESS SUITE -- %d harnesses, run sequentially" % len(selected))
+    print("harnesses: %s" % hdir)
+    if fast and slow_names:
+        print("--fast: %s will be reported as NOT RUN, never as pass"
+              % ", ".join(slow_names))
+    print("=" * 90)
+    base = snapshot(root)
+    passed, failed, not_run = [], [], []
+    for entry in selected:
+        name, kind = entry[0], entry[1]
+        if fast and entry[4]:
+            report(NOTRUN, name, kind, 0.0, ["not run (--fast)"])
+            not_run.append(name)
+            continue
+        status, dt, problems, tail = run_one(entry, root, hdir, py)
+        if status == FAIL:
+            problems = problems + tail
+        report(status, name, kind, dt, problems)
+        (passed if status == OK else failed).append(name)
+        if status == NOTRUN:
+            not_run.append(name)
+    clean = not drift(base, snapshot(root))
+    if not clean:
+        print("        workspace no longer matches the pre-run snapshot")
+    return verdict(passed, failed, not_run, len(selected), fast, clean)
+
+
+def selftest():
+    """Prove the runner can still fail -- a runner that cannot fail is a
+    runner that reports PASS by construction."""
+    import shutil
+    import tempfile
+    print("=" * 90)
+    print("HARNESS_RUNNER SELFTEST")
+    print("=" * 90)
+    failures = []
+
+    def expect(name, got, want):
+        if got != want:
+            failures.append("%s: got %r, want %r" % (name, got, want))
+            print("FAIL  %-52s got %r want %r" % (name, got, want))
+        else:
+            print("ok    %-52s %r" % (name, got))
+
+    tmp = tempfile.mkdtemp(prefix="harness_selftest_")
+    try:
+        hdir = os.path.join(tmp, "harnesses")
+        root = os.path.join(tmp, "ws")
+        os.makedirs(hdir)
+        os.makedirs(root)
+        with open(os.path.join(root, "keep.md"), "w") as fh:
+            fh.write("unchanged\n")
+
+        def put(name, body):
+            with open(os.path.join(hdir, name), "w") as fh:
+                fh.write(body)
+
+        put("ok.py", "print('ALL GOOD')\n")
+        put("silent.py", "pass\n")
+        put("wrongrc.py", "print('ALL GOOD')\nimport sys\nsys.exit(1)\n")
+        put("dirty.py", "print('ALL GOOD')\nopen('pwned.txt', 'w').write('x')\n")
+        put("mig.py", "print('ALREADY APPLIED')\nimport sys\nsys.exit(1)\n")
+        put("slow.py", "print('ALL GOOD')\n")
+
+        E = lambda n, k, rc, m, s=False: (n, k, rc, m, s)
+        st, dt, prob, tail = run_one(E("ok.py", "verifier", 0, "ALL GOOD"),
+                                     root, hdir)
+        expect("harness exiting 0 with its marker is OK", st, OK)
+
+        st, dt, prob, tail = run_one(E("silent.py", "verifier", 0, "ALL GOOD"),
+                                     root, hdir)
+        expect("exit 0 but silent is FAIL (marker missing)",
+               (st, any("stdout never reported" in p for p in prob)), (FAIL, True))
+
+        st, dt, prob, tail = run_one(E("wrongrc.py", "verifier", 0, "ALL GOOD"),
+                                     root, hdir)
+        expect("exit 1 where 0 expected is FAIL",
+               (st, any("exit=1 but expected 0" in p for p in prob)),
+               (FAIL, True))
+
+        st, dt, prob, tail = run_one(E("dirty.py", "verifier", 0, "ALL GOOD"),
+                                     root, hdir)
+        expect("a file left behind is FAIL (integrity)",
+               (st, any(p.startswith("NEW") for p in prob)), (FAIL, True))
+        expect("the offending file is removed by the fixture run",
+               os.path.exists(os.path.join(root, "pwned.txt")), True)
+
+        st, dt, prob, tail = run_one(E("missing.py", "verifier", 0, "ALL GOOD"),
+                                     root, hdir)
+        expect("missing harness file is FAIL",
+               (st, any("file is missing" in p for p in prob)), (FAIL, True))
+
+        st, dt, prob, tail = run_one(E("mig.py", "migration", 1, "ALREADY"),
+                                     root, hdir)
+        expect("migration refusing with exit 1 is OK", st, OK)
+
+        st, dt, prob, tail = run_one(E("mig.py", "migration", 0, "ALREADY"),
+                                     root, hdir)
+        expect("migration that re-applies (exit 0) is FAIL", st, FAIL)
+
+        os.remove(os.path.join(root, "pwned.txt"))
+
+        # verdict arithmetic -- the exit codes of this runner itself
+        expect("all pass -> 0", verdict(["a"], [], [], 1, False, True), 0)
+        expect("one fail -> 1", verdict([], ["a"], [], 1, False, True), 1)
+        expect("one not-run -> 2", verdict([], [], ["a"], 1, False, True), 2)
+        expect("fail beats not-run -> 1",
+               verdict([], ["a"], ["b"], 2, False, True), 1)
+        expect("dirty workspace -> 1 even when every harness passed",
+               verdict(["a"], [], [], 1, False, False), 1)
+
+        # a run that skipped its slow harnesses must never be a pass
+        code = run_batch([E("slow.py", "verifier", 0, "ALL GOOD", True)],
+                         root, fast=True, hdir=hdir)
+        expect("--fast skips a slow harness and returns 2, not 0", code, 2)
+        code = run_batch([E("ok.py", "verifier", 0, "ALL GOOD")],
+                         root, fast=False, hdir=hdir)
+        expect("full run of an ok harness returns 0", code, 0)
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    print()
+    if failures:
+        print("SELFTEST FAILURES (%d):" % len(failures))
+        for f in failures:
+            print("  - " + f)
+        return 1
+    print("SELFTEST: PASS -- every reporting path behaves, a dirty workspace "
+          "cannot be quoted as a pass, and a partial run cannot be quoted as "
+          "a full pass")
+    return 0
+
+
+def main(argv):
+    args = argv[1:]
+    if "--selftest" in args:
+        return selftest()
+    if "--list" in args:
+        for name, kind, rc, marker, slow in HARNESSES:
+            print("%-24s %-9s exit=%d  %s%s" % (
+                name, kind, rc, marker,
+                "   [--fast: NOT RUN]" if slow else ""))
+        return 0
+    selected = HARNESSES
+    if "--only" in args:
+        want = args[args.index("--only") + 1]
+        selected = [e for e in HARNESSES
+                    if e[0] == want or e[0] == want + ".py"
+                    or e[0][:-3] == want]
+        if not selected:
+            print("FAIL  --only %r matches no harness" % want)
+            return 2
+    return run_batch(selected, HERE, "--fast" in args)
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main(sys.argv))
+    except Exception:
+        import traceback
+        traceback.print_exc()
+        print("FAIL  HARNESS  harness_check.py raised")
+        sys.exit(1)

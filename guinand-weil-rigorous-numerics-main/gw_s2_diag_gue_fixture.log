@@ -1,0 +1,173 @@
+################################################################################################
+# OMEGA OPSI (d) -- MONTGOMERY PAIR CORRELATION / GUE CONSISTENCY
+# input = C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_gue.json   surrogate samples per ensemble = 400   seed = 20260927
+################################################################################################
+
+PRE-REGISTERED RULES (brain #1001630, locked BEFORE any eigenvalue):
+  S1  r_bar unfolding-free, charts T=ln(lambda) PRIMARY and L=lambda
+      -> report BOTH, never pick the flattering one afterwards
+  S2  R2(u) vs 1-(sin(pi u)/(pi u))^2, sigma_u in {0.3,0.5,1.0},
+      sigma_e=0.5, u in [0,10), 20 bins of 0.5, drop bins with E<5
+  ref GUE / GOE / Poisson, matched N, 2000 samples, seed 20260927
+  S1 verdict: in-Poisson-only -> POISSON; in-RMT-only -> RMT;
+      in both -> NO DISCRIMINATION; in neither -> INCONSISTENT
+  S2 verdict: p_GUE = P(chi2_GUE >= chi2_obs),
+      p_Pois = P(chi2_Pois <= chi2_obs)  [LOWER tail -- amendment
+      #1001631, registered before any real spectrum was read];
+      p_GUE>=0.05 & p_Pois<0.05 -> MONTGOMERY/GUE, distinguishable
+      from Poisson; both >=0.05 -> NO DISCRIMINATION; p_GUE<0.05 ->
+      INCONSISTENT. Must hold on ALL 6 grid points {T,L} x {0.3,0.5,1.0},
+      else UNSTABLE. Threshold 0.05, bins, sigma_e, grid, seed UNCHANGED.
+  EXPECTED (pre-registered): GOE-vs-GUE NOT separable at N=401;
+      spread ~295 orders -> chart L non-uniform; ~200 pairs/bin.
+SCOPE: this is NOT Montgomery's theorem about zeta zeros and NOT an
+       RH / Weil-positivity / prime-counting / factoring claim.
+
+================================================================================================
+INPUT SPECTRUM
+================================================================================================
+  provenance : c=0 N=200 dps=400 prec=2048 algo=SYNTHETIC-GUE n=401
+  eig time   : 0.0 s
+  G-M0 gate  : G-M0 PASS (SYNTHETIC FIXTURE -- not a real matrix)
+  G-M0 parts : {"G-M0a_finite": true, "G-M0b_inertia": true, "G-M0c_strict": true, "G-M0d_trace": true, "G-M0e_frob": true}
+  inertia    : {"n_pos": 401, "n_neg": 0, "indeterminate": 0}
+  all 401 levels finite, positive, strictly increasing -- OK
+  lambda_min = 0.0023927772424568992
+  lambda_max = 2.7941683272482161
+  spread     = 3.067350 orders   (synthetic fixture -- the ~295-order
+                pre-registered expectation applies to the REAL matrix only)
+  all 401 enclosure radii are exactly 0 -> synthetic fixture (expected)
+
+================================================================================================
+LEVEL DENSITY IN CHART T = ln(lambda)  (reported)
+================================================================================================
+  bin  0  y in [    -6.04,    -5.68)  count   1
+  bin  1  y in [    -5.68,    -5.33)  count   0
+  bin  2  y in [    -5.33,    -4.98)  count   0
+  bin  3  y in [    -4.98,    -4.62)  count   0
+  bin  4  y in [    -4.62,    -4.27)  count   0
+  bin  5  y in [    -4.27,    -3.92)  count   0
+  bin  6  y in [    -3.92,    -3.56)  count   0
+  bin  7  y in [    -3.56,    -3.21)  count   1
+  bin  8  y in [    -3.21,    -2.86)  count   1
+  bin  9  y in [    -2.86,    -2.50)  count   1
+  bin 10  y in [    -2.50,    -2.15)  count   2
+  bin 11  y in [    -2.15,    -1.80)  count   5
+  bin 12  y in [    -1.80,    -1.44)  count   7
+  bin 13  y in [    -1.44,    -1.09)  count  11
+  bin 14  y in [    -1.09,    -0.74)  count  20
+  bin 15  y in [    -0.74,    -0.39)  count  29
+  bin 16  y in [    -0.39,    -0.03)  count  47
+  bin 17  y in [    -0.03,     0.32)  count  73
+  bin 18  y in [     0.32,     0.67)  count 101
+  bin 19  y in [     0.67,     1.03)  count 102
+
+================================================================================================
+S1 -- MEAN ADJACENT GAP RATIO r_bar (unfolding-free)
+================================================================================================
+  chart T (ln lambda, PRIMARY)   r_bar = 0.590438   (n_ratios = 399, min 4.863e-02, max 0.998)
+  chart L (lambda, SECONDARY)    r_bar = 0.590288   (n_ratios = 399, min 4.852e-02, max 1.000)
+  sanity labels: GUE 0.5995 | GOE 0.5307 | Poisson 0.3863
+  (defect 17: the GUE label 0.5359 printed by run #1 is RETRACTED;
+   a universality sweep of the diagonal variance over {0.5,1,2} moved
+   r_bar by <1 se in both classes, so the construction is sound and
+   the label -- not the code -- was wrong: beta=2 measures 0.5995 here)
+  real references come from the matched-N simulation below
+
+================================================================================================
+SURROGATES -- matched N = 401, 400 samples each, seed 20260927
+================================================================================================
+  gue      generated in 36.1 s
+  goe      generated in 10.2 s
+  poisson  generated in 0.0 s
+
+================================================================================================
+S1 REFERENCES (matched-N simulation)
+================================================================================================
+  gue      mean 0.598686  sd 0.014650  CI95 [0.570605, 0.624989]  (label 0.5995)
+  goe      mean 0.530516  sd 0.015023  CI95 [0.502957, 0.560104]  (label 0.5307)
+  poisson  mean 0.387091  sd 0.015884  CI95 [0.357185, 0.417447]  (label 0.3863)
+  pooled RMT CI95 = [0.505686, 0.622354]
+  SE of r_bar (GUE sd / sqrt(400)) = 0.000732
+  pre-registered expectation 1: GOE vs GUE not separable at N=401
+    measured gap = 0.068170 against SE = 0.000732  ->  FALSIFIED -- they ARE separable (93 SE)
+    (the expectation was built on the recalled label 0.5359, which
+     defect 17 retracted; the measurement is not adjusted to fit it)
+
+  S1 chart T (ln lambda, PRIMARY)   r_bar = 0.590438  ->  CONSISTENT WITH RMT (level repulsion PRESENT)
+  S1 chart L (lambda, SECONDARY)    r_bar = 0.590288  ->  CONSISTENT WITH RMT (level repulsion PRESENT)
+  SECONDARY (does NOT change the verdict above):
+    chart T (ln lambda, PRIMARY)   GOE [OUT] | GUE [in] | Poisson [OUT]
+    chart L (lambda, SECONDARY)    GOE [OUT] | GUE [in] | Poisson [OUT]
+
+  S1 FINAL (charts agree): CONSISTENT WITH RMT (level repulsion PRESENT)
+
+================================================================================================
+S2 -- PAIR CORRELATION vs MONTGOMERY KERNEL 1 - (sin(pi u)/(pi u))^2
+grid = {chart} x {sigma_u in [0.3, 0.5, 1.0]}, sigma_e = 0.5, bins 20 x 0.5
+target = Montgomery convolved with the estimator's own sigma_e
+         (defect 12: comparing a smoothed estimate to an unsmoothed
+          kernel is apples-to-oranges; thresholds unchanged)
+================================================================================================
+  sigma_u 0.3 unfolded+binned in 25.8 s
+  sigma_u 0.5 unfolded+binned in 25.5 s
+  sigma_u 1.0 unfolded+binned in 25.3 s
+  expected pairs/bin: min 38.0  max 200.4  -> bins dropped (E<5): 0
+  NOTE no edge correction is applied; the matched surrogates carry the
+       same finite-N bias, so the Monte-Carlo p-values stay calibrated.
+
+  chart T (ln lambda, PRIMARY)   sigma_u 0.3 : chi2 = 8990.6197
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.9975
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0025  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.9400  [lower tail, #1001631]
+      -> NO DISCRIMINATION AT N=401
+  chart T (ln lambda, PRIMARY)   sigma_u 0.5 : chi2 = 1256.0469
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.9625
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.1900  [lower tail, #1001631]
+      -> NO DISCRIMINATION AT N=401
+  chart T (ln lambda, PRIMARY)   sigma_u 1.0 : chi2 = 206.3103
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.5500
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.6925  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.0000  [lower tail, #1001631]
+      -> CONSISTENT WITH MONTGOMERY/GUE, DISTINGUISHABLE FROM POISSON
+  chart L (lambda, SECONDARY)    sigma_u 0.3 : chi2 = 9195.3292
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.9300
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.9525  [lower tail, #1001631]
+      -> NO DISCRIMINATION AT N=401
+  chart L (lambda, SECONDARY)    sigma_u 0.5 : chi2 = 1290.7118
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.8650
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.2175  [lower tail, #1001631]
+      -> NO DISCRIMINATION AT N=401
+  chart L (lambda, SECONDARY)    sigma_u 1.0 : chi2 = 201.3713
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.6675
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.7400  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.0000  [lower tail, #1001631]
+      -> CONSISTENT WITH MONTGOMERY/GUE, DISTINGUISHABLE FROM POISSON
+
+  S2 FINAL: UNSTABLE -- 2 different verdicts across the grid:
+      CONSISTENT WITH MONTGOMERY/GUE, DISTINGUISHABLE FROM POISSON  (2 grid points)
+      NO DISCRIMINATION AT N=401  (4 grid points)
+    (pre-registered: report instability, do NOT pick sigma_u/chart)
+
+################################################################################################
+# OPSI (d) VERDICT
+################################################################################################
+  S1 (gap ratio, unfolding-free) : CONSISTENT WITH RMT (level repulsion PRESENT)
+      chart T (ln lambda, PRIMARY)   r_bar = 0.590438 -> CONSISTENT WITH RMT (level repulsion PRESENT)
+      chart L (lambda, SECONDARY)    r_bar = 0.590288 -> CONSISTENT WITH RMT (level repulsion PRESENT)
+  S2 (pair correlation)          : UNSTABLE (grid-dependent) -> INCONCLUSIVE
+
+  RESOLUTION CEILING: N = 401 levels, 399 ratios, ~200 pairs/bin;
+  GOE-vs-GUE separation needs |Delta r_bar| ~ 0.0682 against SE ~ 0.0007.
+
+  SCOPE LIMIT (read literally): these are statistics of ONE finite
+  constructed matrix. They are NOT Montgomery's theorem, NOT evidence
+  for RH, NOT Weil positivity, NOT prime counting, NOT factorisation.
+  The source preprint disclaims all four.
+
+TOOL STATUS: python 3.14 + numpy 2.5.2 + scipy 1.18.0 + mpmath + python-flint.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
+seed = 20260927 (fixed for reproducibility, declared before the run).

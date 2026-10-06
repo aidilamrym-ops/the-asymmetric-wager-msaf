@@ -1,0 +1,257 @@
+================================================================================
+CHECKSUM.sha256 -- SHA-256 of every tracked file in this repository.
+Generated : 2026-09-29; regenerated 2026-10-01 after the N=800 result and the
+            certificate status sections landed, and after the three gates were
+            made clone-portable (OMEGA_CORE_CERTIFICATE.md 6.1/6.6,
+            PROVENANCE.txt 6.9).
+            Regenerated 2026-10-02 after the consistency audit: README 4.1,
+            REPO_STRUCTURE.md (inventory + not-produced table), WORKING_PAPER
+            supplementary material, GW_STATUS_2026-09-26.md section 10
+            (operational record 30 Sep - 1 Oct 2026). No file bytes other
+            than documentation were altered.
+            Regenerated again 2026-10-02 when Track C landed: OMEGATrackC.lean,
+            track_c_make_smt.py, track_c_side_conditions.smt2 and the two
+            evidence logs (track_c_smt_z3.log, track_c_lean_verify.log) were
+            added, taking the list from 106 to 111 entries, and README 4.1,
+            REPO_STRUCTURE.md, WORKING_PAPER.md, CITATION.cff and
+            GW_STATUS_2026-09-26.md section 10 were rewritten from "no proof
+            assistant has been run" to the measured tool status.
+            Regenerated again 2026-10-02 after the certificate completeness
+            pass: OMEGA_CORE_CERTIFICATE.md (header and scope now cover both
+            certified targets, the two source-package SHA-256 values are
+            reconciled, section 4.3 rewritten from the final telemetry, the
+            three-phase N=800 run history and the D:\gw_ckpt timing
+            corroboration added, new section 6.7 for Track C, reproduction
+            cautions in section 8), THIRD_PARTY_SOURCES.md (size/SHA/use of
+            the edited source package, scope statement) and PROVENANCE.txt
+            (residual 6.10 and the updated tool status). No code, log, JSON
+            or result file was altered by that pass.
+            Regenerated again later on 2026-10-02 after the source-hash gate
+            was made honest about the 2026-09-30 edit of the vendored source:
+            gw_even_vs_src.py and gw_opt_a_diff.py now pin BOTH copies of
+            source_arb_ldlt_certify.py (verbatim b7fee730... at git b76be0d,
+            shipped 33617ce6... since commit bfa40dc) and fail on any third
+            value, and gw_even_vs_src_100_200_rerun_20261002.log was added as
+            the rerun evidence (exit 0, same delta / delta_rel / V1 verdict as
+            the 2026-09-29 log, only wall-clock times differ).  THIRD_PARTY_
+            SOURCES.md, PROVENANCE.txt 6.10, GW_STATUS 7g.3 and section 10, and
+            certificate 6.1 record the same thing.  Entries 111 -> 112; two
+            .py gate scripts changed, no result file and no pre-existing log
+            was edited.
+            The manifest excludes itself by construction.
+Paths are REPOSITORY-RELATIVE and use forward slashes. The previous
+version of this file recorded absolute Windows paths (C:\Users\...),
+which leaked a local username into a public repository; that is fixed
+here. File contents are unchanged by that edit.
+The previous version was also UTF-16 encoded (PowerShell Out-File default),
+which is why git has always reported this file as "Bin ..." in --stat: a
+UTF-16 byte stream puts a NUL in every other byte and git then treats the
+diff as binary. That occurred in commits de68a32 and 8ec0745, before this
+rewrite. This version is UTF-8 / LF / pure ASCII, so from the next change
+onward the manifest will diff as text.
+================================================================================
+
+
+
+            Regenerated 2026-10-04 after the F0 anti-circularity audit: five
+            Track C hashes above changed (OMEGATrackC.lean, track_c_make_smt.py,
+            track_c_side_conditions.smt2, track_c_lean_verify.log,
+            track_c_smt_z3.log) plus OMEGA_CORE_CERTIFICATE.md section 6.7.
+            Four false docstrings were corrected and implied_constant_gt_81
+            (strict, held only by the binary64 rounding of rhoStar) was replaced
+            by implied_constant_ge_81 (non-strict). No numeric literal changed.
+            See F0_REPORT.md at the workspace root.
+
+            Regenerated 2026-10-04 after the F1 numeric-canon and pipeline
+            audit. Four tracked sources changed:
+              gw_verify_results.py      unguarded fixture read and row index
+                                        replaced by verdicts; missing required
+                                        keys recorded and skipped instead of
+                                        raising KeyError; sha256 test now
+                                        matches its own message and requires
+                                        64 HEX characters (64 'z's passed
+                                        before).  Fault injection: 14/14.
+              gw_verify_production.py   deep invariants enforced (dimension =
+                                        2N+1, 64-hex sha256, bound re-derived
+                                        from bound_detail, pivot sign) on
+                                        fixtures and production; docstring
+                                        synced.  Fault injection: 14/14.
+              gw_final_gate.py          one gate condition replaced by two --
+                                        G1 some side resolves below lambda_min
+                                        and G2 the rejected mpmath side is
+                                        accounted for by the lerchphi gap --
+                                        plus a (c, N) provenance guard and a
+                                        resolution-aware VERDICT.
+              gw_mont_pipeline_check.py anchored to its own directory so it no
+                                        longer reports a false K1-K6 alarm when
+                                        invoked from another cwd.
+            gw_final_gate_run.log is added as the F1 proof artifact of a full
+            PASS run (G1 and G2 both satisfied).  The gate threshold lambda_min
+            and every certified numeric literal are unchanged.  See
+            F1_REPORT.md at the workspace root.
+            Regenerated 2026-10-04 after the F1 blind-spot re-review (F1-R1..R4):
+            three ship-inventory rows in OMEGA_CORE_CERTIFICATE.md went stale
+            the moment the F1 gates above were edited, which the F1 pass itself
+            had not caught.  Section 6.1 now carries the post-F1 bytes of
+            gw_verify_results.py and gw_verify_production.py plus a provenance
+            bullet recording what changed and the superseded hashes; section
+            6.6 keeps the 2026-10-01 bytes of gw_verify_production.py on
+            purpose and now says so; section 6.2 discloses that its three rows
+            are the N=400 snapshot (expected not to match the working tree),
+            that the working-tree run log is two appended runs, and that the
+            "remains in this repository's git history" sentence is not
+            verifiable from a copy without .git.  README section 7 dropped a
+            silently ignored argument from the gw_verify_results.py
+            invocation, which contradicted the override note in section 8, and
+            REPO_STRUCTURE.md records that gw_final_gate.py is provenance-
+            locked to c=100, N=400.  Three documentation files changed; no
+            gate, log, JSON or result file was touched in this pass.
+
+            Also 2026-10-04: the manifest itself was not clean.  It listed
+            `Framework.md`, which does not exist anywhere under the repository,
+            and it did not list the file that does exist under its long title
+            ("Rigorous Ball Arithmetic and Bandwidth-Calibrated Spectral Analysis
+            of the Guinand-Weil Operator Framework.md", 11163 bytes), so a
+            verifier walking the tree would have reported one dead row and one
+            uncovered file.  Both are fixed here: the dead row is dropped and
+            the present file is hashed.  Whether the two names are a rename
+            cannot be established from a copy with no `.git`, so no rename is
+            claimed.  This pass also confirms that `__pycache__/` is excluded by
+            this manifest, consistently with the repository's own .gitignore.
+
+            Also 2026-10-04, from widening that same scan past the certificate:
+            PROVENANCE.txt reported 10 rows that no longer resolve, 8 of them
+            historical by design (it is a dated snapshot and says so) and 2 of
+            them F1's own.  A section 8 was ADDED to PROVENANCE.txt listing all
+            ten with their causes, and the section 1 claim that
+            gw_mont_pipeline_check.py was "intentionally LEFT UNCHANGED" is
+            retracted in place rather than struck.  Sections 1-5 of
+            PROVENANCE.txt were not edited.  The same pass corrected F1-D: the
+            N=400 lambda_min is recorded in three places that agree (run log
+            line 51 at 25 sf, PROVENANCE 6.2 and the certificate section 4 JSON
+            block at 30 sf) but the result FILE was overwritten by the N=800 run
+            and no 1971-byte JSON survives anywhere, so it is "recorded but not
+            machine-gated" rather than "log-recorded only".  Skill.md's
+            lambda_min status line now says that.  No gate, log, JSON or result
+            file was touched by this pass either.
+
+Regenerated 2026-10-05 after F2-7: gw_verify_production.py hardened
+
+SHA-256  27d664062e73ffa752a8d5c3eb5f1426f9988761ccf5650bafde6e429a236c0f         729  .gitattributes
+SHA-256  8ad88f9099b331a9261a33e0acaa3bf4c2a89d0f292545eb8d7c735b9aba4771        1286  .gitignore
+SHA-256  222a713bd4620e2b7e86a350fb360e92a47de66b4b9a200815591bad39533fb7        1786  .zenodo.json
+SHA-256  5b76545a947a2ba99bda3c242ce32a94b214eec44ed6295518661d499e8f9798        2716  CITATION.cff
+SHA-256  4d0769f91d043ea351ca9bc1e13a960411cd3fc4c527f215f90ef2537128e407      108404  GW_STATUS_2026-09-26.md
+SHA-256  5ba17781fa76132afe026c3e8d28727fcc8b8e4d2831dd3693663014abcdf7ad        1656  LICENSE
+SHA-256  8d67e1d7e3d35ef784151c5dcd561e6324b425bf25e85598fb7e8d63b40e31c7        2813  LICENSE-DOCS.md
+SHA-256  b894aef6b08da29a68f63d00f7764a383122c309f09587d409abc5a525c36216        2363  LICENSING.md
+SHA-256  a5773617d02dc257844dbe1ffac6af08a2ed9c01c8f1968afefe8ef33940a646       16382  OMEGATrackC.lean
+SHA-256  12e5591a5d4009376574ac3be82656607993127d02649e1e3dd1fd045402ccee       40747  OMEGA_CORE_CERTIFICATE.md
+SHA-256  01ad7f9236aaee4be150ff39a8c2c4efc4730e24207d7df238dfc45567526f5d       27240  PROVENANCE.txt
+SHA-256  ba42d26b2fb9fa180c74bc1b894a330c59a6a5ebc00d599e6fca4ab9d4e4c9d0       23356  README.md
+SHA-256  1b6d3652f9d059db5910d8ff1a54e5733f5df5bc1a152431972bbefda401d322       18129  REPO_STRUCTURE.md
+SHA-256  bc92865222c00223a793c814b47e12372da02530356f574e6e671d638bc1fcb4       11163  Rigorous Ball Arithmetic and Bandwidth-Calibrated Spectral Analysis of the Guinand-Weil Operator Framework.md
+SHA-256  f7b5ae6bf679daf8564b76ca3acc198a12e3c2d2b0811ab82ec1f81eea79413a        8247  THIRD_PARTY_SOURCES.md
+SHA-256  8deefcec655a0e12524477e96f2b3699ec88d1c6e4ac97ec6e866a0dca72cd83       25269  WORKING_PAPER.md
+SHA-256  ac0d7a173ed66a20d01e248da50b834ac0b391f1c4ebecdf4b0f99c0ca11c103        5538  ZENODO_METADATA.md
+SHA-256  bf4a68e12f4a9356b762e7e619b22a8a134af45cf1b1086453bc5bdb09910ffc        6459  gw_arb_measured.py
+SHA-256  2887ed7fb7787d6c6ef392a1c37938a08279f165cfc9ea3c74720e144e05daa2        8149  gw_arb_sweep.py
+SHA-256  6b7c88b8dd46a7527933cb140fb332d2c46ae2a68fac657c07c0bcbb1caca1ae       11060  gw_arch_check.py
+SHA-256  c0be1443aa3c2eebb27c892943aa3f2780fd6fe111c9f04d121538983ddf14b7        3451  gw_arch_diag.py
+SHA-256  b517c3961d2dbbb9ca30516c922d069f83123f4893a5045473f0512feeaa2ad3       12216  gw_band.py
+SHA-256  e23041b076eddb4a31f29605d1f79519a2f365561270e3562dc887edb2340b43        4477  gw_c100_probe.py
+SHA-256  f6f9a7936e25f3b0398a52dc3b6b3f0104848f4c5eb26069b00f0eca34428aea        5715  gw_cfree_head.py
+SHA-256  7edca0a3c4ce7981cf6e2a62e84339285eaae956ff3a151d011613e1c02d7bb3        1985  gw_check_refs.py
+SHA-256  07fe8d710d00637d7d55460cd56af0ac852ad6e04c483fe1a04d31f691d046f0        8629  gw_ckpt.py
+SHA-256  44a68daf588a5a1f8cf10f95fd1c0a4babc9907898f51dd0ac5f29dbd35c5ab4        8559  gw_closed_third.py
+SHA-256  b238486c8577585cc686e27fe320d0bce5d5c9f5b1b025cd2d7927741e5e5664        4794  gw_compare_builds.py
+SHA-256  1e6cceca592bf1bc34fbb72c3e5ce6e1f7ee5cbb9446549da791a013971bd7fa       12967  gw_corrected_eig.py
+SHA-256  abef6fbe0e57ddf1553e013ff1eeb239ddb0fc18c815c11231053520caef7940        8234  gw_deep_v2.py
+SHA-256  c41fcd968bd11c0d9a94f890a96a5c386dc380fbf8dd2f2c88e2fb736df00f8b        4481  gw_deep_v3.py
+SHA-256  0339ca81f17b89bd394eb7608c13dc2235ff7edba72f6290bf00c5a52bf5cd5a        5025  gw_degeneracy.py
+SHA-256  6e1f71f3fb2b1dff2b1d38f2c01f1d79dc9cf4288b05100c5426d1ac5adfa613        4395  gw_det_check.py
+SHA-256  38311aa13373f9b90ed12cfad7830ce5ed4af019eaaa0d0f8fdee0ac2dea6505        7248  gw_entry_audit.py
+SHA-256  ab2aa1d2bffb566589461930c0a14f6ca16dfa90278bd8a752d7c0a4a7a7e3bd        5736  gw_entry_error.py
+SHA-256  895c64272b79eaf56aaa4619166a02bc809733fd1ae5f6cb854703af57c6f7cc       15358  gw_even_arb.py
+SHA-256  90865aa7e23dc3d870e84c316b5f071a330694dffbf0cefb5a300e5d1ebd0ae1       12458  gw_even_arb_100_200.log
+SHA-256  389c4736aae57980f3d29e4746eab99f861395b7a604ebed4e27aa831a3eb1a9       15225  gw_even_vs_src.py
+SHA-256  5e58cdfe2bd470208e0ac6e63157220c36305d7be22a45dd6142f1b5c5e963fb        9340  gw_even_vs_src_100_200.log
+SHA-256  edc549b236397322d97f30d502b586d1189879c074d39ae0ca97612f878c36a0        4865  gw_even_vs_src_100_200_rerun_20261002.log
+SHA-256  6b8bec77aecddb1686730a24faddc447187264621a8de5547b5fbf517a013b27       12181  gw_final_gate.py
+SHA-256  709fc6ff23f53a3057ee823336227733fd4e16af1b6a55f888ce821ca3bcfd7e        3871  gw_final_gate_run.log
+SHA-256  7add8951ad2e449b6842462706b8b6dfbfc0bb5fd0b14024ad85aead6add03ec        4617  gw_full_vs_even.py
+SHA-256  60969654f8d7fd29bb03ec9da5340764605816ee6a49b3d10bae86ef18b4814e        5680  gw_head_diag.py
+SHA-256  265d724ee24f31e6dcfd127fed4dd5f414528f534df35069d56c126567a6271b       12104  gw_ladder_analysis.py
+SHA-256  94c257f9a56f72b1e413a932288f634c1c3663a3f0b6bf539116519616e9020a        7591  gw_ladder_ext.py
+SHA-256  bd6f4ac4372f0dc1a92cbf485c9723b3c410520489616dd0eeb7660f02ee1119        4032  gw_lam_dps.py
+SHA-256  c043e6a47e13379bccb95072ba0cfcb506eb3d677404f03b847bf26daf258073        3477  gw_launch_v2.ps1
+SHA-256  77e3504086dfeba6d459ec04cfd659de6ba018af36b2d3490cdb43f75e2f7f4f        3953  gw_ldlt_probe.py
+SHA-256  c7eddcd7d7e9791b2cc0dbad145c6f24bcb88b9da0d55bef7ec544aef607b30c        4568  gw_lerchphi_regime.py
+SHA-256  71e6f1e4c4350e36c60696b8a471d8426bcd65a6fd582e6c675b7115fdba2717    65609669  gw_matrix_100_200_dps400.json
+SHA-256  099c56f0c0f1c9013a3ef6c4aa5a03727d9d1055ed506a3cf9d833ada127306c       16677  gw_model_final.py
+SHA-256  4ac74b87f18b34a7324ad8e35b11f1d4b66074ce18e29ea52bcebedc234a7811       10866  gw_mont_pipeline_check.log
+SHA-256  6fe8c623d4b99d82f96aebffad55b5a309033948621fd0ba1cee660b8ae654a4       12706  gw_mont_pipeline_check.py
+SHA-256  f0f3fe8f9c3dbb6ecbbd8eaa22c1c139151d7757859037bb2039b0111fb52f11        6093  gw_mont_pipeline_check_K6.log
+SHA-256  072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5       28223  gw_montgomery.py
+SHA-256  a409d71ed5b2cef9cca729a6a5210d1b281503e2fff0ea09889ca5928c32ac75       20090  gw_montgomery_100_200.log
+SHA-256  15aa399d0991fdbf85898b6aafaf1afcca58552ba13656fe66e78a79888ef0c6       10802  gw_montgomery_100_200_run2.log
+SHA-256  c9555af1f916ac8570731bbcc63deeb526cb9e270d61b3aa15941716a7a492db       23714  gw_odd_validate.py
+SHA-256  1e7bb9b4a5ac0b1ff1b639ed588cc61bf816fb4707f1c8d31de4d17c4f8ec822       21708  gw_odd_validate_100_200.log
+SHA-256  823de907bb53c42ae297a06a5f4549c48655e6fec87efea8c7a52eadbd98fb85       34145  gw_omega_core_v2.py
+SHA-256  477aee08a30d9507e0dd449a9bc84aaa6fea0afe8b1761c10e191cdaeb13ee7f       12870  gw_opt_a_diff.py
+SHA-256  716ca7e707541e78e0ef3ea74b854ea4517d96b56a16c2a08bc2da0cbb661133       13447  gw_opt_b.py
+SHA-256  cec1b1a2b685d217074c28489931f55d3c667b1d5f12435c791adb96a399bbfc       14049  gw_opt_b_arb.py
+SHA-256  eb35b4c03b34dfa87f2ac55ba70017de47b90112a24d5633359dec85788fd6a8        7165  gw_panel_diag.py
+SHA-256  c820d8f7a0d0d5b56372a000f80fdff1bffec929943068a26ebbcd9d2ee3572e       11129  gw_qinf.py
+SHA-256  3d56dc164d9f803cb74ef7a5f812cb51e40594fd87693ec7c107b64e2859576a       14033  gw_s2_ceiling.py
+SHA-256  d352f0c6b945f0dbfe0b8c0056caddbc553e086d50cf6ecff54f00d12e56fb4c        1495  gw_s2_ceiling_fix1.log
+SHA-256  b34d5663893c684452ec271d1829570443244878cab4a4ac54a9c242cb8f6362        5854  gw_s2_ceiling_run3.log
+SHA-256  1428b0cbe5fcec1ce0af89fbebdd90995dd985c2bb1d54a69bcac589aec5b24d        1488  gw_s2_ceiling_stage1.log
+SHA-256  ae3e63dd5eddb51d8eae6f528390bc3a80db6aab8a733d3c8285daa45ab3fe65       10547  gw_s2_diag_gue_fixture.log
+SHA-256  8cffccf31c587f9bdd5b0fcc4bf3427dcc2dd2884e5766cf5067dc809a8bfc45       60543  gw_spectrum_100_200.json
+SHA-256  213e8cce24845bd438ed74881d0c047f0db01cb4c5e46b1b6c94e315daf495f9       13890  gw_spectrum_100_200.log
+SHA-256  bb0fb6414d2e4bbacff2d93ecd36bf3de175ad18de218948b1ca0dc3e4318641       13646  gw_spectrum_arb.py
+SHA-256  e988f22ccf5581f42eba26af55de26ea87a215dc5c767f80072d16c17ee47326        3300  gw_spectrum_detail.py
+SHA-256  bd93a6c2f8ecee9ac8f5b630a82cb5b6ae0d0e1f3993e0ae18594cc3779e1f2e        5048  gw_sysmon.ps1
+SHA-256  4c061d7875c1b17fa7799cf4c7909b34e0d3404fe17d14694ee6719bf8d099f8       15415  gw_tail_deep.py
+SHA-256  763b59ec69e59997b429fc201fba886e4696147769926025c461ba8287302a93        6047  gw_v0_exact.py
+SHA-256  e1c3e0caacb43bfb823abf3c8d00e2c4199dbb11fce34e3de70edd4d041da03c       15279  gw_verify_production.py
+SHA-256  46b386b5a215868bbe690a268fe5ce023c3343ab3fc27ccc31ed19c39bc7f2b1        6343  gw_verify_results.py
+SHA-256  670b582ca18c1673cabd86d8cb4e47e57ce76c7d2aeec7cd697cec689a832d11        5398  gw_watchdog.py
+SHA-256  af7d323d7d790c23e652dd8241fcf31c2541f0e657f4d8e705a2e5d2b5ab3dfa        5907  gw_worked_example.py
+SHA-256  f75198bf8e416c9a07cc527546ccea59539a595c6e1a6625d83a3c29238c1ae5       11280  ladder_bn.txt
+SHA-256  df8490552dc9697bc5423ae82afd2ab676034b4e0a69cf3fc7936a7e13b013da        2482  ladder_fix.txt
+SHA-256  cc31194acd3202a008df6757f0710e7381cbae8eadcb1d63f3045e0569d6278d         388  ldlt_probe_100_100.json
+SHA-256  c63a0a4d0f10ec2429800c782790ec589693ad8f2cea7ce2c506fa2e58eb97da          98  omega_core_v2_heartbeat.json
+SHA-256  8de9c502d933db12a0609b90d6701d1d3bf93b960594e48aa7b7db04ebbdd6a8         147  omega_core_v2_heartbeat_DEAD_20260929_011342.json
+SHA-256  2f6ae89115b3e4ff6c34e80bb5ebc528390db1897d0b53ba4af8abd4ebc80d13          99  omega_core_v2_heartbeat_N400.json
+SHA-256  20ff0378bf72065c75ee8af2e873350d0dcd6801e6384db86eb14d7594119cbc        1774  omega_core_v2_results.json
+SHA-256  ecba9166c19aca9ba10a3bbdb4d2330665ad7e92acc78a9179467bcfab9ed789         180  omega_core_v2_results_FAILED_absbug_20260929_011342.json
+SHA-256  bab3e5f366b3c7e7c2fdcd894520bcdffa30966d66cbfef53fa6efe774eda521        2223  omega_core_v2_results_N400.json
+SHA-256  7c402ca84eb8566f989e65e9ff484cb3d722e4089b2b73240bbe070a4c926ef3        7177  omega_core_v2_run.log
+SHA-256  bc88f1c03d016a1249e2906c794c07141665957d5699bd500919a407c80d2671        3312  omega_core_v2_run_FAILED_absbug_20260929_011309.log
+SHA-256  8c01438355cddedb2eda7f205e86983d1ec97a7b154d69a0da1218ff7a9891b6        4114  omega_core_v2_run_N400.log
+SHA-256  11526d8c1f5ff561954f869b482e9f4895ec455529ce68bde99c169090b4d440      593637  omega_core_v2_watchdog.log
+SHA-256  28f7be901cd616d7eae24710c5d2bf41a966eb0b657de3457a7996d4b2a267b7           6  omega_v2_pid.txt
+SHA-256  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855           0  omega_v2_stderr.txt
+SHA-256  56b3b3d9c2e1f4e74f79b413bb111c01dc305b123afe1fae9750ecfffb8550ba         756  omega_v2_stderr_FAILED_absbug_20260929_011342.txt
+SHA-256  6f4674bcb7b3c38429cac63bd61b13bf0527780b393d9036ee586c1cbd546b60        3178  omega_v2_stdout.txt
+SHA-256  a56284ea4dad3f166fde36b54aa353eea9726fe8a2bb554c955d31dfeaef7506        2055  omega_v2_stdout_FAILED_absbug_20260929_011342.txt
+SHA-256  95a4df23e50430e4e315b5cda08531b687dbdcf4e7d934c5e7d3db42910ef50a      526181  omega_v2_sysmon.log
+SHA-256  97e65bb6704c3c789b762f754254ce35f45df83672096645a0d931c2fc2b5c9c        2476  probe_arb_rad.py
+SHA-256  316dd5f726bbadfe53ebf63b4291e741d4beabc61ac3009c1dbfe69c136177c7        2609  probe_flint_eig.py
+SHA-256  14450c1694b2d56db4d8b1580c32e0700aa03c5423db11fea14f0a769bbff798       11674  smoke.log
+SHA-256  423f2e2a9907bc9d872742979d330c365f9cec1d39e9653e93c6d4c4e1543d37        1326  smoke_escalate.json
+SHA-256  c5d4a7eccc3936dad3d1d06ffb3863e15a382a87c8ba09604f85b1b5b7e83aeb        9798  smoke_escalate.log
+SHA-256  eebdaf0a9734268075e305ce6c1649e4b35ee4810a9a9b1ff21667a95a069990          98  smoke_escalate_hb.json
+SHA-256  51cf93e2035142d4485a160186e39fdab00d31d897bdebcff15e8a3b02007224          99  smoke_hb.json
+SHA-256  d67b9065b78de1c55b440605b299e386eccdf49d1b4181ead1ea831ca0b00959        1633  smoke_results.json
+SHA-256  33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb       12863  source_arb_ldlt_certify.py
+SHA-256  68f56e01ba0861cebaaa37a4f2e690124f7f818df9168ea72eb16c385426268a        2380  track_c_lean_verify.log
+SHA-256  33b4f22e4a09f04c595907ae3c1a2a39245bd6b210a5701b89ad1c406c96775c       12714  track_c_make_smt.py
+SHA-256  99d485c42feeb6b33e77fbab4fb3b55a1208379dd9f6e52246cf5a412b85aa96        1532  track_c_side_conditions.smt2
+SHA-256  454b49faf30c0aace06b1266992a7eb7ab2e0398d64533cb2fc408d2e6036038        1383  track_c_smt_z3.log
+SHA-256  9ab3c5e15fec06b6610e9ad36ef2c74a60fea6ad8befaf146b22a9f1fd6337ce        3892  update_registry.py
+SHA-256  2833afef57d2631e4569e77dffca8854584512e396686a1ca03332c4eb6f2780         797  wd_selftest.log
+
+TOTAL FILES : 116

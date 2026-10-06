@@ -1,0 +1,40 @@
+protocol_09.smt2 -- Z3 run log
+Protocol 09 (Godelian Compliance Loop) finite-state specification.
+Generated 2026-10-06 02:18:45 by running the commands below; not hand-written.
+sha256   : f38e28558ff06398732f40fdbaa4ab0bb10b502dc0def3e51fdf67373c725268
+bytes    : 6671
+
+command   : z3 protocol_09.smt2
+z3        : E:\4_TOOLS_INSTALLER\z3-4.16.0-x64-win\bin\z3.exe
+z3ver     : Z3 version 4.16.0 - 64 bit
+auditor   : C:\Users\usER\oracle-toe\OMEGA_TRACK_C\auditor\smt_circularity_auditor.py
+
+--- the triple that makes a GENUINE verdict possible ---
+ok    script (context + claim)   unsat    (exit 0)
+ok    context alone              sat      (exit 0)
+ok    context + not claim        sat      (exit 0)
+
+--- minimality of the core: drop one of the three and it is sat ---
+ok    drop A4  b >= i            sat      (exit 0)
+ok    drop A5  HALT -> i >= M    sat      (exit 0)
+ok    drop A6  M > N             sat      (exit 0)
+
+The claim is refutable only by [11] A4, [12] A5 and [13] A6
+together.  Each line is necessary, so the result does not rest on
+one axiom and the contradiction is not available from the
+declarations alone.
+
+--- as shipped ---
+z3 protocol_09.smt2
+unsat
+
+--- circularity audit ---
+SMT CIRCULARITY AUDITOR -- z3 5.0.0
+files scanned: 1
+------------------------------------------------------------------------------
+GENUINE           asserts=16  ctx=sat     script=unsat   core=[11,12,13,15]  protocol_09.smt2
+                   the contradiction needs 3 axioms plus the claim, and no axiom is the claim's negation
+------------------------------------------------------------------------------
+summary: GENUINE=1
+
+RESULT: PASS -- script unsat, context sat, negated claim sat, three minimality drops sat, auditor GENUINE core=[11,12,13,15].

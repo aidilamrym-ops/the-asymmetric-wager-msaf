@@ -1,0 +1,13 @@
+# Byte-stable checkouts -- git stores and restores files exactly as committed.
+#
+# Reason: `core.autocrlf=true` is set system-wide on this machine. Without this
+# rule git rewrites LF to CRLF on checkout, so a fresh clone would carry CR bytes
+# that this workspace forbids, `checksum_check.py` and the encoding conditions in
+# `provenance_check.py` would fail on a clone while passing locally, and the
+# SHA-256 values in CHECKSUM.sha256 would no longer describe the checked-out tree.
+#
+# "* -text" disables EOL conversion on both add and checkout. It does not modify
+# any file content; it only stops git from doing so. The sub-repository carries
+# the same rule in guinand-weil-rigorous-numerics-main/.gitattributes for the
+# same reason, stated there against PROVENANCE.txt and its own manifest.
+* -text

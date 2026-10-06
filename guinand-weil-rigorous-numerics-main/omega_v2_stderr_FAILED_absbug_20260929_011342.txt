@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_omega_core_v2.py", line 460, in main
+    r = run_target(args.c, N, args.prec,
+                   do_bound=not args.skip_bound,
+                   max_prec_escalations=args.escalations,
+                   out_path=args.out)
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_omega_core_v2.py", line 301, in run_target
+    sym_dev, sym_at = exact_symmetry_max_dev(A, DIM)
+                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_omega_core_v2.py", line 167, in exact_symmetry_max_dev
+    d = (A[i, j] - A[j, i]).abs()
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'flint.types.arb.arb' object has no attribute 'abs'

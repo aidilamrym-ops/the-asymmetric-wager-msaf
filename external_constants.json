@@ -1,0 +1,296 @@
+{
+  "schema": "msaf-external-provenance/v1",
+  "generated_utc": "2026-10-05T10:40:00Z",
+  "gate_of_record": "provenance_check.py",
+  "evidence": [
+    {
+      "id": "NIST_CODATA_2022_TABLE",
+      "title": "CODATA Recommended Values of the Fundamental Physical Constants, 2022 - allascii table",
+      "publisher": "NIST / CODATA Task Group on Fundamental Constants",
+      "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+      "doi": "10.1063/5.0279860",
+      "retrieved_utc": "2026-10-05",
+      "bytes": 40801,
+      "sha256": "77fb90e66c40db3e6eb16630bc9c88e4c7c8beddbe5e71be406f2f26e3f67e67",
+      "local_copy": "provenance/evidence/nist_allascii_2022.txt",
+      "access": "full_text_local_copy",
+      "layer": "A",
+      "license_basis": "NIST Library FAQ: NIST publications are in the public domain and not subject to US copyright (17 U.S.C. 105)"
+    },
+    {
+      "id": "PLATT_TRUDGIAN_2021",
+      "title": "The Riemann hypothesis is true up to 3*10^12",
+      "publisher": "arXiv",
+      "url": "https://arxiv.org/abs/2004.09765",
+      "doi": "arXiv:2004.09765",
+      "retrieved_utc": "2026-10-05",
+      "bytes": 39398,
+      "sha256": "c137519d02a5cbf7146fed1499c73e03943ce8cd75f9bf78f4d82d65bcc16bc7",
+      "local_copy": "provenance/evidence/arxiv_2004_09765_abs.html",
+      "access": "full_text_local_copy",
+      "layer": "A",
+      "license_basis": "arXiv non-exclusive distribution licence"
+    },
+    {
+      "id": "MOSSINGHOFF_TRUDGIAN_2015",
+      "title": "Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function",
+      "publisher": "Journal of Number Theory 157 (2015) 329-349",
+      "url": "https://doi.org/10.1016/j.jnt.2015.05.012",
+      "doi": "10.1016/j.jnt.2015.05.012",
+      "retrieved_utc": "2026-10-05",
+      "access": "publisher_landing_page",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived"
+    },
+    {
+      "id": "MOSSINGHOFF_TRUDGIAN_YANG_2024",
+      "title": "Explicit zero-free regions for the Riemann zeta-function",
+      "publisher": "Research in Number Theory 10 (2024), article 11",
+      "url": "https://doi.org/10.1007/s40993-023-00498-y",
+      "doi": "10.1007/s40993-023-00498-y",
+      "retrieved_utc": "2026-10-05",
+      "bytes": 508435,
+      "sha256": "9e02c1c934e3e38278f72ba0e1aa9e87fe1ab2953b1c6ce4077f04e7665bda45",
+      "local_copy": "provenance/evidence/springer_mty2024_open_access.html",
+      "access": "full_text_local_copy",
+      "layer": "A",
+      "license_basis": "CC BY"
+    },
+    {
+      "id": "PLANCK_2018_VI",
+      "title": "Planck 2018 results. VI. Cosmological parameters",
+      "publisher": "Astronomy & Astrophysics 641 (2020) A6",
+      "url": "https://doi.org/10.1051/0004-6361/201833910",
+      "doi": "10.1051/0004-6361/201833910",
+      "retrieved_utc": "2026-10-05",
+      "access": "inaccessible",
+      "layer": "C",
+      "observed": "HTTP 403 from the publisher host",
+      "snapshot_evidence_id": "PLANCK_2018_VI_ARXIV",
+      "license_basis": "not applicable; source could not be retrieved"
+    },
+    {
+      "id": "PLATT_2017",
+      "title": "Isolating some non-trivial zeros of zeta",
+      "publisher": "Mathematics of Computation 86 (307) (2017) 2449-2467",
+      "url": "https://doi.org/10.1090/mcom/3198",
+      "doi": "10.1090/mcom/3198",
+      "retrieved_utc": "2026-10-05",
+      "access": "publisher_landing_page",
+      "layer": "B",
+      "license_basis": "no redistribution licence identified; body not archived"
+    },
+    {
+      "id": "PLANCK_2018_VI_ARXIV",
+      "title": "Planck 2018 results. VI. Cosmological parameters (arXiv preprint)",
+      "publisher": "arXiv",
+      "url": "https://arxiv.org/abs/1807.06209",
+      "doi": "arXiv:1807.06209",
+      "retrieved_utc": "2026-10-05",
+      "bytes": 78846,
+      "sha256": "a8f46f86ddaea582f60500ab7708ec801a4e8d86b3be6ca9825ce9ca139e7c4d",
+      "local_copy": "provenance/evidence/arxiv_1807_06209_abs.html",
+      "access": "full_text_local_copy",
+      "layer": "A",
+      "license_basis": "arXiv non-exclusive distribution licence",
+      "mirror_of": "PLANCK_2018_VI",
+      "note": "The canonical DOI returns HTTP 403 from this machine; this preprint of the same article is the archived snapshot."
+    }
+  ],
+  "quantities": [
+    {
+      "id": "PLANCK_LENGTH",
+      "symbol": "\\ell_P",
+      "kind": "measured",
+      "value": "1.616255e-35",
+      "sig_figs": 7,
+      "exact": false,
+      "unit": "m",
+      "uncertainty": "1.8e-40",
+      "authority": "CODATA 2022 (J. Phys. Chem. Ref. Data 54, 033105 (2025))",
+      "evidence_id": "NIST_CODATA_2022_TABLE",
+      "retrieved_utc": "2026-10-05",
+      "evidence_probe": {
+        "evidence_id": "NIST_CODATA_2022_TABLE",
+        "line_needles": ["Planck length", "1.616 255 e-35", "0.000 018 e-35"]
+      },
+      "sites": [
+        {
+          "file": "Skill.md",
+          "needle": "1{,}616255 \\times 10^{-35}",
+          "mantissa": "1{,}616255",
+          "exponent": -35,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "1.616255e-35"
+        },
+        {
+          "file": "01_PARADOX_AND_SCALE.md",
+          "needle": "1.62 \\times 10^{-35}",
+          "mantissa": "1.62",
+          "exponent": -35,
+          "count": 2,
+          "mode": "source_agree",
+          "doc_value": "1.62e-35",
+          "note": "Corrected by F5-1 on 2026-10-05. Until then this site read 1.63e-35, a declared variance of 8.504e-3 (+0.8504 percent) from the CODATA 2022 value 1.616255e-35, which F3-1 recorded openly instead of editing silently. Both 1.62e-35 and 1.63e-35 reproduce N_steps at the 2 s.f. the corpus declares, so no downstream figure moved. The site now carries the correct 3 s.f. rounding and P4 compares it against the authoritative value."
+        }
+      ]
+    },
+    {
+      "id": "OBSERVABLE_UNIVERSE_DIAMETER",
+      "symbol": "D_{obs}",
+      "kind": "measured",
+      "value": "8.8e26",
+      "sig_figs": 2,
+      "exact": false,
+      "unit": "m",
+      "uncertainty": "not quoted; LCDM-model dependent, 2 s.f. only",
+      "authority": "Reference value (Planck 2018 LCDM comoving diameter), A&A 641 A6 (2020)",
+      "evidence_id": "PLANCK_2018_VI",
+        "snapshot_evidence_id": "PLANCK_2018_VI_ARXIV",
+        "retrieved_utc": "2026-10-05",
+        "probe_waived": "Authority PLANCK_2018_VI is layer C and carries no local copy; the archived layer-A snapshot PLANCK_2018_VI_ARXIV is the arXiv abstract page, which contains no occurrence of 'diameter' or 'comoving', so 8.8e26 cannot be read back out of any archived text. Verified 2026-10-05: 0 hits for each term in provenance/evidence/arxiv_1807_06209_abs.html.",
+        "sites": [
+        {
+          "file": "01_PARADOX_AND_SCALE.md",
+          "needle": "8.8 \\times 10^{26}",
+          "mantissa": "8.8",
+          "exponent": 26,
+          "count": 2,
+          "mode": "source_agree",
+          "doc_value": "8.8e26"
+        },
+        {
+          "file": "Skill.md",
+          "needle": "8{,}8 \\times 10^{26}",
+          "mantissa": "8{,}8",
+          "exponent": 26,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "8.8e26"
+        }
+      ]
+    },
+    {
+      "id": "UNIVERSE_PIXEL_CONSTANT",
+      "symbol": "Delta_univ",
+      "kind": "derived",
+      "value": "1.836653e-62",
+      "sig_figs": 7,
+      "exact": false,
+      "unit": "dimensionless",
+      "uncertainty": "inherits 2 s.f. from D_obs",
+      "authority": "Derived quotient of PLANCK_LENGTH and OBSERVABLE_UNIVERSE_DIAMETER",
+      "evidence_id": "NIST_CODATA_2022_TABLE",
+      "retrieved_utc": "2026-10-05",
+      "derived_from": ["PLANCK_LENGTH", "OBSERVABLE_UNIVERSE_DIAMETER"],
+      "recompute": "quotient",
+      "sites": [
+        {
+          "file": "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+          "needle": "1,836653 \\times 10^{-62}",
+          "mantissa": "1,836653",
+          "exponent": -62,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "1.836653e-62"
+        },
+        {
+          "file": "Skill.md",
+          "needle": "1{,}836653 \\times 10^{-62}",
+          "mantissa": "1{,}836653",
+          "exponent": -62,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "1.836653e-62"
+        }
+      ]
+    },
+    {
+      "id": "ZETA_DERIVATIVE_FIRST_ZERO",
+      "symbol": "|zeta'(rho_1)|",
+      "kind": "derived",
+      "value": "0.793160433356506116013897565274",
+      "sig_figs": 30,
+      "exact": false,
+      "unit": "dimensionless",
+      "uncertainty": "truncation of a 100 dps recomputation",
+      "authority": "Independent mpmath recomputation on this machine, dps 100",
+      "evidence_id": null,
+      "evidence_status": "recomputed_in_gate",
+      "retrieved_utc": "2026-10-05",
+      "recompute": "zeta_prime_abs_first_zero",
+      "sites": [
+        {
+          "file": "DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md",
+          "needle": "0,7931604334",
+          "mantissa": "0,7931604334",
+          "exponent": null,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "0.7931604334"
+        }
+      ]
+    },
+    {
+      "id": "BOLTZMANN_CONSTANT",
+      "symbol": "k_B",
+      "kind": "measured",
+      "value": "1.380649e-23",
+      "sig_figs": 7,
+      "exact": true,
+      "unit": "J K^-1",
+      "uncertainty": "exact",
+      "authority": "SI 2019 defining constant, exact by definition; listed in the CODATA 2022 adjustment",
+      "evidence_id": "NIST_CODATA_2022_TABLE",
+      "retrieved_utc": "2026-10-05",
+      "evidence_probe": {
+        "evidence_id": "NIST_CODATA_2022_TABLE",
+        "line_needles": ["Boltzmann constant", "1.380 649 e-23"]
+      },
+      "sites": [
+        {
+          "file": "SOLVABLE_FINITE_PARADOX.md",
+          "needle": "1{,}380649\\times10^{-23}",
+          "mantissa": "1{,}380649",
+          "exponent": -23,
+          "count": 1,
+          "mode": "source_agree",
+          "doc_value": "1.380649e-23"
+        }
+      ]
+    }
+  ],
+  "reference_facts": [
+    {
+      "id": "RF_RH_HEIGHT_VERIFIED",
+      "value": "3000175332800",
+      "source_id": "PLATT_TRUDGIAN_2021",
+      "claim": "All non-trivial zeros with 0 < Im(rho) <= 3000175332800 have Re(rho) = 1/2, verified by ball arithmetic."
+    },
+    {
+      "id": "RF_RH_ZEROS_ON_LINE",
+      "value": "12363153437138",
+      "source_id": "PLATT_TRUDGIAN_2021",
+      "claim": "Number of non-trivial zeros covered by that verification."
+    },
+    {
+      "id": "RF_ZERO_FREE_R_MT2015",
+      "value": "5.573412",
+      "source_id": "MOSSINGHOFF_TRUDGIAN_2015",
+      "claim": "Zero-free region constant R in beta >= 1 - 1/(R log gamma) for gamma > 3."
+    },
+    {
+      "id": "RF_ZERO_FREE_R_MTY2024",
+      "value": "5.559",
+      "source_id": "MOSSINGHOFF_TRUDGIAN_YANG_2024",
+      "claim": "Improved zero-free region constant published in 2024."
+    },
+    {
+      "id": "RF_PLATT2017_ZERO_COUNT",
+      "value": "103800788359",
+      "source_id": "PLATT_2017",
+      "claim": "Zeros rigorously isolated to +/- 2^-102 up to height 3.0610046e10."
+    }
+  ]
+}

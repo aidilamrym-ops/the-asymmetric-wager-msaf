@@ -1,0 +1,69 @@
+[
+  {
+    "c": 100,
+    "N": 400,
+    "dim": 801,
+    "prec": 18000,
+    "attempts": [
+      {
+        "attempt": 1,
+        "prec": 9000,
+        "build_s": 6700.1,
+        "build_s_total": 6700.1,
+        "ldlt_s": 1162.2,
+        "ldlt_s_total": 1162.2,
+        "resumed_rows": 0,
+        "resumed_pivots": 0,
+        "n_pos": 723,
+        "n_neg": 0,
+        "undetermined_pivot": 723,
+        "max_entry_radius": "2.1547598290585434360e-2577",
+        "max_pivot_radius": "6.5054156664262011852e-38"
+      },
+      {
+        "attempt": 2,
+        "prec": 18000,
+        "build_s": 16132.3,
+        "build_s_total": 16132.3,
+        "ldlt_s": 3547.3,
+        "ldlt_s_total": 3547.3,
+        "resumed_rows": 0,
+        "resumed_pivots": 0,
+        "n_pos": 801,
+        "n_neg": 0,
+        "undetermined_pivot": null,
+        "max_entry_radius": "1.3985514392045226612e-5266",
+        "max_pivot_radius": "1.1357906142745494747e-2384"
+      }
+    ],
+    "n_pos": 801,
+    "n_neg": 0,
+    "undetermined_pivot": null,
+    "max_entry_radius": "1.398551439204522661230545e-5266",
+    "max_pivot_radius": "1.135790614274549474670140e-2384",
+    "symmetry_dev": "0",
+    "symmetry_exact": true,
+    "lambda_min_lower_bound": "6.74709239897214291717530665950e-509",
+    "bound_detail": {
+      "min_abs_pivot": "2.014657282505926679349953e-112",
+      "pivot_sign": "+",
+      "norm_Linv_F_upper": "1.727994119336448038542856e+198"
+    },
+    "anomalies": [],
+    "caveats": [],
+    "anomaly": false,
+    "non_result": false,
+    "peak_mb": 4572.721152,
+    "transcript_head": [
+      "0 + 4.890674294301233991434966888540561967175 1.398551439e-5266",
+      "1 + 4.879171853044798705234270808880393829141 7.057590182e-5267",
+      "2 + 0.4001416424901752726827283512353355377121 3.564599480e-5267"
+    ],
+    "transcript_tail": [
+      "798 + 3.292835214788987331069110828543800673987e-29 1.375399638e-2395",
+      "799 + 1.327531752515989029937004273896561935248e-26 7.112689651e-2389",
+      "800 + 1.638719166685593608248050594068888532525e-26 1.135790614e-2384"
+    ],
+    "sha256": "f9735e697c30941a8311ec511634958163ad07bc75432d470555814c77d856d6"
+  }
+]

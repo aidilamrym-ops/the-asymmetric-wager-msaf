@@ -1,0 +1,92 @@
+################################################################################################
+# OPSI (d) PIPELINE CHECK -- synthetic spectra of known class
+# run BEFORE gw_montgomery.py is pointed at the real matrix
+# N = 401, samples = 400, seed = 20260927
+################################################################################################
+
+PRE-REGISTERED CHECK EXPECTATIONS:
+  K1  Poisson fixture  -> S1 must NOT be 'CONSISTENT WITH RMT'
+  K2  GUE fixture      -> S1 must NOT be 'CONSISTENT WITH POISSON'
+  K3  GOE fixture      -> S1 must NOT be 'CONSISTENT WITH POISSON'
+  K4  every fixture    -> both S1 FINAL and S2 FINAL present
+  K5  GUE fixture, chart L, S2 must NOT be 'INCONSISTENT WITH MONTGOMERY'
+  K6  sigma_u grid must ACTUALLY VARY: the 3 chi2 of any chart of any
+      fixture must not be bit-identical (defect 15 regression guard;
+      added after that defect was found -- K1..K5 unchanged)
+  (chart T of a shifted spectrum is a CODE PATH check only -- its
+   verdicts are printed but do not count toward K1..K3, K5)
+
+================================================================================================
+FIXTURE POISSON
+================================================================================================
+  wrote C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_poisson.json  (levels 401, min 0.00185869, max 399.616)
+  $ C:\Python314\python.exe gw_montgomery.py C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_poisson.json --samples 400
+  exit=0  130.5 s
+  S1 FINAL   : S1 FINAL (charts agree): CONSISTENT WITH POISSON (level repulsion ABSENT)
+  S2 FINAL   : S2 FINAL: UNSTABLE -- 2 different verdicts across the grid:
+  S1 chart L : CONSISTENT WITH POISSON (level repulsion ABSENT)   <- native chart, counts toward K1/K2/K3
+  S1 chart T : CONSISTENT WITH POISSON (level repulsion ABSENT)   <- code path only (log of a shifted spectrum)
+  S2 chart L : NO DISCRIMINATION AT N=401
+  S2 chart T : NO DISCRIMINATION AT N=401
+
+================================================================================================
+FIXTURE GUE
+================================================================================================
+  wrote C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_gue.json  (levels 401, min 0.00239278, max 2.79417)
+  $ C:\Python314\python.exe gw_montgomery.py C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_gue.json --samples 400
+  exit=0  128.0 s
+  S1 FINAL   : S1 FINAL (charts agree): CONSISTENT WITH RMT (level repulsion PRESENT)
+  S2 FINAL   : S2 FINAL: UNSTABLE -- 2 different verdicts across the grid:
+  S1 chart L : CONSISTENT WITH RMT (level repulsion PRESENT)   <- native chart, counts toward K1/K2/K3
+  S1 chart T : CONSISTENT WITH RMT (level repulsion PRESENT)   <- code path only (log of a shifted spectrum)
+  S2 chart L : NO DISCRIMINATION AT N=401
+  S2 chart T : NO DISCRIMINATION AT N=401
+
+================================================================================================
+FIXTURE GOE
+================================================================================================
+  wrote C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_goe.json  (levels 401, min 0.00300785, max 3.992)
+  $ C:\Python314\python.exe gw_montgomery.py C:\Users\usER\AppData\Local\Temp\gw_mont_fixture_goe.json --samples 400
+  exit=0  134.5 s
+  S1 FINAL   : S1 FINAL (charts agree): CONSISTENT WITH RMT (level repulsion PRESENT)
+  S2 FINAL   : S2 FINAL: UNSTABLE -- 2 different verdicts across the grid:
+  S1 chart L : CONSISTENT WITH RMT (level repulsion PRESENT)   <- native chart, counts toward K1/K2/K3
+  S1 chart T : CONSISTENT WITH RMT (level repulsion PRESENT)   <- code path only (log of a shifted spectrum)
+  S2 chart L : NO DISCRIMINATION AT N=401
+  S2 chart T : NO DISCRIMINATION AT N=401
+
+################################################################################################
+# PIPELINE CHECK -- RESULT vs PRE-REGISTERED K1..K6
+################################################################################################
+  K1  poisson  PASS   [chart L: CONSISTENT WITH POISSON (level repulsion ABSENT)]
+  K2  gue      PASS   [chart L: CONSISTENT WITH RMT (level repulsion PRESENT)]
+  K3  goe      PASS   [chart L: CONSISTENT WITH RMT (level repulsion PRESENT)]
+  K4a  poisson  PASS   [S1 FINAL present=True, S2 FINAL present=True]
+  K4b  gue      PASS   [S1 FINAL present=True, S2 FINAL present=True]
+  K4c  goe      PASS   [S1 FINAL present=True, S2 FINAL present=True]
+  K5  gue/chart-L PASS   [NO DISCRIMINATION AT N=401]
+  K6  poisson  chart L PASS   [chi2 grid = 5396.6215, 1248.7159, 1219.3114]
+  K6  poisson  chart T PASS   [chi2 grid = 5223.2289, 1273.8381, 1278.8625]
+  K6  gue      chart L PASS   [chi2 grid = 9195.3292, 1290.7118, 201.3713]
+  K6  gue      chart T PASS   [chi2 grid = 8990.6197, 1256.0469, 206.3103]
+  K6  goe      chart L PASS   [chi2 grid = 8557.6578, 1047.0836, 186.3980]
+  K6  goe      chart T PASS   [chi2 grid = 8384.1396, 1013.4918, 197.8878]
+
+  ALL CHART-L VERDICTS (the ones that count):
+     poisson  S1 = CONSISTENT WITH POISSON (level repulsion ABSENT)
+     poisson  S2 = NO DISCRIMINATION AT N=401
+     gue      S1 = CONSISTENT WITH RMT (level repulsion PRESENT)
+     gue      S2 = NO DISCRIMINATION AT N=401
+     goe      S1 = CONSISTENT WITH RMT (level repulsion PRESENT)
+     goe      S2 = NO DISCRIMINATION AT N=401
+  ALL CHART-T VERDICTS (code path only):
+     poisson  S1 = CONSISTENT WITH POISSON (level repulsion ABSENT) | S2 = NO DISCRIMINATION AT N=401
+     gue      S1 = CONSISTENT WITH RMT (level repulsion PRESENT) | S2 = NO DISCRIMINATION AT N=401
+     goe      S1 = CONSISTENT WITH RMT (level repulsion PRESENT) | S2 = NO DISCRIMINATION AT N=401
+
+  PIPELINE CHECK: ALL OF K1..K6 SATISFIED.
+  -> the instrument can separate these classes at N = 401.
+
+TOOL STATUS: python 3.14 + numpy + scipy + subprocess on synthetic data.
+These are SYNTHETIC fixtures, not the Guinand-Weil matrix.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.

@@ -1,0 +1,183 @@
+################################################################################################
+# OMEGA OPSI (d) -- MONTGOMERY PAIR CORRELATION / GUE CONSISTENCY
+# input = gw_spectrum_100_200.json   surrogate samples per ensemble = 2000   seed = 20260927
+################################################################################################
+
+PRE-REGISTERED RULES (brain #1001630, locked BEFORE any eigenvalue):
+  S1  r_bar unfolding-free, charts T=ln(lambda) PRIMARY and L=lambda
+      -> report BOTH, never pick the flattering one afterwards
+  S2  R2(u) vs 1-(sin(pi u)/(pi u))^2, sigma_u in {0.3,0.5,1.0},
+      sigma_e=0.5, u in [0,10), 20 bins of 0.5, drop bins with E<5
+  ref GUE / GOE / Poisson, matched N, 2000 samples, seed 20260927
+  S1 verdict: in-Poisson-only -> POISSON; in-RMT-only -> RMT;
+      in both -> NO DISCRIMINATION; in neither -> INCONSISTENT
+  S2 verdict: p_GUE = P(chi2_GUE >= chi2_obs),
+      p_Pois = P(chi2_Pois <= chi2_obs)  [LOWER tail -- amendment
+      #1001631, registered before any real spectrum was read];
+      p_GUE>=0.05 & p_Pois<0.05 -> MONTGOMERY/GUE, distinguishable
+      from Poisson; both >=0.05 -> NO DISCRIMINATION; p_GUE<0.05 ->
+      INCONSISTENT. Must hold on ALL 6 grid points {T,L} x {0.3,0.5,1.0},
+      else UNSTABLE. Threshold 0.05, bins, sigma_e, grid, seed UNCHANGED.
+  EXPECTED (pre-registered): GOE-vs-GUE NOT separable at N=401;
+      spread ~295 orders -> chart L non-uniform; ~200 pairs/bin.
+SCOPE: this is NOT Montgomery's theorem about zeta zeros and NOT an
+       RH / Weil-positivity / prime-counting / factoring claim.
+
+================================================================================================
+INPUT SPECTRUM
+================================================================================================
+  provenance : c=100 N=200 dps=400 prec=2048 algo=vdhoeven_mourrain n=401
+  eig time   : 1862.2 s
+  G-M0 gate  : G-M0 PASS
+  G-M0 parts : {"G-M0a_finite": true, "G-M0b_inertia": true, "G-M0c_strict": true, "G-M0d_trace": true, "G-M0e_frob": true}
+  inertia    : {"n_pos": 401, "n_neg": 0, "indeterminate": 0}
+  all 401 levels finite, positive, strictly increasing -- OK
+  lambda_min = 1.7372701741044778e-294
+  lambda_max = 7.9954638264487512
+  spread     = 294.662976 orders   (pre-registered expectation ~295)
+  max enclosure radius = 1.009286479e-611   (401 of 401 levels carry a radius)
+  worst |rad|/|mid|    = 1e-317.24
+
+================================================================================================
+LEVEL DENSITY IN CHART T = ln(lambda)  (reported)
+================================================================================================
+  bin  0  y in [  -676.41,  -642.48)  count   4
+  bin  1  y in [  -642.48,  -608.56)  count   4
+  bin  2  y in [  -608.56,  -574.63)  count   4
+  bin  3  y in [  -574.63,  -540.71)  count   5
+  bin  4  y in [  -540.71,  -506.79)  count   5
+  bin  5  y in [  -506.79,  -472.86)  count   5
+  bin  6  y in [  -472.86,  -438.94)  count   6
+  bin  7  y in [  -438.94,  -405.01)  count   6
+  bin  8  y in [  -405.01,  -371.09)  count   6
+  bin  9  y in [  -371.09,  -337.16)  count   7
+  bin 10  y in [  -337.16,  -303.24)  count   7
+  bin 11  y in [  -303.24,  -269.32)  count   8
+  bin 12  y in [  -269.32,  -235.39)  count   8
+  bin 13  y in [  -235.39,  -201.47)  count   9
+  bin 14  y in [  -201.47,  -167.54)  count   9
+  bin 15  y in [  -167.54,  -133.62)  count  10
+  bin 16  y in [  -133.62,   -99.69)  count  11
+  bin 17  y in [   -99.69,   -65.77)  count  12
+  bin 18  y in [   -65.77,   -31.85)  count  14
+  bin 19  y in [   -31.85,     2.08)  count 261
+
+================================================================================================
+S1 -- MEAN ADJACENT GAP RATIO r_bar (unfolding-free)
+================================================================================================
+  chart T (ln lambda, PRIMARY)   r_bar = 0.548557   (n_ratios = 399, min 2.317e-05, max 1.000)
+  chart L (lambda, SECONDARY)    r_bar = 0.190891   (n_ratios = 399, min 2.338e-05, max 0.989)
+  sanity labels: GUE 0.5995 | GOE 0.5307 | Poisson 0.3863
+  (defect 17: the GUE label 0.5359 printed by run #1 is RETRACTED;
+   a universality sweep of the diagonal variance over {0.5,1,2} moved
+   r_bar by <1 se in both classes, so the construction is sound and
+   the label -- not the code -- was wrong: beta=2 measures 0.5995 here)
+  real references come from the matched-N simulation below
+
+================================================================================================
+SURROGATES -- matched N = 401, 2000 samples each, seed 20260927
+================================================================================================
+    gue 500/2000 done  (44 s)
+    gue 1000/2000 done  (90 s)
+    gue 1500/2000 done  (134 s)
+    gue 2000/2000 done  (177 s)
+  gue      generated in 177.0 s
+    goe 500/2000 done  (191 s)
+    goe 1000/2000 done  (204 s)
+    goe 1500/2000 done  (218 s)
+    goe 2000/2000 done  (231 s)
+  goe      generated in 53.9 s
+    poisson 500/2000 done  (231 s)
+    poisson 1000/2000 done  (231 s)
+    poisson 1500/2000 done  (231 s)
+    poisson 2000/2000 done  (231 s)
+  poisson  generated in 0.1 s
+
+================================================================================================
+S1 REFERENCES (matched-N simulation)
+================================================================================================
+  gue      mean 0.599639  sd 0.014359  CI95 [0.570867, 0.625932]  (label 0.5995)
+  goe      mean 0.530353  sd 0.015483  CI95 [0.500058, 0.559624]  (label 0.5307)
+  poisson  mean 0.386838  sd 0.015934  CI95 [0.355849, 0.418225]  (label 0.3863)
+  pooled RMT CI95 = [0.503934, 0.622659]
+  SE of r_bar (GUE sd / sqrt(400)) = 0.000718
+  pre-registered expectation 1: GOE vs GUE not separable at N=401
+    measured gap = 0.069286 against SE = 0.000718  ->  FALSIFIED -- they ARE separable (97 SE)
+    (the expectation was built on the recalled label 0.5359, which
+     defect 17 retracted; the measurement is not adjusted to fit it)
+
+  S1 chart T (ln lambda, PRIMARY)   r_bar = 0.548557  ->  CONSISTENT WITH RMT (level repulsion PRESENT)
+  S1 chart L (lambda, SECONDARY)    r_bar = 0.190891  ->  INCONSISTENT WITH ALL THREE REFERENCES
+  SECONDARY (does NOT change the verdict above):
+    chart T (ln lambda, PRIMARY)   GOE [in] | GUE [OUT] | Poisson [OUT]
+    chart L (lambda, SECONDARY)    GOE [OUT] | GUE [OUT] | Poisson [OUT]
+
+  S1 FINAL: CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+    (pre-registered: report the disagreement, do NOT pick the chart)
+
+================================================================================================
+S2 -- PAIR CORRELATION vs MONTGOMERY KERNEL 1 - (sin(pi u)/(pi u))^2
+grid = {chart} x {sigma_u in [0.3, 0.5, 1.0]}, sigma_e = 0.5, bins 20 x 0.5
+target = Montgomery convolved with the estimator's own sigma_e
+         (defect 12: comparing a smoothed estimate to an unsmoothed
+          kernel is apples-to-oranges; thresholds unchanged)
+================================================================================================
+  sigma_u 0.3 unfolded+binned in 115.4 s
+  sigma_u 0.5 unfolded+binned in 117.3 s
+  sigma_u 1.0 unfolded+binned in 112.0 s
+  expected pairs/bin: min 38.0  max 200.4  -> bins dropped (E<5): 0
+  NOTE no edge correction is applied; the matched surrogates carry the
+       same finite-N bias, so the Monte-Carlo p-values stay calibrated.
+
+  chart T (ln lambda, PRIMARY)   sigma_u 0.3 : chi2 = 11639.5769
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.9980  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 0.5 : chi2 = 1698.5441
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.5340  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart T (ln lambda, PRIMARY)   sigma_u 1.0 : chi2 = 816.3241
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 0.0075  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.3 : chi2 = 137543.9721
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 0.5 : chi2 = 18825.3487
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+  chart L (lambda, SECONDARY)    sigma_u 1.0 : chi2 = 6289.2525
+      p_GUE   = P(chi2_GUE   >= chi2_obs) = 0.0000
+      p_GOE   = P(chi2_GOE   >= chi2_obs) = 0.0000  [reported only]
+      p_Pois  = P(chi2_Pois  <= chi2_obs) = 1.0000  [lower tail, #1001631]
+      -> INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  S2 FINAL (all 6 grid points agree): INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+################################################################################################
+# OPSI (d) VERDICT
+################################################################################################
+  S1 (gap ratio, unfolding-free) : CHART-DEPENDENT (T and L disagree) -> INCONCLUSIVE
+      chart T (ln lambda, PRIMARY)   r_bar = 0.548557 -> CONSISTENT WITH RMT (level repulsion PRESENT)
+      chart L (lambda, SECONDARY)    r_bar = 0.190891 -> INCONSISTENT WITH ALL THREE REFERENCES
+  S2 (pair correlation)          : INCONSISTENT WITH MONTGOMERY AT THIS RESOLUTION
+
+  RESOLUTION CEILING: N = 401 levels, 399 ratios, ~200 pairs/bin;
+  GOE-vs-GUE separation needs |Delta r_bar| ~ 0.0693 against SE ~ 0.0007.
+
+  SCOPE LIMIT (read literally): these are statistics of ONE finite
+  constructed matrix. They are NOT Montgomery's theorem, NOT evidence
+  for RH, NOT Weil positivity, NOT prime counting, NOT factorisation.
+  The source preprint disclaims all four.
+
+TOOL STATUS: python 3.14 + numpy 2.5.2 + scipy 1.18.0 + mpmath + python-flint.
+lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN.
+seed = 20260927 (fixed for reproducibility, declared before the run).

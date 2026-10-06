@@ -1,0 +1,69 @@
+################################################################################################
+# OMEGA-CORE Falsification Engine v2  (arb-native LDL^T route)
+# c=100  dims=[400]  start_prec=9000  escalations=3  bound=on
+# checkpoint: D:\THE ASYMMETRIC WAGER\guinand-weil-rigorous-numerics-main\ckpt_N400
+################################################################################################
+
+CAVEAT that must travel with every number below:
+  Entries are Arb balls built natively by build_arb_tau (source
+  package, SHA-256 b7fee730...1509e3) -- enclosure covers FLINT
+  rigorously; there is NO mpmath decimal hand-off in this route.
+  Inertia is PROVED by interval LDL^T (Sylvester), not sampled.
+  The lambda_min bound is a derived rigorous inequality; the
+  original positivity certificate does not depend on it.
+  TOOL STATUS: python 3.14 + python-flint 0.9.0.
+  lean/coqc/isabelle/dkcheck/z3/gcc NOT RUN -> NOT proof-assistant
+  verified.  Not RH, not Weil-positivity, not prime counting.
+
+
+================================================================================================
+TARGET c=100 N=400  dim=801 x 801  starting prec=9000 bits
+================================================================================================
+
+--- attempt 1 : prec = 9000 bits (~3000 digits) ---
+  build_arb_tau      : 6700.1 s (session)   6700.1 s (total)
+  build checkpoint   : rows recorded, 0.37 GB on disk
+  max entry radius   : 2.1547598290585e-2577  at (0, 0)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 100/801  elapsed=57s  eta=397s
+  [ldlt] pivot 200/801  elapsed=201s  eta=604s
+  [ldlt] pivot 300/801  elapsed=402s  eta=671s
+  [ldlt] pivot 400/801  elapsed=626s  eta=628s
+  [ldlt] pivot 500/801  elapsed=843s  eta=507s
+  [ldlt] pivot 600/801  elapsed=1024s  eta=343s
+  [ldlt] pivot 700/801  elapsed=1145s  eta=165s
+  ldlt checkpoint    : 0.27 GB on disk
+  certified_inertia  : 1162.2 s (session)   1162.2 s (total)
+  n_pos=723  n_neg=0  undetermined_pivot=723  max_pivot_rad=6.5054156664262e-38
+  UNDETERMINED pivot at index 723 -> escalating precision
+
+--- attempt 2 : prec = 18000 bits (~6000 digits) ---
+  build_arb_tau      : 16132.3 s (session)   16132.3 s (total)
+  build checkpoint   : rows recorded, 0.73 GB on disk
+  max entry radius   : 1.3985514392045e-5266  at (0, 0)
+  symmetry (mutual containment) : 0  at None -> SYMMETRIC (spectrum provably real)
+  [ldlt] pivot 100/801  elapsed=159s  eta=1111s
+  [ldlt] pivot 200/801  elapsed=571s  eta=1714s
+  [ldlt] pivot 300/801  elapsed=1149s  eta=1918s
+  [ldlt] pivot 400/801  elapsed=1805s  eta=1810s
+  [ldlt] pivot 500/801  elapsed=2449s  eta=1474s
+  [ldlt] pivot 600/801  elapsed=2998s  eta=1004s
+  [ldlt] pivot 700/801  elapsed=3388s  eta=489s
+  [ldlt] pivot 800/801  elapsed=3547s  eta=4s
+  ldlt checkpoint    : 0.63 GB on disk
+  certified_inertia  : 3547.3 s (session)   3547.3 s (total)
+  n_pos=801  n_neg=0  undetermined_pivot=None  max_pivot_rad=1.1357906142745e-2384
+  lambda_min >= 6.747092398972142917175307e-509   (2936.2 s)
+
+------------------------------------------------------------------------------------------------
+VERDICT N=400 : VERIFIED POSITIVE DEFINITE  (n+=801, n-=0, 801/801 certified)
+------------------------------------------------------------------------------------------------
+
+================================================================================================
+SUMMARY
+================================================================================================
+N       dim      prec     n_neg  max_entry_rad  lam_min_bound  verdict
+------------------------------------------------------------------------------------------------
+400     801      18000    0      1.398551439204 6.747092398972 VERIFIED POSITIVE DEFINITE  (n+=801, n-=0, 801/801 certified)
+------------------------------------------------------------------------------------------------
+Results -> D:\THE ASYMMETRIC WAGER\guinand-weil-rigorous-numerics-main\omega_core_v2_results_N400.json

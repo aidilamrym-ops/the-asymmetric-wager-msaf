@@ -1,0 +1,26 @@
+[    0.0 s] S2 CEILING DIAGNOSTIC -- seed 20260928 declared BEFORE any draw
+[    0.0 s] SIGMA_U=[0.3, 0.5, 1.0] SIGMA_E=0.5 U_MAX=10.0 DU=0.5 N_BINS=20
+[    0.0 s] tool: python 3.14.4 + numpy 2.5.2 + scipy; lean/coqc/isabelle/z3 NOT RUN
+[    0.0 s] 
+[    0.0 s] TEST 0 -- affine invariance of unfold()  (why chart L is exchangeable)
+[    0.9 s]     max |unfold(e) - unfold(shift(e))| over 5 draws x 3 sigma_u = 1.137e-13
+[    0.9 s]     -> chart L: fixture shift is invisible to the estimator: EXCHANGEABLE
+[    0.9 s] 
+[    0.9 s] TEST A -- exchangeability audit for chart T (log) vs chart L (linear)
+[    0.9 s]          N=401, n_ref=400, n_test=250, seed=20260928
+[   74.0 s]     sigma_u 0.3  ref curves built (linear + log)
+[   91.0 s]     sigma_u 0.5  ref curves built (linear + log)
+[  107.7 s]     sigma_u 1.0  ref curves built (linear + log)
+Traceback (most recent call last):
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_s2_ceiling.py", line 301, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_s2_ceiling.py", line 292, in main
+    test_a(a.n_ref_a, a.n_test_a)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_s2_ceiling.py", line 157, in test_a
+    pois = G.generate_ensemble("poisson", n_levels, 1200, rng)
+  File "C:\Users\usER\oracle-toe\GUINAND_WEIL\gw_montgomery.py", line 255, in generate_ensemble
+    time.time() - T0))
+                  ^^
+NameError: name 'T0' is not defined

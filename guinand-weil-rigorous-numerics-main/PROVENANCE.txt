@@ -1,0 +1,426 @@
+================================================================================
+PROVENANCE.txt -- Guinand-Weil OPSI (d) verification chain
+Generated : 2026-09-27
+Scope     : SHA-256 of the scripts, run logs and input that constitute the
+            evidence for the OPSI (d) verdicts. Living documents
+            (GW_STATUS_2026-09-26.md, state/STATE.md, state/PROJECT_REGISTRY.json)
+            are deliberately NOT hashed here: they are edited as work proceeds,
+            so hashing them would produce a stale record by construction.
+            Hash them at the moment of archiving if a frozen copy is needed.
+
+================================================================================
+1. VERIFICATION SCRIPTS
+================================================================================
+file                      bytes   mtime              SHA-256
+gw_montgomery.py          28223   2026-09-27 15:51:18 072910f232b15768ba35e14d7cc6aaf4fe1ee174dc45b65429460f791196e1d5
+gw_mont_pipeline_check.py 11973   2026-09-27 15:57:05 a089e78a89acd0a3478d7586a4665f6db402d34b77055ece3b9877fb45f56971
+gw_s2_ceiling.py          14033   2026-09-27 18:50:17 3d56dc164d9f803cb74ef7a5f812cb51e40594fd87693ec7c107b64e2859576a
+gw_spectrum_arb.py        13646   2026-09-27 14:34:05 bb0fb6414d2e4bbacff2d93ecd36bf3de175ad18de218948b1ca0dc3e4318641
+
+  gw_montgomery.py       : the instrument (S1 gap ratio + S2 pair correlation).
+                           Contains the defect 15/16/17 fixes.
+  gw_mont_pipeline_check.py : gate script K1..K6. Defect 18 (closing sentence
+                           too broad) is intentionally LEFT UNCHANGED so that
+                           log and code stay mutually consistent.
+                           [RETRACTED 2026-10-04 -- F1-J edited this file after
+                           all.  See section 8; the claim is struck, not
+                           silently rewritten, so this block still reads as it
+                           did on 2026-09-27.]
+  gw_s2_ceiling.py       : ceiling diagnostic written 27 Sep (TEST 0 / A / B).
+                           Imports gw_montgomery READ-ONLY; injects G.T0 instead
+                           of editing the audited module.
+  gw_spectrum_arb.py     : spectrum generator. mtime 14:34:05 sits AFTER the
+                           pre-registration lock (14:32:35) and BEFORE the
+                           eigen run (14:34:39) -- see the provenance chain in
+                           state/STATE.md.
+
+================================================================================
+2. INPUT DATA (bit-identical for run 1 and run 2)
+================================================================================
+file                      bytes   mtime              SHA-256
+gw_spectrum_100_200.json  60543   2026-09-27 15:05:41 8cffccf31c587f9bdd5b0fcc4bf3427dcc2dd2884e5766cf5067dc809a8bfc45
+
+================================================================================
+3. RUN LOGS
+================================================================================
+file                              bytes  mtime              SHA-256
+gw_mont_pipeline_check.log        10866  2026-09-27 15:58:41 4ac74b87f18b34a7324ad8e35b11f1d4b66074ce18e29ea52bcebedc234a7811
+gw_mont_pipeline_check_K6.log      6093  2026-09-27 17:28:23 f0f3fe8f9c3dbb6ecbbd8eaa22c1c139151d7757859037bb2039b0111fb52f11
+gw_montgomery_100_200.log         20090  2026-09-27 15:34:28 a409d71ed5b2cef9cca729a6a5210d1b281503e2fff0ea09889ca5928c32ac75
+gw_montgomery_100_200_run2.log    10802  2026-09-27 17:41:07 15aa399d0991fdbf85898b6aafaf1afcca58552ba13656fe66e78a79888ef0c6
+gw_s2_diag_gue_fixture.log        10547  2026-09-27 18:33:24 ae3e63dd5eddb51d8eae6f528390bc3a80db6aab8a733d3c8285daa45ab3fe65
+gw_s2_ceiling_stage1.log           1488  2026-09-27 18:42:50 1428b0cbe5fcec1ce0af89fbebdd90995dd985c2bb1d54a69bcac589aec5b24d
+gw_s2_ceiling_fix1.log             1495  2026-09-27 18:47:16 d352f0c6b945f0dbfe0b8c0056caddbc553e086d50cf6ecff54f00d12e56fb4c
+gw_s2_ceiling_run3.log             5854  2026-09-27 19:08:26 b34d5663893c684452ec271d1829570443244878cab4a4ac54a9c242cb8f6362
+
+STATUS OF EACH LOG
+  gw_mont_pipeline_check.log       KEPT, not overwritten (older gate run).
+  gw_mont_pipeline_check_K6.log    Gate run: ALL OF K1..K6 SATISFIED.
+  gw_montgomery_100_200.log        RUN 1 -- RETRACTED (defect 15: the sigma_u
+                                   grid was vacuous). KEPT so the retraction
+                                   stays auditable.
+  gw_montgomery_100_200_run2.log   RUN 2 -- the audited analysis on real data.
+  gw_s2_diag_gue_fixture.log       12 p-values of the GUE fixture (the full
+                                   grid, not just the first verdict).
+  gw_s2_ceiling_stage1.log         FAILED diagnostic run (bug D1: IndexError).
+                                   KEPT as audit trail.
+  gw_s2_ceiling_fix1.log           FAILED diagnostic run (bug D3: NameError T0).
+                                   KEPT as audit trail.
+  gw_s2_ceiling_run3.log           FINAL ceiling result (965.1 s, seed 20260928).
+
+None of the above was overwritten or deleted during this session.
+
+================================================================================
+4. RUNTIME ENVIRONMENT
+================================================================================
+python     3.14.4          (C:\Python314\python.exe)
+numpy      2.5.2
+scipy      present (scipy.stats.norm used by unfold)
+mpmath     present (arb path)
+python-flint 0.9.0
+
+Tool status: python 3.14 + numpy + scipy were RUN.
+lean / coqc / isabelle / dkcheck / z3 / gcc were NOT RUN in this session.
+
+Third-party vendored source and its licence: see THIRD_PARTY_SOURCES.md
+(the only vendored file, source_arb_ldlt_certify.py, MIT.  Two SHA-256 values
+apply to it: b7fee730a83baedc860ca456547d2799ec10894a79edecc6d5612931b41509e3
+as retrieved on 2026-09-27 (12256 bytes, preserved at git commit b76be0d), and
+33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb as shipped
+(12863 bytes, extended 2026-09-30 for checkpoint resume).  See residual 6.10.)
+
+================================================================================
+5. SCOPE LIMIT (read literally)
+================================================================================
+Nothing in this repository establishes the Riemann Hypothesis, Weil positivity,
+a prime-counting result, or a factorisation method. The S1/S2 statistics are
+statistics of ONE finite, deterministic, synthetic matrix. The upstream
+preprint disclaims all four.
+
+Known residuals carried into the freeze (reported, NOT repaired):
+  * defect 18  -- gate script closing sentence is broader than S1 supports.
+  * K5 row of GW_STATUS s7h.3 -- its recorded verdict is unreachable by the
+    current grabber; the supporting log was overwritten. Still unexplained.
+  * defect 19  -- chart T is unfolded in the log chart while the surrogate
+    reference is built in the linear chart; audited chart-T p-values are
+    therefore not exchangeable (measured false-reject 0.25% vs nominal 5%).
+  * repository-wide py_compile: 856 files, 853 OK, 3 FAIL.
+    STATUS: PRE-EXISTING, OUT-OF-SCOPE ISSUES.
+    Architect's decision, 2026-09-27: do NOT enter CTP Mode A/B to edit them;
+    no change is made to core/theorem_ingestion.py or to either
+    quran_toe_synthesis.py. The three files are outside GUINAND_WEIL
+    (core/theorem_ingestion.py:178 and two quran_toe_synthesis.py at :107) and
+    were not created by this session.
+    The GUINAND_WEIL verification chain itself compiles 100% clean, and that
+    is accepted as sufficient certification FOR THIS SCOPE.
+================================================================================
+
+
+================================================================================
+6. OMEGA-CORE FALSIFICATION ENGINE v2  (appended 2026-09-29)
+================================================================================
+Scope     : the arb-native interval-LDL^T chain and its N=400 certificate.
+            Sections 1-5 above cover the OPSI (d) chain (2026-09-27) and are
+            untouched.  This section covers work done 2026-09-28/29.
+Snapshot  : 2026-09-29 15:19:49 local.
+Note      : omega_v2_sysmon.log and omega_core_v2_watchdog.log are LIVE logs
+            captured as a snapshot while the N=800 target was still running;
+            their hashes describe that instant, not a final state.
+            omega_core_v2_run.log was verified byte-identical to the running
+            process's own file at snapshot time (C4714253...8756B on both sides).
+
+6.1 ENGINE AND INSTRUMENTATION
+file                        bytes   SHA-256
+gw_omega_core_v2.py         24981   cf21900937dbc4c47e7169f46d32638bee9c14ad80ed85d8ae53b8c9b0f74d0d
+gw_sysmon.ps1                5048   bd93a6c2f8ecee9ac8f5b630a82cb5b6ae0d0e1f3993e0ae18594cc3779e1f2e
+gw_watchdog.py               5398   670b582ca18c1673cabd86d8cb4e47e57ce76c7d2aeec7cd697cec689a832d11
+gw_launch_v2.ps1             2300   420e25078f75e61cb20a877fd2718d618a2db50c62f43090c2c84633a2754e2b
+gw_check_refs.py             1729   428117a9acbaef4aa66c38243210c55f200b0713c139ddca5be78aa3ff294454
+gw_verify_results.py         4561   02bdae10f1c644195a17e1f7cc942a6fee17f58a6c08c5ad47374b5362da1a60
+
+  gw_omega_core_v2.py    : the engine.  certified_ldlt_with_L (interval LDL^T),
+                           the auto-escalation loop, and the three anomaly gates
+                           (n_neg>0 / asymmetry / radius>1e-50).
+  gw_sysmon.ps1          : 60 s system telemetry (ram/commit/disk/ac/batt/alive/
+                           pid/priv/cpu/stage) + ALERT taxonomy.  LOG-AND-CONTINUE:
+                           it can never kill or restart the process it measures.
+  gw_watchdog.py         : 60 s liveness watcher against the JSON heartbeat.
+  gw_launch_v2.ps1       : detached launcher (Task Scheduler job object).
+  gw_check_refs.py       : static reference gate, run BEFORE any large sweep.
+  gw_verify_results.py   : JSON invariant gate, run BEFORE reporting any result.
+
+6.2 EVIDENCE -- TARGET (c,N) = (100,400)
+file                        bytes   SHA-256
+omega_core_v2_results.json    1971   5aaab0cfbf26f7fc5a3306bcd6a6e82e5482dad54a0a08d55ed4ebdcf22aa4f2
+omega_core_v2_run.log         3337   c4714253f841d3f16b5ce60c6f8382e9e1c823c63cf9bc0472ed94d5a278756b
+omega_core_v2_heartbeat.json   146   3181f896b13e7411c677042e935ab5e8aa415aa93b6143cd80bdadd377385c68
+
+VERDICT: VERIFIED POSITIVE DEFINITE.  n_pos=801, n_neg=0, 801/801 pivots
+certified, dim=801, prec=18000 after escalation from 9000 (undetermined pivot
+at index 723 on attempt 1 -- reported as unknown, NOT rounded to a sign).
+max_entry_radius   1.398551439204522661230545e-5266
+max_pivot_radius   1.135790614274549474670140e-2384
+symmetry_dev "0", symmetry_exact true, anomalies [], caveats [], non_result false
+lambda_min >= 6.74709239897214291717530665950e-509
+  (min_abs_pivot 2.014657282505926679349953e-112, sign "+",
+   ||L^-1||_F upper 1.727994119336448038542856e+198)
+peak_mb 2334.02368
+attempt 1: build 6191.3 s, ldlt 1171.8 s   (9000 bits)
+attempt 2: build 15939.7 s, ldlt 3614.3 s  (18000 bits); bound 2425.0 s
+inner sha256 of the result object: a38cb70e53f60ac21a66c23c83ef48fa75e57fbe14a8c9c58251df46856f18bb
+
+Reproducibility anchor: attempt 1 max_entry_radius 2.1547598290585434360e-2577
+is byte-identical to the value recorded by an earlier, independently
+terminated run of the same target at the same precision.
+
+Superseding artefact (2026-10-05, F2-7).  The three files above record the
+2026-09-29 run; `omega_core_v2_results.json` was later overwritten by the
+N=800 run, so section 6.2 pointed at bytes no longer on disk.  The target
+was re-run and now ships its own file:
+
+file                        bytes   SHA-256
+omega_core_v2_results_N400.json  2223  bab3e5f366b3c7e7c2fdcd894520bcdffa30966d66cbfef53fa6efe774eda521
+omega_core_v2_run_N400.log       4114  8c01438355cddedb2eda7f205e86983d1ec97a7b154d69a0da1218ff7a9891b6
+omega_core_v2_heartbeat_N400.json  99  2f6ae89115b3e4ff6c34e80bb5ebc528390db1897d0b53ba4af8abd4ebc80d13
+
+VERDICT: VERIFIED POSITIVE DEFINITE.  n_pos=801, n_neg=0,
+undetermined_pivot null, dim=801, prec=18000 after escalation from 9000
+(attempt 1 stopped at index 723 with undetermined_pivot=723 and escalated,
+exactly as the certificate predicts); symmetry_dev "0", symmetry_exact
+true, anomalies [], caveats [], non_result false, anomaly false,
+peak_mb 4572.721152.
+lambda_min >= 6.74709239897214291717530665950e-509
+  (min_abs_pivot 2.014657282505926679349953e-112, sign "+",
+   ||L^-1||_F upper 1.727994119336448038542856e+198)
+attempt 1: build 6700.1 s, ldlt 1162.2 s   (9000 bits)
+attempt 2: build 16132.3 s, ldlt 3547.3 s  (18000 bits)
+inner sha256 of the result object: f9735e697c30941a8311ec511634958163ad07bc75432d470555814c77d856d6
+gw_verify_production.py exits 0 and reproduces this bound against the three
+records above; its F2-7 fault injection is recorded in F2_REPORT.md 7.
+
+6.3 TELEMETRY (live snapshot)
+file                        bytes   SHA-256
+omega_v2_sysmon.log          48685   691bb4bc4a94f9f4a8e741bfabdd0f5eb67c88e28d2d9a6a34defb07895f8c00
+omega_core_v2_watchdog.log  145997   f1c400ff6ce4aea37e45221658e4d0af881e760a1888f8d90c3a5dfd9b20a95d
+
+Reliability record at snapshot: 0 ALERT lines across the whole run,
+ACLineStatus=1, free physical RAM 9.5 GB, free commit 14.4 GB, CPU delta
++52..+59 s per 60 s sample.
+
+6.4 FAILED RUN, KEPT AS AUDIT TRAIL (never deleted)
+file                                                    bytes   SHA-256
+omega_core_v2_run_FAILED_absbug_20260929_011309.log       3312   bc88f1c03d016a1249e2906c794c07141665957d5699bd500919a407c80d2671
+omega_core_v2_results_FAILED_absbug_20260929_011342.json   180   ecba9166c19aca9ba10a3bbdb4d2330665ad7e92acc78a9179467bcfab9ed789
+omega_v2_stderr_FAILED_absbug_20260929_011342.txt          756   56b3b3d9c2e1f4e74f79b413bb111c01dc305b123afe1fae9750ecfffb8550ba
+omega_v2_stdout_FAILED_absbug_20260929_011342.txt         2055   a56284ea4dad3f166fde36b54aa353eea9726fe8a2bb554c955d31dfeaef7506
+omega_core_v2_heartbeat_DEAD_20260929_011342.json          147   8de9c502d933db12a0609b90d6701d1d3bf93b960594e48aa7b7db04ebbdd6a8
+
+Cause: a missing .abs() on the python-flint ball type raised AFTER a completed
+multi-hour build and destroyed it.  Kept so the failure stays auditable.
+
+6.5 SMOKE TESTS (both gates green after the five defect fixes)
+file                     bytes   SHA-256
+smoke.log                11674   14450c1694b2d56db4d8b1580c32e0700aa03c5423db11fea14f0a769bbff798
+smoke_escalate.log        9798   c5d4a7eccc3936dad3d1d06ffb3863e15a382a87c8ba09604f85b1b5b7e83aeb
+smoke_results.json        1633   d67b9065b78de1c55b440605b299e386eccdf49d1b4181ead1ea831ca0b00959
+smoke_escalate.json       1326   423f2e2a9907bc9d872742979d330c365f9cec1d39e9653e93c6d4c4e1543d37
+smoke_hb.json               99   51cf93e2035142d4485a160186e39fdab00d31d897bdebcff15e8a3b02007224
+smoke_escalate_hb.json      98   eebdaf0a9734268075e305ce6c1649e4b35ee4810a9a9b1ff21667a95a069990
+
+6.6 FIVE DEFECTS FOUND BY EXECUTION, FIXED BEFORE THE CERTIFICATE WAS TRUSTED
+  1. missing .abs() on the python-flint ball (destroyed a finished build).
+  2. symmetry test mathematically wrong: it compared A[i,j] == A[j,i], but on a
+     ball x-x = [0 +/- 2r] is never empty, so a PERFECTLY SYMMETRIC matrix would
+     have produced a false ASYMMETRIC signal -- a manufactured falsification.
+     Replaced by mutual containment (a.contains(b) and b.contains(a)).
+  3. Lf[i][i] left at zero when materialising L, making arb_mat.inv() report
+     "matrix is singular" and costing the whole lambda_min bound.
+  4. anomaly hard-coded False in the escalation-exhausted branch, with anomalies
+     overwritten by the undetermined message: a certified NEGATIVE pivot would
+     have been silently swallowed -- the worst failure mode a falsification
+     engine can have.  Fixed: anomalies is re-initialised per attempt and
+     anomaly = bool(anomalies); undetermined is reported separately through
+     non_result_reason.
+  5. missing non_result key in the certified branch of the result schema.
+
+6.7 python-flint 0.9.0 API FACTS, MEASURED (not assumed)
+  * no .abs() on the ball type; abs_lower() / abs_upper() are the rigorous
+    primitives (abs_lower returns 0 on a ball containing 0, so a bound degrades
+    instead of overclaiming).
+  * == and != both return False EVEN FOR A BALL COMPARED WITH ITSELF when the
+    radius is nonzero -- hence mutual containment rather than equality.
+  * .contains(), .upper(), .lower(), .sqrt(), .str(n, radius=False) and
+    arb_mat.inv() behave as expected; inv() requires a unit diagonal.
+
+6.8 STATUS OF THE SWEEP (final, 2026-10-01)
+  (100,400) CERTIFIED.
+  (100,800) CERTIFIED as of 2026-10-01 21:06 -- completed by the restart
+            locked on 2026-09-30 (18000 bits, escalations 0, attempt 1):
+            dim 1601, n_pos 1601, n_neg 0, undetermined none, symmetry
+            exact (dev 0), verdict VERIFIED POSITIVE DEFINITE, lambda_min >=
+            8.67526098867855342892890992571e-2877 = min|d_i| 2.3175889389605092798e-120
+            / ||L^-1||_F^2 with ||L^-1||_F 1.6344699115298598798e+1378.
+            Result record omega_core_v2_results.json (file sha256
+            20ff0378bf72065c75ee8af2e873350d0dcd6801e6384db86eb14d7594119cbc,
+            internal record e42dad4b16dfe5a9e3e886b8f7ec77f1e5b982730b98a867583aaa1ffd2babb7).
+            Gates gw_verify_results.py and gw_verify_production.py PASS, exit 0.
+  (The earlier snapshot note recorded the 9000-bit launch as IN PROGRESS.
+   That launch terminated as a measured non-result -- undetermined at pivot
+   1087/1601 -- and stays in the run log as evidence, never as a result.)
+
+6.9 DECLARED RESIDUAL -- LOCAL PATHS IN LOGS AND SCRIPTS
+    (reported; gates repaired 2026-10-01 with disclosure, logs untouched)
+
+Several files in this repository contain the absolute Windows path
+C:\Users\usER\... and therefore disclose the local account name "usER".
+
+Where it still occurs:
+  * PRE-EXISTING, public since 2026-09-27: gw_mont_pipeline_check.log,
+    gw_mont_pipeline_check_K6.log, gw_s2_ceiling_stage1.log,
+    gw_s2_ceiling_fix1.log, gw_s2_diag_gue_fixture.log -- traceback frames and
+    captured command lines.  Not introduced by the 2026-09-29 session.
+  * OPERATIONAL SCRIPTS: gw_sysmon.ps1, gw_launch_v2.ps1 (interpreter path,
+    source directory, checkpoint directory D:\gw_ckpt), update_registry.py
+    (docstring), plus smoke.log, smoke_escalate.log and
+    omega_v2_stderr_FAILED_absbug_*.txt (forensic captures).
+  * NOT in the Track C files added 2026-10-02: OMEGATrackC.lean,
+    track_c_side_conditions.smt2, track_c_lean_verify.log and
+    track_c_make_smt.py contain no C:\Users\... path.  track_c_make_smt.py
+    relativises every path under the repository root before writing it into
+    track_c_smt_z3.log, so that log reads "readme = README.md" rather than a
+    local absolute path.  What the Track C artefacts do carry is one
+    machine-local tool path with no account name in it,
+    E:\4_TOOLS_INSTALLER\z3-4.16.0-x64-win\bin\z3.exe, printed by
+    track_c_make_smt.py as the solver it invoked.  track_c_lean_verify.log
+    records its build command with <stage> in place of the temporary
+    directory it used.
+
+Repaired 2026-10-01 (disclosed, behavior-preserving):
+  * gw_check_refs.py, gw_verify_results.py and gw_verify_production.py no
+    longer hard-code C:\... -- defaults now resolve relative to each script's
+    own directory, so a fresh clone runs from any working directory
+    (overrides: argv[1] for the first and third, GW_FIXTURE_DIR for the
+    second).  Baseline runs BEFORE the edit and reruns AFTER it both PASS
+    with exit 0 on the same fixtures; the checks performed are unchanged.
+  * gw_launch_v2.ps1 comment only: the cited "GitHub snapshot (sha256
+    a38cb70e...f18bb)" pointed to a commit that exists nowhere (404 on the
+    remote, unknown in local history) and was corrected to the commit that
+    verifiably holds the N=400 record: e65319d, blob 30ca1467, file sha256
+    5aaab0cf... (= certificate section 6.2).  The argument list that was
+    executed is unchanged.
+
+Why the logs remain unrepaired:
+  * The logs are forensic records. Rewriting a path inside a captured traceback
+    or command line would make the archive NOT what was executed, which
+    contradicts the purpose of shipping it.  Logs are never edited here.
+  * The operational scripts keep their executed paths for the same reason.
+  * Only CHECKSUM.sha256 was changed, because it is a manifest describing this
+    repository rather than a record of a run; its paths are repository-relative.
+
+Status: ACCEPTED as a pre-existing, non-sensitive residual (a local account
+name, no credential of any kind; grep for credential patterns across all
+tracked files returns zero matches).  Recorded here so a reader is not
+surprised.  Removal, if ever wanted, must be a separate, disclosed decision --
+silently rewriting these files would destroy the provenance this file exists
+to assert.
+
+================================================================================
+6.10 DECLARED RESIDUAL -- THE VENDORED SOURCE PACKAGE WAS EDITED AFTER FREEZE
+================================================================================
+THIRD_PARTY_SOURCES.md section 1 and section 4 above both record the vendored
+file source_arb_ldlt_certify.py as 12256 bytes / b7fee730...1509e3, which is
+correct for the file AS RETRIEVED on 2026-09-27 and still correct for the copy
+held at git commit b76be0d.  The working-tree copy is 12863 bytes /
+33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb, because
+commit bfa40dc of 2026-09-30 09:12:19 ("Add power-cut checkpointing to the
+OMEGA-CORE sweep") added three default-preserving keyword arguments to
+build_arb_tau (start_row, row_hook, prefill) so the sweep could resume after
+the power cut of 2026-09-30 03:15:19.  The arithmetic is unchanged; the copy
+that ran the certified N=800 sweep is the edited one.
+
+What this affects, all of it recorded rather than repaired:
+  * OMEGA_CORE_CERTIFICATE.md section 1 now reconciles both hashes.
+  * gw_omega_core_v2.py line 707 prints the ORIGINAL hash from a hard-coded
+    string, so the caveat inside omega_core_v2_run.log and omega_v2_stdout.txt
+    reports b7fee730... for the N=800 block too.  Logs are never edited.
+  * gw_even_vs_src.py lines 54-64/154-172 compare the on-disk hash against
+    BOTH pinned values (b7fee730... verbatim, 33617ce6... shipped) and fail on
+    any third value.  Its shipped log gw_even_vs_src_100_200.log recorded
+    MATCH -- byte-identical on 2026-09-27 (true then); the rerun of 2026-10-02,
+    gw_even_vs_src_100_200_rerun_20261002.log (exit 0, 339 s), records
+    MATCH -- documented local extension and reproduces delta, delta_rel, the
+    median ratio and the V1 verdict identically to the 2026-09-29 log (only
+    wall-clock times differ).  Both logs shipped unedited.
+  * gw_opt_a_diff.py prints the hash it actually loaded and which pinned copy
+    it is, instead of asserting one hash in a header comment.
+
+Residual accepted as disclosed.  Repairing any of these silently would falsify
+either a log or a git history that already exists.
+
+================================================================================
+7. TOOL STATUS FOR THE OMEGA-CORE SESSION
+================================================================================
+python       3.14.4   (C:\Python314\python.exe)
+python-flint 0.9.0
+numpy        NOT USED by gw_omega_core_v2.py (zero-fudging rule: no numpy,
+             no scipy, no float64 in the certification path)
+mpmath       NOT USED on this route -- entries are built natively in Arb,
+             there is NO decimal hand-off.
+
+Tool status for the certification session: python 3.14 + python-flint 0.9.0
+were RUN.  lean / coqc / isabelle / dkcheck / z3 / gcc were NOT RUN in that
+session -> the certificate is NOT proof-assistant verified.
+
+Tool status for 2026-10-02 (Track C only, OMEGA_CORE_CERTIFICATE.md 6.7):
+lean 4.33.1 and z3 4.16.0 WERE RUN on OMEGATrackC.lean / the generated
+track_c_side_conditions.smt2 (10/10 theorems, axiom footprint
+[propext, Classical.choice, Quot.sound], 0 sorryAx; 7/7 negations UNSAT plus
+their conjunction).  coqc / isabelle / dkcheck / gcc remain NOT RUN.  Track C
+consumes the certified numbers as literals; no Arb matrix and no LDL^T is
+re-checked by any proof assistant, so the matrix claims above remain
+machine-checked ball arithmetic, not kernel-checked theorems.
+
+Method and formulae: see OMEGA_CORE_CERTIFICATE.md (matrix definition,
+zero-fudging architecture, the bound derivation, telemetry schema).
+================================================================================
+
+================================================================================
+8. NOTE ADDED 2026-10-04 -- WHICH ROWS ABOVE NO LONGER MATCH THE WORKING TREE
+================================================================================
+This file is a dated snapshot (header line 3; section 6 "Snapshot"), and it says
+so deliberately.  After the F1 audit of 2026-10-04, 10 of its hash rows do not
+match a file on disk.  They are listed here rather than edited, because editing
+a snapshot's numbers would destroy the record this file exists to keep.
+
+  historical BY DESIGN -- the thing described was later replaced, or was still
+  growing at snapshot time:
+
+    6.1  gw_omega_core_v2.py          24981 ->   34145   engine grew 2026-09-30
+    6.1  gw_launch_v2.ps1              2300 ->    3477   comment-only edit 10-01
+    6.1  gw_check_refs.py              1729 ->    1985   clone-portable 10-01
+    6.2  omega_core_v2_results.json    1971 ->    1774   overwritten by N=800 run
+    6.2  omega_core_v2_run.log         3337 ->    7177   two runs appended
+    6.2  omega_core_v2_heartbeat.json   146 ->      98   overwritten by N=800 run
+    6.3  omega_v2_sysmon.log          48685 ->  526181   LIVE log, still growing
+    6.3  omega_core_v2_watchdog.log  145997 ->  593637   LIVE log, still growing
+
+  changed BY THE F1 AUDIT itself, so the row above is the pre-F1 version:
+
+    1    gw_mont_pipeline_check.py   11973 ->  12706   F1-J anchored it to its
+                                                     own directory
+    6.1  gw_verify_results.py         4561 ->   6343   F1-Q guarded the fixture
+                                                     read and made the sha256
+                                                     test check for hex
+
+  For those two, the row above is not wrong -- it is the bytes that existed on
+  the date this section states.  Current bytes for every file listed here are
+  in OMEGA_CORE_CERTIFICATE.md section 6.1 and in CHECKSUM.sha256.
+
+  One consequence has to be recorded rather than left to inference: the section
+  1 sentence that gw_mont_pipeline_check.py's defect 18 was "intentionally LEFT
+  UNCHANGED so that log and code stay mutually consistent" was true on
+  2026-09-27 and is no longer true as of 2026-10-04.  It is retracted at the
+  site above and here, not struck from the record.
+
+  Nothing in sections 1-5 was edited by F1.
+================================================================================
