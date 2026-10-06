@@ -30,6 +30,39 @@ Since F5-2 every entry also carries a **layer**:
 * **C** — the source could not be retrieved from this machine; the observed
   failure is recorded and no snapshot is claimed.
 
+### Archive policy decision (A7, 2026-10-06)
+
+`F4_REPORT.md` §9 R1 left the remainder of the archive open as *"a storage and
+licensing decision rather than a code change"*. The decision has been taken, and
+it is written here so that only a change of policy can reopen it:
+
+* **Archive** a source only when a redistribution permission was actually read
+  out of the retrieved document (public domain, CC BY / CC BY-SA / CC BY-NC-SA,
+  or the arXiv distribution licence). That is the whole of layer **A**, and every
+  layer-A file is hash-verified by `provenance_check.py` P2 or
+  `theorem_provenance_check.py` P9 on each run.
+* **Do not archive** a source whose landing page states no redistribution
+  permission. The bibliographic record, the retrieval date and the observed
+  status are kept and the body is discarded. That is layer **B**, and after A7 it
+  is a recorded decision rather than an unfinished task.
+* **Record** a source that cannot be retrieved at all, with the failure that was
+  observed, instead of implying it was read. That is layer **C**.
+
+A7 executed the decision. One further source qualified and was added as
+`MOSSINGHOFF_TRUDGIAN_2015_ARXIV`; one former layer-C record (the Pitt
+`measure.html` page) was re-fetched with HTTP 200 on 2026-10-06 and moved to
+layer B because it carries only *"Copyright, John D. Norton"*; two layer-C
+records were re-tried the same day and stayed at layer C (the Planck DOI and
+`doi:10.1098/rspa.1970.0021`, both HTTP 403 from this machine even with a
+browser user agent); the three SEP entries were re-read against
+`https://plato.stanford.edu/info.html`, which grants reproduction only for fair
+use and so stays at layer B; and an author manuscript of `PLATT_2017` was located
+at the Bristol research portal but its licence field reads *Unspecified*, which
+is not a redistribution permission, so that record also stays at layer B.
+
+**Tally at A7: 23 records, A = 9, B = 12, C = 2** (22 records, A = 8, B = 11,
+C = 3 at F5-2, 2026-10-05).
+
 ### NIST_CODATA_2022_TABLE
 
 CODATA Recommended Values of the Fundamental Physical Constants, 2022 adjustment.
@@ -69,6 +102,31 @@ zero-free region for the Riemann zeta-function*, J. Number Theory **157**, 329-3
 * Retrieved (UTC): 2026-10-05 (cited from the reference list of arXiv:2004.09765)
 * Access class: `publisher_landing_page` — layer **B** (no redistribution
   licence identified; body not archived)
+* Licence check re-run by A7 (2026-10-06): the Elsevier/JNT landing page still
+  states no redistribution permission, so this record stays at layer B.
+* Snapshot: `MOSSINGHOFF_TRUDGIAN_2015_ARXIV` below, hash-verified locally —
+  the open preprint of the same article, whose abstract states the constant
+  `5.573412` this register records.
+
+### MOSSINGHOFF_TRUDGIAN_2015_ARXIV
+
+M. J. Mossinghoff, T. S. Trudgian, *Nonnegative trigonometric polynomials and a
+zero-free region for the Riemann zeta-function* (arXiv preprint of the article
+above).
+
+* arXiv: `1410.3926`
+* URL: `https://arxiv.org/abs/1410.3926`
+* Retrieved (UTC): 2026-10-06
+* Bytes: 39360
+* SHA-256: `dff8840502d028d597f1ab9ab2c59f12cd5609eaba4601e8c968e599a6522419`
+* Local copy: `provenance/evidence/arxiv_1410_3926_abs.html`
+* Access class: `full_text_local_copy` — layer **A**
+* Licence basis: arXiv non-exclusive distribution licence, linked from the
+  retrieved page
+* Role: added by A7 to execute the archive policy above. The submitted abstract
+  reads *no zeros in the region $\sigma \ge 1 - 1/(5.573412 \log|t|)$ for
+  $|t| \ge 2$*, which is `RF_ZERO_FREE_R_MT2015` read back out of an archived,
+  hash-verified page rather than out of a landing page that cannot be retained.
 
 ### MOSSINGHOFF_TRUDGIAN_YANG_2024
 
@@ -127,6 +185,10 @@ David J. Platt, *Isolating some non-trivial zeros of zeta*, Math. Comp. **86** (
 * Retrieved (UTC): 2026-10-05
 * Access class: `publisher_landing_page` — layer **B** (no redistribution
   licence identified; body not archived)
+* Licence check re-run by A7 (2026-10-06): an author manuscript is retrievable
+  from the Bristol research portal, but its licence field reads *Unspecified*,
+  which is not a redistribution permission. The record therefore stays at
+  layer B and no copy is kept.
 
 ---
 
@@ -172,9 +234,14 @@ Symbol $D_{\text{obs}}$. Value `8.8e26` m, 2 significant figures, **not exact**.
   *A&A* **641**, A6 (2020), DOI `10.1051/0004-6361/201833910`, arXiv `1807.06209`.
 * Authority for the quoted decimal: common reference value, cross-checked
   against the comoving-radius identity $2 \times 4.40\times10^{26}$ m.
-* Evidence: none locally archived. **This is a known provenance weakness and is
-  recorded here rather than hidden**; an archival snapshot of the cosmological
-  parameter table is a candidate follow-up.
+* Evidence: no local copy of the Planck parameter table. The authority
+  `PLANCK_2018_VI` is layer **C** (HTTP 403), and the layer-A snapshot
+  `PLANCK_2018_VI_ARXIV` holds only the arXiv **abstract page**, in which
+  `diameter` and `comoving` occur zero times — verified 2026-10-05 — so the
+  decimal cannot be read back out of any archived text and the quantity carries
+  an explicit `probe_waived` reason instead of silence. **This is a known
+  provenance weakness and is recorded here rather than hidden**; a snapshot of
+  the cosmological parameter table remains the candidate follow-up.
 * Retrieved (UTC): 2026-10-05
 * Sites: `01_PARADOX_AND_SCALE.md` L18 and L29 (`8.8 \times 10^{26}`),
   `Skill.md` canon row (`8{,}8 \times 10^{26}`).
@@ -255,7 +322,8 @@ Source: `PLATT_TRUDGIAN_2021`.
 
 Best zero-free region constant $R$ in $\beta \ge 1 - 1/(R \log \gamma)$ for
 $\gamma > 3$ at the time of arXiv:2004.09765.
-Source: `MOSSINGHOFF_TRUDGIAN_2015`.
+Source: `MOSSINGHOFF_TRUDGIAN_2015` (layer B); the same constant is readable
+from the layer-A snapshot `MOSSINGHOFF_TRUDGIAN_2015_ARXIV`.
 
 ### RF_ZERO_FREE_R_MTY2024
 

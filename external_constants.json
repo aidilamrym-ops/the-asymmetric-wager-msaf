@@ -1,6 +1,6 @@
 {
   "schema": "msaf-external-provenance/v1",
-  "generated_utc": "2026-10-05T10:40:00Z",
+  "generated_utc": "2026-10-06T06:31:15Z",
   "gate_of_record": "provenance_check.py",
   "evidence": [
     {
@@ -95,6 +95,22 @@
       "license_basis": "arXiv non-exclusive distribution licence",
       "mirror_of": "PLANCK_2018_VI",
       "note": "The canonical DOI returns HTTP 403 from this machine; this preprint of the same article is the archived snapshot."
+    },
+    {
+      "id": "MOSSINGHOFF_TRUDGIAN_2015_ARXIV",
+      "title": "Nonnegative trigonometric polynomials and a zero-free region for the Riemann zeta-function (arXiv preprint)",
+      "publisher": "arXiv",
+      "url": "https://arxiv.org/abs/1410.3926",
+      "doi": "arXiv:1410.3926",
+      "retrieved_utc": "2026-10-06",
+      "bytes": 39360,
+      "sha256": "dff8840502d028d597f1ab9ab2c59f12cd5609eaba4601e8c968e599a6522419",
+      "local_copy": "provenance/evidence/arxiv_1410_3926_abs.html",
+      "access": "full_text_local_copy",
+      "layer": "A",
+      "license_basis": "arXiv non-exclusive distribution licence",
+      "mirror_of": "MOSSINGHOFF_TRUDGIAN_2015",
+      "note": "Found by A7 (2026-10-06). The JNT/Elsevier DOI has no redistribution licence, so that record stays layer B; this preprint of the same article does, and its abstract states 5.573412, the constant RF_ZERO_FREE_R_MT2015 records."
     }
   ],
   "quantities": [

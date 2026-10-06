@@ -114,8 +114,13 @@ def flip_byte(name, offset=100):
 
 
 IHARA = "https://en.wikipedia.org/wiki/Ihara_zeta_function"
-PITT = ("https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/measure/"
-        "measure.html")
+# A7 (2026-10-06) re-fetched the Pitt page successfully and moved that record
+# from layer C to layer B, so the two layer-C fixtures below have to aim at the
+# record that is still unreachable: the Royal Society DOI, which answers 403
+# from both doi.org and royalsocietypublishing.org.  Retargeted, not removed --
+# the property under test (an illegal layer, and a layer C record claiming
+# content) is unchanged.
+RS = "doi:10.1098/rspa.1970.0021"
 SNAP = '"snapshot_evidence_id": "PLANCK_2018_VI_ARXIV"'
 
 # (label, gate, expected rc for that gate, [side effects], [edits])
@@ -164,13 +169,13 @@ CASES = [
      [(TP, in_obj(TP, '"identifier": "%s"' % IHARA,
                   '"layer": "A"', '"layer": "B"'))]),
     ("G4  archive layer set to an illegal value", "f4", 1, [],
-     [(TP, in_obj(TP, '"identifier": "%s"' % PITT,
+     [(TP, in_obj(TP, '"identifier": "%s"' % RS,
                   '"layer": "C"', '"layer": "Z"'))]),
     ("G5  archive licence basis key removed", "f4", 1, [],
      [(TP, in_obj(TP, '"identifier": "%s"' % IHARA,
                   '"license_basis"', '"license_basis_x"'))]),
     ("G6  Layer C record starts claiming a local copy", "f4", 1, [],
-     [(TP, in_obj(TP, '"identifier": "%s"' % PITT,
+     [(TP, in_obj(TP, '"identifier": "%s"' % RS,
                   '"access_class": "inaccessible"',
                   '"local_copy": "provenance/evidence/'
                   'nist_allascii_2022.txt",\n'

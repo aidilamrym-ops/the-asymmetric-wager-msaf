@@ -263,8 +263,8 @@ and restored baseline both exit 0, every target byte-identical.**
 
 | id | item | state |
 |---|---|---|
-| F6-R1 | the upstream `GW_STATUS` history needed to close F5-R5 | **open — A7 scope.** A5 corrected the reason, not the verdict |
-| F6-R2 | `F4_REPORT.md` §9 R1 remainder: where the archive lives and under what licence | **open — A7 scope.** A5 did not touch it |
+| F6-R1 | the upstream `GW_STATUS` history needed to close F5-R5 | **CLOSED 2026-10-06 (A7).** The upstream repository was located from `guinand-weil-rigorous-numerics-main/CITATION.cff` L16 and cloned; every clause of `GW_STATUS_2026-09-26.md` L1682 was checked against the real history and holds at `bfa40dc`. `F5-R5` moved from NOT ESTABLISHED to ESTABLISHED, with the scope that `d70f6fa` later superseded the file. See `F7_REPORT.md` §5 |
+| F6-R2 | `F4_REPORT.md` §9 R1 remainder: where the archive lives and under what licence | **CLOSED 2026-10-06 (A7).** The storage and licensing decision is taken and written down in `REFERENCES.md` §1 "Archive policy decision (A7, 2026-10-06)": archive what a redistribution permission allows, keep record-only for the rest, record failures as failures. `F4_REPORT.md` §9 R1 rewritten accordingly (its old "two identifiers returned 404, so those are layer C" sentence was already false when F5-2 finished); one snapshot added, one layer-C record re-fetched and moved to layer B, two re-tried and unchanged. Tally now 23 records, A = 9, B = 12, C = 2. See `F7_REPORT.md` §4 |
 | F6-R3 | 216 encoding findings inside `BootLoops-ai/` | recorded, out of scope: the folder is gitignored and never scanned |
 | F6-R4 | `F5-R4` (sub-repository encoding sweep), `F2` §8.2, `F1` §5 | still recorded-not-closed; unchanged by A5 |
 | F6-R5 | sweep 1 pattern set covers cardinal + ordinal + digit forms of *gates / harnesses / rows / entries / versions* | a rig quantity named in prose under a form these rules do not match would still pass unread; no such form was found in this sweep |
@@ -273,5 +273,12 @@ and restored baseline both exit 0, every target byte-identical.**
 
 ## 9. What F7 (A7) inherits
 
-- F6-R1 and F6-R2, both about **where things are kept and under what terms**.
-- The `REFERENCES.md` URL layer, which A5 deliberately did not disturb.
+*Status after A7 (2026-10-06): both items below were received open and are now
+closed in `F7_REPORT.md`; the rest of this list is unchanged.*
+
+- F6-R1 and F6-R2, both about **where things are kept and under what terms** —
+  received open, **closed by A7** (upstream history fetched; archive policy
+  written into `REFERENCES.md` §1).
+- The `REFERENCES.md` URL layer, which A5 deliberately did not disturb — A7
+  re-checked every URL it could re-fetch and recorded the outcomes without
+  changing a single identifier.

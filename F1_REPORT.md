@@ -80,9 +80,13 @@ result file. Root cause established:
 - there is **no two-row JSON** anywhere in the workspace;
 - the workspace contained **zero** `.git` directories at F1's date, so
   `GW_STATUS_2026-09-26.md`'s claim that the `N = 400` row "merged so it stayed
-  in HEAD" is **NOT ESTABLISHED** here. *(Restated 2026-10-06: A6 gave the
-  workspace a repository. The verdict is unchanged, the reason is not — see
-  `F5_REPORT.md` F5-R5.)*
+  in HEAD" was **NOT ESTABLISHED** here. *(Updated 2026-10-06: A6 gave the
+  workspace a repository, and A7 then fetched the upstream history and checked
+  the sentence against commit `bfa40dc`, where it holds — 12 files / 102
+  tracked, single parent `e65319d`, diff `+16/−1` appending the partial
+  `N = 800` record after the untouched `N = 400` record. Commit `d70f6fa`
+  later replaced that file. **ESTABLISHED, scoped as stated** — see
+  `F5_REPORT.md` F5-R5 and `F7_REPORT.md` §5.)*
 
 **Consequence:** `N = 400` is not machine-gated. `Skill.md` §3 status was
 corrected to say that.
@@ -571,10 +575,13 @@ No numeric literal certified by any result file was altered. The gate threshold
    without a traceback**, every case leaving both shipped result files
    byte-identical. Detail: `F2_REPORT.md` §7. Reproducible from
    `harnesses/f2_7_inj.py` (2026-10-06).
-    The `GW_STATUS` "stayed in HEAD" sentence remains **NOT ESTABLISHED** in
-    this workspace. *(F1's stated reason — "because there is no `.git`" — held
-    only until A6, 2026-10-06: the workspace is a repository since then, but its
-    history begins at the A6 commit and holds no such merge. See F5-R5.)*
+    The `GW_STATUS` "stayed in HEAD" sentence was **NOT ESTABLISHED** at F1's
+    date and is **ESTABLISHED** since A7, 2026-10-06: A6 gave the workspace a
+    repository, A7 fetched the upstream history, and the sentence holds against
+    commit `bfa40dc` — 12 files / 102 tracked, single parent `e65319d`, diff
+    `+16/−1` appending the partial `N = 800` record after the untouched
+    `N = 400` record — and was superseded afterwards by `d70f6fa`. See
+    `F5_REPORT.md` F5-R5 and `F7_REPORT.md` §5.
 3. **F1-L — `Z_none` labelling — CLOSED by F2-2.** One definition of record
    (`DEFINISI_OPERASIONAL_MSAF.md` §1), the DRAF table re-labelled to read
    `OUTSIDE` with a reading note, the manifesto and the plot title corrected,
@@ -642,7 +649,13 @@ replaced at its source and the source re-verified afterwards.
 
 ## 7. Exit
 
-F1 exits **complete**. All four closable residual items are now closed, each by the phase that closed it and recorded above rather than deleted: items 5 and 3 by F2-1 and F2-2, item 4 by F2-6, and item 2 (`N = 400`) by F2-7. The `GW_STATUS` "stayed in HEAD" sentence remains the one item that no phase can close, because this tree has no `.git`.
+F1 exits **complete**. All four closable residual items are now closed, each by
+the phase that closed it and recorded above rather than deleted: items 5 and 3
+by F2-1 and F2-2, item 4 by F2-6, and item 2 (`N = 400`) by F2-7. The
+`GW_STATUS` "stayed in HEAD" sentence, which no phase could close while this
+tree had no `.git`, was **closed by A7, 2026-10-06**, once the upstream history
+was fetched: it holds at commit `bfa40dc` and is superseded from `d70f6fa`
+onward. See `F5_REPORT.md` F5-R5.
 
 F1-R1 was found by re-reading the deliverables after F1 appeared to pass, i.e. by
 auditing the audit: every hash table and every documented command the report

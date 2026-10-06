@@ -137,13 +137,17 @@ string actually found in the retrieved document:
 * **Layer C** — the canonical target is unreachable from this machine
   (HTTP 403 or TLS failure). Recorded as inaccessible rather than implied.
 
-Final archive, 22 records: **A = 8, B = 11, C = 3**
+Final archive at F5-2 (2026-10-05), 22 records: **A = 8, B = 11, C = 3**
 (`theorem_provenance.json` 15 → A4/B9/C2; `external_constants.json` 7 →
-A4/B2/C1).
+A4/B2/C1). *A7 moved one record C → B and added one layer-A record, so the
+tally at 2026-10-06 is 23 records, A = 9, B = 12, C = 2 — see
+`F7_REPORT.md` §4.*
 
 ### 4.3 What was stored
 
-Eight Layer-A files in `provenance/evidence/`:
+Eight Layer-A files in `provenance/evidence/` at F5-2 (a ninth,
+`arxiv_1410_3926_abs.html`, was added by A7 and is listed in `F7_REPORT.md`
+§4):
 
 | file | bytes | sha256 (head) |
 |---|---:|---|
@@ -376,7 +380,7 @@ prove things.
 | F5-R2 | independent authority check for a measured `value` at declared precision (was F3-R8) | **CLOSED 2026-10-05 (B1-a)** — P6 makes the tie mandatory instead of opt-in: a non-derived quantity citing archived evidence must declare `evidence_probe` and pass it, one citing unarchived evidence must state a non-empty `probe_waived` reason, and silence is now a FAIL. `harnesses\f3_inj.py` M29 (probe removed from `PLANCK_LENGTH`) and M30 (waiver removed from `OBSERVABLE_UNIVERSE_DIAMETER`) both trip P6; 29/29 mutants, 3/3 controls |
 | F5-R3 | F4-R2 (borrowed-authority marker coverage across the F4 scope) | **open — decided 2026-10-05 (B2-b): status quo retained.** The gap is bounded by measurement rather than closed by a pattern list: `harnesses\f4_brittleness.py` reports 0/60 tested paraphrases escaping (25/60 escaped before F4-I; the audit itself read 35/60 caught). A citation-key convention would close the class but requires editing all 15 scope documents and re-verifying the P2 anchors, P3 counts, the F4 markers and the full suite; rejected for now on that radius |
 | F5-R4 | encoding sweep of `guinand-weil-rigorous-numerics-main/` | deferred — the sub-repo is outside F5's scope |
-| F5-R5 | `.git` "stayed in HEAD" | **NOT ESTABLISHED, reason restated 2026-10-06 (A6).** F5's premise — "the workspace is not a repository" — is false as of today: A6 created the repository and pushed it. The verdict does not move. The local history begins at the A6 commit and `guinand-weil-rigorous-numerics-main/` carries no `.git` of its own, so the `N = 400` merge recorded in `GW_STATUS_2026-09-26.md` still cannot be inspected here. Closing it requires the upstream history, which is A7 scope |
+| F5-R5 | `.git` "stayed in HEAD" | **ESTABLISHED — scoped to `bfa40dc` — closed 2026-10-06 (A7).** The sentence under test is `GW_STATUS_2026-09-26.md` L1682: *"Snapshot pushed as commit `bfa40dc` (12 files, 102 tracked). Before committing, `omega_core_v2_results.json` was merged so the $N=400$ certificate stayed in HEAD instead of being overwritten by the in-flight $N=800$ attempt."* F5 could not test it (no `.git`); A6 created this repository; A7 fetched the upstream history from `https://github.com/aidilamrym-ops/guinand-weil-rigorous-numerics` (HEAD `6082dcd67d9bcd932780176b02a4ec806dc01fec`, tag `v1.0.0-certified` → `a928d0f`) and verified every clause. **(a)** `bfa40dc` exists and carries exactly **12 files / 102 tracked objects**. **(b)** It has a **single parent**, `e65319d` — so "merged" describes the content merge of the JSON, not a git merge, and no parent side was lost. **(c)** Its diff against `e65319d` on `omega_core_v2_results.json` is **+16 / −1**: the partial $N=800$ record is appended **after** the $N=400$ record, which is untouched in that diff — so at `bfa40dc` both records coexisted and the $N=400$ certificate was indeed still in the file at HEAD. **(d)** The $N=400$ record at the parent is 1971 bytes with SHA-256 `5aaab0cfbf26f7fc5a3306bcd6a6e82e5482dad54a0a08d55ed4ebdcf22aa4f2`, matching `REPO_STRUCTURE.md` L214 and `OMEGA_CORE_CERTIFICATE.md` L767; the blob id in the diff header is `30ca146`, matching `OMEGA_CORE_CERTIFICATE.md` L505. **(e)** Scope of the verdict: commit `d70f6fa` (2026-10-01) later replaced that file with the single $N=800$ row (1774 bytes), which is why upstream HEAD now holds only $N=800$. The claim was true on the date it was written and superseded afterwards, and both halves are now on the record. **(f)** Fidelitas: this workspace's `omega_core_v2_results.json` is byte-identical to upstream `d70f6fa`..`6082dcd`, and this workspace's `GW_STATUS_2026-09-26.md` is byte-identical to upstream HEAD (108404 bytes). Method, tree diff and command transcript in `F7_REPORT.md` §5 |
 | F5-R6 | `CHECKSUM.sha256` covers the sub-repo only (116 rows) and does not track root-level files | **CLOSED 2026-10-05 (A2)** — `checksum_check.py` writes and verifies a workspace-root `CHECKSUM.sha256` over the root files plus `provenance/` (8) and `harnesses/` — 61 rows at A2, **65 since A1** (43 root + 8 + 14) — manifest excluded from its own hash, sub-repositories excluded on purpose because they are third-party or already self-pinned. Verified **65/65** as of 2026-10-06 (61/61 at A2); a tampered file and an unlisted `.bak` are both reported. **71 since the A2 F2 harness rebuild** (43 root + 8 + 20), verified 71/71 — the row count moves only when a listed file is added, which is the point of the manifest. Registered as the twelfth gate of `suite_check.py` and, since A1 inserted `protocol_09_check.py` ahead of it, as the **thirteenth and last**, so it re-hashes after every other gate has run and turns the manifest into a mutation detector rather than a snapshot. A missing manifest exits 2, never 0 |
 
 ---
@@ -387,8 +391,8 @@ prove things.
 |---|---|---|
 | **suite, full** | `python suite_check.py` | `passed=11 failed=0 not_run=0 of 11` as of F5 (2026-10-05), `SUITE: PASS -- every listed gate returned 0`, **exit 0**, 1607 s — includes `gw_final_gate.py` (1211 s) and `gw_mont_pipeline_check.py` (387 s) |
 | rig, partial | `python suite_check.py --fast` | `passed=10 failed=0 not_run=1 of 11` as of F5 (2026-10-05), **exit 2** (never 0 — `--fast` cannot be quoted as a pass) |
-| snapshots | sha256 + size vs both registers | **8 of 8** Layer-A files match (4 in `external_constants.json`, 4 in `theorem_provenance.json`), 0 problems |
-| F3 gate | `python provenance_check.py` | exit **0**, `GATE: PASS -- 4 quantities, 7 evidence snapshots, 5 reference facts, 10 conditions` |
+| snapshots | sha256 + size vs both registers | **8 of 8** Layer-A files match (4 in `external_constants.json`, 4 in `theorem_provenance.json`), 0 problems, as of F5 (2026-10-05); A7 added a ninth, recorded in `F7_REPORT.md` §4 |
+| F3 gate | `python provenance_check.py` | exit **0**, `GATE: PASS -- 4 quantities, 7 evidence snapshots, 5 reference facts, 10 conditions`, as of F5 (2026-10-05) |
 | F4 gate | `python theorem_provenance_check.py` | exit **0**, P1…P9 including `ARCHIVE_CONSISTENCY` |
 | F5-1 probe | `harnesses\f5_1_stageb.py` | `STAGE B: PASS`, B1–B4 all caught, baseline exit 0 |
 | F5-2 injection | `harnesses\f5_2_inj.py` | **20/20**, registers byte-identical, both gates green |
