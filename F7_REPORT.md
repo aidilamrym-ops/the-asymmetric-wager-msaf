@@ -315,6 +315,15 @@ list every file in scope. So the manifest moved from 80 to 81 rows and the map
 gained a row that says, in as many words, that the file is a queued task and not
 a corpus artefact.
 
+A byte scan of the fresh clone of `4ea5033` found one encoding exception among
+the root files: `Tugas tambahan.md` is stored with CRLF line endings, while
+every other root file is LF-only. The other 40 CR files, the one BOM and the
+eight non-UTF-8 files all sit inside `guinand-weil-rigorous-numerics-main/`,
+which is the upstream's own tree and the residual `F2` already records it. The
+task file was **not** normalised: its bytes were not written by this phase, its
+line endings are not what any gate reads, and rewriting a file the workspace
+did not author is a worse surprise than recording the fact. It is `F7-R4`.
+
 ---
 
 ## 8. Residual
@@ -324,6 +333,7 @@ a corpus artefact.
 | `F7-R1` | the $N=400$ evidence exists only in this workspace, never upstream | **recorded, not closed** — §5.6 names the eight files and says why. Publishing them upstream is an operator decision about someone else's repository, not a correction of this one |
 | `F7-R2` | the Planck parameter table is still not archived | **unchanged from F3** — the authority is layer C and the arXiv snapshot carries no occurrence of `diameter` or `comoving`, so `D_obs` still rests on a declared `probe_waived` reason. A snapshot of the table remains the candidate follow-up |
 | `F7-R3` | re-fetching is manual | the register records a date, not a liveness guarantee; no URL monitor runs in this workspace. `provenance_check.py` P2 verifies *bytes*, which is the property a gate can actually hold |
+| `F7-R4` | `Tugas tambahan.md` carries CRLF line endings | **recorded, not fixed** — §7.1. Normalising it would edit bytes this phase did not write; no gate reads its line endings. Inside the sub-repo the same scan reports 40 CR files, 1 BOM and 8 non-UTF-8 files, already carried by `F2` |
 
 ---
 
