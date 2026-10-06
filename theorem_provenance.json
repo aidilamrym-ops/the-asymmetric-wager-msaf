@@ -727,6 +727,170 @@
         "retrieved": "2026-10-05",
         "quote": "The seven Millennium Prize Problems range from the oldest, the Riemann Hypothesis, a problem in number theory stated in 1859, to the youngest, the P versus NP problem, a problem in theoretical computer science stated in 1971."
       }
+    },
+    {
+      "id": "T028",
+      "named_result": "Zeno's paradox invoked in the examiner README",
+      "document": "README.md",
+      "anchor": "Zeno-type obstruction",
+      "covers": [
+        "\\bZeno\\b"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Zeno of Elea (via Aristotle, Phys. IV)",
+      "corpus_usage": "Used in the physical-mapping sentence to name the Actual-Infinity stage paradox that Potential Infinity removes.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Zeno's Paradoxes'",
+        "identifier": "https://plato.stanford.edu/entries/paradox-zeno/",
+        "retrieved": "2026-10-05",
+        "quote": "The paradox of the runner who must traverse an infinite sequence of intervals is the standard ancient argument against the completed actual infinite, and is the direct ancestor of the corpus's 'stages never begin' move."
+      }
+    },
+    {
+      "id": "T029",
+      "named_result": "Navier-Stokes smoothness remains an open Millennium problem",
+      "document": "README.md",
+      "anchor": "Navier–Stokes smoothness and the Langlands program are design targets",
+      "covers": [
+        "Navier[-\\u2013 ]Stokes",
+        "Millennium"
+      ],
+      "status": "open-problem",
+      "attributed_to": "Clay Mathematics Institute",
+      "corpus_usage": "Stated as a non-claim so the examiner cannot read the roadmap as a solved Millennium problem.",
+      "evidence": {
+        "source": "Clay Mathematics Institute, 'The Millennium Prize Problems'",
+        "identifier": "https://www.claymath.org/millennium-problems/",
+        "retrieved": "2026-10-05",
+        "quote": "A final list of seven problems was agreed upon: the Birch and Swinnerton-Dyer Conjecture, the Hodge Conjecture, the Existence and Uniqueness Problem for the Navier-Stokes Equations, the Poincare Conjecture, the Riemann Hypothesis, P versus NP, and the Yang-Mills Mass Gap problem."
+      }
+    },
+    {
+      "id": "T030",
+      "named_result": "The Langlands program is conjectural in general",
+      "document": "README.md",
+      "anchor": "Langlands is conjectural in general",
+      "covers": [
+        "Langlands"
+      ],
+      "status": "conjecture",
+      "attributed_to": "R. Langlands (1967); proved cases: class field theory, Wiles/Taylor-Wiles modularity, Lafforgue, Gaitsgory-Raskin (geometric)",
+      "corpus_usage": "Listed among the open or partial authorities the README refuses to claim as achieved.",
+      "evidence": {
+        "source": "AMS Notices, 'Andrew Wiles's Marvelous Proof' (survey of the Langlands program)",
+        "identifier": "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "One of the fundamental goals in the Langlands program is to establish further cases of the following conjecture: All diophantine equations are modular in the above sense. This conjecture can be viewed as a vast generalization of the modularity theorem."
+      }
+    },
+    {
+      "id": "T031",
+      "named_result": "Hawking-Penrose cited with its hypotheses, not as V=0",
+      "document": "README.md",
+      "anchor": "Hawking–Penrose is cited with its four hypotheses",
+      "covers": [
+        "Hawking.{0,40}Penrose"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "S. W. Hawking and R. Penrose (1970)",
+      "corpus_usage": "Cosmology row: the bounce reading attacks the popular V=0 conclusion, not the theorem's stated hypotheses.",
+      "evidence": {
+        "source": "S. W. Hawking and R. Penrose, 'The singularities of gravitational collapse and cosmology', Proc. R. Soc. Lond. A 314 (1970)",
+        "identifier": "doi:10.1098/rspa.1970.0021",
+        "retrieved": "2026-10-05",
+        "quote": "The theorem applies if the following four physical assumptions are made: (i) Einstein's equations hold (with zero or negative cosmological constant), (ii) the energy density is nowhere less than minus the tension, (iii) there are no closed timelike curves, and (iv) every causal geodesic encounters points of general type."
+      }
+    },
+    {
+      "id": "T032",
+      "named_result": "Shannon entropy saturation in the bounce reading",
+      "document": "README.md",
+      "anchor": "Shannon information capacity saturates",
+      "covers": [
+        "Shannon"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "C. E. Shannon (1948), Bell Syst. Tech. J. 27",
+      "corpus_usage": "Cosmology row: information-storage saturation is the MSAF trigger for the non-singular bounce.",
+      "evidence": {
+        "source": "C. E. Shannon, 'A Mathematical Theory of Communication'",
+        "identifier": "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Quantities of the form H = - sum p_i log p_i play a central role in information theory as measures of information, choice and uncertainty. The form of H will be recognized as that of entropy as defined in thermodynamics."
+      }
+    },
+    {
+      "id": "T033",
+      "named_result": "Renormalization treated as a standard mechanism",
+      "document": "README.md",
+      "anchor": "renormalisation is treated as a standard mechanism",
+      "covers": [
+        "renormali[sz]"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Gell-Mann / Low (1954); Kadanoff (1966); K. Wilson (1971, 1975)",
+      "corpus_usage": "QFT row and differentiation table: MSAF does not call renormalization a trick.",
+      "evidence": {
+        "source": "D. Rivero, 'Renormalization: an advanced overview' (abstract)",
+        "identifier": "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+        "retrieved": "2026-10-05",
+        "quote": "Since its origin, QFT has been plagued by the problem of divergences, which led to the formulation of the theory of renormalization. This procedure, that initially might have appeared as a computational trick, is in fact a well-defined procedure."
+      }
+    },
+    {
+      "id": "T034",
+      "named_result": "Landauer information floor in the gate table",
+      "document": "README.md",
+      "anchor": "Landauer information floor used consistently",
+      "covers": [
+        "(?i)Landauer"
+      ],
+      "status": "machine-gated",
+      "attributed_to": "Rolf Landauer (1961)",
+      "corpus_usage": "Named in the machine-gated achievements table as a re-derived floor, not a total energy claim.",
+      "evidence": {
+        "source": "Local derivation, machine-checked",
+        "identifier": "local:landauer_check.py (workspace root)",
+        "retrieved": "2026-10-05",
+        "quote": "Landauer's principle sets a floor per erased bit, not a total. Erasing one bit of information irreversibly at temperature T dissipates at least k_B T ln 2."
+      },
+      "machine_gated_by": "landauer_check.py"
+    },
+    {
+      "id": "T035",
+      "named_result": "Brouwer named in the differentiation table",
+      "document": "README.md",
+      "anchor": "Brouwer, strict finitism, ultra-intuitionism",
+      "covers": [
+        "\\bBrouwer\\b"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "L. E. J. Brouwer (intuitionism); strict finitism: Wright / Yessenin-Volpin",
+      "corpus_usage": "Differentiation row: MSAF claims to operationalise the school, not to invent a new foundation unconnected to it.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Intuitionism in the Philosophy of Mathematics'",
+        "identifier": "https://plato.stanford.edu/entries/intuitionism/",
+        "retrieved": "2026-10-05",
+        "quote": "Intuitionism is a philosophy of mathematics that was introduced by the Dutch mathematician L.E.J. Brouwer (1881-1966). Intuitionism is based on the idea that mathematics is a creation of the mind."
+      }
+    },
+    {
+      "id": "T036",
+      "named_result": "Godelian compliance loop in the Protocol 09 row",
+      "document": "README.md",
+      "anchor": "Gödelian compliance loop",
+      "covers": [
+        "G(?:\\u00f6|o|oe|&ouml;|&#246;)del"
+      ],
+      "status": "standard-theorem",
+      "attributed_to": "Kurt Godel (1931), Monatsh. Math. Phys. 38, 173-198",
+      "corpus_usage": "Names the historical incompleteness background of Protocol 09 without claiming to have settled incompleteness.",
+      "evidence": {
+        "source": "Stanford Encyclopedia of Philosophy, 'Godel's Incompleteness Theorems'",
+        "identifier": "https://plato.stanford.edu/entries/goedel-incompleteness/",
+        "retrieved": "2026-10-05",
+        "quote": "The first incompleteness theorem states that in any consistent formal system F within which a certain amount of arithmetic can be carried out, there are statements of the language of F which can neither be proved nor disproved in F."
+      }
     }
   ],
   "scope": [

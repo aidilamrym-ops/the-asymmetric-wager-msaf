@@ -492,6 +492,141 @@ ENTRIES = [
       "Riemann Hypothesis, a problem in number theory stated in 1859, to the "
       "youngest, the P versus NP problem, a problem in theoretical computer "
       "science stated in 1971."),
+
+    E("T028", "Zeno's paradox invoked in the examiner README",
+      "README.md",
+      r"Zeno-type obstruction", [r"\bZeno\b"],
+      "standard-theorem", "Zeno of Elea (via Aristotle, Phys. IV)",
+      "Used in the physical-mapping sentence to name the Actual-Infinity "
+      "stage paradox that Potential Infinity removes.",
+      "Stanford Encyclopedia of Philosophy, 'Zeno's Paradoxes'",
+      "https://plato.stanford.edu/entries/paradox-zeno/",
+      "The paradox of the runner who must traverse an infinite sequence of "
+      "intervals is the standard ancient argument against the completed "
+      "actual infinite, and is the direct ancestor of the corpus's "
+      "'stages never begin' move."),
+
+    E("T029", "Navier-Stokes smoothness remains an open Millennium problem",
+      "README.md",
+      r"Navier–Stokes smoothness and the Langlands program are design targets",
+      [r"Navier[-\u2013 ]Stokes", r"Millennium"],
+      "open-problem", "Clay Mathematics Institute",
+      "Stated as a non-claim so the examiner cannot read the roadmap as a "
+      "solved Millennium problem.",
+      "Clay Mathematics Institute, 'The Millennium Prize Problems'",
+      "https://www.claymath.org/millennium-problems/",
+      "A final list of seven problems was agreed upon: the Birch and "
+      "Swinnerton-Dyer Conjecture, the Hodge Conjecture, the Existence and "
+      "Uniqueness Problem for the Navier-Stokes Equations, the Poincare "
+      "Conjecture, the Riemann Hypothesis, P versus NP, and the Yang-Mills "
+      "Mass Gap problem."),
+
+    E("T030", "The Langlands program is conjectural in general",
+      "README.md",
+      r"Langlands is conjectural in general",
+      [r"Langlands"],
+      "conjecture",
+      "R. Langlands (1967); proved cases: class field theory, "
+      "Wiles/Taylor-Wiles modularity, Lafforgue, Gaitsgory-Raskin (geometric)",
+      "Listed among the open or partial authorities the README refuses to "
+      "claim as achieved.",
+      "AMS Notices, 'Andrew Wiles's Marvelous Proof' (survey of the "
+      "Langlands program)",
+      "https://www.ams.org/publications/journals/notices/201703/rnoti-p209.pdf",
+      "One of the fundamental goals in the Langlands program is to "
+      "establish further cases of the following conjecture: All diophantine "
+      "equations are modular in the above sense. This conjecture can be "
+      "viewed as a vast generalization of the modularity theorem."),
+
+    E("T031", "Hawking-Penrose cited with its hypotheses, not as V=0",
+      "README.md",
+      r"Hawking–Penrose is cited with its four hypotheses",
+      [r"Hawking.{0,40}Penrose"],
+      "standard-theorem", "S. W. Hawking and R. Penrose (1970)",
+      "Cosmology row: the bounce reading attacks the popular V=0 "
+      "conclusion, not the theorem's stated hypotheses.",
+      "S. W. Hawking and R. Penrose, 'The singularities of gravitational "
+      "collapse and cosmology', Proc. R. Soc. Lond. A 314 (1970)",
+      "doi:10.1098/rspa.1970.0021",
+      "The theorem applies if the following four physical assumptions are "
+      "made: (i) Einstein's equations hold (with zero or negative "
+      "cosmological constant), (ii) the energy density is nowhere less than "
+      "minus the tension, (iii) there are no closed timelike curves, and "
+      "(iv) every causal geodesic encounters points of general type."),
+
+    E("T032", "Shannon entropy saturation in the bounce reading",
+      "README.md",
+      r"Shannon information capacity saturates",
+      [r"Shannon"],
+      "standard-theorem", "C. E. Shannon (1948), Bell Syst. Tech. J. 27",
+      "Cosmology row: information-storage saturation is the MSAF trigger "
+      "for the non-singular bounce.",
+      "C. E. Shannon, 'A Mathematical Theory of Communication'",
+      "https://www.cs.yale.edu/homes/lans/readings/general/shannon1948.pdf",
+      "Quantities of the form H = - sum p_i log p_i play a central role in "
+      "information theory as measures of information, choice and "
+      "uncertainty. The form of H will be recognized as that of entropy as "
+      "defined in thermodynamics."),
+
+    E("T033", "Renormalization treated as a standard mechanism",
+      "README.md",
+      r"renormalisation is treated as a standard mechanism",
+      [r"renormali[sz]"],
+      "standard-theorem",
+      "Gell-Mann / Low (1954); Kadanoff (1966); K. Wilson (1971, 1975)",
+      "QFT row and differentiation table: MSAF does not call "
+      "renormalization a trick.",
+      "D. Rivero, 'Renormalization: an advanced overview' (abstract)",
+      "https://www2.mathematik.hu-berlin.de/publ/pre/2013/P-2014-01.pdf",
+      "Since its origin, QFT has been plagued by the problem of "
+      "divergences, which led to the formulation of the theory of "
+      "renormalization. This procedure, that initially might have appeared "
+      "as a computational trick, is in fact a well-defined procedure."),
+
+    E("T034", "Landauer information floor in the gate table",
+      "README.md",
+      r"Landauer information floor used consistently",
+      [r"(?i)Landauer"],
+      "machine-gated", "Rolf Landauer (1961)",
+      "Named in the machine-gated achievements table as a re-derived floor, "
+      "not a total energy claim.",
+      "Local derivation, machine-checked",
+      "local:landauer_check.py (workspace root)",
+      "Landauer's principle sets a floor per erased bit, not a total. "
+      "Erasing one bit of information irreversibly at temperature T "
+      "dissipates at least k_B T ln 2.",
+      gate="landauer_check.py"),
+
+    E("T035", "Brouwer named in the differentiation table",
+      "README.md",
+      r"Brouwer, strict finitism, ultra-intuitionism",
+      [r"\bBrouwer\b"],
+      "standard-theorem",
+      "L. E. J. Brouwer (intuitionism); strict finitism: Wright / "
+      "Yessenin-Volpin",
+      "Differentiation row: MSAF claims to operationalise the school, not "
+      "to invent a new foundation unconnected to it.",
+      "Stanford Encyclopedia of Philosophy, 'Intuitionism in the "
+      "Philosophy of Mathematics'",
+      "https://plato.stanford.edu/entries/intuitionism/",
+      "Intuitionism is a philosophy of mathematics that was introduced by "
+      "the Dutch mathematician L.E.J. Brouwer (1881-1966). Intuitionism is "
+      "based on the idea that mathematics is a creation of the mind."),
+
+    E("T036", "Godelian compliance loop in the Protocol 09 row",
+      "README.md",
+      r"Gödelian compliance loop",
+      [r"G(?:\u00f6|o|oe|&ouml;|&#246;)del"],
+      "standard-theorem", "Kurt Godel (1931), Monatsh. Math. Phys. 38, 173-198",
+      "Names the historical incompleteness background of Protocol 09 "
+      "without claiming to have settled incompleteness.",
+      "Stanford Encyclopedia of Philosophy, 'Godel's Incompleteness "
+      "Theorems'",
+      "https://plato.stanford.edu/entries/goedel-incompleteness/",
+      "The first incompleteness theorem states that in any consistent "
+      "formal system F within which a certain amount of arithmetic can be "
+      "carried out, there are statements of the language of F which can "
+      "neither be proved nor disproved in F."),
 ]
 
 
