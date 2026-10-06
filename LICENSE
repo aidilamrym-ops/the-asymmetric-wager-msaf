@@ -1,0 +1,52 @@
+MIT License
+
+Copyright (c) 2026 Muhammad Aidil Amry (ORCID 0009-0002-9718-9710)
+Independent Researcher, South Sulawesi, Indonesia
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+SCOPE: this MIT licence covers the MACHINE-READABLE ARTIFACTS of this
+repository, i.e.
+
+    *.py at the repository root        (the verification gates)
+    harnesses/           all *.py      (the proof harnesses)
+    mcp/                 all *.py      (the registered bridge script)
+    *.smt2 at the root                  (the formal specifications)
+
+Scholarly documents and the numerical registers are NOT covered by this
+file; they are covered by CC-BY-4.0. See LICENSING.md for the full split
+and for the CC-BY-4.0 terms and mandatory attribution.
+
+THIRD-PARTY MATERIAL IS NOT COVERED BY EITHER LICENCE:
+
+  * guinand-weil-rigorous-numerics-main/ carries its own hybrid licence
+    (MIT for its code, CC-BY-4.0 for its scholarly documents) described in
+    guinand-weil-rigorous-numerics-main/LICENSING.md.
+  * provenance/evidence/ holds verbatim snapshots of external sources. This
+    licence does not relicense them; each snapshot keeps the licence basis
+    recorded against it in REFERENCES.md and in the two registers.
+  * source_arb_ldlt_certify.py inside the sub-repository is third-party
+    code under MIT, Copyright (c) 2026 Akiva Groskin, documented in
+    guinand-weil-rigorous-numerics-main/THIRD_PARTY_SOURCES.md.
+
+No statement in any document in this repository establishes the Riemann
+Hypothesis, Weil positivity, a prime-counting result, or a factorisation
+method.
+---------------------------------------------------------------------------
