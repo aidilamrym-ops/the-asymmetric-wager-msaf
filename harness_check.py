@@ -66,7 +66,7 @@ HARNESSES = [
     # stale tally, a citation of a harness that does not exist, and a second
     # Brain.MD version string.  Every target is reverted byte-for-byte and the
     # baseline is required to be green again afterwards.
-    ("a3_report_inj.py",      "verifier",  0, "HARNESS: PASS -- 6/6 cases caught",      True),
+      ("a3_report_inj.py",      "verifier",  0, "HARNESS: PASS -- 10/10 cases caught",    True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

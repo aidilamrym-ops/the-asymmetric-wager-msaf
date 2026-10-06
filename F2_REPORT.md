@@ -22,7 +22,7 @@ the residual sections that the finished phases explicitly handed over**:
 | F2-5 | F0 §9.5 | Root `shp_bridge` — operator decision |
 | F2-6 | F1 §5.4 | Plot semantics of the `p` axis |
 | F2-7 | F1 §5.2 | F1-D — regenerate an `N = 400` run so `lambda_min` is machine-gated |
-| — | F1 §5.2 (F1-D, second half) | The `GW_STATUS` "stayed in HEAD" claim: requires a `.git`, which this tree does not have. Not closable in F2, and creating a repository inside an operator's tree is an operator decision |
+| — | F1 §5.2 (F1-D, second half) | The `GW_STATUS` "stayed in HEAD" claim: requires a `.git`, which this tree did not have at F2's date. Not closable in F2, and creating a repository inside an operator's tree is an operator decision. *(Superseded as a statement of fact 2026-10-06 by A6, which created the repository; the residual itself is tracked in `F5_REPORT.md` F5-R5)* |
 
 Each stage is worked, then blind-spot-audited, then **re-proven after the fix**.
 This report grows one section per stage.
@@ -971,7 +971,7 @@ Carried into F2-2 … F2-7, exactly as table 0 above.
 | item | source | state |
 |---|---|---|
 | F2-7 -- machine-gate $\lambda_{\min}$ at $N=400$ | F1 5.2 (F1-D) | **CLOSED 2026-10-05**: run completed, artefact shipped, gate exit 0 against it, 26/26 mutants + 4/4 missing-file proven, `CHECKSUM.sha256` 113 -> 116, checklist 7.9 all ticked, record in 7.10 |
-| the `GW_STATUS` "stayed in HEAD" sentence | F1 5.2, second half | not closable: this tree has no `.git`, and creating a repository inside an operator's tree is an operator decision |
+| the `GW_STATUS` "stayed in HEAD" sentence | F1 5.2, second half | not closable: this tree had no `.git` at F2's date, and creating a repository inside an operator's tree is an operator decision. *(Superseded 2026-10-06 by A6 — the repository now exists; see F5-R5 for the current state)* |
 
 ### 8.2 New finding -- text encodings across the tree (recorded, not touched)
 
@@ -1040,7 +1040,7 @@ where they read as inherited fact.
 
 State when opened: **OPEN**. Two honest options, neither taken at the time:
 
-1. rebuild the six harnesses — roughly 110 mutants across six gates, each
+1. rebuild the six F2 harnesses — roughly 110 mutants across six gates, each
    requiring byte-identical restore and a control; or
 2. downgrade the six counts at every citation site from *proven* to
    *observed once, not re-runnable*, which is a weaker claim but a true one.
@@ -1049,7 +1049,7 @@ Until one is chosen, the six numbers above were **recorded, not reproducible**
 — the distinction `F1_REPORT.md` §5 already applies to the `GW_STATUS`
 "stayed in HEAD" sentence.
 
-### 8.3.1 CLOSED 2026-10-06 — option 1 taken, all six harnesses rebuilt
+### 8.3.1 CLOSED 2026-10-06 — option 1 taken, all six F2 harnesses rebuilt
 
 Option 1 was chosen and executed. `harnesses/` now holds one harness per
 stage, each asserting its own published table rather than a paraphrase of it:
@@ -1090,10 +1090,10 @@ from and the difference has to be visible:
   controls named in §7.4 were never enumerated there; the rebuilt pair is
   "add an unused key" and "re-indent", both of which must still exit 0.
 
-`harness_check.py` runs all twenty harnesses — the fourteen that already
-existed plus these six — sequentially, snapshots the workspace before and
-after each, and exits 0 only if every marker appeared and no byte moved
-(run recorded 2026-10-06, A2, when the rig held twenty harnesses):
+`harness_check.py` runs every harness in `harnesses\` sequentially, snapshots
+the workspace before and after each, and exits 0 only if every marker appeared
+and no byte moved. At A2 (2026-10-06) it ran all twenty harnesses — the
+fourteen that already existed plus these six — and reported:
 
 ```
 passed=20  failed=0  not_run=0  of 20  |  workspace byte-identical

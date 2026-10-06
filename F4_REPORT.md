@@ -17,7 +17,7 @@
 | Register contents | 27 entries (T001--T027), 15 scope documents, 44 covered lines, 0 uncovered |
 | Gate result | 8/8 checks, exit 0 |
 | Fault injection | 31 mutants caught + 4 controls behaved, exit 0 |
-| Suite regression | 11/11 gates exit 0 (the eleven gates then in service; 12/12 since 2026-10-05, A2; 13/13 since 2026-10-06, A1) |
+| Suite regression | 11/11 gates exit 0 (the eleven gates then in service; 12/12 since 2026-10-05, A2; 13/13 since 2026-10-06, A1; 14/14 since 2026-10-06, A3) |
 | Encoding | 17/17 files clean (CR=0, BOM=False, UTF-8) |
 | Findings | 6 corpus (F4-A..F4-F), 4 harness-level (F4-G..F4-J), all closed |
 
@@ -74,8 +74,21 @@ cannot be written that points at text which does not exist.
 | `f4_build_register.py` | builder (harnesses/); imports `EXTERNAL` from the gate |
 | `f4_inj.py` | fault injection, 31 mutants + 4 controls (harnesses/) |
 | `f4_brittleness.py` | paraphrase robustness audit, 60 cases (harnesses/) |
-| `f4_survey1.py`, `f4_survey2.py`, `f4_coverage_dry.py` | corpus survey (harnesses/) |
 | `ANTI_INFINITY_BLINDSPOT.md`, `DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md`, `MSAF_COSMOLOGY_DECONSTRUCTION.md`, `OCTAVE_CORE_MATHEMATICS.md`, `Perluasan Visi Ilmiah (Extended Thesis Blueprint).md` | the 5 corrected documents |
+
+> **A5 correction (2026-10-06).** This table used to carry a fourth row listing
+> `f4_survey1.py`, `f4_survey2.py` and `f4_coverage_dry.py` as *"corpus survey
+> (harnesses/)"*. Those three scripts exist nowhere in the workspace: they were
+> one-off survey tools run during F4 and never committed, so they are not
+> artefacts and the row was wrong to claim they were. It has been removed
+> rather than annotated, because a table headed *Artefacts* is a claim about
+> what is on disk. The corpus counts the survey produced are quoted once, in
+> the transcript at §2 (23 documents scanned, 92 candidate lines, 43 borrowed
+> authority lines in 12 files); those are a scan summary and no gate reads
+> them. Every number this report publishes as a result is gated by
+> `theorem_provenance_check.py` — P3 `COVERAGE` over the register — and by
+> `harnesses/f4_inj.py`. `f4_hits.json`, named in the same transcript, is the
+> same kind of scratch output: a console dump, not a shipped file.
 
 Scope (15): `01_PARADOX_AND_SCALE.md`, `02_OMEGA_CORE_ANALYSIS.md`,
 `03_RIEMANN_RECONSTRUCTION.md`, `ANTI_INFINITY_BLINDSPOT.md`,

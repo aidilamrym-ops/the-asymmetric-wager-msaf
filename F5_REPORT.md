@@ -45,8 +45,9 @@ step that proves it:
 
 ## 2. F5-5 — the rig itself (`suite_check.py`)
 
-Eleven root gates were runnable individually but there was no single command
-that runs them in order and reports honestly when one was skipped.
+At F5's start, eleven root gates were runnable individually but there was no
+single command that runs them in order and reports honestly when one was
+skipped.
 
 | property | value |
 |---|---|
@@ -375,7 +376,7 @@ prove things.
 | F5-R2 | independent authority check for a measured `value` at declared precision (was F3-R8) | **CLOSED 2026-10-05 (B1-a)** — P6 makes the tie mandatory instead of opt-in: a non-derived quantity citing archived evidence must declare `evidence_probe` and pass it, one citing unarchived evidence must state a non-empty `probe_waived` reason, and silence is now a FAIL. `harnesses\f3_inj.py` M29 (probe removed from `PLANCK_LENGTH`) and M30 (waiver removed from `OBSERVABLE_UNIVERSE_DIAMETER`) both trip P6; 29/29 mutants, 3/3 controls |
 | F5-R3 | F4-R2 (borrowed-authority marker coverage across the F4 scope) | **open — decided 2026-10-05 (B2-b): status quo retained.** The gap is bounded by measurement rather than closed by a pattern list: `harnesses\f4_brittleness.py` reports 0/60 tested paraphrases escaping (25/60 escaped before F4-I; the audit itself read 35/60 caught). A citation-key convention would close the class but requires editing all 15 scope documents and re-verifying the P2 anchors, P3 counts, the F4 markers and the full suite; rejected for now on that radius |
 | F5-R4 | encoding sweep of `guinand-weil-rigorous-numerics-main/` | deferred — the sub-repo is outside F5's scope |
-| F5-R5 | `.git` "stayed in HEAD" | not attempted — the workspace is not a repository |
+| F5-R5 | `.git` "stayed in HEAD" | **NOT ESTABLISHED, reason restated 2026-10-06 (A6).** F5's premise — "the workspace is not a repository" — is false as of today: A6 created the repository and pushed it. The verdict does not move. The local history begins at the A6 commit and `guinand-weil-rigorous-numerics-main/` carries no `.git` of its own, so the `N = 400` merge recorded in `GW_STATUS_2026-09-26.md` still cannot be inspected here. Closing it requires the upstream history, which is A7 scope |
 | F5-R6 | `CHECKSUM.sha256` covers the sub-repo only (116 rows) and does not track root-level files | **CLOSED 2026-10-05 (A2)** — `checksum_check.py` writes and verifies a workspace-root `CHECKSUM.sha256` over the root files plus `provenance/` (8) and `harnesses/` — 61 rows at A2, **65 since A1** (43 root + 8 + 14) — manifest excluded from its own hash, sub-repositories excluded on purpose because they are third-party or already self-pinned. Verified **65/65** as of 2026-10-06 (61/61 at A2); a tampered file and an unlisted `.bak` are both reported. **71 since the A2 F2 harness rebuild** (43 root + 8 + 20), verified 71/71 — the row count moves only when a listed file is added, which is the point of the manifest. Registered as the twelfth gate of `suite_check.py` and, since A1 inserted `protocol_09_check.py` ahead of it, as the **thirteenth and last**, so it re-hashes after every other gate has run and turns the manifest into a mutation detector rather than a snapshot. A missing manifest exits 2, never 0 |
 
 ---

@@ -72,6 +72,40 @@ def ordinal(n):
     return str(n)
 
 
+# Cardinal words, index == value.  A sentence that says "the thirteen gates"
+# makes the same claim as one that says "13 gates", so both have to be read.
+# Ordinals are deliberately absent: they are positional and are handled by
+# ORD_GATE / ORD_HARNESS, which know the difference between "the twelfth gate"
+# and "a second harness".
+CARDINALS = ["zero", "one", "two", "three", "four", "five", "six", "seven",
+             "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+             "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+             "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three",
+             "twenty-four", "twenty-five", "twenty-six", "twenty-seven",
+             "twenty-eight", "twenty-nine", "thirty"]
+WORDNUM = {w: i for i, w in enumerate(CARDINALS)}
+SPOKEN = "|".join(re.escape(w) for w in CARDINALS)
+
+# The determiner is what makes a cardinal a claim about *the* rig.  "across
+# six gates", "of two gates" and "pass three gates" count something else;
+# "the thirteen gates are a read-only contract" counts the suite.
+SPOKEN_GATES = re.compile(r"\b(?:all|the)\s+(" + SPOKEN + r")\s+(?:root\s+)?gates\b",
+                          re.I)
+SPOKEN_ROOT_GATES = re.compile(r"\b(" + SPOKEN + r")\s+root gates\b", re.I)
+SPOKEN_HARNESSES = re.compile(r"\b(?:all|the)\s+(" + SPOKEN + r")\s+(?:proof\s+)?harnesses\b",
+                              re.I)
+SPOKEN_ROWS = re.compile(r"\b(?:all|the)\s+(" + SPOKEN + r")\s+(?:tracked\s+)?rows\b",
+                         re.I)
+
+
+def spelled(n):
+    return CARDINALS[n] if 0 <= n < len(CARDINALS) else str(n)
+
+
+def spoken_number(word):
+    return WORDNUM.get(word.lower())
+
+
 def rooted_md():
     """Root-level Markdown documents only: the corpus, not the sub-repository,
     not provenance/evidence (snapshot files are not claims about this workspace)."""
@@ -273,6 +307,14 @@ def dated_claims(L):
         ("harness count", re.compile(BARE_NUM + r"\s+(?:proof\s+)?harnesses\b")),
         ("Brain.MD version", re.compile(r"`?Brain\.MD`?\s+(?:at\s+)?(v\d+\.\d+)")),
     ]
+    # The same claims spelled out.  "the thirteen gates are a read-only
+    # contract" counts the suite exactly as "13 gates" does; a sweep that only
+    # reads digits laps over the moment anyone writes a number in words.
+    spoken_expected = {
+        "gate count": {spelled(L["gates"])},
+        "harness count": {spelled(L["harnesses"])},
+        "manifest rows": {spelled(L["rows"])},
+    }
     # Only the `--with-harness` enumeration means "entries"; a manifest or a
     # register has entries too, and those are not counts of the suite.
     entries_re = re.compile(BARE_NUM + r"\s+entries\b")
@@ -315,8 +357,21 @@ def dated_claims(L):
             for m in ORD_HARNESS.finditer(line):
                 claims.append(("harness ordinal", m.group(1)))
 
-            for label, value in claims:
-                allowed = expected.get(label)
+            spoken = []
+            if re.search(r"CHECKSUM|manifest", line, re.I):
+                m = SPOKEN_ROWS.search(line)
+                if m:
+                    spoken.append(("manifest rows", m.group(1)))
+            for m in SPOKEN_GATES.finditer(line):
+                spoken.append(("gate count", m.group(1)))
+            for m in SPOKEN_ROOT_GATES.finditer(line):
+                spoken.append(("gate count", m.group(1)))
+            for m in SPOKEN_HARNESSES.finditer(line):
+                spoken.append(("harness count", m.group(1)))
+
+            both = ([(l, v, expected.get(l)) for l, v in claims]
+                    + [(l, w.lower(), spoken_expected.get(l)) for l, w in spoken])
+            for label, value, allowed in both:
                 if allowed is None or (name, i, label, value) in seen:
                     continue
                 seen.add((name, i, label, value))
@@ -361,6 +416,30 @@ def reference_check():
         ok("P6 all %d harnesses named in the reports exist in harnesses\\"
            % len(cited))
 
+    # A row that says "(harnesses/)" makes the same claim as a path that says
+    # `harnesses\name.py`, and P6 above only reads the second form.  F4's
+    # artefacts table named three survey scripts that exist in no folder and
+    # no gate noticed, because the folder lived in its own column.
+    ghosts = 0
+    for name in rooted_md():
+        t = readable(os.path.join(HERE, name))
+        if not t:
+            continue
+        for i, line in enumerate(t.splitlines(), 1):
+            if not re.search(r"harnesses[/\\]", line):
+                continue
+            for m in re.finditer(r"`([A-Za-z0-9_]+\.py)`", line):
+                fn = m.group(1)
+                if os.path.isfile(os.path.join(HERE, fn)):
+                    continue
+                if os.path.isfile(os.path.join(HERE, "harnesses", fn)):
+                    continue
+                ghosts += 1
+                fail("P6 %s:%d names %s on a line that claims it lives in "
+                     "harnesses\\, and no such file exists" % (name, i, fn))
+    if ghosts == 0:
+        ok("P6 every .py named on a harnesses/ line resolves to a file")
+
     on_disk = set()
     hdir = os.path.join(HERE, "harnesses")
     if os.path.isdir(hdir):
@@ -391,6 +470,59 @@ def registration_check():
         ok("P7 all %d suite gates resolve to a file" % len(suite_check.GATES))
 
 
+# -------------------------------------------------------------------- P8 ----
+def map_check():
+    """Brain.MD is the knowledge map of the workspace, so every file at the
+    root has to appear in it.  A6 added four files and nothing said so; the
+    map is the first thing an agent reads and the last thing anyone audits."""
+    text = readable(BRAIN)
+    if text is None:
+        fail("P8 Brain.MD is unreadable")
+        return
+    missing = []
+    for f in sorted(os.listdir(HERE)):
+        if not os.path.isfile(os.path.join(HERE, f)):
+            continue
+        if "`%s`" % f in text:
+            continue
+        missing.append(f)
+    if missing:
+        for f in missing:
+            fail("P8 Brain.MD does not name %s, which is a file at the root "
+                 "of the workspace it claims to map" % f)
+    else:
+        ok("P8 Brain.MD names every one of the %d files at the workspace root"
+           % len([f for f in os.listdir(HERE)
+                  if os.path.isfile(os.path.join(HERE, f))]))
+
+
+# --------------------------------------------------------- C1 (spelled) ----
+def spoken_canonical_checks(L):
+    """The constitution has no escape hatch: if it spells a rig total in words,
+    the words must equal the live value.  A report may carry dated history; the
+    document an agent is told to read at startup may not."""
+    expect = {"gates": spelled(L["gates"]), "harnesses": spelled(L["harnesses"])}
+    sites = [
+        ("SPOKEN_SKILL_GATES",    "Skill.md", SKILL,    SPOKEN_GATES,      "gates"),
+        ("SPOKEN_BRAIN_GATES",    "Brain.MD", BRAIN,    SPOKEN_GATES,      "gates"),
+        ("SPOKEN_BRAIN_ROOTGATE", "Brain.MD", BRAIN,    SPOKEN_ROOT_GATES, "gates"),
+        ("SPOKEN_SKILL_HARNESSES", "Skill.md", SKILL,   SPOKEN_HARNESSES,  "harnesses"),
+        ("SPOKEN_BRAIN_HARNESSES", "Brain.MD", BRAIN,   SPOKEN_HARNESSES,  "harnesses"),
+    ]
+    for key, name, path, pattern, kind in sites:
+        text = readable(path)
+        if text is None:
+            fail("%s: %s unreadable" % (key, name))
+            continue
+        found = [m.group(1) for m in pattern.finditer(text)]
+        bad = [w for w in found if w.lower() != expect[kind]]
+        if bad:
+            fail("%s: %s spells %r where the live value is %d (%s)"
+                 % (key, name, ", ".join(sorted(set(bad))), L[kind], expect[kind]))
+        elif found:
+            ok("%s -- %s %s" % (key, ", ".join(sorted(set(found))), kind))
+
+
 def main(argv):
     L, err = live_values()
     if L is None:
@@ -400,11 +532,13 @@ def main(argv):
     print("report_claim_check: suite=%d harnesses=%d manifest=%d brain=%s"
           % (L["gates"], L["harnesses"], L["rows"], L["brain"]))
     canonical_checks(L)
+    spoken_canonical_checks(L)
     brain_version_check(L)
     scope_check(L)
     dated_claims(L)
     reference_check()
     registration_check()
+    map_check()
     if failures:
         print("report_claim_check: FAIL -- %d defective claim(s)" % len(failures))
         return 1

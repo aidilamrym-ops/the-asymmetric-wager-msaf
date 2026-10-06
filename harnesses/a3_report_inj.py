@@ -4,7 +4,7 @@
 # The gate reads prose, and prose is the one part of this workspace that every
 # other gate ignores.  A gate over sentences that has only ever printed "PASS"
 # is a gate that has been run, not a gate that has been tested.  This harness
-# applies six defects, each aimed at a different condition, and requires the
+# applies ten defects, each aimed at a different condition, and requires the
 # gate to reject every one of them:
 #
 #   SKILL_GATES  Skill.md's root-gate count        -> the canonical suite number
@@ -13,6 +13,14 @@
 #   P5           an unanchored stale tally in a report -> the dated-claim rule
 #   P6           a citation of a harness that does not exist -> the reference rule
 #   P4           a second Brain.MD version string  -> the version rule
+#   SPOKEN_*     a stale cardinal word in the constitution -> the spelled-out
+#                reading of the same rule (a number written as words is a
+#                claim exactly as a digit is, and the sweep must not lap)
+#   P5 spoken    an unanchored stale cardinal word in a report -> the dated-claim
+#                rule applied to words instead of digits
+#   P6 row       a file named on a line whose own column claims it lives in
+#                harnesses\ -> the form of citation P6 originally missed
+#   P8           a root file the knowledge map does not name -> the map rule
 #
 # The numbers are read from the live rig rather than written into this file,
 # so the harness does not rot the moment a gate or a harness is added: each
@@ -53,6 +61,13 @@ ORDINALS = ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth",
             "thirteenth", "fourteenth", "fifteenth", "sixteenth",
             "seventeenth", "eighteenth", "nineteenth", "twentieth"]
 
+CARDINALS = ["zero", "one", "two", "three", "four", "five", "six", "seven",
+             "eight", "nine", "ten", "eleven", "twelve", "thirteen",
+             "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+             "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three",
+             "twenty-four", "twenty-five", "twenty-six", "twenty-seven",
+             "twenty-eight", "twenty-nine", "thirty"]
+
 failures = []
 
 
@@ -63,6 +78,10 @@ def fail(msg):
 
 def ordinal(n):
     return ORDINALS[n] if 0 <= n < len(ORDINALS) else str(n)
+
+
+def spelled(n):
+    return CARDINALS[n] if 0 <= n < len(CARDINALS) else str(n)
 
 
 def read(name):
@@ -149,6 +168,28 @@ CASES = [
     ("P4           second version string",
      "P4 Brain.MD declares",
      lambda: append_line(BRAIN, "Brain.MD v1.99"),
+     BRAIN),
+    ("SPOKEN_BRAIN_GATES stale cardinal word",
+     "SPOKEN_BRAIN_GATES",
+     lambda: sub_group(BRAIN,
+                       r"the (" + spelled(GATES) + r") gates are a read-only contract",
+                       lambda m: "the %s gates are a read-only contract"
+                                 % spelled(GATES + 1)),
+     BRAIN),
+    ("P5 spoken    unanchored stale cardinal",
+     "harness count=",
+     lambda: append_line(F4, "All %s harnesses are enumerated in this "
+                             "paragraph." % spelled(HARNS + 1)),
+     F4),
+    ("P6 row      ghost file behind a harnesses/ column",
+     "P6 F4_REPORT.md",
+     lambda: append_line(F4, "| `f4_ghost_survey.py` | corpus survey "
+                             "(harnesses/) |"),
+     F4),
+    ("P8          a root file the map does not name",
+     "P8 Brain.MD does not name",
+     lambda: sub_group(BRAIN, r"`(AGENTS\.md)`",
+                       lambda m: "`AGENTS_probed.md`"),
      BRAIN),
 ]
 

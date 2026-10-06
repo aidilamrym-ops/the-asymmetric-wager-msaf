@@ -78,9 +78,11 @@ result file. Root cause established:
   `omega_core_v2_results_FAILED_absbug_20260929_011342.json`
   (`non_result = true`, `bound = null`);
 - there is **no two-row JSON** anywhere in the workspace;
-- the workspace contains **zero** `.git` directories, so
+- the workspace contained **zero** `.git` directories at F1's date, so
   `GW_STATUS_2026-09-26.md`'s claim that the `N = 400` row "merged so it stayed
-  in HEAD" is **NOT ESTABLISHED** here.
+  in HEAD" is **NOT ESTABLISHED** here. *(Restated 2026-10-06: A6 gave the
+  workspace a repository. The verdict is unchanged, the reason is not — see
+  `F5_REPORT.md` F5-R5.)*
 
 **Consequence:** `N = 400` is not machine-gated. `Skill.md` §3 status was
 corrected to say that.
@@ -569,8 +571,10 @@ No numeric literal certified by any result file was altered. The gate threshold
    without a traceback**, every case leaving both shipped result files
    byte-identical. Detail: `F2_REPORT.md` §7. Reproducible from
    `harnesses/f2_7_inj.py` (2026-10-06).
-   The `GW_STATUS` "stayed in HEAD" sentence remains **NOT ESTABLISHED** in
-   this workspace because there is no `.git`.
+    The `GW_STATUS` "stayed in HEAD" sentence remains **NOT ESTABLISHED** in
+    this workspace. *(F1's stated reason — "because there is no `.git`" — held
+    only until A6, 2026-10-06: the workspace is a repository since then, but its
+    history begins at the A6 commit and holds no such merge. See F5-R5.)*
 3. **F1-L — `Z_none` labelling — CLOSED by F2-2.** One definition of record
    (`DEFINISI_OPERASIONAL_MSAF.md` §1), the DRAF table re-labelled to read
    `OUTSIDE` with a reading note, the manifesto and the plot title corrected,
