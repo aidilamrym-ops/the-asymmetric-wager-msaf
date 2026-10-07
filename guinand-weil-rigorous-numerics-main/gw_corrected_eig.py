@@ -299,6 +299,12 @@ def main(argv):
     print("  decimal text.  arb's radius over those entries covers FLINT parse rounding")
     print("  ONLY, not the mpmath origin of the digits.  acb_mat.eig's enclosures are")
     print("  rigorous over the matrix handed to them.")
+    print("  CAPABILITY CORRECTION (2026-10-07, A15): the three lines above are only")
+    print("  half right.  On 0.9.0, arb.digamma, acb.polygamma and acb.hypgeom_2f1 ARE")
+    print("  ball primitives; only lerchphi is missing.  gw_rho_formal.py therefore")
+    print("  encloses the archimedean block directly and supplies rho_actual as an")
+    print("  upper bound.  Phase 6 below is unchanged: it still reports over the")
+    print("  decimal text handed to it.")
     print()
     results = []
     for prec, alg in ((1024, "rump"), (1024, "vdhoeven_mourrain")):

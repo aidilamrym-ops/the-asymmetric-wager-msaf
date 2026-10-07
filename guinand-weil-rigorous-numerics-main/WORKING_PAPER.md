@@ -24,17 +24,20 @@ $$
 
 Two ball-arithmetic routes were executed with `python-flint 0.9.0` at 1024
 working bits. **Route A1** combines an `arb` enclosure of the matrix as handed
-with Weyl propagation of a measured per-entry error bound, certifying positivity
-with a margin of **74.446 orders** above the required tolerance
+with Weyl propagation of an enclosed per-entry error bound, certifying positivity
+with a margin of **74.4468 orders** above the required tolerance
 $\rho^*=1.63092656759474834688247443633\times10^{-104}$. **Route A2**, the
 validated interval eigen-solver `acb_mat.eig`, isolates all 81 eigenvalues under
 both the `rump` and `vdhoeven_mourrain` algorithms and returns an enclosure
 strictly positive with zero imaginary part; it agrees with the arbitrary-precision
 `mpmath` value to **79 significant decimal digits**.
 
-The chain of certification rests on one measured estimate: the per-entry error
-is obtained by dps-doubling, and `mpmath` is not interval arithmetic. We state
-this explicitly rather than presenting the enclosure as unconditional.
+The entry-error link of the chain was, until 2026-10-07, a dps-doubling
+*estimate*: `mpmath` is not interval arithmetic, so an error invariant under
+dps-doubling would not have appeared. It is now a ball-arithmetic upper bound
+(§3.2), so the chain no longer rests on an estimate — but the bound is a
+Python/FLINT output consumed as a literal in the Lean module, not a
+kernel-checked quantity, and we state that rather than claiming otherwise.
 
 We further document a defect in `mp.lerchphi` that propagates into the matrix
 diagonal, producing a maximal entry perturbation of
@@ -299,24 +302,36 @@ $$
 = 1.63092656759474834688247443633\times10^{-104}.
 $$
 
-### The measured entry error
+### The entry error, enclosed
 
-The per-entry error is obtained by dps-doubling, building the corrected matrix
-at `dps 180` and `dps 260` through the *same code path*:
+Since 2026-10-07 the per-entry error is not measured by dps-doubling but
+*enclosed*. `gw_rho_formal.py` re-evaluates the same corrected-build formulas of
+`gw_corrected_eig.build_blocks_corrected` in `flint.arb`/`flint.acb` at 1200
+working bits — `acb.hypgeom_2f1`, `arb.digamma` and `acb.polygamma` are ball
+primitives — and evaluates the one term with no primitive, the Lerch series in
+`beta_L`, as a ball series carrying a proved geometric tail bound. Against the
+dps-180 reference matrix this gives
 
 $$
-\rho_{\text{actual}} = 5.83986112334288261\times10^{-179},
+\rho_{\text{actual}} = 5.8287013697174734848\times10^{-179},
 \qquad
-\frac{\rho_{\text{actual}}}{\rho^*} = 3.5807014\times10^{-75}.
+\frac{\rho_{\text{actual}}}{\rho^*} = 3.5738589\times10^{-75}.
 $$
 
-**Certified margin: 74.446 orders.**
+**Certified margin: 74.4468 orders.**
 
-> **Epistemic status.** $\rho^*$ and the Weyl step are rigorous. The link
-> $\rho_{\text{actual}}$ is an **estimate**: `mpmath` is not interval
-> arithmetic, so an error invariant under dps-doubling would not appear. The
-> certificate is therefore *conditional*, and every presentation of the result
-> in this repository says so.
+> **Epistemic status.** $\rho^*$ and the Weyl step are rigorous, and so is the
+> entry-error bound: it is `max_ij (|M_ref_ij − center_ij| + rad_ij)`, an upper
+> bound by construction rather than a sample of a difference. The dps-doubling
+> estimate it replaces was $5.83986112334288261\times10^{-179}$ — larger, as
+> expected, since an estimate measures the gap between two dps builds. What is
+> still outside the kernel: this bound is a Python/FLINT output that
+> `OMEGATrackC.lean` consumes as a literal, and that module could not be
+> recompiled after the literal changed because the measuring machine has no
+> Mathlib. The literal is checked by `track_c_make_smt.py` (three-way match
+> against the README, seven side conditions as exact rationals), by the
+> regenerated SMT-LIB2 conjunction under `z3`, and by the anti-circularity
+> audit.
 
 ### Negative result: the solver with radii
 
@@ -366,7 +381,8 @@ reference. It is not a measurement and is retracted.
 `mp.mp.dps` was set, so the 180-digit strings were read at `dps 40` — the
 module-level landmine at `gw_qinf.py:47`. The number measured the reader, not
 the matrix. Corrected value: $5.83986112334288261\times10^{-179}$, and the
-verdict inverted by **138 orders** to $+74.446$.
+verdict inverted by **138 orders** to $+74.446$ — that was the dps-doubling
+tool's own margin; the rigorous bound of §3.2 gives $+74.4468$.
 
 ---
 
@@ -494,8 +510,10 @@ on the following basis:
    validated algorithms and returns an enclosure strictly positive with zero
    imaginary part. *Rigorous over the matrix as handed.*
 2. **Route A1** — `arb` enclosure combined with Weyl propagation certifies
-   positivity with a margin of **74.446 orders** over the required entry-error
-   tolerance. *Conditional on the dps-doubling estimate of $\rho_{\text{actual}}$.*
+   positivity with a margin of **74.4468 orders** over the required entry-error
+   tolerance. *Conditional on $\rho_{\text{actual}}$, which since 2026-10-07 is
+   a ball-arithmetic upper bound consumed as a literal rather than a
+   dps-doubling estimate; the bound itself is rigorous (§3.2).*
 3. **Precision ladder** — $dy = 2.11\times10^{-79}$ (180→260) and
    $2.42\times10^{-159}$ (260→340), both far below the $10^{-4}$ threshold.
 4. **Cross-checks** — determinant route agrees with `eigsy` to 25 digits at
@@ -519,10 +537,17 @@ seven side conditions -- that module checks the inference and the arithmetic
 
 ### Limitations
 
-* The certificate in Route A1 rests on one measured estimate
-  ($\rho_{\text{actual}}$, by dps-doubling). A fully rigorous chain would
-  require evaluating the archimedean block inside interval arithmetic, which
-  `python-flint 0.9.0` does not provide.
+* The certificate in Route A1 rests on one quantity produced outside the Lean
+  kernel: $\rho_{\text{actual}}$. Since 2026-10-07 it is an interval-arithmetic
+  upper bound rather than an estimate (§3.2), so the earlier limitation no
+  longer applies — but it is still a Python/FLINT output consumed as a literal.
+* The belief that blocked this earlier — that `python-flint 0.9.0` cannot
+  evaluate the archimedean block in interval arithmetic because it "exposes no
+  psi/digamma/polygamma/hyp2f1/lerchphi" — was **partly false**. Verified on
+  0.9.0: `arb.digamma`, `acb.polygamma` and `acb.hypgeom_2f1` are all
+  ball-valued primitives. Only `lerchphi` is genuinely absent, and it needed
+  only a ball series with a proved tail bound. That false capability claim is
+  what kept the chain on dps-doubling for as long as it did.
 * Routes A1 and A2 are **not independent of one another**: `arb_mat.eig`
   wraps `acb_mat.eig`. Both are independent only of `mpmath`.
 * The eigenvalue result is a measurement at finite precision. It is not a proof

@@ -464,3 +464,47 @@ shp_mcp_bridge_v4.py            9755469673e5e55bea841ea201f5a70c3243cd9f4c2ccc27
    refuse to answer when no solver ran. It does not make any claim in the
    corpus true. The seven Track C side conditions remain the only
    machine-checked results in this workspace.
+
+---
+
+## N. Addendum 2026-10-07 (phase A15) -- `rho_actual` re-anchored from estimate to bound
+
+Sections 1-5 above record this workspace at F0 time and are left as written.
+One of the three constants changed after that, so this addendum states the
+change rather than letting the older table stand unqualified.
+
+| constant | at F0 time (section 3) | since 2026-10-07 |
+|---|---|---|
+| `lambdaMin` | `132105051975174632728899314595 / 10^131` | unchanged |
+| `rhoActual` | `583986112334288261 / 10^196` | `58287013697174734848 / 10^198` |
+| `rhoStar` | `163092656759474834688247443633 / 10^133` | unchanged |
+| margin `rho* / rho_actual` | 74.4460318880 decades | 74.4468626023 decades |
+
+`rhoActual` was a **dps-doubling estimate**; it is now the ball-arithmetic
+upper bound `max_ij (|M_ref_ij - center_ij| + rad_ij)` measured by the new
+`gw_rho_formal.py`, which re-evaluates the same corrected-build formulas in
+`flint.arb` / `flint.acb` at 1200 working bits and gives the Lerch series of
+`beta_L` a proved geometric tail bound. The new value is *smaller* than the
+estimate it replaces, which is what an upper bound should be relative to a
+two-builds difference.
+
+The seven side conditions of section 3 were re-evaluated with the new literal
+and still hold; `rho_actual * 10^74 <= rhoStar` now has 0.4468 decades of slack
+and `rho_actual * 401 = 2.34e-176 < lambda_min` is unchanged in verdict.
+
+What was verified after the edit, and what was not:
+
+* `track_c_make_smt.py`: three-way literal match against `README.md` **MATCH**,
+  7/7 negations UNSAT, exit 0; `track_c_side_conditions.smt2` regenerated.
+* `z3` on the regenerated script: UNSAT, via the anti-circularity gate, which
+  reports `GENUINE=2`.
+* `lean -o OMEGATrackC.olean OMEGATrackC.lean` (the row in section 4) was
+  **NOT RUN** for the new literal: the machine that made the change has no
+  Mathlib. No theorem statement changed, so that row still describes the
+  proofs, but it no longer covers the current bytes of the file.
+* The dps-180 reference matrix `gw_matrix_100_40_dps180.json`, absent when this
+  report was written, was rebuilt on 2026-10-07 with `gw_corrected_eig.py`; its
+  `lambda_min` reproduces `lambdaMin` to all 30 published digits. That matrix and
+  `gw_rho_formal_100_40.json` are megabyte-scale generated data and are not
+  tracked in git; the commands that regenerate both are in the sub-repository
+  `README.md` (A1 section).

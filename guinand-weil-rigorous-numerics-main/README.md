@@ -27,7 +27,7 @@ Two independent ball-arithmetic routes to this number were executed:
 
 | route | tool | outcome |
 |---|---|---|
-| **A1** — `arb` enclosure + Weyl propagation | `flint.arb`, prec 1024 bits | **CERTIFIED**, margin **74.446 orders** over the required entry-error tolerance |
+| **A1** — `arb` enclosure + Weyl propagation | `flint.arb`, prec 1024 bits | **CERTIFIED**, margin **74.4468 orders** over the required entry-error tolerance |
 | **A2** — interval eigen-solver | `flint.arb_mat.eig` (`rump`, `vdhoeven_mourrain`) | **ENCLOSED STRICTLY POSITIVE**, 81/81 eigenvalues isolated, $\operatorname{Im} = 0$ |
 
 Route A1 certifies positivity provided every matrix entry carries absolute
@@ -37,20 +37,35 @@ $$
 \rho^* = 1.63092656759474834688247443633\times 10^{-104},
 $$
 
-while the measured entry error at `dps 180` is
+while the entry error of the `dps 180` reference matrix is bounded by
 
 $$
-\rho_{\text{actual}} = 5.83986112334288261\times 10^{-179},
-\qquad \frac{\rho_{\text{actual}}}{\rho^*} = 3.5807014\times10^{-75}.
+\rho_{\text{actual}} = 5.8287013697174734848\times 10^{-179},
+\qquad \frac{\rho_{\text{actual}}}{\rho^*} = 3.5738589\times10^{-75}.
 $$
 
-> **Precision note that must travel with the number.** $\rho_{\text{actual}}$
-> comes from dps-doubling. It is an **estimate**, not a proof: `mpmath` is not
-> interval arithmetic, so an error stable across both precisions would not
-> appear in the difference. The two links *above* it — the `arb` enclosure of
-> the handed matrix and the Weyl inequality — are rigorous. The complete chain
-> is therefore **certified conditional on one measured estimate**, and is
-> described that way throughout this repository.
+> **Precision note that must travel with the number.** Since 2026-10-07
+> $\rho_{\text{actual}}$ is **not** a dps-doubling estimate. It is the
+> ball-arithmetic upper bound `max_ij (|M_ref_ij − center_ij| + rad_ij)`
+> computed by `gw_rho_formal.py`, which re-evaluates the *same* corrected-build
+> formulas of `gw_corrected_eig.build_blocks_corrected` in `flint.arb` /
+> `flint.acb` at prec 1200 bits and reports what remains between the dps-180
+> reference matrix `gw_matrix_100_40_dps180.json` and those balls. The Lerch
+> series behind `beta_L` — the one term with no flint primitive — is evaluated
+> there as a ball series with a proved geometric tail bound. The old
+> dps-doubling estimate was $5.83986112334288261\times10^{-179}$; the rigorous
+> bound is *smaller*, because an estimate measures the gap between two dps
+> builds while this measures the distance to the true value.
+>
+> What remains outside the kernel: the enclosure itself is a Python/FLINT
+> output consumed by `OMEGATrackC.lean` as a literal, and that file could not be
+> recompiled after the literal changed (no Mathlib on the measuring machine).
+> The literal is verified by `track_c_make_smt.py` (three-way literal match
+> against this README, seven side conditions as exact rationals), by the
+> regenerated `track_c_side_conditions.smt2` under `z3`, and by the
+> anti-circularity audit. Route A1 is **no longer conditional on a measured
+> estimate**; it is conditional on a ball-arithmetic measurement consumed as a
+> literal, which is a different and strictly stronger statement.
 
 Route A2 is rigorous over the matrix as handed to `flint`. It agrees with the
 `mpmath` eigenvalue to **79 significant decimal digits**.
@@ -281,7 +296,7 @@ build from **602.3 s to 2.6 s — a factor of 231.7** — while removing the def
 | determinant route vs `eigsy` | agree 25 digits, ratio 1.0 | cross-checked |
 | FLINT `rump` enclosure | $\pm\,8.410\times10^{-309}$ | `ENCLOSED STRICTLY POSITIVE` |
 | FLINT `vdhoeven_mourrain` | $\pm\,3.79\times10^{-279}$ | `ENCLOSED STRICTLY POSITIVE` |
-| A1 margin | 74.446 orders | `CERTIFIED` *(one estimated link)* |
+| A1 margin | 74.4468 orders | `CERTIFIED` *(rigorous ball-arithmetic enclosure, `gw_rho_formal.py`)* |
 | $\psi'$ identity at $(100,40)$ | $4.807\times10^{-138}$ (140), $3.912\times10^{-159}$ (160) | `PASS`, 35.4 / 56.5 orders |
 | $\lambda_{\min}(Q_{100,20})$ | $+3.0256658\times10^{-62}$ | `RESOLVED POSITIF`, dps 70 & 100 |
 | c = 13 ladder, rung $N=64$ | $\lambda_{\min}=6.32135140948\times10^{-59}$ | identity valid 19 orders below |
@@ -357,11 +372,19 @@ python gw_lam_dps.py 100 40 180 260 340
 python gw_arb_sweep.py gw_matrix_100_200_dps400.json
 
 # entry-error dps-doubling: loads a saved matrix at dps_lo, rebuilds it at dps_hi.
-# The dps-180 / dps-260 input matrices of record are NOT shipped in this repo --
-# only gw_matrix_100_200_dps400.json is -- so the line below documents the
-# invocation and is not runnable from the shipped data alone (see the
-# entry-error retraction in GW_STATUS_2026-09-26.md).
+# The dps-180 matrix of record was rebuilt on 2026-10-07 and now ships as
+# gw_matrix_100_40_dps180.json; the dps-260 one still does not, so that line
+# remains documentary.  This tool is kept for comparison: it produced the
+# estimate that route A1 used until 2026-10-07.
 python gw_entry_error.py 100 40 180 260 <matrix_dps180.json>
+
+# formal entry-error enclosure (replaces the estimate above as the source of
+# rho_actual): rebuilds the corrected-build formulas in flint ball arithmetic
+# and reports max_ij (|M_ref_ij - center_ij| + rad_ij).  Writes
+# gw_rho_formal_100_40.json.  Neither that results file nor the dps-180 matrix
+# it consumes is tracked in git -- both are regenerated by the two commands
+# above, and both are megabyte-scale generated data.
+python gw_rho_formal.py 100 40 gw_matrix_100_40_dps180.json 1200
 
 # A2: interval eigen-solver
 python gw_corrected_eig.py 100 40 180      # phase 6

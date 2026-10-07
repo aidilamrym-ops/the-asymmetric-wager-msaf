@@ -17,6 +17,17 @@ existed outside the repository.  On 2026-10-02 the module was shipped here and
 conditions below), `coqc` / `isabelle` / `dkcheck` not installed on the machine
 that produced this file, `gcc` **NOT RUN**.
 
+On 2026-10-07 (phase A15) the `rhoActual` literal below was re-anchored from a
+dps-doubling **estimate** to a rigorous ball-arithmetic upper bound produced by
+`gw_rho_formal.py`.  That machine has no Mathlib, so **this file was not
+recompiled after that edit**: `lean` **NOT RUN** for the new literal.  What ran,
+and what the re-anchored literal rests on, is `track_c_make_smt.py` (three-way
+literal match against `README.md`, plus the seven side conditions evaluated as
+exact rationals), the regenerated `track_c_side_conditions.smt2` under `z3`, and
+the anti-circularity audit.  No theorem statement changed, so the 2026-10-02
+`lean` run still certifies the proofs as written; what changed is the provenance
+of one literal.
+
 This module closes the *logical* half of that gap.  It proves, in Lean 4 with
 Mathlib:
 
@@ -36,6 +47,12 @@ numbers satisfy these inequalities").  What is **not** machine-checked is the
 origin of the numbers themselves: `μ`, `ρ_actual` and `ρ*` are outputs of the
 FLINT/Arb ball-arithmetic stage, and this module consumes them as literals.
 No claim of kernel verification is made for the numerics.
+
+Since 2026-10-07 that includes one change in kind: `ρ_actual` used to be a
+dps-doubling estimate and is now an *upper bound produced by interval
+arithmetic* (`gw_rho_formal.py`), so the entry-error link of the chain is no
+longer an estimate — but it is still a Python/FLINT output consumed here as a
+literal, not a Lean-checked quantity.  `μ` and `ρ*` are likewise literals.
 -/
 
 namespace OMEGA
@@ -241,8 +258,26 @@ abbrev nDim : ℕ := 401
 /-- `λ_min(Q̂) = +1.32105051975174632728899314595 × 10⁻¹⁰²` (README §1). -/
 abbrev lambdaMin : ℚ := 132105051975174632728899314595 / 10 ^ 131
 
-/-- Measured entry error `ρ_actual = 5.83986112334288261 × 10⁻¹⁷⁹` at dps 180. -/
-abbrev rhoActual : ℚ := 583986112334288261 / 10 ^ 196
+/-- Rigorous upper bound on the entry error:
+    `ρ_actual ≤ 5.8287013697174734848 × 10⁻¹⁷⁹`.
+
+    Measured by `gw_rho_formal.py`, which re-evaluates the same corrected-build
+    formulas of `gw_corrected_eig.build_blocks_corrected` in FLINT ball
+    arithmetic (prec 1200 bits) and reports
+    `max_ij (|M_ref_ij − center_ij| + rad_ij)` against the dps-180 reference
+    matrix `gw_matrix_100_40_dps180.json` (81 × 81, verified symmetric).  This
+    is an upper bound by construction, not a sample of a difference.
+
+    It replaces the dps-doubling estimate `5.83986112334288261 × 10⁻¹⁷⁹` this
+    literal carried until 2026-10-07, and it is *smaller* than that estimate —
+    as it should be, since the estimate measures the gap between two dps builds
+    while this measures the distance to the true value.
+
+    The one transcendental the corrected build has no FLINT primitive for, the
+    Lerch series inside `beta_L`, is evaluated there as a ball series with a
+    proved geometric tail bound; `λ_min` is untouched, and the dps-180 rebuild
+    reproduces `lambdaMin` to all 30 published digits. -/
+abbrev rhoActual : ℚ := 58287013697174734848 / 10 ^ 198
 
 /-- Certified tolerance `ρ* = 1.63092656759474834688247443633 × 10⁻¹⁰⁴`
 (`README.md` line 37).  A 30-digit numerator over `10^133`
@@ -262,7 +297,7 @@ abbrev rhoStar : ℚ := 163092656759474834688247443633 / 10 ^ 133
 tolerance. -/
 theorem measured_within_tolerance : rhoActual ≤ rhoStar := by norm_num
 
-/-- **74 orders of margin, kernel-checked.**  The README reports 74.446 orders;
+/-- **74 orders of margin, kernel-checked.**  The README reports 74.4468 orders;
 this establishes the integer part `≥ 74` as an exact rational inequality. -/
 theorem margin_at_least_74_orders : rhoActual * 10 ^ 74 ≤ rhoStar := by norm_num
 
@@ -270,9 +305,9 @@ theorem margin_at_least_74_orders : rhoActual * 10 ^ 74 ≤ rhoStar := by norm_n
 evaluated at the enlarged constant `nDim = 401`:
 `ρ_actual · nDim ≈ 2.34 × 10⁻¹⁷⁶ ≪ 1.32 × 10⁻¹⁰²`, so the theorem applies
 with an enormous reserve.  At the true dimension `81` of `Q_{100,40}` the
-product is `≈ 5.8 × 10⁻¹⁷⁸` and the reserve is 74.446 orders -- the figure
-the certificate reports.  Both readings satisfy the same side condition;
-this one is the stronger of the two. -/
+  product is `≈ 5.8 × 10⁻¹⁷⁸` and the reserve is 74.4468 orders -- the figure
+  the certificate reports.  Both readings satisfy the same side condition;
+  this one is the stronger of the two. -/
 theorem margin_satisfies_master_theorem :
     rhoActual * nDim < lambdaMin := by norm_num
 

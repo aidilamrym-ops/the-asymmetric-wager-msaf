@@ -18,6 +18,15 @@ measurement available is dps-doubling:
 
     |M_dps - M_2*dps|  estimates the error of M_dps
 
+CAPABILITY CORRECTION (2026-10-07, phase A15): the paragraph above repeats a
+claim that is only half true, and the false half is what kept Route A1
+conditional for so long.  Verified on python-flint 0.9.0: `arb.digamma`,
+`acb.polygamma` and `acb.hypgeom_2f1` ARE ball-valued primitives; only
+`lerchphi` is genuinely absent, and it needed only a ball series with a proved
+geometric tail bound.  `gw_rho_formal.py` does exactly that and replaces the
+estimate with an upper bound (see README section A1).  This tool is kept for
+comparison and for its mis-parse diagnostic, not as the source of rho_actual.
+
 The matrix is built by the SAME code path at both precisions (the corrected
 build, beta_L via the defining series), so the difference isolates the
 rounding/truncation error of the lower precision rather than a code change.
