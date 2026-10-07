@@ -23,6 +23,13 @@ Theory_of_Everything_Derivations/ are third-party or self-pinned trees. The
 Guinand-Weil sub-repo already carries its own manifest; duplicating it here
 would create two authorities for one set of bytes.
 
+lean/ (DiscreteCoordinates.lean, A13) is first-party but deliberately out of
+scope: adding it would change the live row count this corpus quotes as 93,
+and every current-state claim would need re-anchoring. Its integrity is
+pinned instead by (a) the AC Gate `lean` scan (zero `sorry` after comment
+stripping) and (b) a clean `lean.exe` compile with `#print axioms` showing
+only [propext, Classical.choice, Quot.sound] on both exported theorems.
+
 USAGE
 -----
     python checksum_check.py            verify (the suite runs this)
