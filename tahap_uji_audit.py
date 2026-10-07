@@ -2,7 +2,7 @@
 # PURPOSE: Fase A10 honesty gate over the two documents in
 #          Theory_of_Everything_Derivations/tahap uji/.
 #          Reads every condition OUT of those documents (and out of
-#          external_constants.json / protocol_09.log where the condition is a
+#          external_constants.json / bounded_loop.log where the condition is a
 #          cross-reference), so deleting a sentence fails the gate rather than
 #          quietly passing it.
 # EXIT:    0 = every condition met
@@ -24,7 +24,7 @@ VAC = os.path.join(HERE, "Theory_of_Everything_Derivations", "tahap uji",
 SIEVE = os.path.join(HERE, "Theory_of_Everything_Derivations", "tahap uji",
                      "THE_SOVEREIGN_SIEVE_PROTOCOL.md")
 CONST = os.path.join(HERE, "external_constants.json")
-P09LOG = os.path.join(HERE, "protocol_09.log")
+BLLOG = os.path.join(HERE, "bounded_loop.log")
 LANDAUER = os.path.join(HERE, "landauer_check.py")
 ZETA = os.path.join(HERE, "msaf_zeta_check.py")
 
@@ -54,7 +54,7 @@ def read(path):
 
 
 def main():
-    for p in (VAC, SIEVE, CONST, P09LOG):
+    for p in (VAC, SIEVE, CONST, BLLOG):
         if not os.path.isfile(p):
             print("FAIL  --  missing artefact: %s" % p)
             return 2
@@ -66,7 +66,7 @@ def main():
     except Exception as exc:
         print("FAIL  --  external_constants.json unreadable: %s" % exc)
         return 2
-    p09 = read(P09LOG)
+    p09 = read(BLLOG)
     q_by_id = {q.get("id"): q for q in reg.get("quantities") or []
                if isinstance(q, dict)}
 
@@ -196,7 +196,7 @@ def main():
     # ---- V7 sieve: Gate 3 meaning is not 'all SAT' -----------------------
     base = len(failures)
     check("unsat" in p09.lower(),
-          "V7  protocol_09.log records an unsat script verdict")
+          "V7  bounded_loop.log records an unsat script verdict")
     check("ctx=sat" in p09 or "context alone" in p09.lower()
           or "context alone" in sieve.lower(),
           "V7  context-alone sat is recorded (non-vacuous)")

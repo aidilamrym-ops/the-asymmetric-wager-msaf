@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Protocol 09 -- gate over the Phi encoding (F0_REPORT.md section 9 residual 1).
+"""bounded_loop -- gate over the Phi encoding (renamed A12) (F0_REPORT.md section 9 residual 1).
 
 WHY THIS EXISTS
 ---------------
@@ -9,7 +9,7 @@ a claim rather than a result, and refused to write the encoding off-hand
 because a literal one would have been discharged from its own axioms and
 audited VACUOUS or SINGLE_AXIOM.  The three pieces it demanded -- transition
 relation, self-reference operator, step counter -- now exist in
-`protocol_09.smt2`, with the run recorded in `protocol_09.log`.
+`bounded_loop.smt2`, with the run recorded in `bounded_loop.log`.
 
 This gate keeps the two failure modes F0-3 named from coming back:
 
@@ -34,8 +34,8 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SMT = os.path.join(HERE, "protocol_09.smt2")
-LOG = os.path.join(HERE, "protocol_09.log")
+SMT = os.path.join(HERE, "bounded_loop.smt2")
+LOG = os.path.join(HERE, "bounded_loop.log")
 AUDITOR_NAME = "smt_circularity_auditor.py"
 AUDITOR_KNOWN = (
     os.path.join(r"C:\Users\usER\oracle-toe\OMEGA_TRACK_C", "auditor",
@@ -47,10 +47,10 @@ AUDITOR_KNOWN = (
 Z3_KNOWN = (r"E:\4_TOOLS_INSTALLER\z3-4.16.0-x64-win\bin\z3.exe",)
 
 # The three axioms the audit reports as the minimal core, by 0-based position
-# among the (assert ...) forms of protocol_09.smt2, plus the claim itself.
+# among the (assert ...) forms of bounded_loop.smt2, plus the claim itself.
 CORE = ((11, "A4 the invariant b >= i"),
-        (12, "A5 HALT implies i >= M"),
-        (13, "A6 M > N"))
+        (12, "A5 q_halt implies i >= m_budget"),
+        (13, "A6 m_budget > n_budget"))
 CLAIM_INDEX = 15
 
 failures = []
@@ -154,7 +154,7 @@ def assemble(clean, forms, drop=None, negated_claim=None):
 
 def run_z3(z3, text, tag):
     tag = "".join(c if c.isalnum() else "_" for c in str(tag))
-    path = os.path.join(tempfile.gettempdir(), "p09gate_%s.smt2" % tag)
+    path = os.path.join(tempfile.gettempdir(), "blgate_%s.smt2" % tag)
     with io.open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(text)
     try:
@@ -170,12 +170,12 @@ def main():
     # ------------------------------------------------ P1 presence --------
     base = len(failures)
     if not check(os.path.isfile(SMT),
-                 "P1  protocol_09.smt2 is missing from the workspace root"):
+                 "P1  bounded_loop.smt2 is missing from the workspace root"):
         print("")
         print("GATE: FAIL -- %d condition(s) not met" % len(failures))
         return 1
     if not check(os.path.isfile(LOG),
-                 "P1  protocol_09.log is missing; a displayed verdict with "
+                 "P1  bounded_loop.log is missing; a displayed verdict with "
                  "no run log is a claim, not a result"):
         print("")
         print("GATE: FAIL -- %d condition(s) not met" % len(failures))
@@ -185,7 +185,7 @@ def main():
         raw = fh.read()
     with io.open(LOG, encoding="utf-8", newline="") as fh:
         log = fh.read()
-    say("P1", "PRESENCE            protocol_09.smt2 + protocol_09.log", base)
+    say("P1", "PRESENCE            bounded_loop.smt2 + bounded_loop.log", base)
 
     # ------------------------------------------------ P2 log binding ------
     base = len(failures)
@@ -201,12 +201,12 @@ def main():
     # ------------------------------------------------ P3 claim + verdict --
     base = len(failures)
     check("(check-sat)" in raw,
-          "P3  protocol_09.smt2 carries no (check-sat)")
+          "P3  bounded_loop.smt2 carries no (check-sat)")
     check(re.search(r"MACHINE[\s_-]+RESULT", raw, re.I) is not None,
-          "P3  protocol_09.smt2 carries no MACHINE RESULT marker, so the "
+          "P3  bounded_loop.smt2 carries no MACHINE RESULT marker, so the "
           "claim gate has nothing to bind")
     vm = re.search(r"^\s*(sat|unsat|unknown)\s*$", log, re.I | re.M)
-    if check(vm is not None, "P3  protocol_09.log carries no solver verdict line"):
+    if check(vm is not None, "P3  bounded_loop.log carries no solver verdict line"):
         check(vm.group(1).lower() == "unsat",
               "P3  the log records %r, not 'unsat'" % vm.group(1))
     say("P3", "CLAIM BINDING       check-sat + MACHINE RESULT + log unsat", base)
@@ -231,7 +231,7 @@ def main():
     if check(len(forms) > CLAIM_INDEX,
              "P4  expected at least %d assertions, found %d"
              % (CLAIM_INDEX + 1, len(forms))):
-        check(forms[CLAIM_INDEX].startswith("(assert (and (= q0 HALT)"),
+        check(forms[CLAIM_INDEX].startswith("(assert (and (= q0 q_halt)"),
               "P4  the last assertion is not the halting claim; the "
               "auditor would audit a different sentence than the one "
               "documented")

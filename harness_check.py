@@ -45,7 +45,7 @@ HARNESSES = [
     ("f5_2_inj.py",          "verifier",  0, "HARNESS: PASS -- 20/20 cases",           True),
     ("f5_3_inj.py",          "verifier",  0, "HARNESS: PASS -- 7/7 cases",             True),
     ("f5_4_inj.py",          "verifier",  0, "HARNESS: PASS -- 14/14 cases",           True),
-    # A1.  Proves protocol_09_check.py is a gate and not a rubber stamp: four
+    # A1.  Proves bounded_loop_gate.py is a gate and not a rubber stamp: four
     # defects aimed at four different conditions (vacuous context, stale log,
     # removed axiom, removed marker) plus the baseline and the restored
     # baseline.  Both tracked artefacts come back byte-for-byte.

@@ -199,6 +199,13 @@ over, and it is the honest limit of this closure: the encoding proves the
 halting claim it encodes, not the unboundedness of the loop that motivated
 it. §1.B of the document has been re-pointed at the gate.
 
+> **Amendment, 2026-10-07 (A12).** The A1 artefacts were renamed by Fase A12:
+> `protocol_09.smt2` → `bounded_loop.smt2`, `protocol_09.log` →
+> `bounded_loop.log`, `protocol_09_check.py` → `bounded_loop_gate.py`.
+> Token mapping (own Kamus, `KAMUS_PEMETAAN.md`): `P09→p09_op`,
+> `SCAN→q_scan`, `SELFCHECK→q_check`, `HALT→q_halt`, `M→m_budget`,
+> `N→n_budget`. Gate still 8/8; auditor still `GENUINE`.
+
 ### F0-4 — `shp_mcp_bridge_v4.py` would return verdicts no solver produced
 
 When `z3py` was absent, `SMTTribunal._evaluate_simulated()` ran a regex over

@@ -15,7 +15,7 @@ trees do not contradict each other.
 |---|---|---|---|
 | **Machine-readable artefacts** — `*.py` at the root, `harnesses/*.py`, `mcp/*.py`, `*.smt2` | **MIT** | `LICENSE` | maximise reproducibility; another group must be able to run the gates, the harnesses and the solver checks without friction |
 | **Scholarly documents** — every `*.md` at the root: the corpus, `F0_REPORT.md` … `F5_REPORT.md`, `README.md`, `Brain.MD`, `Skill.md`, `AGENTS.md`, `REFERENCES.md`, `LICENSING.md` | **CC-BY-4.0** | this file | these are works of scholarship, not software; attribution has to travel with them |
-| **Numerical registers and data** — `external_constants.json`, `theorem_provenance.json`, `zeta_pixel_results.json`, `CHECKSUM.sha256`, `protocol_09.log` | **CC-BY-4.0** | this file | the evidence record; citable and quotable with attribution |
+| **Numerical registers and data** — `external_constants.json`, `theorem_provenance.json`, `zeta_pixel_results.json`, `CHECKSUM.sha256`, `ounded_loop.log` | **CC-BY-4.0** | this file | the evidence record; citable and quotable with attribution |
 | **Third-party material** | as recorded at each item | see below | not ours to relicense |
 
 ## What neither licence covers

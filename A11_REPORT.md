@@ -123,7 +123,12 @@ phase tags) are left alone — that is the escape hatch working as designed.
 | manifest | `python checksum_check.py` | `ok   CHECKSUM matched 91/91 listed, 91 on disk` |
 | AC Gate | `gate.py` self-test / lean / claim / audit | self-test **13/13**; lean **PASS**; claim **PASS**; audit **PASS** `GENUINE=2` (`protocol_09.smt2` core=[11,12,13,15]; `track_c_side_conditions.smt2` core=[0]) |
 
-Live rig after A11: suite=15, harnesses=24, manifest=91, brain=v1.17, `len(CONDITIONS)`=11.
+Live rig after A11 (2026-10-07): suite=15, harnesses=24, manifest=91, brain=v1.17, `len(CONDITIONS)`=11.
+
+> **Amendment, 2026-10-07 (A12).** The AC Gate claim on `protocol_09.smt2`
+> above is historical; A12 renamed it to `bounded_loop.smt2` (same core
+> `[11,12,13,15]`, same auditor verdict). Manifest is now 93 files;
+> `Brain.MD` is v1.18; F8-R4 closed.
 
 ---
 

@@ -1,5 +1,5 @@
 # FILE: harnesses/p09_inj.py
-# PURPOSE: prove protocol_09_check.py can fail.
+# PURPOSE: prove bounded_loop_gate.py can fail.
 #
 # A gate whose every condition has only ever returned "ok" has not been
 # tested; it has merely been run.  This harness applies four independent
@@ -30,9 +30,9 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-GATE = os.path.join(ROOT, "protocol_09_check.py")
-SMT = os.path.join(ROOT, "protocol_09.smt2")
-LOG = os.path.join(ROOT, "protocol_09.log")
+GATE = os.path.join(ROOT, "bounded_loop_gate.py")
+SMT = os.path.join(ROOT, "bounded_loop.smt2")
+LOG = os.path.join(ROOT, "bounded_loop.log")
 PY = sys.executable
 
 TARGET = "HARNESS: PASS -- 6/6 cases"
@@ -104,11 +104,11 @@ def main():
         cases.append(("baseline", ok))
 
         # ------------------------------ case 2: context made inconsistent --
-        # Replace N > 0 by (and N > 0  N < 0): the context collapses, the
+        # Replace n_budget > 0 by (and n_budget > 0  n_budget < 0): the context collapses, the
         # assertion count is unchanged, and the claim stays at index 15, so
         # nothing structural can trip the gate before P5 gets to look.
-        mutated = raw.replace("(assert (> N 0))",
-                              "(assert (and (> N 0) (< N 0)))", 1)
+        mutated = raw.replace("(assert (> n_budget 0))",
+                              "(assert (and (> n_budget 0) (< n_budget 0)))", 1)
         if check(mutated != raw, "C2 mutation did not apply (needle absent)"):
             apply_raw(mutated)
             rebind_log(mutated)
@@ -147,7 +147,7 @@ def main():
                 fh.write(orig_log)
 
         # ------------------------------------------- case 4: axiom removed --
-        mutated = raw.replace("(assert (> M N))\n", "", 1)
+        mutated = raw.replace("(assert (> m_budget n_budget))\n", "", 1)
         if check(mutated != raw, "C4 mutation did not apply (needle absent)"):
             apply_raw(mutated)
             rebind_log(mutated)

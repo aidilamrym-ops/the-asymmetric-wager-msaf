@@ -332,7 +332,7 @@ Still open or deferred, not closed by A9 or A11:
 | Id | Statement |
 |---|---|
 | `F8-R3` | Sub-repo encoding remains pinned-not-fixed (39 files, `CHECKSUM.sha256` header `TOTAL FILES : 116`). Out of A9 scope on purpose. |
-| `F8-R4` | A8 (`protocol_09` / `Tugas tambahan.md`) remains deferred. |
+| `F8-R4` | **CLOSED 2026-10-07 (A12).** A8 was deferred (no Kamus; name collisions). A12 authored `KAMUS_PEMETAAN.md`, renamed `protocol_09.*` → `bounded_loop.*` with tokens `p09_op`/`q_scan`/`q_check`/`q_halt`/`m_budget`/`n_budget`, regenerated the Z3 log, retargeted `bounded_loop_gate.py` (8/8) and the live harness/suite/sieve references. Historical reports keep A1 names with an amendment. |
 
 ---
 

@@ -29,7 +29,7 @@ Fase A10 executed options 1B, 2b/2c, 3ii and 4y of the A10 decision:
 | S-2 | Vacuum | Used `1/Δ_univ` (dimensionless) as if it were a physical frequency bound | The reciprocal of a length ratio has no s^-1 unit. The Planck cutoff frequency is a different registered quantity. |
 | S-3 | Vacuum | Called renormalisation a "dirty trick" (`renormalisasi kotor`) | Standard EFT procedure; the corpus's own F4-F finding already rejected that framing. |
 | S-4 | Vacuum | Claimed the divergent integral "≈ 10^111" as if it evaluated | The integral diverges; any finite number needs a stated cutoff. |
-| V-1 | Sieve | Gate 3 described as requiring "purely SATISFIABLE" for all computation | `protocol_09.log` records `script=unsat ctx=sat`. Context sat ≠ every prose claim true. |
+| V-1 | Sieve | Gate 3 described as requiring "purely SATISFIABLE" for all computation | `bounded_loop.log` (A1; historical name `protocol_09.log`) records `script=unsat ctx=sat`. Context sat ≠ every prose claim true. |
 | V-2 | Sieve | Landauer sold as proof of computational crash / thermodynamic incineration | Landauer is a per-bit energy floor. `landauer_check.py` gates the floor arithmetic only. |
 | V-3 | Sieve | Navier--Stokes "proven smooth deterministically" | Clay open problem. F4-D already recorded this as an open claim. |
 | V-4 | Sieve | Gate 2 (quantum censorship) presented as part of a passing triple-gate | No gate script implements it. |
@@ -66,6 +66,10 @@ Fase A10 executed options 1B, 2b/2c, 3ii and 4y of the A10 decision:
 * Gate 2: **not implemented** — recorded as open residual.
 * Gate 3: implemented for Protocol 09 only; context sat, claim unsat,
   negated claim sat; cross-read of `protocol_09.log`.
+
+> **Amendment, 2026-10-07 (A12).** Gate 3 cross-read file is now
+> `bounded_loop.log` (renamed from `protocol_09.log`; A12). Gate 2 remains
+> not implemented.
 * Coercion doctrine rewritten without negotiation bans.
 
 ## 4. Provenance chain (4y)

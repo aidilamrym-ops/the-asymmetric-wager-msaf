@@ -40,7 +40,7 @@ GATES = [
     ("gw_verify_results.py",        os.path.join(GW, "gw_verify_results.py"),          [],         300),
     ("gw_final_gate.py",            os.path.join(GW, "gw_final_gate.py"),
      ["100", "40", "160", "1000.0", "224"], 1500),
-    # The encoding of Phi (F0 residual 1, A1): Protocol 09 as a finite-state
+    # The encoding of Phi (F0 residual 1, A1; renamed A12): Protocol 09 as a finite-state
     # machine, proven as QF_LIA rather than asserted in prose.  Eight
     # conditions, all recomputed -- the script must be unsat, the context
     # alone must be sat (so it is not vacuous), context + not-claim must be
@@ -49,10 +49,10 @@ GATES = [
     # must return GENUINE.  Its log is bound to the script by sha256, so a
     # stale log cannot vouch for edited bytes.  Placed immediately before the
     # manifest gate so that anything it wrote would still be caught.
-    ("protocol_09_check.py",        os.path.join(HERE, "protocol_09_check.py"),       [],         120),
+    ("bounded_loop_gate.py",        os.path.join(HERE, "bounded_loop_gate.py"),       [],         120),
     # A10 (2026-10-07): honesty gate over the two `tahap uji` documents.
     # Reads every condition out of those documents and out of
-    # external_constants.json / protocol_09.log, recomputes the Planck-cutoff
+    # external_constants.json / bounded_loop.log, recomputes the Planck-cutoff
     # vacuum density at 50 dps, and fails on the dishonesty classes the A10
     # audit found (zero-error claims, "dirty renormalisation", NS sold as
     # proven, Gate 3 misread as "all SAT").  Placed ahead of the prose gate

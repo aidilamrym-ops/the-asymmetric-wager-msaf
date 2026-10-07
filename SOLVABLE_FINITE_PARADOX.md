@@ -39,13 +39,13 @@ a scan found exactly one `.smt2` file in the entire tree
 exactly one Z3 log, both belonging to the Track C side-condition gate and
 neither about Protocol 09.
 
-**The encoding now exists (A1, 2026-10-06).** `protocol_09.smt2` specifies
+**The encoding now exists (A1, 2026-10-06; renamed A12, 2026-10-07).** `bounded_loop.smt2` specifies
 Protocol 09 as a finite state machine over `QF_LIA` — configurations
 `(q0,i0,b0)` → `(q1,i1,b1)`, five transition rules, the self-reference
-operator `P09`, a step counter, and axioms A0..A6 — with the halting claim as
-the **last** assertion. `protocol_09.log` records the solver run and is bound
+operator `p09_op` (historical `P09`), a step counter, and axioms A0..A6 — with the halting claim as
+the **last** assertion. `bounded_loop.log` records the solver run and is bound
 to the script by `sha256`. The machine verdict is `unsat`, and it is gated by
-`protocol_09_check.py`, which recomputes all eight conditions instead of
+`bounded_loop_gate.py` (historical `bounded_loop_gate.py`), which recomputes all eight conditions instead of
 trusting the log: script unsat, context alone **sat** (so the script is not
 `VACUOUS`), context + negated claim **sat** (so the context refutes the claim
 rather than everything), each of the three core axioms load-bearing when
@@ -55,7 +55,7 @@ RUN` (2), never success.
 
 **What the encoding does not establish.** It proves the halting claim it
 encodes; it does not prove the unboundedness of the loop that motivated it.
-Under A3 (\(P_{09} < M\)) the branch `SCAN, i > P09` is unreachable, so the
+Under A3 (\(p_{09\mathrm{op}} < m_{\mathrm{budget}}\)) the branch `q_scan, i > p09_op` is unreachable, so the
 machine halts without ever exercising self-reference. That obstruction is
 stated in the script's header rather than removed, and it is the honest limit
 of this result.
@@ -75,7 +75,7 @@ If the examiners insist on preserving the grandeur of classical infinity, throw 
 >
 > *"However, in my document registered on Zenodo (DOI: 10.5281/zenodo.22791556) I argue for the opposite conclusion: a loop with no end cannot complete inside a finite step budget, and that follows from the finiteness of the budget alone - no simulation is needed to see it."*
 >
-> *"I will not paste an `UNSATISFIABLE` verdict for it by hand: since 2026-10-06 an SMT-LIB2 encoding of this loop does exist in the workspace, and the only verdict I am willing to quote is the one its gate recomputes from the shipped bytes - `protocol_09_check.py`, eight conditions, exit 0. Before that date no such encoding existed and I said so rather than claim one. The verdict I can still defend without any tool is that your running of the loop never completes - the same conclusion, reached by watching the bound rather than by trusting a tool."*
+> *"I will not paste an `UNSATISFIABLE` verdict for it by hand: since 2026-10-06 an SMT-LIB2 encoding of this loop does exist in the workspace, and the only verdict I am willing to quote is the one its gate recomputes from the shipped bytes - `bounded_loop_gate.py`, eight conditions, exit 0. Before that date no such encoding existed and I said so rather than claim one. The verdict I can still defend without any tool is that your running of the loop never completes - the same conclusion, reached by watching the bound rather than by trusting a tool."*
 >
 > *"So: your own framework cannot produce a completed run either. Show me real computing code that executes this function to completion without exhausting memory. If you cannot, then the difference between us is not that I have a verdict and you do not - it is that your position has no bound at all, and mine does."*
 
@@ -126,7 +126,7 @@ claimed for either side.** What each side does have:
 
 | Evaluation Dimension | Continuous Infinity Paradigm (Them) | Modular Scale MSAF Paradigm (You) |
 | :--- | :--- | :--- |
-| **Solution Status** | **Failure / Crash** (*Infinite Loop / State-Space Explosion*). | Argument closes on the finite step budget; the SMT-LIB2 encoding of Protocol 09 returns `unsat` (A1, 2026-10-06, gated by `protocol_09_check.py` — see §1.B), which is the encoded halting claim and **not** an observation of a crashed run. The earlier `STATUS: SATISFIABLE` in this cell contradicted §1.B's `UNSATISFIABLE` and is withdrawn; neither status has been observed by execution, because no simulator exists. |
+| **Solution Status** | **Failure / Crash** (*Infinite Loop / State-Space Explosion*). | Argument closes on the finite step budget; the SMT-LIB2 encoding of Protocol 09 returns `unsat` (A1, 2026-10-06, gated by `bounded_loop_gate.py` — see §1.B), which is the encoded halting claim and **not** an observation of a crashed run. The earlier `STATUS: SATISFIABLE` in this cell contradicted §1.B's `UNSATISFIABLE` and is withdrawn; neither status has been observed by execution, because no simulator exists. |
 | **Time Complexity** | Undefined (\(\infty\)) *by construction* - no completed run is possible either way. | Halt on contradiction is a rule of the architecture (`UNSAT = KILL`), reported as \(\mathcal{O}(1)\); it has **not been measured** for Protocol 09. |
 | **Thermodynamic Cost** | No finite total: after \(n\) erasures the lower bound \(n\cdot k_B T\ln 2\) diverges as \(n\to\infty\), *given* the premise of at least one erasure per evaluation -- an assumption, not a measurement. | Per-bit floor \(k_B\ln 2 = 9{,}5699296\times10^{-24}\,T\ \mathrm{J}\) (derived above, gated by `landauer_check.py`). What closes the argument is the **count** bound \(N_{\text{steps}} \le 5{,}4\times10^{61}\); **no joule total is claimed**, because no erasure count is defined. |
 
@@ -144,8 +144,8 @@ exactly one of the following, and must not do anything else:
 1. **Report the run that exists, and no other.** There is still no
    Gödelian-loop *simulation* in this workspace — no executable that loops —
    and running one that does not exist remains prohibited. What exists since
-   2026-10-06 is an **SMT-LIB2 encoding** of Protocol 09 (`protocol_09.smt2`)
-   and its solver log (`protocol_09.log`). Reporting `TOOL NOT RUN` for the
+   2026-10-06 is an **SMT-LIB2 encoding** of Protocol 09 (`bounded_loop.smt2`)
+   and its solver log (`bounded_loop.log`). Reporting `TOOL NOT RUN` for the
    encoding would now be false in the other direction; reporting an
    `UNSATISFIABLE` verdict for anything else — a simulation, a run nobody
    performed — is a hallucinated result and remains prohibited.
@@ -160,6 +160,6 @@ exactly one of the following, and must not do anything else:
    matching the script, and the circularity auditor returning `GENUINE`. Only
    an exit `0` from that gate may be reported as verified. `TOOL NOT RUN` (2),
    `VACUOUS`, `SINGLE_AXIOM` and `CIRCULAR` are never success, and a verdict
-   copied out of `protocol_09.log` without running the gate is a claim, not a
+   copied out of `bounded_loop.log` without running the gate is a claim, not a
    result — the log is bound to the script precisely so that it cannot be
    quoted for bytes it never saw.
