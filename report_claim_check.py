@@ -24,6 +24,7 @@ import sys
 
 import checksum_check
 import harness_check
+import provenance_check
 import suite_check
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -282,6 +283,7 @@ def live_values():
         return None, "report_claim_check vocabulary is corrupted: %s" % bad
     gates = len(suite_check.GATES)
     harnesses = len(harness_check.HARNESSES)
+    conditions = len(provenance_check.CONDITIONS)
     rows = manifest_rows()
     brain = readable(BRAIN)
     if rows is None:
@@ -296,8 +298,8 @@ def live_values():
     except SystemExit as exc:
         return None, "checksum scope unavailable: %s" % exc
     return {"gates": gates, "harnesses": harnesses, "rows": rows,
-            "brain": "v" + versions[-1], "versions": len(versions),
-            "scope": len(scanned)}, None
+            "conditions": conditions, "brain": "v" + versions[-1],
+            "versions": len(versions), "scope": len(scanned)}, None
 
 
 # ---------------------------------------------------------------- P1..P4 ----
@@ -682,6 +684,64 @@ def spoken_canonical_checks(L):
             ok("%s -- %s %s" % (key, ", ".join(sorted(set(found))), kind))
 
 
+# -------------------------------------------------------------------- P9 ----
+# F8-R1 (A11).  The string form "N conditions" is a claim about
+# provenance_check.CONDITIONS, but no pattern used to read it: a prose
+# sentence saying "nine conditions" while len(CONDITIONS) is 11 passed
+# unread.  Scope is deliberately narrow.  theorem_provenance_check has its own
+# condition count and its own "nine conditions" sentences; those are not
+# compared against provenance_check.CONDITIONS.  A line is in scope only when
+# it names the constants gate itself, its own output vocabulary, or the
+# CONDITIONS tuple.  Anchored history remains allowed, exactly as in P5.
+PROV_SCOPE = re.compile(
+    r"(?<![A-Za-z0-9_])provenance_check|evidence snapshots|"
+    r"reference facts|P11 LIVENESS|len\(CONDITIONS\)|"
+    r"external provenance for every constant",
+    re.I)
+COND_NUM = re.compile(r"\b(" + SPOKEN + r"|\d+)\s+conditions\b", re.I)
+
+
+def parse_cond_num(token):
+    if token.isdigit():
+        return int(token)
+    return spoken_number(token)
+
+
+def conditions_claim_check(L):
+    live = L["conditions"]
+    checked = history = 0
+    for name in rooted_md():
+        text = readable(os.path.join(HERE, name))
+        if text is None:
+            continue
+        lines = text.splitlines()
+        for i, line in enumerate(lines):
+            if not PROV_SCOPE.search(line):
+                continue
+            for m in COND_NUM.finditer(line):
+                value = parse_cond_num(m.group(1))
+                if value is None:
+                    continue
+                if value == live:
+                    checked += 1
+                    continue
+                if anchor_window(lines, i):
+                    history += 1
+                    ok("P9 %s:%d history, not current -- %d conditions, "
+                       "live %d" % (name, i + 1, value, live))
+                else:
+                    fail("P9 %s:%d says %s conditions but len(CONDITIONS) is "
+                         "%d and the line carries no date, phase tag or "
+                         "'then' -- a reader will take it as current"
+                         % (name, i + 1, m.group(1), live))
+    if checked or history:
+        ok("P9 conditions claims -- %d current-value, %d dated history "
+           "(len(CONDITIONS)=%d)" % (checked, history, live))
+    else:
+        ok("P9 conditions claims -- no in-scope 'N conditions' sentences; "
+           "len(CONDITIONS)=%d" % live)
+
+
 def main(argv):
     L, err = live_values()
     if L is None:
@@ -698,6 +758,7 @@ def main(argv):
     brain_version_check(L)
     scope_check(L)
     dated_claims(L)
+    conditions_claim_check(L)
     reference_check()
     registration_check()
     map_check()

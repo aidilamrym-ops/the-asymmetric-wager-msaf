@@ -41,6 +41,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 
 # Declared-precision ceiling. P5 feeds agrees() mp.nstr(x, 40), so a quantity
@@ -837,14 +838,21 @@ def main(argv):
     # on top of a contradiction the probe has already found.
     #
     # Deliberately NOT checked here:
-    #   * freshness -- the record carries `checked_utc`, and a gate that fails
-    #     by the clock would break the offline contract the suite exists to
-    #     keep.  Age is reported by the probe, not judged by this gate.
+    #   * a hard age limit on the record -- A11 measured age instead of
+    #     inventing a threshold.  P11 prints the record's age in days and
+    #     FAILs a future-dated generated_utc (an impossible stamp is a
+    #     defect, not staleness).  A hard age limit is deliberately not
+    #     applied: the suite is the offline contract, and a gate that fails
+    #     by the clock would break that contract on a machine that has not
+    #     re-run the probe.  Operational practice is to re-run
+    #     url_liveness_check.py when a source may have moved; F8_REPORT.md
+    #     §8 F8-R2 and A11_REPORT.md record this policy decision.
     #   * whether the live bodies still match the archived snapshots -- see
     #     "WHY DIVERGED DOES NOT FAIL" in url_liveness_check.py: the register
     #     pins a snapshot taken at `retrieved_utc`, and P2 already verifies
     #     those bytes on disk.
     p11_base = len(failures)
+    liveness_age_days = None
     if not check(os.path.isfile(LIVENESS_PATH),
                  "P11  LIVENESS_RECORD: %s is missing -- run "
                  "python url_liveness_check.py and commit the record"
@@ -865,6 +873,24 @@ def main(argv):
             check(isinstance(stamp, str) and stamp.endswith("Z") and len(stamp) >= 19,
                   "P11  LIVENESS_RECORD: generated_utc is missing or malformed: %r"
                   % stamp)
+            # Age is measured and printed (F8-R2 / A11).  A future-dated
+            # stamp is impossible and fails; an old but well-formed stamp is
+            # reported, not failed -- see the policy note above.
+            if isinstance(stamp, str) and stamp.endswith("Z") and len(stamp) >= 19:
+                try:
+                    _ts = datetime.strptime(stamp[:19], "%Y-%m-%dT%H:%M:%S")
+                    _ts = _ts.replace(tzinfo=timezone.utc)
+                    liveness_age_days = ((datetime.now(timezone.utc) - _ts)
+                                         .total_seconds() / 86400.0)
+                except ValueError:
+                    liveness_age_days = None
+                    fail("P11  LIVENESS_RECORD: generated_utc is not a valid "
+                         "UTC timestamp: %r" % stamp)
+                if liveness_age_days is not None and liveness_age_days < 0:
+                    fail("P11  LIVENESS_RECORD: generated_utc %s is in the "
+                         "future (age %.2f days) -- a record cannot claim to "
+                         "have been generated later than now"
+                         % (stamp, liveness_age_days))
             check(doc.get("tool") == "url_liveness_check.py",
                   "P11  LIVENESS_RECORD: tool field is %r"
                   % doc.get("tool"))
@@ -964,10 +990,15 @@ def main(argv):
             n_div = sum(1 for rec in by_url.values()
                         if rec.get("verdict") == "DIVERGED")
             n_ok = sum(1 for rec in by_url.values() if rec.get("verdict") == "OK")
+            if liveness_age_days is None:
+                age_txt = "unknown"
+            else:
+                age_txt = "%.2f days" % liveness_age_days
             print("%s P11  LIVENESS_RECORD          delta: %d (urls: %d, "
-                  "ok: %d, diverged: %d)"
+                  "ok: %d, diverged: %d, age: %s)"
                   % ("ok  " if len(failures) == p11_base else "FAIL  ",
-                     len(failures) - p11_base, len(by_url), n_ok, n_div))
+                     len(failures) - p11_base, len(by_url), n_ok, n_div,
+                     age_txt))
     else:
         print("FAIL  P11  LIVENESS_RECORD          record unreadable")
 

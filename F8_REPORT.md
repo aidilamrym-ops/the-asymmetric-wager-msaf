@@ -309,11 +309,11 @@ stale artefact — not the new gate — is what must change.
 | vocabulary guard | corrupt `_CARD_ONES` in a copy | gate exits 2, not 0 |
 | harness | `python harnesses/a9_drift_inj.py` | as of A9 (2026-10-06) `HARNESS: PASS -- 21/21 cases behaved as expected, every tool green before and after, every target byte-identical` |
 | manifest | `python checksum_check.py` then `--update` then verify | header `TOTAL FILES` equals scope; both directions green |
-| gate | `python provenance_check.py` (11 conditions) | exit 0 |
+| gate | `python provenance_check.py` (11 conditions) | exit 0; P11 prints record age since A11 |
 | gate | `python theorem_provenance_check.py` | exit 0 |
-| gate | `python report_claim_check.py` | `report_claim_check: PASS` |
-| gate | `python harness_check.py` | as of A9 (2026-10-06) 22 harnesses, PASS (23 since A10) |
-| suite | `python suite_check.py --with-harness` | as of A9 (2026-10-06) 15/15 (16/16 since A10) |
+| gate | `python report_claim_check.py` | `report_claim_check: PASS`; P9 CONDITIONS_CLAIM since A11 |
+| gate | `python harness_check.py` | as of A9 (2026-10-06) 22 harnesses, PASS (23 since A10, 24 since A11) |
+| suite | `python suite_check.py --with-harness` | as of A9 (2026-10-06) 15/15 (16/16 since A10, still 16/16 since A11) |
 | AC Gate | last, after the last edit | see §9 |
 
 ---
@@ -324,13 +324,13 @@ stale artefact — not the new gate — is what must change.
 |---|---|---|
 | `F7-R3` | re-fetching is manual | **CLOSED 2026-10-06 (A9).** `url_liveness_check.py` + `P11 LIVENESS_RECORD`. |
 | `F6-R5` | pattern set covers the spelled forms | **CLOSED 2026-10-06 (A9).** Seven classes + vocabulary guard + generator fix, injection-proven 21/21. |
+| `F8-R1` | `report_claim_check` did not parse the string form `N conditions` as a claim about the condition count | **CLOSED 2026-10-07 (A11).** P9 CONDITIONS_CLAIM: any root `.md` line whose scope names the constants gate and carries `N conditions` in digits or cardinal words must equal `len(CONDITIONS)`; anchored history is allowed. Injection-proven by `harnesses/a11_residual_inj.py`. See `A11_REPORT.md`. |
+| `F8-R2` | `provenance/url_liveness.json` freshness is not gated | **CLOSED 2026-10-07 (A11).** P11 now measures and prints record age in days; a future-dated or malformed `generated_utc` FAILs. A hard age limit is deliberately not applied — the suite is the offline contract and a clock-dependent gate is not offline; operational practice is to re-run the probe when a source may have moved. Policy recorded in `A11_REPORT.md`. |
 
-New, recorded, **not** closed in A9:
+Still open or deferred, not closed by A9 or A11:
 
 | Id | Statement |
 |---|---|
-| `F8-R1` | `report_claim_check` still does not parse the **string** `10 conditions` as a claim about the condition count. The P-number convention makes the number true by definition, but a prose sentence that says "nine conditions" while `len(CONDITIONS)` is 11 would pass unread. Candidate rule: any root `.md` sentence matching `\b(nine|ten|eleven|twelve|\d+)\s+conditions\b` must equal `len(CONDITIONS)`. |
-| `F8-R2` | `provenance/url_liveness.json` freshness is not gated. A record that is weeks old still passes P11. Policy question for a later phase: age limit, or re-run on a schedule. |
 | `F8-R3` | Sub-repo encoding remains pinned-not-fixed (39 files, `CHECKSUM.sha256` header `TOTAL FILES : 116`). Out of A9 scope on purpose. |
 | `F8-R4` | A8 (`protocol_09` / `Tugas tambahan.md`) remains deferred. |
 

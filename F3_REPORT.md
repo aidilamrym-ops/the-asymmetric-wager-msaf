@@ -166,7 +166,7 @@ a false FAIL remains visible where a false PASS would not. Proved by
 before comparison, so the corpus's LaTeX and prose conventions are handled
 without special cases.
 
-**Baseline output:**
+**Baseline output (as of F3, 2026-10-05):**
 ```
 GATE: PASS -- 4 quantities, 6 evidence snapshots, 5 reference facts, 8 conditions
 exit=0
@@ -369,7 +369,7 @@ Rows in §8 marked **CLOSED** carry their own proof; nothing marked *open* or *d
 
 | check | command | result |
 |---|---|---|
-| gate of record | `python provenance_check.py` | exit **0**, `GATE: PASS -- 5 quantities, 8 evidence snapshots, 5 reference facts, 10 conditions` (the 9th is `P9 LAYER_CONSISTENCY` from F5-2, the 10th is `P10 REF_MARKERS` from F5-3; 4 quantities and 7 snapshots at F5-2, 5 quantities since A3, 8 snapshots since A7) |
+| gate of record | `python provenance_check.py` | exit **0**, `GATE: PASS -- 5 quantities, 8 evidence snapshots, 5 reference facts, 11 conditions` (the 9th is `P9 LAYER_CONSISTENCY` from F5-2, the 10th is `P10 REF_MARKERS` from F5-3, the 11th is `P11 LIVENESS_RECORD` from A9; 4 quantities and 7 snapshots at F5-2, 5 quantities since A3, 8 snapshots since A7; **10 conditions as of F5/F7**, 11 since A9) |
 | layered-archive injection (F5-2) | `harnesses\f5_2_inj.py` | exit **0**, `HARNESS: PASS -- 20/20 cases behaved as expected, registers byte-identical, both gates green at the end`: deleted and one-byte-corrupted snapshots, illegal layer labels, a layer B/C record claiming content, a missing licence basis, unresolvable and layer-C snapshot pointers, a dropped and an uncited archive record — each caught by the gate it targets, with the other gate staying green |
 | marker injection (F5-3) | `harnesses\f5_3_inj.py` | exit **0**, `HARNESS: PASS -- 7/7 cases behaved as expected, documents byte-identical, both gates green at the end`: a phantom marker, the right id on the wrong line, every marker stripped, a marker moved off its needle line, a marker pasted into a document no site points at — each reported by `P10 REF_MARKERS` itself, never by another condition. Before the markers were inserted the same gate read `FAIL -- 11 condition(s) not met`, which is the "missing marker" direction pre-validated |
 | markers, by hand | byte inspection | `markers seen: 11, stray: 0`, 8 marked lines, 3 documents, `CR = 0`, no BOM; re-running the inserter on an already marked file changes **0 bytes** |

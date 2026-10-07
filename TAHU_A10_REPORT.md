@@ -118,7 +118,7 @@ Live recompute (mpmath 50 dps, 2026-10-07):
 | A10-R2 | Gate 2 (quantum censorship) remains **not implemented**. |
 | A10-R3 | RH, Navier--Stokes regularity and Langlands remain open in the literature regardless of any gate result here. |
 | A10-R4 | `provenance/url_liveness.json` re-probed 2026-10-07 after the new Wikipedia URL entered the register: P11 offline record holds (`urls: 25, ok: 23, diverged: 2`; DIVERGED is measured, not failed — see A9). **CLOSED 2026-10-07.** |
-| A10-R5 | `F8-R1`..`F8-R4` from the A9 report remain as recorded. |
+| A10-R5 | `F8-R1` and `F8-R2` from the A9 report were closed by A11 (`A11_REPORT.md`); `F8-R3` and `F8-R4` remain as recorded. **PARTIALLY CLOSED 2026-10-07 (A11).** |
 
 ## 8. Residual after the rewrite
 

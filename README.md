@@ -130,18 +130,18 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Borrowed mathematics (Brouwer, Hawking–Penrose, Langlands, …) | `theorem_provenance_check.py` | Every borrowed authority registered with evidence for **this** document; anchors resolve once; findings carry corrections and markers |
 | Finite Guinand–Weil truncations positive definite | `gw_verify_production.py`, `gw_verify_results.py`, `gw_final_gate.py`, `gw_mont_pipeline_check.py` | Certified row checks for $N=400$ and $N=800$; final gate’s two conditions; production fault-injection counts recorded in `F1_REPORT.md` / `F2_REPORT.md` |
 | Protocol 09 ($\Phi$ / Gödelian compliance loop) encoding | `protocol_09_check.py` | FSM over `QF_LIA`; log bound to script by sha256; context sat, claim unsat, each core axiom load-bearing; auditor verdict `GENUINE` |
-| Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor |
+| Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor; P9 also holds `N conditions` to `len(CONDITIONS)` on provenance lines |
 | `tahap uji` honesty (A10) | `tahap_uji_audit.py` | Two documents rewritten to English and to claims the machine gates support; Planck-cutoff density recomputed; zero-error / dirty-renormalisation / "NS proven" / Gate-3-misread classes rejected |
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
-| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **23** proof harnesses, run sequentially with before/after workspace hashes |
+| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **24** proof harnesses, run sequentially with before/after workspace hashes |
 
-**Offline verification contract (as of 2026-10-07, Fase A10):**
+**Offline verification contract (as of 2026-10-07, Fase A11):**
 
 - Suite gates: **15** (`suite_check.py`)
 - `--with-harness` entry: **16**
-- Proof harnesses: **23**
-- Manifest scope: **89** files
-- `provenance_check.py`: **11** conditions (P1–P11)
+- Proof harnesses: **24**
+- Manifest scope: **91** files
+- `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + Protocol 09: **GENUINE**, not circular
 
@@ -157,10 +157,11 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 
 | ID | Open item |
 |---|---|
-| `F8-R1` | `report_claim_check` still does not parse the bare string `N conditions` as a claim about `len(CONDITIONS)` |
-| `F8-R2` | Freshness of `provenance/url_liveness.json` is not age-gated |
 | `F8-R3` | Sub-repo encoding remains pinned-not-fixed (by design of A9) |
 | `F8-R4` | A8 (`Tugas tambahan.md` rename of `protocol_09` symbols) remains deferred — the *Kamus Pemetaan* the task defers to does not exist in the workspace, and three proposed names collide with existing symbols |
+| A10-R1 | The `10^120` vacuum gap is **not solved** |
+| A10-R2 | Gate 2 (quantum censorship) remains **not implemented** |
+| A10-R3 | RH, Navier–Stokes regularity and Langlands remain open in the literature regardless of any gate result here |
 
 External open mathematics (RH, Navier–Stokes, Langlands in general) remains open **regardless of any gate result in this repository**.
 
@@ -260,7 +261,7 @@ If any of these do **not** fail, treat that as a defect in this workspace, not a
 
 ## 7. Roadmap (phase map for the examining board)
 
-Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Status as of **2026-10-06**:
+Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Status as of **2026-10-07**:
 
 | Phase | Date | Focus | Status |
 |---|---|---|---|
@@ -279,6 +280,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Stat
 | A8 | 2026-10-06 | `Tugas tambahan.md` symbol-rename assessment | **Deferred** (missing dictionary; name collisions) |
 | A9 | 2026-10-06 | URL liveness tool + `P11`; prose-pattern closure (`F8_REPORT.md`); `F7-R3`/`F6-R5` closed | Complete |
 | A10 | 2026-10-07 | `tahap uji` honesty rewrite + `tahap_uji_audit.py` + ρ_Λ/ħ/c/Planck-vacuum provenance + harness `a10_tahu_inj.py` | Complete |
+| A11 | 2026-10-07 | Residual closures: P9 CONDITIONS_CLAIM + P11 liveness age; harness `a11_residual_inj.py`; `F8-R1`/`F8-R2` closed | Complete |
 
 **Forward research blueprint** (from `Perluasan Visi Ilmiah (Extended Thesis Blueprint).md` — roadmap, not results):
 

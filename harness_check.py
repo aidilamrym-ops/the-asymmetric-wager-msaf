@@ -87,6 +87,14 @@ HARNESSES = [
     # baseline and the restored baseline.  Both documents come back
     # byte-for-byte.
     ("a10_tahu_inj.py",         "verifier",  0, "HARNESS: PASS -- 8/8 cases",             True),
+    # A11.  Proves the two A11 residual closures are gates and not decorations:
+    # four conditions-claim cases (a stale "nine conditions" on a provenance
+    # line, a correct live count, an anchored historical count, and an
+    # out-of-scope znone count that must stay unread) and three liveness-age
+    # cases (a future-dated generated_utc, a malformed stamp, and a control
+    # that must keep printing the record's age).  Both tracked targets come
+    # back byte-for-byte and both gates are green at the end.
+    ("a11_residual_inj.py",     "verifier",  0, "HARNESS: PASS -- 7/7 cases",             True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is
