@@ -14,7 +14,7 @@ WHAT THIS IS NOT
         - Not a refutation of ℝ/ℂ or of classical analysis.
         - Not a proof that physical space is discrete.
         - Not a proof about RH, the Critical Line, Protocol 09, R_tail,
-          or M_hat_N (those live elsewhere; R_tail is a later phase).
+          or M_hat_N (those live in lean/ModularWall.lean).
         - Not an evaluation inside Z_none (Z_none stays non-operational).
 
 BUILD
