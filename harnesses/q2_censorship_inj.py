@@ -1,6 +1,7 @@
 """Fault-injection harness for `quantum_censorship_check.py` (Gate 2).
 
-Eight cases -- six mutations plus two positive controls -- aimed at the gate's
+Nine cases -- seven mutations plus two positive controls -- aimed at the
+gate's
 conditions, each reverted
 byte-for-byte afterwards.  The pattern is the one A2 established: a published
 count with no harness behind it is a claim nobody can falsify.
@@ -23,6 +24,10 @@ count with no harness behind it is a claim nobody can falsify.
   M8  Q6  a *quoted* overclaim is injected         -> CONTROL: must stay PASS,
                                                 proving the guard reads
                                                 assertions, not citations
+  M9  Q5  the tracked scope sentence is deleted    -> the scope must be
+                                                anchored in a file that
+                                                actually ships (the sieve
+                                                row's folder is gitignored)
 
 Control: the unmutated workspace must pass, and after every mutation the target
 file must be byte-identical to where it started.
@@ -44,6 +49,9 @@ SIEVE = os.path.join(ROOT, "Theory_of_Everything_Derivations", "tahap uji",
 VACUUM = os.path.join(ROOT, "Theory_of_Everything_Derivations", "tahap uji",
                       "THE_VACUUM_CATASTROPHE_SOLUTION.md")
 PROBE = os.path.join(ROOT, "ANTI_INFINITY_BLINDSPOT.md")
+# The scope witness that actually ships: the sieve row lives in a
+# gitignored folder, so the tracked phase report carries it too.
+REPORT = os.path.join(ROOT, "A18_REPORT.md")
 
 PY = sys.executable
 
@@ -98,6 +106,20 @@ def case(label, path, mutate, expect_fragment):
             print("        FAIL target not restored byte-identically: %s"
                   % os.path.basename(path))
             results.append((label + " (restore)", False, -1, False))
+
+
+def m9():
+        """Delete the tracked scope sentence that names the gate's limit."""
+        with io.open(REPORT, encoding="utf-8", newline="") as fh:
+            text = fh.read()
+        for line in text.split("\n"):
+            if "quantum censorship is **not** established here" in line:
+                text = text.replace(line + "\n", "", 1)
+                break
+        else:
+            raise AssertionError("tracked scope sentence not found")
+        with io.open(REPORT, "w", encoding="utf-8", newline="") as fh:
+            fh.write(text)
 
 
 def main():
@@ -216,6 +238,12 @@ def main():
     if digest(PROBE) != before_probe2:
         print("        FAIL quoted-control target not restored byte-identically")
         results.append(("M8 (restore)", False, -1, False))
+
+        # M9 -- the scope must also be stated in a TRACKED file.  The sieve row lives
+    # in a gitignored folder, so the scope witness that ships with the repository
+    # is A18_REPORT.md; deleting the sentence there must fail the gate.
+    case("M9 tracked scope sentence deleted", REPORT, m9,
+         "the tracked report states censorship itself is not claimed")
 
     rc, out = run_gate()
     if rc != 0:

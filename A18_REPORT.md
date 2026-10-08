@@ -77,7 +77,7 @@ Stated in the module docstring, in the gate's own output line, and enforced by Q
   framework. That is a different claim from being false, and the corpus had
   already been bitten by that difference in F3's declared variance.
 
-## 4. Three defects found while building it
+## 4. Six defects found while building it
 
 Recorded because each one made the gate report something other than the truth
 before it was fixed:
@@ -123,13 +123,26 @@ retargeted to something stronger than before — mutating the scope sentence int
 "quantum censorship itself is verified here and is settled", which is a real
 overclaim rather than a stale status.
 
+A sixth defect was found by asking a question the rig never asks: **what did
+the commit actually ship?** `.gitignore:8` excludes
+`Theory_of_Everything_Derivations/` entirely, so the sieve row this gate
+audits is not in the repository at all. On a fresh clone this gate returns
+exit 2 — TOOL NOT RUN, never a pass — and so has `tahap_uji_audit.py`, which
+has read those documents since A10. Q5 now also requires the scope sentence
+from `A18_REPORT.md`, which *is* tracked and hash-pinned, so the scope cannot
+drift silently even when the source folder is missing; harness case **M9**
+deletes that sentence and must fail. Q4, the document needles, still needs
+the folder: that part is recorded as `A18-R4` rather than papered over, because
+deciding whether third-party clippings belong in the repository is an operator
+decision, not a phase decision.
+
 The lesson is the F1 one again: a gate that only ever inspected the artefact it
 was written with would never have noticed that its sibling's expectation had
 expired.
 
 ## 5. Fault injection
 
-`harnesses/q2_censorship_inj.py` — **8/8**, every target byte-identical
+`harnesses/q2_censorship_inj.py` — **9/9**, every target byte-identical
 afterwards, gate green at both ends:
 
 | Case | Mutation | Result |
@@ -142,6 +155,7 @@ afterwards, gate green at both ends:
 | M6 | overclaim injected into a root document | exit 1, Q6 fires |
 | M7 | **control**: honest scope sentence injected | **exit 0**, Q6 stays quiet |
 | M8 | **control**: an overclaim *quoted* as documentation of a defect | **exit 0**, quoted text is not an assertion |
+| M9 | the tracked scope sentence deleted from `A18_REPORT.md` | exit 1, the scope must ship with the repository |
 
 ## 6. Rig changes and their consequences
 
@@ -181,7 +195,7 @@ Filled from this phase's own run, after all corpus edits:
 | Check | Result |
 |---|---|
 | `python quantum_censorship_check.py` | exit **0**, every condition above |
-| `python harnesses/q2_censorship_inj.py` | `HARNESS: PASS -- 8/8 cases`, targets byte-identical |
+| `python harnesses/q2_censorship_inj.py` | `HARNESS: PASS -- 9/9 cases`, targets byte-identical |
 | `python report_claim_check.py` | `PASS` |
 | `python checksum_check.py` | `100/100` |
 | `python suite_check.py` | `16/16` |
@@ -200,6 +214,7 @@ Filled from this phase's own run, after all corpus edits:
 | `A14-R1` | The `lean\` theorems are statements about the model over exact rationals |
 | `A15-R2` | The entry-error enclosure is of the supplied matrix only |
 | `A16-R1` | `report_claim_check.py` cannot read a bare `N files` / `N-gate` claim |
+| `A18-R4` | **The gate's document inputs are not in the repository.** `.gitignore:8` excludes `Theory_of_Everything_Derivations/` entirely, so on a fresh clone this gate — and `tahap_uji_audit.py`, which has read those documents since A10 — return exit 2, TOOL NOT RUN, never a pass. The pre-existing behaviour is deliberate (inputs absent ⇒ no verdict), but it means Gate 2 cannot be run by an examiner who cloned rather than received a workspace. Q5 therefore also requires the scope sentence from `A18_REPORT.md`, which is tracked and hash-pinned, and M9 proves that requirement bites. Q4 (the document needles) still needs the folder; closing this properly means deciding whether the `tahap uji` documents should be tracked at all — an operator decision about third-party clippings, not a phase decision. |
 | `A18-R3` | **Q6 is quote-aware, so a wrapped overclaim is not counted.** A document that renders an assertion inside quotation marks or a code span escapes the guard, which is what lets phase reports quote defects. The threat model here is honest drift rather than an adversary, and the trade-off is deliberate -- but it is a real hole and it is recorded rather than left implicit. |
 | `A17-R1` | `trackc_recompile.py` is not a suite gate, and `OMEGATrackC.lean` has no offline byte-level check |
 | **`A18-R1`** | **Gate 2 is implemented for the micro-scale arithmetic only, and this document is the place where that scope is written down.** If a future phase widens the gate, this row and the sieve row are the two places that must change together, because the gate checks the sieve row and nothing checks this file. |

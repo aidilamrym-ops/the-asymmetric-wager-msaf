@@ -576,7 +576,7 @@ Three defects were found while building the gate and are recorded in `A18_REPORT
 a cross-check that matched the reduced Planck constant instead of the density it was
 asked for, a regex that did not compile, and an overclaim guard whose window was
 wide enough to catch the phase's own honest sentence. Fault injection: `harnesses/q2_censorship_inj.py`
-`8/8` (six mutations plus two positive controls), every target byte-identical.
+`9/9` (seven mutations plus two positive controls), every target byte-identical.
 
 Rig after A18: suite **16** gates, **17** `--with-harness` entries, **25** proof harnesses,
 manifest **101** files. `Skill.md`, `Brain.MD` (v1.21) and `README.md` were amended in

@@ -217,26 +217,60 @@ def main():
                % (qid, os.path.basename(site["file"])))
 
     # ------------------------------------------------ Q5: the scope statement
-    # The sieve protocol is the document that declared Gate 2 unimplemented.
-    # It must now state what is implemented, what is not, and name the script.
-    required = [
-        ("Gate 2 names the script that implements its arithmetic",
-         r"`quantum_censorship_check\.py`"),
-        ("Gate 2 states the arithmetic is implemented",
-         r"Gate 2[^\n]{0,200}?\*\*Implemented"),
-        ("Gate 2 states censorship itself is not verified",
-         r"quantum censorship[^.]{0,260}?not\s+(?:verified|proved|proven|"
-         r"established|confirmed)"),
-    ]
-    for name, pattern in required:
-        if re.search(pattern, sieve, re.S | re.I):
-            ok("Q5  %s" % name)
-        else:
-            fail("Q5: %s is missing from %s"
-                 % (name, os.path.basename(SIEVE)))
+    # The sieve protocol is the document that declared Gate 2 unimplemented, and
+    # its row is where a reader looks.  But that folder is gitignored
+    # (`.gitignore:8`), so on a fresh clone the file is absent and a gate whose
+    # only scope witness were that row would have nothing to check.  The scope
+    # statement is therefore required in `A18_REPORT.md` as well -- a tracked,
+    # manifest-pinned file -- and, when the sieve document is present, in the
+    # row itself too.  On this machine both are checked; on a fresh clone the
+    # scope still verifies from the tracked report.
+    REPORT = os.path.join(HERE, "A18_REPORT.md")
+    have_report = os.path.isfile(REPORT)
+    if not have_report:
+        fail("Q5: %s is missing -- the tracked scope statement cannot be read"
+             % os.path.basename(REPORT))
+    else:
+        report = io.open(REPORT, encoding="utf-8").read()
 
-    if re.search(r"Gate 2[^\n|]{0,80}\*\*Not implemented\.\*\*", sieve):
-        fail("Q5: the sieve protocol still calls Gate 2 'Not implemented'")
+    required = [
+        ("the tracked report states the arithmetic is gated",
+         r"arithmetic[^\n]{0,120}?(is gated|can decide)"),
+        ("the tracked report states censorship itself is not claimed",
+         r"quantum censorship[^\n]{0,160}?not\*{0,2}\s+(claimed|established|"
+         r"verified|proved|proven)"),
+    ]
+    if have_report:
+        for name, pattern in required:
+            if re.search(pattern, report, re.S | re.I):
+                ok("Q5  %s" % name)
+            else:
+                fail("Q5: %s is missing from %s"
+                     % (name, os.path.basename(REPORT)))
+
+    # The sieve row, when this workspace has it.  Q0 has already returned exit 2
+    # if either `tahap uji` document is missing -- the same choice
+    # `tahap_uji_audit.py` makes since A10, and for the same reason: those
+    # documents are inputs to this gate, and a gate whose inputs are absent must
+    # say TOOL NOT RUN rather than pass on what it happens to have.
+    if os.path.isfile(SIEVE):
+        sieve_checks = [
+            ("Gate 2 names the script that implements its arithmetic",
+             r"`quantum_censorship_check\.py`"),
+            ("Gate 2 states the arithmetic is implemented",
+             r"Gate 2[^\n]{0,200}?\*\*Implemented"),
+            ("Gate 2 states censorship itself is not verified",
+             r"quantum censorship[^.]{0,260}?not\s+(?:verified|proved|proven|"
+             r"established|confirmed)"),
+        ]
+        for name, pattern in sieve_checks:
+            if re.search(pattern, sieve, re.S | re.I):
+                ok("Q5  %s" % name)
+            else:
+                fail("Q5: %s is missing from %s"
+                     % (name, os.path.basename(SIEVE)))
+        if re.search(r"Gate 2[^\n|]{0,80}\*\*Not implemented\.\*\*", sieve):
+            fail("Q5: the sieve protocol still calls Gate 2 'Not implemented'")
 
     # The reverse-order pattern above is deliberately narrow -- it needs the
     # claim word immediately before the phrase.  A wider window was tried first
