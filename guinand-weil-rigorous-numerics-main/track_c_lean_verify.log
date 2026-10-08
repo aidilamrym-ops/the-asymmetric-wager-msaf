@@ -29,3 +29,47 @@ AMENDMENT 2026-10-04 (F0 anti-circularity audit): OMEGATrackC.lean revised --
   8894D24BEE7107DEE42EA2BCF3A6034323D1188872D41E43126B4326589FEA95, elapsed 12.6s,
   olean 358736 bytes.  That build is superseded, not contradicted: it type-checked
   the earlier file with the same axiom footprint.  Rationale: F0_REPORT.md.
+
+AMENDMENT 2026-10-07 (A17 -- Mathlib install + recompile; closes residual A15-R1):
+  rhoActual was re-anchored in A15 from a dps-doubling ESTIMATE to a ball-arithmetic
+  UPPER BOUND produced by gw_rho_formal.py, and this is the first run that compiles
+  the file after that edit.  The build recorded above used sha A5773617D02D... for
+  the pre-A15 file; the A15 commit (50da2aa) ran no lean at all -- see A15_REPORT.md.
+  Mathlib was installed to make the recompile possible:
+      mathlib        : release v4.33.1, commit 0df444a360eaa60ab8c11dca51a86af692955474
+                       (matches the Lean 4.33.1 toolchain this corpus pins)
+      lakefile pin   : rev = <commit>, because Lake rejects version = "v4.33.1"
+      cache          : lake update fetched the prebuilt olean cache, 8690 files
+      project        : throwaway, outside the workspace; nothing installed into it
+  source sha256 : 21795FE82F75DF07AB49EE58E346237F4030E442A3D6E68CB9F377C5E769085E
+  stage == source: IDENTICAL (verified by trackc_recompile.py before compiling)
+  recorded (UTC) : 2026-10-08T03:14:21Z
+  command        : python trackc_recompile.py
+                   (resolves the tag, verifies the copy by digest, then runs
+                    `lake env lean` on the byte-identical file with Mathlib on the path)
+  lean          : Lean (version 4.33.1, x86_64-w64-windows-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+  kernel diagnostics on the file : none (no warnings, no errors)
+  sorry tokens in code (comments stripped) : 0
+  axiom/constant declarations : 0
+  theorems with printed axioms : 10/10
+  axiom footprint drift vs the 2026-10-02 control : none
+  'OMEGA.two_abs_mul_le_add_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.enclosure_quad_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.certified_positivity' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.measured_within_tolerance' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.margin_at_least_74_orders' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.margin_satisfies_master_theorem' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.tolerance_fails_the_coarse_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.implied_constant_ge_81' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.implied_constant_lt_82' depends on axioms: [propext, Classical.choice, Quot.sound]
+  'OMEGA.tolerance_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+  METHOD NOTE: `lake build` was NOT the evidence.  A lakefile target builds the
+  library module named in the lakefile, not this file; an earlier attempt reported
+  a green `lake build` while that module was a one-line `import Mathlib`.  The
+  evidence is `lake env lean` on the byte-identical copy, with its diagnostics read.
+  Mutation probe on trackc_recompile.py, 6 cases: a raised rhoStar gives
+  `unsolved goals` (kernel path), an introduced sorry is caught twice over (static
+  scan and kernel hole), a deleted theorem is refused, a deleted rhoActual literal
+  is refused, and prose containing the word "sorry" inside a comment does NOT trip
+  the scanner (control, expected PASS).
+  RESULT: PASS -- the A15 literal is now kernel-checked, not merely solver-agreed.

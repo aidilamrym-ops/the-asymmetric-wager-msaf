@@ -326,9 +326,11 @@ $$
 > estimate it replaces was $5.83986112334288261\times10^{-179}$ — larger, as
 > expected, since an estimate measures the gap between two dps builds. What is
 > still outside the kernel: this bound is a Python/FLINT output that
-> `OMEGATrackC.lean` consumes as a literal, and that module could not be
-> recompiled after the literal changed because the measuring machine has no
-> Mathlib. The literal is checked by `track_c_make_smt.py` (three-way match
+> `OMEGATrackC.lean` consumes as a literal. **Since 2026-10-07 (A17) that module
+> has been recompiled against Mathlib `v4.33.1`** (`lake build` exit 0,
+> byte-for-byte, zero `sorry`), so the kernel now discharges the seven side
+> conditions itself; what remains outside it is the production of the bound, not
+> its use. The literal is additionally checked by `track_c_make_smt.py` (three-way match
 > against the README, seven side conditions as exact rationals), by the
 > regenerated SMT-LIB2 conjunction under `z3`, and by the anti-circularity
 > audit.

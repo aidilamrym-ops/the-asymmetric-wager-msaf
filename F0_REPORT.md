@@ -508,3 +508,35 @@ What was verified after the edit, and what was not:
   `gw_rho_formal_100_40.json` are megabyte-scale generated data and are not
   tracked in git; the commands that regenerate both are in the sub-repository
   `README.md` (A1 section).
+
+---
+
+## O. Addendum 2026-10-07 (phase A17)
+
+Residual `A15-R1` recorded that `OMEGATrackC.lean` had **not** been recompiled
+after the `rhoActual` literal was re-anchored, because Mathlib was absent on
+that machine. A17 installed Mathlib `v4.33.1` (commit
+`0df444a360eaa60ab8c11dca51a86af692955474`, matching the pinned Lean 4.33.1
+toolchain) and compiled the module with `lake env lean` on a byte-identical
+copy:
+
+- kernel diagnostics: **none** (no warnings, no errors);
+- `sorry` tokens in code: **0**; `axiom`/`constant` declarations: **0**;
+- all ten theorems print `[propext, Classical.choice, Quot.sound]`, identical
+  to the 2026-10-02 control -- expected, since no theorem statement changed;
+- verified digest `21795fe82f75df07ab49ee58e346237f4030e442a3d6e68cb9f377c5e769085e`,
+  recorded with a dated amendment in `track_c_lean_verify.log`.
+
+Two claims made during this phase were **withdrawn after measurement** and are
+kept here rather than edited away: `lake build` compiles the lakefile's library
+module, not the file under test, so the first version of the new
+`trackc_recompile.py` reported a green build without the file ever reaching the
+kernel; and its `sorry` scan read prose, which the module's own header
+legitimately contains. Both are fixed, both are mutation-proven (six cases,
+including a control that must pass), and the tool is deliberately not a suite
+gate because it needs the network and several GB of Mathlib. See
+`A17_REPORT.md` section 4.
+
+Residual `A15-R1` is CLOSED. The claim Track C makes is unchanged: logical
+inference from published constants, with the constants themselves certified by
+ball arithmetic outside the kernel.

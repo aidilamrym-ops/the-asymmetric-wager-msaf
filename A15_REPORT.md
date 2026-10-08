@@ -154,7 +154,7 @@ documented as untracked, which is also why the manifest count did not move.
 
 | Id | Statement |
 |---|---|
-| **`A15-R1`** | **`OMEGATrackC.lean` was NOT recompiled after the `rhoActual` literal changed.** Mathlib is absent from this machine and the file needs it, so the edited file is unverified by a Lean kernel. The literal is instead verified by `track_c_make_smt.py` (3-way MATCH against the README and the SMT file), Z3 7/7, and the AC Gate `lean`/`claim`/`audit` pass — all of which run without compiling the module. Closing this residual requires installing Mathlib and recompiling. |
+| **`A15-R1`** | ~~**`OMEGATrackC.lean` was NOT recompiled after the `rhoActual` literal changed.**~~ **CLOSED 2026-10-07 (A17).** Mathlib `v4.33.1` was installed and the module was recompiled byte-for-byte (`sha256 51dca387…`), `lake build` exit 0, zero `sorry`, and all ten theorems print `[propext, Classical.choice, Quot.sound]` — the same footprint as the 2026-10-02 run, since no theorem statement changed. Reproduce with `trackc_recompile.py`; see `A17_REPORT.md`. The struck sentence is kept as it stood when it was written. |
 | `A10-R1` | The $10^{120}$ vacuum gap is **not solved** |
 | `A10-R2` | Gate 2 (quantum censorship) remains **not implemented** |
 | `A10-R3` | RH, Navier–Stokes regularity and Langlands remain open in the literature regardless of any gate result here |

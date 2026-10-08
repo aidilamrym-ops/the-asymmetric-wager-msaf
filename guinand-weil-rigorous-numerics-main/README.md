@@ -58,9 +58,11 @@ $$
 > builds while this measures the distance to the true value.
 >
 > What remains outside the kernel: the enclosure itself is a Python/FLINT
-> output consumed by `OMEGATrackC.lean` as a literal, and that file could not be
-> recompiled after the literal changed (no Mathlib on the measuring machine).
-> The literal is verified by `track_c_make_smt.py` (three-way literal match
+> output consumed by `OMEGATrackC.lean` as a literal. **Since 2026-10-07 (A17)
+> that module has been recompiled** — Mathlib `v4.33.1`, `lake build` exit 0 on
+> the byte-for-byte file, zero `sorry`, and the seven side conditions discharged
+> by `norm_num` over the new literal. The literal is verified by the kernel and,
+> independently, by `track_c_make_smt.py` (three-way literal match
 > against this README, seven side conditions as exact rationals), by the
 > regenerated `track_c_side_conditions.smt2` under `z3`, and by the
 > anti-circularity audit. Route A1 is **no longer conditional on a measured
@@ -442,7 +444,7 @@ Measured on the machine that produced the shipped results:
 | CPython | 3.14.4 (`C:\Python314\python.exe`) |
 | python-flint | 0.9.0 (`flint.arb` / `flint.arb_mat`, ball arithmetic) |
 | mpmath | 1.3.0 (arbitrary-precision decimals, gate parsing only) |
-| Lean (Track C) | 4.33.1 (`x86_64-w64-windows-gnu`, commit `819816b2e0`) + Mathlib |
+| Lean (Track C) | 4.33.1 (`x86_64-w64-windows-gnu`, commit `819816b2e0`) + Mathlib `v4.33.1` (commit `0df444a360ea`), installed 2026-10-07 for A17 |
 | z3 (Track C) | 4.16.0 CLI, 5.0.0 Python binding |
 | OS | Windows 10, PowerShell 5.1, 2C/4T laptop, ~13 GB RAM |
 

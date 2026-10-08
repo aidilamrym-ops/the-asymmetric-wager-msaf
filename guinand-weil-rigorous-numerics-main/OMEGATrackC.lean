@@ -19,14 +19,35 @@ that produced this file, `gcc` **NOT RUN**.
 
 On 2026-10-07 (phase A15) the `rhoActual` literal below was re-anchored from a
 dps-doubling **estimate** to a rigorous ball-arithmetic upper bound produced by
-`gw_rho_formal.py`.  That machine has no Mathlib, so **this file was not
-recompiled after that edit**: `lean` **NOT RUN** for the new literal.  What ran,
-and what the re-anchored literal rests on, is `track_c_make_smt.py` (three-way
-literal match against `README.md`, plus the seven side conditions evaluated as
-exact rationals), the regenerated `track_c_side_conditions.smt2` under `z3`, and
-the anti-circularity audit.  No theorem statement changed, so the 2026-10-02
-`lean` run still certifies the proofs as written; what changed is the provenance
-of one literal.
+`gw_rho_formal.py`.  That machine had no Mathlib, so the file could not be
+recompiled there; the re-anchored literal rested on `track_c_make_smt.py`
+(three-way literal match against `README.md`, plus the seven side conditions
+evaluated as exact rationals), the regenerated `track_c_side_conditions.smt2`
+under `z3`, and the anti-circularity audit.  That gap was registered as residual
+`A15-R1`.
+
+On 2026-10-07 (phase A17) it was closed.  Mathlib was installed (release
+`v4.33.1`, commit `0df444a360eaa60ab8c11dca51a86af692955474`, matching the Lean
+4.33.1 toolchain this corpus pins) and **this file was recompiled**: the kernel
+compiled the byte-for-byte copy of this module with **no diagnostics of any
+kind**, the code carries no `sorry` token outside comments and no
+`axiom`/`constant` declaration, and the axiom footprint of all ten theorems is
+`[propext, Classical.choice, Quot.sound]` again -- identical to the 2026-10-02
+run, which is the expected result since no theorem statement changed.  The seven
+numerical theorems (`measured_within_tolerance`, `margin_at_least_74_orders`,
+`margin_satisfies_master_theorem`, `tolerance_fails_the_coarse_bound`,
+`implied_constant_ge_81`, `implied_constant_lt_82`, `tolerance_positive`) are
+`by norm_num` over the literal *below*, so the kernel has now evaluated the new
+bound itself and not merely agreed that the file parses.
+
+Note on method: `lake build` was **not** the evidence, because a lakefile target
+builds the library module named in it, not this file.  The evidence is
+`lake env lean` run on the byte-for-byte copy, with its diagnostics read: an
+earlier attempt reported a green `lake build` while the module it had built was
+a one-line `import Mathlib`.  Reproduce with `trackc_recompile.py`, which fails
+if the kernel reports a hole, if the footprint drifts, or if any of the ten
+theorems is missing.  (A file cannot record its own sha256, so the digest of the
+verified copy is in `track_c_lean_verify.log` and in `A17_REPORT.md` instead.)
 
 This module closes the *logical* half of that gap.  It proves, in Lean 4 with
 Mathlib:
