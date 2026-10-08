@@ -135,12 +135,12 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
 | Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **28** proof harnesses, run sequentially with before/after workspace hashes |
 
-**Offline verification contract (as of 2026-10-07, Fase A18):**
+**Offline verification contract (as of 2026-10-08, Fase A23):**
 
 - Suite gates: **16** (`suite_check.py`)
 - `--with-harness` entry: **17**
 - Proof harnesses: **28**
-- Manifest scope: **104** files
+- Manifest scope: **105** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **17/17 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
@@ -159,7 +159,7 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 |---|---|
 | `F8-R3` | Sub-repo encoding remains pinned-not-fixed (by design of A9) |
 | `F8-R4` | **CLOSED 2026-10-07 (A12).** A8 deferred because the *Kamus Pemetaan* did not exist and three proposed names collided (`N_steps`, `M_inf`, `q_self`). A12 authored `KAMUS_PEMETAAN.md`, renamed the encoding to `bounded_loop.*` with collision-free tokens (`p09_op`, `q_scan`, `q_check`, `q_halt`, `m_budget`, `n_budget`), regenerated the log via Z3, retargeted the gate (`bounded_loop_gate.py` 8/8) and live harnesses, and closed the residual. |
-| A10-R1 | The `10^120` vacuum gap is **not solved** |
+| `A10-R1` | The `10^120` vacuum gap is **not solved** (surveyed against the literature by A23, 2026-10-08; `A23_REPORT.md`; still open) |
 | A10-R2 | **CLOSED 2026-10-07 (A18).** Gate 2 is implemented for the part arithmetic can decide -- `quantum_censorship_check.py` recomputes the Planck-scale identities, the Planck mass by two routes and the zero-point density, and refuses any claim that quantum censorship itself is established. The physics claim remains open: a question below the resolution floor is unevaluable in this framework, which is not the same as false (`A18_REPORT.md`) |
 | A10-R3 | RH, Navier–Stokes regularity and Langlands remain open in the literature regardless of any gate result here |
 | `A13-R1` | `lean\` sits **outside** the manifest scope, so neither Lean file is hash-pinned (`A13_REPORT.md` §7) |
@@ -291,6 +291,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
 | A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
 | A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
 | A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
+| A23 | 2026-10-08 | Deep literature survey of `A10-R1` (the `10^120` vacuum gap): `A23_REPORT.md` maps the problem taxonomy and twelve approach classes against 46 cited sources; `A10-R1` remains OPEN, no closure claimed; manifest 105 | Complete |
 | A22 | 2026-10-08 | `A17-R1` CLOSED: `trackc_recompile.py` `--static-only` (structure + literal value pin + byte-level pin vs sub-repo manifest) + harness `trackc_static_inj.py` `9/9`; sub-manifest regenerated, 118 rows (8 stale rows refreshed from A15/A17 git evidence) | Complete |
 | A21 | 2026-10-08 | `gw_rho_formal.py` component check given a `1e-3` tolerance and exit 1 (`A18-R5` CLOSED); harness M7 asserts that exit; production (100,40) re-run byte-identical, bound unchanged | Complete |
 | A20 | 2026-10-07 | `report_claim_check.py` P5 extended to the `N files` tally (A16-R1 CLOSED) and the reversed `harnesses: N` form; scope held to manifest lines so encoding and git-history counts stay unread; harness `harnesses/p5_files_inj.py` `12/12` | Complete |
