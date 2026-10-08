@@ -50,6 +50,14 @@ GATES = [
     # stale log cannot vouch for edited bytes.  Placed immediately before the
     # manifest gate so that anything it wrote would still be caught.
     ("bounded_loop_gate.py",        os.path.join(HERE, "bounded_loop_gate.py"),       [],         120),
+    # A18 (2026-10-07): Gate 2 of the sieve protocol, the part arithmetic can
+    # decide -- the micro-scale boundary identities (omega_P * l_P = c, the
+    # Planck mass by two routes, the zero-point density) recomputed from
+    # external_constants.json at 100 dps, plus the document cross-check and
+    # the overclaim guard that keeps "quantum censorship is proven" out of
+    # every document.  Sits beside Gate 1 because it is Gate 1's sibling:
+    # both read their numbers out of documents and recompute them.
+    ("quantum_censorship_check.py", os.path.join(HERE, "quantum_censorship_check.py"), [], 120),
     # A10 (2026-10-07): honesty gate over the two `tahap uji` documents.
     # Reads every condition out of those documents and out of
     # external_constants.json / bounded_loop.log, recomputes the Planck-cutoff

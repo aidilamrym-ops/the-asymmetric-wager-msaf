@@ -95,6 +95,16 @@ HARNESSES = [
     # that must keep printing the record's age).  Both tracked targets come
     # back byte-for-byte and both gates are green at the end.
     ("a11_residual_inj.py",     "verifier",  0, "HARNESS: PASS -- 7/7 cases",             True),
+    # A18 (2026-10-07): eight cases -- six mutations of quantum_censorship_check.py
+    # (a perturbed register value, the density formula edited inside the gate,
+    # a needle edited in the vacuum document, the sieve row reverted to
+    # "Not implemented", the "not verified" scope sentence deleted, and an
+    # overclaim asserted in a root document) plus two positive controls (an
+    # honest scope sentence, and an overclaim *quoted* as documentation of a
+    # defect -- both must stay green).  Three tracked targets (the register,
+    # the gate and a root document) come back byte-for-byte and the gate is
+    # green at the end.
+    ("q2_censorship_inj.py",   "verifier",  0, "HARNESS: PASS -- 8/8 cases",             True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

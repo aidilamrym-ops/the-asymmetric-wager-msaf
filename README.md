@@ -135,12 +135,12 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
 | Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **24** proof harnesses, run sequentially with before/after workspace hashes |
 
-**Offline verification contract (as of 2026-10-07, Fase A16):**
+**Offline verification contract (as of 2026-10-07, Fase A18):**
 
-- Suite gates: **15** (`suite_check.py`)
-- `--with-harness` entry: **16**
-- Proof harnesses: **24**
-- Manifest scope: **97** files
+- Suite gates: **16** (`suite_check.py`)
+- `--with-harness` entry: **17**
+- Proof harnesses: **25**
+- Manifest scope: **101** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
@@ -160,7 +160,7 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | `F8-R3` | Sub-repo encoding remains pinned-not-fixed (by design of A9) |
 | `F8-R4` | **CLOSED 2026-10-07 (A12).** A8 deferred because the *Kamus Pemetaan* did not exist and three proposed names collided (`N_steps`, `M_inf`, `q_self`). A12 authored `KAMUS_PEMETAAN.md`, renamed the encoding to `bounded_loop.*` with collision-free tokens (`p09_op`, `q_scan`, `q_check`, `q_halt`, `m_budget`, `n_budget`), regenerated the log via Z3, retargeted the gate (`bounded_loop_gate.py` 8/8) and live harnesses, and closed the residual. |
 | A10-R1 | The `10^120` vacuum gap is **not solved** |
-| A10-R2 | Gate 2 (quantum censorship) remains **not implemented** |
+| A10-R2 | **CLOSED 2026-10-07 (A18).** Gate 2 is implemented for the part arithmetic can decide -- `quantum_censorship_check.py` recomputes the Planck-scale identities, the Planck mass by two routes and the zero-point density, and refuses any claim that quantum censorship itself is established. The physics claim remains open: a question below the resolution floor is unevaluable in this framework, which is not the same as false (`A18_REPORT.md`) |
 | A10-R3 | RH, Navier–Stokes regularity and Langlands remain open in the literature regardless of any gate result here |
 | `A13-R1` | `lean\` sits **outside** the manifest scope, so neither Lean file is hash-pinned (`A13_REPORT.md` §7) |
 | `A14-R1` | The Lean theorems are theorems about the **model** over exact rationals; nothing connects them to the numerics that instantiate `R_tail` (`A14_REPORT.md` §7) |
@@ -201,7 +201,7 @@ Registers (external_constants.json, theorem_provenance.json,
 Gates (15 offline suite gates, fixed order, sequential)
         |
         v
-Fault-injection harnesses (24, mutate then restore, hash-checked)
+Fault-injection harnesses (25, mutate then restore, hash-checked)
         |
         v
 Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
@@ -213,7 +213,7 @@ Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
 git clone https://github.com/aidilamrym-ops/the-asymmetric-wager-msaf.git
 cd the-asymmetric-wager-msaf
 
-REM Offline suite — 15 gates, fixed order
+REM Offline suite — 16 gates, fixed order
 python suite_check.py
 
 REM Same, plus the 23 proof harnesses (mutates then restores; do not parallelise)
@@ -291,6 +291,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
 | A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
 | A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
 | A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
+| A18 | 2026-10-07 | Gate 2 implemented for its arithmetic only: `quantum_censorship_check.py` (micro-scale identities + overclaim guard) and harness `q2_censorship_inj.py` `7/7`; gates 16, harnesses 25, manifest 101; closes `A10-R2` with a bounded scope | Complete |
 | A17 | 2026-10-07 | Mathlib `v4.33.1` installed; `OMEGATrackC.lean` recompiled byte-for-byte (exit 0, zero `sorry`, ten-theorem footprint re-measured); `trackc_recompile.py` added, mutation-proven 4/4; closes `A15-R1`; manifest 98 | Complete |
 
 **Forward research blueprint** (from `Perluasan Visi Ilmiah (Extended Thesis Blueprint).md` — roadmap, not results):

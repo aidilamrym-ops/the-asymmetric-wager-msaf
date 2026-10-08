@@ -210,13 +210,31 @@ def main():
           % ("ok  " if len(failures) == base else "FAIL  ",
              len(failures) - base))
 
-    # ---- V8 sieve: Gate 2 is recorded as not implemented -----------------
+    # ---- V8 sieve: the Gate 2 row must state an implemented scope -----------
+    # Original A10 form: "Gate 2 is recorded as not implemented", which was the
+    # honest state on 2026-10-07 while no script existed.  A18 implemented the
+    # part arithmetic can decide, so the condition changes shape -- but not its
+    # intent.  The defect A10 V-4 recorded was a gate *presented as* passing
+    # while unimplemented; the guard now asks the question in both directions:
+    # the row must name the script that exists, and it must not present the
+    # physics as settled.  A row reading either "Not implemented" or
+    # "Implemented" with no scope sentence fails, which is the overclaim this
+    # condition has always been about.
     base = len(failures)
-    check("Gate 2" in sieve or "Gate 2" in sieve,
+    check("Gate 2" in sieve,
           "V8  sieve doc names Gate 2")
-    check(re.search(r"Gate 2.*Not implemented|Not implemented.*Gate 2",
-                    sieve, re.I | re.S),
-          "V8  Gate 2 is recorded as not implemented")
+    check(re.search(r"Gate 2[^\n]{0,200}?\*\*Implemented",
+                    sieve, re.I),
+          "V8  Gate 2 row records the implemented arithmetic")
+    check(re.search(r"`quantum_censorship_check\.py`", sieve),
+          "V8  Gate 2 row names the script that implements it")
+    check(re.search(r"quantum censorship[^.]{0,260}?not\s+"
+                    r"(?:verified|proved|proven|established|confirmed)",
+                    sieve, re.I),
+          "V8  Gate 2 row does not present censorship as established")
+    check(not re.search(r"Gate 2[^\n|]{0,80}\*\*Not implemented\.\*\*", sieve,
+                        re.I),
+          "V8  the stale 'Not implemented' status is gone")
     print("%s V8  GATE2_STATUS                delta: %d"
           % ("ok  " if len(failures) == base else "FAIL  ",
              len(failures) - base))

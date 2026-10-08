@@ -12,7 +12,9 @@
 #   C3  vacuum: delete "remains open"        -> V3
 #   C4  vacuum: drop "dimensionless"         -> V4
 #   C5  sieve: claim Navier-Stokes proven    -> V6
-#   C6  sieve: delete the Gate 2 not-implemented sentence -> V8
+#   C6  sieve: turn the Gate 2 scope sentence into an overclaim -> V8
+#        (retargeted by A18: the old needle was the pre-A18
+#         "Not implemented" status, which no longer exists)
 #   C7  sieve: claim the Protocol 09 context proves all SAT -> V7
 #   C8  vacuum: re-introduce "renormalisasi kotor" -> V3
 #
@@ -103,9 +105,9 @@ CASES = [
      [("This corpus does **not** prove that solutions are\n  smooth.",
        "This corpus proves that solutions are\n  smooth.")],
      "V6"),
-    ("C6 sieve Gate 2 not implemented", SIEVE,
-     [("**Not implemented.** No gate script in this workspace checks for local quantum black-hole formation.",
-       "Implemented and passing on every scale.")],
+    ("C6 sieve Gate 2 overclaim", SIEVE,
+     [("Quantum censorship itself is not verified here and cannot be",
+       "Quantum censorship itself is verified here and is settled")],
      "V8"),
     ("C7 sieve Gate 3 all-SAT", SIEVE,
      [("It does\n**not** mean \"every claim written in prose is true\".",

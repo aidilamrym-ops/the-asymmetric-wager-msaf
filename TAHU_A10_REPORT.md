@@ -63,7 +63,7 @@ Fase A10 executed options 1B, 2b/2c, 3ii and 4y of the A10 decision:
 * Navier--Stokes: **open** Clay problem.
 * Dark matter / bounce: **interpretive**, not gated as established.
 * Gate 1: implemented (`landauer_check.py`), Landauer = floor.
-* Gate 2: **not implemented** — recorded as open residual.
+* Gate 2: **not implemented** — recorded as open residual. **[CLOSED 2026-10-07 (A18): implemented for its arithmetic only — `quantum_censorship_check.py` recomputes the Planck-scale identities and the registered zero-point density, and gates the honesty boundary. The physics claim is not gated and is not claimed; see `A18_REPORT.md`.]**
 * Gate 3: implemented for Protocol 09 only; context sat, claim unsat,
   negated claim sat; cross-read of `protocol_09.log`.
 
@@ -119,7 +119,7 @@ Live recompute (mpmath 50 dps, 2026-10-07):
 | ID | Open item |
 |---|---|
 | A10-R1 | The `10^120` vacuum gap is **not solved**. A finite Planck cutoff is a cutoff, not a cosmological-constant solution. |
-| A10-R2 | Gate 2 (quantum censorship) remains **not implemented**. |
+| A10-R2 | **CLOSED 2026-10-07 (A18)**, with a bounded scope: `quantum_censorship_check.py` implements Gate 2's arithmetic (the Planck-scale identities and the registered zero-point density, recomputed from the register) and gates the honesty boundary; quantum censorship itself is **not** claimed and remains open. See `A18_REPORT.md`. |
 | A10-R3 | RH, Navier--Stokes regularity and Langlands remain open in the literature regardless of any gate result here. |
 | A10-R4 | `provenance/url_liveness.json` re-probed 2026-10-07 after the new Wikipedia URL entered the register: P11 offline record holds (`urls: 25, ok: 23, diverged: 2`; DIVERGED is measured, not failed — see A9). **CLOSED 2026-10-07.** |
 | A10-R5 | `F8-R1` and `F8-R2` from the A9 report were closed by A11 (`A11_REPORT.md`); `F8-R3` and `F8-R4` remain as recorded. **PARTIALLY CLOSED 2026-10-07 (A11).** |

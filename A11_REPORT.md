@@ -107,7 +107,7 @@ phase tags) are left alone — that is the escape hatch working as designed.
 | `README.md` | offline contract A11; roadmap A11; open items F8-R1/R2 removed |
 | `F8_REPORT.md` | residuals F8-R1/F8-R2 closed; verification matrix noted |
 | `TAHU_A10_REPORT.md` | A10-R5 partially closed |
-| `CHECKSUM.sha256` | regenerated (91 files: 57 root + 10 provenance + 24 harnesses) |
+| `CHECKSUM.sha256` | regenerated (91 files at A11: 57 root + 10 provenance + 24 harnesses) |
 
 ---
 
@@ -118,8 +118,8 @@ phase tags) are left alone — that is the escape hatch working as designed.
 | conditions claim | `python report_claim_check.py` | `ok  P9 conditions claims -- 7 current-value, 9 dated history (len(CONDITIONS)=11)`; **PASS** |
 | liveness age | `python provenance_check.py` | `ok   P11  LIVENESS_RECORD delta: 0 (urls: 25, ok: 23, diverged: 2, age: 0.29 days)`; `GATE: PASS -- 11 quantities, 9 evidence snapshots, 5 reference facts, 11 conditions`; exit 0 |
 | harness (A11) | `python harnesses/a11_residual_inj.py` | `HARNESS: PASS -- 7/7 cases behaved as expected, targets byte-identical, both gates green at the end` |
-| harness runner | `python harness_check.py` | `passed=24 failed=0 not_run=0 of 24`, workspace byte-identical |
-| suite | `python suite_check.py --with-harness` | `passed=16 failed=0 not_run=0 of 16`; `SUITE: PASS -- every listed gate returned 0` |
+| harness runner | `python harness_check.py` | `passed=24 failed=0 not_run=0 of 24` (at A11), workspace byte-identical |
+| suite | `python suite_check.py --with-harness` | `passed=16 failed=0 not_run=0 of 16` (at A11); `SUITE: PASS -- every listed gate returned 0` |
 | manifest | `python checksum_check.py` | `ok   CHECKSUM matched 91/91 listed, 91 on disk` |
 | AC Gate | `gate.py` self-test / lean / claim / audit | self-test **13/13**; lean **PASS**; claim **PASS**; audit **PASS** `GENUINE=2` (`protocol_09.smt2` core=[11,12,13,15]; `track_c_side_conditions.smt2` core=[0]) |
 

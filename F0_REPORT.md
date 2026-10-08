@@ -540,3 +540,45 @@ gate because it needs the network and several GB of Mathlib. See
 Residual `A15-R1` is CLOSED. The claim Track C makes is unchanged: logical
 inference from published constants, with the constants themselves certified by
 ball arithmetic outside the kernel.
+
+
+---
+
+## P. Addendum 2026-10-07 (phase A18)
+
+Residual `A10-R2` recorded that Gate 2 of the sieve protocol was described but
+not implemented -- "Quantum censorship audit at micro scales. No gate script in
+this workspace checks for local quantum black-hole formation."  A18 closes it
+with a bounded scope, on the precedent Gate 1 already set: `landauer_check.py`
+gates the *arithmetic* of the Landauer floor, not thermodynamics, and no
+gate there proves erasure releases heat.
+
+`quantum_censorship_check.py` recomputes, from `external_constants.json` at 100 dps:
+
+- `omega_P * ell_P = c` (rel err 1.84e-07), which re-tests the register's own derived
+  quotient instead of trusting the derivation string;
+- the Planck mass by two independent routes, `hbar omega_P / c^2` and `hbar / (c ell_P)`,
+  against CODATA `2.176434e-8` kg;
+- the registered zero-point density `hbar c / (8 pi^2 ell_P^4)` (rel err 8.26e-10);
+- that the vacuum document still quotes the registered needles, read from the register's
+  own `sites[]` entries;
+- that the sieve row states this scope, names the script, and no longer says "Not
+  implemented";
+- that no document asserts the censorship result -- with a **positive control**, so
+  the guard cannot fire on the honest scope sentence.
+
+Quantum censorship itself is **not** claimed, and the gate says so in its own output. A
+question below the operational resolution floor is unevaluable in this framework;
+that is a different claim from being false, and the corpus was already bitten by
+that difference when F3 declared a rounding variance instead of editing it.
+
+Three defects were found while building the gate and are recorded in `A18_REPORT.md` section 4:
+a cross-check that matched the reduced Planck constant instead of the density it was
+asked for, a regex that did not compile, and an overclaim guard whose window was
+wide enough to catch the phase's own honest sentence. Fault injection: `harnesses/q2_censorship_inj.py`
+`8/8` (six mutations plus two positive controls), every target byte-identical.
+
+Rig after A18: suite **16** gates, **17** `--with-harness` entries, **25** proof harnesses,
+manifest **101** files. `Skill.md`, `Brain.MD` (v1.21) and `README.md` were amended in
+the same phase, because those three numbers are the constitution and a gate count
+that moves without them moving is how C1 stops meaning anything.
