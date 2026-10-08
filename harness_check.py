@@ -105,6 +105,17 @@ HARNESSES = [
     # the gate and a root document) come back byte-for-byte and the gate is
     # green at the end.
     ("q2_censorship_inj.py",   "verifier",  0, "HARNESS: PASS -- 9/9 cases",             True),
+    # A18 (2026-10-07): seven cases for gw_rho_formal.py, the tool that
+    # produced the A15 entry-error bound.  Three malformed-reference cases,
+    # one that moves the tool's own worst entry away from its ball centre and
+    # requires rho to rise by exactly that delta, one that checks the published
+    # JSON against itself, one that requires 128-bit balls to be no tighter than
+    # 1200-bit balls, and one that mutates the Lerch summation in a scratch copy
+    # and requires the printed mpmath deviations to move by two orders of
+    # magnitude.  Runs on a 3x3 synthetic reference, so it needs neither the
+    # megabyte matrix nor the long production run; the workspace tool file is
+    # never modified and every scratch file is removed.
+    ("gw_rho_inj.py",         "verifier",  0, "HARNESS: PASS -- 7/8 cases behaved as expected", True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

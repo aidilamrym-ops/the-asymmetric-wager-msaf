@@ -139,8 +139,8 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 
 - Suite gates: **16** (`suite_check.py`)
 - `--with-harness` entry: **17**
-- Proof harnesses: **25**
-- Manifest scope: **101** files
+- Proof harnesses: **26**
+- Manifest scope: **102** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
@@ -201,7 +201,7 @@ Registers (external_constants.json, theorem_provenance.json,
 Gates (15 offline suite gates, fixed order, sequential)
         |
         v
-Fault-injection harnesses (25, mutate then restore, hash-checked)
+Fault-injection harnesses (26, mutate then restore, hash-checked)
         |
         v
 Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
@@ -291,6 +291,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
 | A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
 | A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
 | A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
+| A19 | 2026-10-07 | `harnesses/gw_rho_inj.py` — the A2 pattern applied to the A15 entry-error bound: seven cases including a sensitivity test on the Lerch summation; two of the first drafts of this harness were vacuous and were rewritten | Complete |
 | A18 | 2026-10-07 | Gate 2 implemented for its arithmetic only: `quantum_censorship_check.py` (micro-scale identities + overclaim guard) and harness `q2_censorship_inj.py` `7/7`; gates 16, harnesses 25, manifest 101; closes `A10-R2` with a bounded scope | Complete |
 | A17 | 2026-10-07 | Mathlib `v4.33.1` installed; `OMEGATrackC.lean` recompiled byte-for-byte (exit 0, zero `sorry`, ten-theorem footprint re-measured); `trackc_recompile.py` added, mutation-proven 4/4; closes `A15-R1`; manifest 98 | Complete |
 
