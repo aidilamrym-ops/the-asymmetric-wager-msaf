@@ -136,6 +136,23 @@ onward the manifest will diff as text.
             file was touched by this pass either.
 
 Regenerated 2026-10-05 after F2-7: gw_verify_production.py hardened
+Regenerated 2026-10-08 (A22): the pin is now checked, not merely written --
+            trackc_recompile.py --static-only verifies the OMEGATrackC.lean row
+            offline, and the workspace harness trackc_static_inj.py proves that
+            check can fail.  Eight rows were stale, every one of them edited
+            after the 2026-10-05 regeneration by phase A15 (2026-10-07,
+            commit 50da2aa: the rhoActual re-anchor reaching OMEGATrackC.lean,
+            README.md, WORKING_PAPER.md, gw_corrected_eig.py, gw_entry_error.py,
+            track_c_side_conditions.smt2, track_c_smt_z3.log) or phase A17
+            (2026-10-08, commit a4425b9: OMEGATrackC.lean, README.md,
+            WORKING_PAPER.md and the recompile evidence track_c_lean_verify.log);
+            A15_REPORT.md and A17_REPORT.md carry the same edits as evidence.
+            Two files that git tracks were never listed (gw_rho_formal.py from
+            A15 and trackc_recompile.py from A17) and are pinned here, so the
+            manifest again means what its header says.  The three JSON inputs
+            and outputs that git ignores remain outside the manifest.  Hashes
+            were recomputed from the files as committed; no file bytes were
+            touched by this regeneration.
 
 SHA-256  27d664062e73ffa752a8d5c3eb5f1426f9988761ccf5650bafde6e429a236c0f         729  .gitattributes
 SHA-256  8ad88f9099b331a9261a33e0acaa3bf4c2a89d0f292545eb8d7c735b9aba4771        1286  .gitignore
@@ -145,14 +162,14 @@ SHA-256  4d0769f91d043ea351ca9bc1e13a960411cd3fc4c527f215f90ef2537128e407      1
 SHA-256  5ba17781fa76132afe026c3e8d28727fcc8b8e4d2831dd3693663014abcdf7ad        1656  LICENSE
 SHA-256  8d67e1d7e3d35ef784151c5dcd561e6324b425bf25e85598fb7e8d63b40e31c7        2813  LICENSE-DOCS.md
 SHA-256  b894aef6b08da29a68f63d00f7764a383122c309f09587d409abc5a525c36216        2363  LICENSING.md
-SHA-256  a5773617d02dc257844dbe1ffac6af08a2ed9c01c8f1968afefe8ef33940a646       16382  OMEGATrackC.lean
+SHA-256  21795fe82f75df07ab49ee58e346237f4030e442a3d6e68cb9f377c5e769085e       19971  OMEGATrackC.lean
 SHA-256  12e5591a5d4009376574ac3be82656607993127d02649e1e3dd1fd045402ccee       40747  OMEGA_CORE_CERTIFICATE.md
 SHA-256  01ad7f9236aaee4be150ff39a8c2c4efc4730e24207d7df238dfc45567526f5d       27240  PROVENANCE.txt
-SHA-256  ba42d26b2fb9fa180c74bc1b894a330c59a6a5ebc00d599e6fca4ab9d4e4c9d0       23356  README.md
+SHA-256  38877494520f643b47d7d0a71ecb3a19c8a8783c9d13e04ee8dc226b48515742       25172  README.md
 SHA-256  1b6d3652f9d059db5910d8ff1a54e5733f5df5bc1a152431972bbefda401d322       18129  REPO_STRUCTURE.md
 SHA-256  bc92865222c00223a793c814b47e12372da02530356f574e6e671d638bc1fcb4       11163  Rigorous Ball Arithmetic and Bandwidth-Calibrated Spectral Analysis of the Guinand-Weil Operator Framework.md
 SHA-256  f7b5ae6bf679daf8564b76ca3acc198a12e3c2d2b0811ab82ec1f81eea79413a        8247  THIRD_PARTY_SOURCES.md
-SHA-256  8deefcec655a0e12524477e96f2b3699ec88d1c6e4ac97ec6e866a0dca72cd83       25269  WORKING_PAPER.md
+SHA-256  439a3852b5bd1984573b817c6f8533d777c200f6b83ead603244e485c7ad57a4       27362  WORKING_PAPER.md
 SHA-256  ac0d7a173ed66a20d01e248da50b834ac0b391f1c4ebecdf4b0f99c0ca11c103        5538  ZENODO_METADATA.md
 SHA-256  bf4a68e12f4a9356b762e7e619b22a8a134af45cf1b1086453bc5bdb09910ffc        6459  gw_arb_measured.py
 SHA-256  2887ed7fb7787d6c6ef392a1c37938a08279f165cfc9ea3c74720e144e05daa2        8149  gw_arb_sweep.py
@@ -165,13 +182,13 @@ SHA-256  7edca0a3c4ce7981cf6e2a62e84339285eaae956ff3a151d011613e1c02d7bb3       
 SHA-256  07fe8d710d00637d7d55460cd56af0ac852ad6e04c483fe1a04d31f691d046f0        8629  gw_ckpt.py
 SHA-256  44a68daf588a5a1f8cf10f95fd1c0a4babc9907898f51dd0ac5f29dbd35c5ab4        8559  gw_closed_third.py
 SHA-256  b238486c8577585cc686e27fe320d0bce5d5c9f5b1b025cd2d7927741e5e5664        4794  gw_compare_builds.py
-SHA-256  1e6cceca592bf1bc34fbb72c3e5ce6e1f7ee5cbb9446549da791a013971bd7fa       12967  gw_corrected_eig.py
+SHA-256  593d1c0f855425a8916fd09a3a81547b969d03fc2030062b866ed1e3c9bb527b       13439  gw_corrected_eig.py
 SHA-256  abef6fbe0e57ddf1553e013ff1eeb239ddb0fc18c815c11231053520caef7940        8234  gw_deep_v2.py
 SHA-256  c41fcd968bd11c0d9a94f890a96a5c386dc380fbf8dd2f2c88e2fb736df00f8b        4481  gw_deep_v3.py
 SHA-256  0339ca81f17b89bd394eb7608c13dc2235ff7edba72f6290bf00c5a52bf5cd5a        5025  gw_degeneracy.py
 SHA-256  6e1f71f3fb2b1dff2b1d38f2c01f1d79dc9cf4288b05100c5426d1ac5adfa613        4395  gw_det_check.py
 SHA-256  38311aa13373f9b90ed12cfad7830ce5ed4af019eaaa0d0f8fdee0ac2dea6505        7248  gw_entry_audit.py
-SHA-256  ab2aa1d2bffb566589461930c0a14f6ca16dfa90278bd8a752d7c0a4a7a7e3bd        5736  gw_entry_error.py
+SHA-256  3edb727c08a97d3887db3fed69775b96226357e5cd985519ff630bde51467647        6340  gw_entry_error.py
 SHA-256  895c64272b79eaf56aaa4619166a02bc809733fd1ae5f6cb854703af57c6f7cc       15358  gw_even_arb.py
 SHA-256  90865aa7e23dc3d870e84c316b5f071a330694dffbf0cefb5a300e5d1ebd0ae1       12458  gw_even_arb_100_200.log
 SHA-256  389c4736aae57980f3d29e4746eab99f861395b7a604ebed4e27aa831a3eb1a9       15225  gw_even_vs_src.py
@@ -203,6 +220,7 @@ SHA-256  716ca7e707541e78e0ef3ea74b854ea4517d96b56a16c2a08bc2da0cbb661133       
 SHA-256  cec1b1a2b685d217074c28489931f55d3c667b1d5f12435c791adb96a399bbfc       14049  gw_opt_b_arb.py
 SHA-256  eb35b4c03b34dfa87f2ac55ba70017de47b90112a24d5633359dec85788fd6a8        7165  gw_panel_diag.py
 SHA-256  c820d8f7a0d0d5b56372a000f80fdff1bffec929943068a26ebbcd9d2ee3572e       11129  gw_qinf.py
+SHA-256  773c9b2bd20ba947d2d09e7c8ef013dfeb119bc4e193ec4a9331abc28ce544c1       16750  gw_rho_formal.py
 SHA-256  3d56dc164d9f803cb74ef7a5f812cb51e40594fd87693ec7c107b64e2859576a       14033  gw_s2_ceiling.py
 SHA-256  d352f0c6b945f0dbfe0b8c0056caddbc553e086d50cf6ecff54f00d12e56fb4c        1495  gw_s2_ceiling_fix1.log
 SHA-256  b34d5663893c684452ec271d1829570443244878cab4a4ac54a9c242cb8f6362        5854  gw_s2_ceiling_run3.log
@@ -247,11 +265,10 @@ SHA-256  eebdaf0a9734268075e305ce6c1649e4b35ee4810a9a9b1ff21667a95a069990       
 SHA-256  51cf93e2035142d4485a160186e39fdab00d31d897bdebcff15e8a3b02007224          99  smoke_hb.json
 SHA-256  d67b9065b78de1c55b440605b299e386eccdf49d1b4181ead1ea831ca0b00959        1633  smoke_results.json
 SHA-256  33617ce64b0e052c07873b196a3744f2f5142a4aaf7b4cfbe9e3de43d17c27bb       12863  source_arb_ldlt_certify.py
-SHA-256  68f56e01ba0861cebaaa37a4f2e690124f7f818df9168ea72eb16c385426268a        2380  track_c_lean_verify.log
+SHA-256  b47edd206672f485e7b8c0a8572e30ad09462f041963f40ed1861ac504bbc017        5752  track_c_lean_verify.log
 SHA-256  33b4f22e4a09f04c595907ae3c1a2a39245bd6b210a5701b89ad1c406c96775c       12714  track_c_make_smt.py
-SHA-256  99d485c42feeb6b33e77fbab4fb3b55a1208379dd9f6e52246cf5a412b85aa96        1532  track_c_side_conditions.smt2
-SHA-256  454b49faf30c0aace06b1266992a7eb7ab2e0398d64533cb2fc408d2e6036038        1383  track_c_smt_z3.log
+SHA-256  ff4beaf9a1639c2a5a17cc4c921a8f7c70a5d033af32ad1ba59d5711a2b6f1f7        1536  track_c_side_conditions.smt2
+SHA-256  eb49a53ca4dcd7db8e3a1fffaed6c5cbaac35fd6b4bcf99fd4305bb7c6855dda        1385  track_c_smt_z3.log
+SHA-256  63f14c2770218eb79e357991d7ee9bc0d3fdf5c8fd74a496cc57be08e65e007e       16998  trackc_recompile.py
 SHA-256  9ab3c5e15fec06b6610e9ad36ef2c74a60fea6ad8befaf146b22a9f1fd6337ce        3892  update_registry.py
 SHA-256  2833afef57d2631e4569e77dffca8854584512e396686a1ca03332c4eb6f2780         797  wd_selftest.log
-
-TOTAL FILES : 116

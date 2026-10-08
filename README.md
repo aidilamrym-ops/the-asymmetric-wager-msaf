@@ -133,16 +133,16 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor; P9 also holds `N conditions` to `len(CONDITIONS)` on provenance lines; P5 also reads a bare `N files` tally when the line names the manifest |
 | `tahap uji` honesty (A10) | `tahap_uji_audit.py` | Two documents rewritten to English and to claims the machine gates support; Planck-cutoff density recomputed; zero-error / dirty-renormalisation / "NS proven" / Gate-3-misread classes rejected |
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
-| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **27** proof harnesses, run sequentially with before/after workspace hashes |
+| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **28** proof harnesses, run sequentially with before/after workspace hashes |
 
 **Offline verification contract (as of 2026-10-07, Fase A18):**
 
 - Suite gates: **16** (`suite_check.py`)
 - `--with-harness` entry: **17**
-- Proof harnesses: **27**
-- Manifest scope: **103** files
+- Proof harnesses: **28**
+- Manifest scope: **104** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
-- Full offline suite with harnesses last run: **16/16 PASS**
+- Full offline suite with harnesses last run: **17/17 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
 
 ### 4.2 Theoretical / epistemological achievements
@@ -201,7 +201,7 @@ Registers (external_constants.json, theorem_provenance.json,
 Gates (15 offline suite gates, fixed order, sequential)
         |
         v
-Fault-injection harnesses (27, mutate then restore, hash-checked)
+Fault-injection harnesses (28, mutate then restore, hash-checked)
         |
         v
 Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
@@ -291,6 +291,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
 | A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
 | A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
 | A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
+| A22 | 2026-10-08 | `A17-R1` CLOSED: `trackc_recompile.py` `--static-only` (structure + literal value pin + byte-level pin vs sub-repo manifest) + harness `trackc_static_inj.py` `9/9`; sub-manifest regenerated, 118 rows (8 stale rows refreshed from A15/A17 git evidence) | Complete |
 | A21 | 2026-10-08 | `gw_rho_formal.py` component check given a `1e-3` tolerance and exit 1 (`A18-R5` CLOSED); harness M7 asserts that exit; production (100,40) re-run byte-identical, bound unchanged | Complete |
 | A20 | 2026-10-07 | `report_claim_check.py` P5 extended to the `N files` tally (A16-R1 CLOSED) and the reversed `harnesses: N` form; scope held to manifest lines so encoding and git-history counts stay unread; harness `harnesses/p5_files_inj.py` `12/12` | Complete |
 | A19 | 2026-10-07 | `harnesses/gw_rho_inj.py` — the A2 pattern applied to the A15 entry-error bound: seven cases including a sensitivity test on the Lerch summation; two of the first drafts of this harness were vacuous and were rewritten | Complete |

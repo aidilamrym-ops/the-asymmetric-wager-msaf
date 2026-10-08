@@ -17,6 +17,10 @@ WHY THIS EXISTS
 WHAT IT DOES NOT DO
     - It does not rewrite `OMEGATrackC.lean`.  It copies it.
     - It does not install anything into the workspace.
+    - The full Mathlib recompile stays outside the suite on purpose (the suite
+      is the offline contract); the offline half of this tool -- structure,
+      literal value, byte-level pin -- is what the workspace gates, via
+      --static-only.
     - It is deliberately NOT a suite gate: the suite is the offline contract,
       and this tool needs the network plus several GB of Mathlib.  The same
       reasoning that kept `url_liveness_check.py` out of the suite.
@@ -25,10 +29,15 @@ USAGE
     python trackc_recompile.py                  # build in a temp dir
     python trackc_recompile.py --keep           # leave the temp project behind
     python trackc_recompile.py --project DIR    # reuse a project dir
+    python trackc_recompile.py --static-only    # offline half only: structure,
+                                                # literal value, byte-level
+                                                # pin -- no toolchain needed
 
 EXIT
-    0  file compiled, zero sorry, zero axiom declarations, footprint printed
-    1  a check failed (build error, sha256 mismatch, sorry/axiom found)
+    0  file compiled, zero sorry, zero axiom declarations, footprint printed;
+       with --static-only, every offline check passed and nothing was compiled
+    1  a check failed (build error, sha256 mismatch, sorry/axiom found,
+       literal value drift, sub-repository manifest pin mismatch)
     2  no Lean toolchain / lake / network on this machine -- never a pass
 """
 
@@ -42,6 +51,8 @@ import shutil
 import subprocess
 import sys
 import tempfile
+
+from decimal import Decimal
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TARGET = os.path.join(HERE, "OMEGATrackC.lean")
@@ -73,6 +84,13 @@ THEOREMS = [
 # literal changed.  A17's whole claim is that the *proofs* were untouched, so
 # the old footprint is the control and a drift here is a finding.
 EXPECTED_AXIOMS = "[propext, Classical.choice, Quot.sound]"
+
+# The rhoActual literal A15 proved and A17 recompiled against.  The structural
+# check below only reads the number's shape; without this pin a silent edit of
+# the value itself would leave every shape check green, which is the drift A22
+# closes alongside the byte-level pin.
+EXPECTED_RHO_NUM = "58287013697174734848"
+EXPECTED_RHO_DEN = "198"
 
 LAKEFILE = """name = "trackc"
 version = "0.1.0"
@@ -197,19 +215,14 @@ def main() -> int:
                     help="project directory to reuse (default: a temp dir)")
     ap.add_argument("--keep", action="store_true",
                     help="do not delete the temporary project")
+    ap.add_argument("--static-only", action="store_true",
+                    help="run the offline checks (structure, literal value, "
+                         "byte-level pin) and exit -- no toolchain, no network")
     args = ap.parse_args()
 
     if not os.path.isfile(TARGET):
         fail("OMEGATrackC.lean not found next to this script")
         return 2
-    lean = find_tool("lean")
-    lake = find_tool("lake")
-    git = find_tool("git")
-    if not lean or not lake:
-        fail("no Lean toolchain or lake on this machine -- this is exit 2, "
-             "never a pass")
-        return 2
-
     src = open(TARGET, encoding="utf-8").read()
 
     # --- static checks that need no toolchain -------------------------------
@@ -241,14 +254,68 @@ def main() -> int:
         fail("rhoActual literal not found -- the module shape changed")
         return 1
     num, den = literal.group(1), literal.group(2)
-    ok("rhoActual literal = %s / 10^%s = %.19e"
-       % (num, den, int(num) / 10 ** int(den)))
+    if (num, den) != (EXPECTED_RHO_NUM, EXPECTED_RHO_DEN):
+        fail("rhoActual literal is %s / 10^%s, expected %s / 10^%s -- the "
+             "value drifted" % (num, den, EXPECTED_RHO_NUM, EXPECTED_RHO_DEN))
+        return 1
+    # Exact decimal, not a float: %.19e used to print a float64 rendering whose
+    # digits past the sixteenth were garbage (the A17 run quoted ...4925 for a
+    # rational that is ...4848), and a false-precision line in a verification
+    # log is exactly the drift this tool exists to stop.
+    ok("rhoActual literal = %s / 10^%s = %s"
+       % (num, den, Decimal(num) / (Decimal(10) ** int(den))))
 
     for other in ("rhoStar", "lambdaMin", "nDim"):
         if not re.search(r"abbrev %s\s*:" % other, src):
             fail("%s declaration not found -- the module shape changed" % other)
             return 1
     ok("rhoStar, lambdaMin and nDim declarations present")
+
+    # --- offline byte-level pin (A17-R1 second clause, closed by A22) --------
+    # The sub-repository manifest pins this file by sha256 and size; before A22
+    # nothing ever checked that row.  A missing manifest or a missing row is a
+    # failure, never a silent skip -- the same rule the workspace checksum gate
+    # applies to the workspace.
+    manifest_path = os.path.join(HERE, "CHECKSUM.sha256")
+    if not os.path.isfile(manifest_path):
+        fail("sub-repository CHECKSUM.sha256 not found -- the byte-level pin "
+             "cannot be verified")
+        return 1
+    want = None
+    with open(manifest_path, encoding="utf-8", errors="replace") as fh:
+        for line in fh:
+            parts = line.split()
+            if (len(parts) >= 4 and parts[0] == "SHA-256"
+                    and parts[3] == os.path.basename(TARGET)):
+                want = (parts[1], parts[2])
+                break
+    if want is None:
+        fail("%s has no row in the sub-repository manifest -- the byte-level "
+             "pin is missing" % os.path.basename(TARGET))
+        return 1
+    digest_now = sha256(TARGET)
+    size_now = os.path.getsize(TARGET)
+    if digest_now != want[0] or str(size_now) != want[1]:
+        fail("byte-level pin mismatch: manifest says sha256 %s / %s bytes, "
+             "file is sha256 %s / %d bytes"
+             % (want[0][:16], want[1], digest_now, size_now))
+        return 1
+    ok("byte-level pin: %s matches the sub-repository manifest (sha256 %s..., "
+       "%s bytes)" % (os.path.basename(TARGET), want[0][:12], want[1]))
+
+    if args.static_only:
+        print("")
+        print("TRACKC_RECOMPILE: STATIC PASS -- offline checks green "
+              "(no toolchain run, nothing compiled)")
+        return 0
+
+    lean = find_tool("lean")
+    lake = find_tool("lake")
+    git = find_tool("git")
+    if not lean or not lake:
+        fail("no Lean toolchain or lake on this machine -- this is exit 2, "
+             "never a pass")
+        return 2
 
     # --- toolchain work -----------------------------------------------------
     project = args.project

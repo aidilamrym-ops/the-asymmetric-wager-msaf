@@ -442,7 +442,7 @@ shp_mcp_bridge_v4.py            9755469673e5e55bea841ea201f5a70c3243cd9f4c2ccc27
    2026-10-05) of `suite_check.py`
    so that it runs *after* every other gate. A manifest that is missing exits
    2 rather than 0: integrity cannot be claimed without a baseline. The
-   sub-repository manifest is deliberately out of scope — it pins its own 116
+   sub-repository manifest is deliberately out of scope — it pins its own 118
    entries and two authorities over one set of bytes is worse than one.
 5. **`shp_bridge`'s corpus root does not exist — CLOSED by F2-5.**
    `opencode.jsonc` set `SHP_MCP_CORPUS_ROOT` to

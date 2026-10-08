@@ -124,6 +124,20 @@ HARNESSES = [
     # one out-of-scope encoding count that must stay green, and two anchor
     # removals that must fail.  Every target comes back byte-for-byte.
     ("p5_files_inj.py",       "verifier",  0, "HARNESS: PASS -- 12/12 cases behaved as expected", True),
+    # A22 (2026-10-08): closes A17-R1's offline half.  The sub-repository
+    # manifest has always pinned OMEGATrackC.lean and nothing ever read the
+    # row; the recompile tool carried no offline check of its own.  Nine
+    # cases against the tool's new --static-only mode (structure checks, a
+    # pin on the rhoActual VALUE the old tool only read the shape of, and the
+    # byte-level pin): the clean baseline, a sorry token, the numerator nudged
+    # by one, a renamed theorem, an appended axiom, a corrupted manifest hash
+    # with the file untouched, an appended comment where every static check
+    # stays green and only the pin fails (load-bearing, not vacuous), a
+    # deleted manifest row where absence must fail rather than skip, and the
+    # restored baseline.  Each case runs in its own temp scratch; the
+    # workspace tool, target and manifest are never written.  Milliseconds,
+    # no Lean toolchain, no network.
+    ("trackc_static_inj.py",  "verifier",  0, "HARNESS: PASS -- 9/9 cases behaved as expected", False),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is
