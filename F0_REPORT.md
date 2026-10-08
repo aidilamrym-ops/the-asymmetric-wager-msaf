@@ -578,7 +578,7 @@ asked for, a regex that did not compile, and an overclaim guard whose window was
 wide enough to catch the phase's own honest sentence. Fault injection: `harnesses/q2_censorship_inj.py`
 `9/9` (seven mutations plus two positive controls), every target byte-identical.
 
-Rig after A18: suite **16** gates, **17** `--with-harness` entries, **25** proof harnesses,
+Rig after A18 (2026-10-07): suite **16** gates, **17** `--with-harness` entries, **25** proof harnesses,
 manifest **101** files. `Skill.md`, `Brain.MD` (v1.21) and `README.md` were amended in
 the same phase, because those three numbers are the constitution and a gate count
 that moves without them moving is how C1 stops meaning anything.

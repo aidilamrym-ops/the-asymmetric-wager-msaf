@@ -116,6 +116,14 @@ HARNESSES = [
     # megabyte matrix nor the long production run; the workspace tool file is
     # never modified and every scratch file is removed.
     ("gw_rho_inj.py",         "verifier",  0, "HARNESS: PASS -- 7/8 cases behaved as expected", True),
+    # A20 (2026-10-07): closes A16-R1 by proving the P5 claim form that used to
+    # be unreadable is now read -- and read narrowly.  Nine mutations over five
+    # tracked documents: the canonical Brain tally (C1), README's digit and
+    # spelled files counts, README's reversed unit-then-number harness count
+    # (also new at A20), two anchor-respecting controls that must stay green,
+    # one out-of-scope encoding count that must stay green, and two anchor
+    # removals that must fail.  Every target comes back byte-for-byte.
+    ("p5_files_inj.py",       "verifier",  0, "HARNESS: PASS -- 12/12 cases behaved as expected", True),
 ]
 
 # Trees hashed alongside the root level.  The 1.4 GB guinand-weil sub-repo is

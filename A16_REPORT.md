@@ -121,7 +121,7 @@ Filled from this phase's own run, after all corpus edits:
 | Check | Result |
 |---|---|
 | `lean lean\DiscreteCoordinates.lean` / `lean\ModularWall.lean` | exit 0 both, `#print axioms` as quoted in §2 |
-| `python checksum_check.py --update` | manifest written, 97 files |
+| `python checksum_check.py --update` | manifest written, 97 files (at A16) |
 | `python report_claim_check.py` | `PASS` |
 | `python checksum_check.py` | `97/97` |
 | `python suite_check.py` | `15/15` |
@@ -150,7 +150,7 @@ prose lines is a gate that is not reading.
 | `A14-R1` | Model theorems vs numerics (see §3) |
 | `A15-R1` | `OMEGATrackC.lean` not recompiled (see §3) |
 | `A15-R2` | Enclosure is of the supplied matrix only (see §3) |
-| `A16-R1` | `report_claim_check.py` cannot read a bare `N files` / `N-gate` claim outside a `rows`/`gates=` pattern, so §4's stale figures reached a reader unchallenged. Recorded as a gate gap, not a prose fix; closing it means extending P5's pattern set, which is an A3-scale change to a gate and belongs in its own phase. |
+| `A16-R1` | **CLOSED 2026-10-07 (A20).** ~~`report_claim_check.py` cannot read a bare `N files` / `N-gate` claim outside a `rows`/`gates=` pattern~~ -- P5 now reads digit, bold and spelled `N files` under a manifest-line scope, the compound gate through the constitution's bold, and the reversed `harnesses: N` form. The pattern immediately found two genuinely stale sentences, both anchored in the same phase (this report's results table, F0's A18 summary), and `harnesses`p5_files_inj.py`` holds the boundaries: `12/12`, with an out-of-scope encoding count and an anchored history line both required to stay green. |
 
 ---
 

@@ -130,17 +130,17 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Borrowed mathematics (Brouwer, Hawking–Penrose, Langlands, …) | `theorem_provenance_check.py` | Every borrowed authority registered with evidence for **this** document; anchors resolve once; findings carry corrections and markers |
 | Finite Guinand–Weil truncations positive definite | `gw_verify_production.py`, `gw_verify_results.py`, `gw_final_gate.py`, `gw_mont_pipeline_check.py` | Certified row checks for $N=400$ and $N=800$; final gate’s two conditions; production fault-injection counts recorded in `F1_REPORT.md` / `F2_REPORT.md` |
 | Protocol 09 ($\Phi$ / Gödelian compliance loop) encoding | `bounded_loop_gate.py` | FSM over `QF_LIA`; log bound to script by sha256; context sat, claim unsat, each core axiom load-bearing; auditor verdict `GENUINE`. Renamed from `protocol_09.*` by A12 (2026-10-07); historical A1 names retained in the SMT header. |
-| Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor; P9 also holds `N conditions` to `len(CONDITIONS)` on provenance lines |
+| Prose claims about the rig | `report_claim_check.py` | Numeric claims in reports must equal live rig values or carry a date/phase anchor; P9 also holds `N conditions` to `len(CONDITIONS)` on provenance lines; P5 also reads a bare `N files` tally when the line names the manifest |
 | `tahap uji` honesty (A10) | `tahap_uji_audit.py` | Two documents rewritten to English and to claims the machine gates support; Planck-cutoff density recomputed; zero-error / dirty-renormalisation / "NS proven" / Gate-3-misread classes rejected |
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
-| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **24** proof harnesses, run sequentially with before/after workspace hashes |
+| Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **27** proof harnesses, run sequentially with before/after workspace hashes |
 
 **Offline verification contract (as of 2026-10-07, Fase A18):**
 
 - Suite gates: **16** (`suite_check.py`)
 - `--with-harness` entry: **17**
-- Proof harnesses: **26**
-- Manifest scope: **102** files
+- Proof harnesses: **27**
+- Manifest scope: **103** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
@@ -201,7 +201,7 @@ Registers (external_constants.json, theorem_provenance.json,
 Gates (15 offline suite gates, fixed order, sequential)
         |
         v
-Fault-injection harnesses (26, mutate then restore, hash-checked)
+Fault-injection harnesses (27, mutate then restore, hash-checked)
         |
         v
 Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
@@ -291,6 +291,7 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
 | A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
 | A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
 | A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
+| A20 | 2026-10-07 | `report_claim_check.py` P5 extended to the `N files` tally (A16-R1 CLOSED) and the reversed `harnesses: N` form; scope held to manifest lines so encoding and git-history counts stay unread; harness `harnesses`p5_files_inj.py`` `12/12` | Complete |
 | A19 | 2026-10-07 | `harnesses/gw_rho_inj.py` — the A2 pattern applied to the A15 entry-error bound: seven cases including a sensitivity test on the Lerch summation; two of the first drafts of this harness were vacuous and were rewritten | Complete |
 | A18 | 2026-10-07 | Gate 2 implemented for its arithmetic only: `quantum_censorship_check.py` (micro-scale identities + overclaim guard) and harness `q2_censorship_inj.py` `7/7`; gates 16, harnesses 25, manifest 101; closes `A10-R2` with a bounded scope | Complete |
 | A17 | 2026-10-07 | Mathlib `v4.33.1` installed; `OMEGATrackC.lean` recompiled byte-for-byte (exit 0, zero `sorry`, ten-theorem footprint re-measured); `trackc_recompile.py` added, mutation-proven 4/4; closes `A15-R1`; manifest 98 | Complete |

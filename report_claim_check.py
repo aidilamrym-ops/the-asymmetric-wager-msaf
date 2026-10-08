@@ -11,6 +11,12 @@
 #                    anchored (a date, a phase tag, "then", "as of") within one
 #                    line of the claim.  An unanchored stale number reads as a
 #                    statement about today, which is the defect this catches.
+#                    A16-R1 (A20) closed the last class it could not read: a
+#                    bare `N files` tally, digit or spelled, bold or plain,
+#                    which P5 now treats as a manifest count when the line
+#                    names the manifest -- and only then, so that an encoding
+#                    scan reporting 216 files is not condemned as a stale row
+#                    count.
 #            P6..P7  REFERENCE -- a path the reports name must exist, and a
 #                    file that exists must be registered.
 # EXIT:    0 = every claim agrees with the live values (or is honestly dated)
@@ -132,6 +138,19 @@ SPOKEN_OF_GATES = re.compile(
 SPOKEN_OF_HARNESSES = re.compile(
     r"\b(" + SPOKEN + r")\s+of\s+(?:all\s+|the\s+)?(" + SPOKEN
     + r")\s+(?:proof\s+)?harnesses\b", re.I)
+
+
+# Unit-then-number, the shape README writes its contract block in
+# ("- Proof harnesses: **26**").  No pattern read it, so the front-door count
+# could drift unchallenged while every other harness sentence was checked --
+# the A16-R1 class one lexical step over.  Defined at module scope so the
+# per-line loop only searches.
+REVERSED_CLAIMS = [
+    ("gate count",
+     re.compile(r"\bgates\s*:\s*(?:\*\*)?(\d+)", re.I)),
+    ("harness count",
+     re.compile(r"\bharnesses\s*:\s*(?:\*\*)?(\d+)", re.I)),
+]
 
 
 def spelled(n):
@@ -389,7 +408,7 @@ ORD_HARNESS = re.compile(ORD_HEAD + r"\b(" + ORD_WORDS + r")\b\s+harness\b",
                          re.I)
 # "a 14-gate suite" and "the 22-harness rig" carry the same claim as their
 # bare form and used to be invisible to every pattern here.
-COMPOUND_GATE = re.compile(BARE_NUM + r"-gate\b")
+COMPOUND_GATE = re.compile(BARE_NUM + r"(?:\*\*)?-gate\b")
 COMPOUND_HARNESS = re.compile(BARE_NUM + r"-harness\b")
 # The header a report is allowed to quote from a gate run.  Each key is
 # compared with its own live value; none of these was read before, so a
@@ -406,6 +425,19 @@ OF_GATES = re.compile(r"\b(\d+)\s+of\s+(?:all\s+|the\s+)?(\d+)\s+(?:root\s+)?gat
                       re.I)
 OF_HARNESSES = re.compile(r"\b(\d+)\s+of\s+(?:all\s+|the\s+)?(\d+)\s+(?:proof\s+)?harnesses\b",
                           re.I)
+# A16-R1 (A20): `N files` is the manifest tally and P5 read none of it -- the
+# A16 results table and F0's A18 summary both reached a reader unchallenged
+# while the live manifest had already moved on.  `**` between number and unit
+# is included because that is how the constitution writes the count ("Manifest
+# scope: **102** files"), and the same option is added to the compound gate
+# form for the same reason.  Scope, as in P9: only a line that names what the
+# number counts.  "216 files report CR/BOM" and "12 files / 102 tracked" are
+# true sentences about other objects, and a gate that read them as row counts
+# would fail a correct report -- which is the defect the scope prevents.
+FILE_CLAIM_SCOPE = re.compile(
+    r"manifest|CHECKSUM|root \+|checked in|workspace|in scope|corpus", re.I)
+NUM_FILES = re.compile(BARE_NUM + r"(?:\*\*)?\s+files\b")
+SPOKEN_FILES = re.compile(r"\b(" + SPOKEN + r")\s+files\b", re.I)
 
 
 def dated_claims(L):
@@ -427,8 +459,9 @@ def dated_claims(L):
         "harness ordinal": {ordinal(L["harnesses"])},
     }
     exact = [
-        ("gate count",    re.compile(BARE_NUM + r"\s+(?:root\s+)?gates\b")),
-        ("harness count", re.compile(BARE_NUM + r"\s+(?:proof\s+)?harnesses\b")),
+        ("gate count",    re.compile(BARE_NUM + r"(?:\*\*)?\s+(?:root\s+)?gates\b")),
+        ("harness count",
+         re.compile(BARE_NUM + r"(?:\*\*)?\s+(?:proof\s+)?harnesses\b")),
         ("gate count",    COMPOUND_GATE),
         ("harness count", COMPOUND_HARNESS),
         ("Brain.MD version", re.compile(r"`?Brain\.MD`?\s+(?:at\s+)?(v\d+\.\d+)")),
@@ -485,10 +518,19 @@ def dated_claims(L):
                 if m:
                     note("manifest rows", m.group(1).lower(),
                          spoken_expected["manifest rows"])
+            if FILE_CLAIM_SCOPE.search(line):
+                for m in NUM_FILES.finditer(line):
+                    note("manifest rows", m.group(1), expected["manifest rows"])
+                for m in SPOKEN_FILES.finditer(line):
+                    note("manifest rows", m.group(1).lower(),
+                         spoken_expected["manifest rows"])
             for label, pat in exact:
                 for m in pat.finditer(line):
                     note(label, m.group(1), expected.get(label))
             for label, pat in KEYED:
+                for m in pat.finditer(line):
+                    note(label, m.group(1), expected.get(label))
+            for label, pat in REVERSED_CLAIMS:
                 for m in pat.finditer(line):
                     note(label, m.group(1), expected.get(label))
             # A tally is `passed=N ... of N`; both halves name the same rig.
