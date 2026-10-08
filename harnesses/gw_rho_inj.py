@@ -16,9 +16,10 @@ promises.
   M6  low precision (128 bits vs 1200)       -> the bound must not shrink; wider
                                                balls may only make it larger
   M7  the Lerch summation mutated inside the tool, in a scratch copy
-      (term index shifted by one)   -> the printed mpmath deviations must move
-                                      by two orders of magnitude, proving the
-                                      check is sensitive rather than decorative
+      (term index shifted by one)   -> the tool must exit 1 (A18-R5 closed by
+                                      A21: the component check gained a
+                                      threshold) and the printed deviations
+                                      must move by orders of magnitude
 
 Everything runs on a 3x3 synthetic reference (c=2, N=1) so the suite stays
 fast; the shipped 81x81 dps-180 run is the A15 record, not this harness's job.
@@ -241,8 +242,12 @@ def main():
         moved_far = (mut_dev is not None
                      and (mut_dev > honest_dev * 100
                           or mut_dev < honest_dev / 100.0))
-        record("M7 Lerch mutation moves the diagnostics", moved_far,
-               "max deviation %.3e -> %.3e" % (honest_dev, mut_dev))
+        # A21 closed A18-R5: the check now has a threshold, so the mutated
+        # tool must object with exit 1 -- previously it could only print.
+        record("M7 Lerch mutation: tool objects and diagnostics move",
+               rc == 1 and moved_far,
+               "exit=%d, max deviation %.3e -> %.3e"
+               % (rc, honest_dev, mut_dev))
 
     # ---- cleanup --------------------------------------------------------
     for path in created:

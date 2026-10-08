@@ -50,7 +50,8 @@ usage:  python gw_rho_formal.py <c> <N> <reference.json> [prec_bits]
                     e.g. gw_matrix_100_40_dps180.json
 
 exit 0: measurement completed (read the verdict on stdout)
-exit 1: bad input (unreadable reference, wrong dimension, |z| >= 1)
+exit 1: bad input (unreadable reference, wrong dimension, |z| >= 1),
+         or a component deviation above tolerance (A18-R5)
 exit 2: flint/python unavailable
 """
 import json
@@ -295,6 +296,17 @@ def main(argv):
         print("  component check vs mpmath (dps 100, point values, ABSOLUTE):")
         for key in ("P0", "P0d", "pole_A"):
             print("    max abs. deviation %-7s : %s" % (key, mp.nstr(worst[key], 6)))
+        # A18-R5, closed by A21: a deviation that is only printed cannot fail
+        # the run, and a check that cannot fail is not a check.  1e-3 sits
+        # three orders above the honest port (~4e-06 at dps 100) and three
+        # below a wrong term in the Lerch summation (~8, harness M7).  Still
+        # a diagnostic rather than the certificate: the certificate is the
+        # ball enclosure computed below, and it is unchanged by this guard.
+        worst_dev = max(worst.values())
+        if worst_dev > mp.mpf("1e-3"):
+            print("  component check FAILED: worst deviation %s > tolerance 1e-3"
+                  % mp.nstr(worst_dev, 6))
+            return 1
     except Exception as exc:
         print("  component check skipped (%s: %s)" % (type(exc).__name__, exc))
     sys.stdout.flush()
