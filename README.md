@@ -135,12 +135,12 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | Workspace integrity | `checksum_check.py` | Manifest over workspace root + `provenance/` + `harnesses/`; last suite gate so mutations are detected |
 | Fault-injection proof of the gates themselves | `harness_check.py` + `harnesses\` | **24** proof harnesses, run sequentially with before/after workspace hashes |
 
-**Offline verification contract (as of 2026-10-07, Fase A12):**
+**Offline verification contract (as of 2026-10-07, Fase A16):**
 
 - Suite gates: **15** (`suite_check.py`)
 - `--with-harness` entry: **16**
 - Proof harnesses: **24**
-- Manifest scope: **93** files
+- Manifest scope: **97** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **16/16 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular
@@ -162,6 +162,10 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 | A10-R1 | The `10^120` vacuum gap is **not solved** |
 | A10-R2 | Gate 2 (quantum censorship) remains **not implemented** |
 | A10-R3 | RH, Navier–Stokes regularity and Langlands remain open in the literature regardless of any gate result here |
+| `A13-R1` | `lean\` sits **outside** the manifest scope, so neither Lean file is hash-pinned (`A13_REPORT.md` §7) |
+| `A14-R1` | The Lean theorems are theorems about the **model** over exact rationals; nothing connects them to the numerics that instantiate `R_tail` (`A14_REPORT.md` §7) |
+| `A15-R1` | **`OMEGATrackC.lean` was not recompiled** after the `rhoActual` literal changed — Mathlib is absent on this machine. The literal is verified instead by `track_c_make_smt.py` (3-way MATCH), Z3 7/7 and the Anti-Circularity Gate, none of which compile the module. Closing it requires installing Mathlib (`A15_REPORT.md` §7) |
+| `A15-R2` | `rho_actual` bounds the entry error **of the supplied matrix**; it is not a rebuild of that matrix and transfers to no other build (`A15_REPORT.md` §7) |
 
 External open mathematics (RH, Navier–Stokes, Langlands in general) remains open **regardless of any gate result in this repository**.
 
@@ -194,10 +198,10 @@ Registers (external_constants.json, theorem_provenance.json,
           REFERENCES.md, CHECKSUM.sha256, url_liveness.json)
         |
         v
-Gates (14 offline suite gates, fixed order, sequential)
+Gates (15 offline suite gates, fixed order, sequential)
         |
         v
-Fault-injection harnesses (22, mutate then restore, hash-checked)
+Fault-injection harnesses (24, mutate then restore, hash-checked)
         |
         v
 Anti-Circularity Gate (placeholder scan + claim gate + Z3 circularity audit)
@@ -261,7 +265,8 @@ If any of these do **not** fail, treat that as a defect in this workspace, not a
 
 ## 7. Roadmap (phase map for the examining board)
 
-Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Status as of **2026-10-07** (A12 complete):
+Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md`, in `A10_REPORT.md` …
+`A16_REPORT.md`, and in `Brain.MD`. Status as of **2026-10-07** (A16 complete):
 
 | Phase | Date | Focus | Status |
 |---|---|---|---|
@@ -282,6 +287,10 @@ Phases are recorded in `F0_REPORT.md` … `F8_REPORT.md` and in `Brain.MD`. Stat
 | A10 | 2026-10-07 | `tahap uji` honesty rewrite + `tahap_uji_audit.py` + ρ_Λ/ħ/c/Planck-vacuum provenance + harness `a10_tahu_inj.py` | Complete |
 | A11 | 2026-10-07 | Residual closures: P9 CONDITIONS_CLAIM + P11 liveness age; harness `a11_residual_inj.py`; `F8-R1`/`F8-R2` closed | Complete |
 | A12 | 2026-10-07 | F8-R4: `KAMUS_PEMETAAN.md` + rename `protocol_09.*` → `bounded_loop.*`; gate 8/8; manifest 93 | Complete |
+| A13 | 2026-10-07 | `lean\DiscreteCoordinates.lean`: Scale-Axiom lattice, `min_separation` + open-zone emptiness, core-only Lean, zero `sorry` | Complete |
+| A14 | 2026-10-07 | `lean\ModularWall.lean`: `M_hat_N` + `R_tail` structural contract, zero-fudging midpoint theorems, core-only Lean, zero `sorry` | Complete |
+| A15 | 2026-10-07 | `gw_rho_formal.py`: `rho_actual` as a ball-arithmetic **upper bound** (1200 bits, proved Lerch tail) instead of a dps-doubling estimate; margin 74.4468626023 decades; registers `A15-R1` | Complete |
+| A16 | 2026-10-07 | Bookkeeping closure: phase reports `A13`–`A15` authored, roadmap extended, residual register completed, manifest 97 | Complete |
 
 **Forward research blueprint** (from `Perluasan Visi Ilmiah (Extended Thesis Blueprint).md` — roadmap, not results):
 
@@ -304,7 +313,7 @@ Each of these is an **open programme**. None of the gates in §4.1 establishes t
 | 5 | `DRAF_AKADEMIS_DAN_SIMULASI_RIIL.md` | Abstract draft + gated zeta sensitivity data + anti-density defence |
 | 6 | `OCTAVE_CORE_MATHEMATICS.md` | Eight-domain tensor architecture and orthogonality mandate |
 | 7 | `Skill.md`, `Brain.MD`, `AGENTS.md` | Operating protocol and knowledge map |
-| 8 | `F0_REPORT.md` … `F8_REPORT.md` | Phase audits, findings, residuals, corrections |
+| 8 | `F0_REPORT.md` … `F8_REPORT.md`, `A10_REPORT.md` … `A16_REPORT.md` | Phase audits, findings, residuals, corrections |
 | 9 | `REFERENCES.md`, `external_constants.json`, `theorem_provenance.json` | Evidence layer |
 | 10 | `guinand-weil-rigorous-numerics-main\` | OMEGA-CORE engine, Track-C, engine-local licence and residuals |
 

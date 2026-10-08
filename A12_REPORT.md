@@ -62,7 +62,7 @@ File: `KAMUS_PEMETAAN.md` (root). A8 had deferred because this dictionary did no
 
 ## 4. Prose current-state vs historical amendment
 
-**Current-state (live pointers):** `README.md`, `Brain.MD` v1.18 (new rows for `bounded_loop.smt2`, `bounded_loop.log`, `KAMUS_PEMETAAN.md`, `A12_REPORT.md`), `SOLVABLE_FINITE_PARADOX.md` A1 block, sieve doc, `LICENSING.md`, `F8_REPORT.md` residual table.
+**Current-state (live pointers):** `README.md`, `Brain.MD` v1.19 (new rows for `bounded_loop.smt2`, `bounded_loop.log`, `KAMUS_PEMETAAN.md`, `A12_REPORT.md`), `SOLVABLE_FINITE_PARADOX.md` A1 block, sieve doc, `LICENSING.md`, `F8_REPORT.md` residual table.
 
 **Amendment-only (history preserved):** `F0_REPORT.md`, `F5_REPORT.md`, `A11_REPORT.md`, `TAHU_A10_REPORT.md` — each carries a dated A12 amendment naming the rename; original A1 wording is not rewritten.
 
