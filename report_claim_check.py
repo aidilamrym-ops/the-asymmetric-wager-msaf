@@ -38,20 +38,65 @@ SKILL = os.path.join(HERE, "Skill.md")
 BRAIN = os.path.join(HERE, "Brain.MD")
 MANIFEST = os.path.join(HERE, "CHECKSUM.sha256")
 
-# An anchor proves a number is written as history rather than as a fact about
-# today.  Anything the writer could have used to date the sentence counts.
-ANCHORS = (
+# History anchors, two tiers (audit B-MW1). TIER1 entries are
+# self-dating (a date, a version, an explicit phase reference, or an
+# explicit then/as-of) and keep the established +-1-line window. Bare
+# phase tags (F4, A20) date ONLY the sentence they stand in: "F4 gates
+# are green, 14 pass" dates the gates clause, not the 14. REMOVED from
+# the old set: `now` and `->`, which assert currency or change, never
+# history -- a stale number next to "now" used to pass as dated.
+TIER1 = (
     re.compile(r"20\d\d-\d\d-\d\d"),
     re.compile(r"\bat\s+[FA]\d"),
     re.compile(r"\bat\s+v\d"),
     re.compile(r"\bthen\b"),
     re.compile(r"\bas of\b"),
     re.compile(r"\bat the time\b"),
-    re.compile(r"\bnow\b"),
-    re.compile(r"\bF\d\b"),
-    re.compile(r"\bA\d\b"),
-    re.compile(r"->|→"),
 )
+PHASE_TAG = re.compile(r"\b[FA]\d\b")
+
+skips = []
+
+
+def record_skip(what):
+    skips.append(what)
+    print("SKIP  %s" % what)
+
+
+def _window_idx(lines, i):
+    idx = {i - 1, i, i + 1}
+    for j in range(i, max(-1, i - 8), -1):
+        if lines[j].lstrip().startswith("```"):
+            idx |= set(range(max(0, j - 3), j + 2))
+            break
+    return idx
+
+
+def anchor_window(lines, i):
+    for j in sorted(_window_idx(lines, i)):
+        if 0 <= j < len(lines):
+            for pat in TIER1:
+                if pat.search(lines[j]):
+                    return True
+    return False
+
+
+def phase_in_sentence(lines, i, value):
+    window = "\n".join(
+        lines[j] for j in sorted(_window_idx(lines, i))
+        if 0 <= j < len(lines)
+    )
+    for sent in re.split(r"[.!?;\n]+", window):
+        if PHASE_TAG.search(sent) and re.search(
+            r"(?<![A-Za-z0-9-])" + re.escape(str(value)) + r"(?![A-Za-z0-9-])",
+            sent,
+        ):
+            return True
+    return False
+
+
+def is_history(lines, i, value):
+    return anchor_window(lines, i) or phase_in_sentence(lines, i, value)
 
 failures = []
 
@@ -212,20 +257,22 @@ def manifest_rows():
     return rows
 
 
-def anchor_window(lines, i):
-    """True when the claim's own line or an immediate neighbour is dated.
-
-    A fenced code block is quoted evidence rather than prose: its date belongs
-    to the sentence that introduced the block, so the search also reaches the
-    opening fence and the line above it."""
+def _window_idx(lines, i):
     idx = {i - 1, i, i + 1}
     for j in range(i, max(-1, i - 8), -1):
         if lines[j].lstrip().startswith("```"):
             idx |= set(range(max(0, j - 3), j + 2))
             break
-    for j in sorted(idx):
+    return idx
+
+
+def anchor_window(lines, i):
+    """True when the claim's own line or an immediate neighbour carries a
+    TIER-1 (self-dating) anchor. Kept for compatibility; new code calls
+    is_history with the claimed value instead."""
+    for j in sorted(_window_idx(lines, i)):
         if 0 <= j < len(lines):
-            for pat in ANCHORS:
+            for pat in TIER1:
                 if pat.search(lines[j]):
                     return True
     return False
@@ -494,7 +541,7 @@ def dated_claims(L):
             return
         suspect += 1
         want = "/".join(sorted(expected_set))
-        if anchor_window(lines, i):
+        if is_history(lines, i, value):
             ok("P5 %s:%d history, not current -- %s=%s, live %s"
                % (name, i + 1, label, value, want))
         else:
@@ -505,6 +552,7 @@ def dated_claims(L):
     for name in rooted_md():
         text = readable(os.path.join(HERE, name))
         if text is None:
+            record_skip("%s unreadable (BOM/binary), skipped" % name)
             continue
         lines = text.splitlines()
         for i, line in enumerate(lines):
@@ -755,6 +803,7 @@ def conditions_claim_check(L):
     for name in rooted_md():
         text = readable(os.path.join(HERE, name))
         if text is None:
+            record_skip("%s unreadable (BOM/binary), skipped" % name)
             continue
         lines = text.splitlines()
         for i, line in enumerate(lines):
@@ -767,7 +816,7 @@ def conditions_claim_check(L):
                 if value == live:
                     checked += 1
                     continue
-                if anchor_window(lines, i):
+                if is_history(lines, i, m.group(1)):
                     history += 1
                     ok("P9 %s:%d history, not current -- %d conditions, "
                        "live %d" % (name, i + 1, value, live))
@@ -804,6 +853,8 @@ def main(argv):
     reference_check()
     registration_check()
     map_check()
+    if skips:
+        print("report_claim_check: %d file(s) skipped (loud, listed above)" % len(skips))
     if failures:
         print("report_claim_check: FAIL -- %d defective claim(s)" % len(failures))
         return 1
