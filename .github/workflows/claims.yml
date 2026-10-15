@@ -1,0 +1,44 @@
+name: claims
+
+# Scope, stated rather than implied: this workflow proves the *report claim
+# layer* -- that every number in the corpus either equals the live rig or is
+# dated as history, that the manifest matches the bytes, and that the gate
+# still fails on planted defects.
+#
+# It deliberately does NOT run suite_check.py. That rig needs Lean, Z3, the
+# visual/pixel bridge and a 600 s spectral pipeline, so wiring it here would
+# mean a red badge that says "no Lean toolchain" instead of "a claim is
+# wrong". A badge that cries wolf gets ignored; that is worse than no badge.
+# The rig is run locally with `python suite_check.py --with-harness`.
+#
+# Two operating systems on purpose. The manifest hashes raw bytes and the
+# repository pins `* -text` precisely so a Linux checkout and this Windows
+# checkout hash identically -- that property is asserted by CI, never by a
+# comment.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  claim-layer:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: negative fixtures (planted defects must be caught)
+        run: python claim_fixture_check.py
+
+      - name: manifest matches the bytes
+        run: python checksum_check.py
+
+      - name: every report claim is live or dated
+        run: python report_claim_check.py

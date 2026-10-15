@@ -146,7 +146,7 @@ Seven classes this gate used to read past. Each is injection-proven by
 
 | # | Class | Defect the gate used to read past | Fix |
 |---|---|---|---|
-| 1 | keyed header | `suite=14 harnesses=21` was mis-read as bare counts (the `=` glued digits to the word); `brain=v…` was never compared | `KEYED` map; `BARE_NUM` now rejects `=` and alphanumeric prefixes |
+| 1 | keyed header | `suite=14 harnesses=21` was mis-read as bare counts (the `=` glued digits to the word); `brain=v…` was never compared | `KEYED` map; `BARE_NUM` now rejects `=` and alphanumeric prefixes | (quoted historical header, at F8)
 | 2 | `tally_object` mis-binds | `suite_check.py --with-harness` was counted as harnesses because the ±3-line window hit the wrong line | classify from the claim's **own** line first; window is fallback only |
 | 3 | `entries` spelled out | a written-out manifest row count was skipped | `SPOKEN_ENTRIES`, gated on `with-harness\|enumerat` |
 | 4 | ordinals past `twentieth` | `twenty-second` passed unread (`ORD_*` was case-sensitive; lists stopped at 20th) | `re.I`; lists generated 0…99 |
@@ -193,7 +193,7 @@ retargeted.
 
 ### 6.2 An A8 edit had overwritten a historical `brain=v…` record
 
-`F7_REPORT.md` §6 is a **phase record**. It stated `brain=v1.14` because A8
+`F7_REPORT.md` §6 is a **phase record**. It stated `brain=v1.14` (as overwritten at A8; since restored) because A8
 edits had overwritten the version string the F7 verification actually read.
 A phase record must not be rewritten to match a later tree; the string was
 restored to `v1.13`, the value F7 verified, and the surrounding sentence was

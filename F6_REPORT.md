@@ -75,13 +75,13 @@ value, one agreed.**
 
 ### 2.3 What was fixed
 
-**A5-1 — `Brain.MD`, current-tense constitution.**
+**A5-1 — `Brain.MD`, current-tense constitution.** (quotes below are wordings as of F6)
 *"the flag is off by default because the thirteen gates are a read-only
 contract"*. Present tense, no date, in the file `Skill.md` tells every agent to
 read first. Corrected to *fourteen*. This is the sentence the new C1 spelled
 rule now holds permanently.
 
-**A5-2 — `F2_REPORT.md` §9, unanchored.**
+**A5-2 — `F2_REPORT.md` §9, unanchored.** (quotes below are wordings as of F6)
 *"`harness_check.py` runs all twenty harnesses"* sat three lines above a date,
 outside the one-line anchor window. Rewritten so the count and its date share a
 line: the method sentence became timeless (*runs every harness in
@@ -93,12 +93,12 @@ The suite-regression row recorded `11/11 → 12/12 (A2) → 13/13 (A1)` and then
 stopped, because it was last written before A3. Appended `14/14 since
 2026-10-06, A3`.
 
-**A5-4 — `F5_REPORT.md` §1, unanchored past tense.**
+**A5-4 — `F5_REPORT.md` §1, unanchored past tense.** (quotes below are wordings as of F6)
 *"Eleven root gates were runnable individually"* reads as a statement about the
 rig today. Prefixed with *At F5's start*, which is what was meant.
 
 **A5-5 — three subset phrases, disambiguated.**
-`Brain.MD` and `F2_REPORT.md` said "the six harnesses" / "all six harnesses"
+`Brain.MD` and `F2_REPORT.md` said "the six harnesses" / "all six harnesses" (as of A5)
 about F2's six, in a workspace that has twenty-one. Each now reads "the six F2
 harnesses". They were not wrong; they were only decidable from context, and
 context is what a sweep does not have.
@@ -171,7 +171,7 @@ not a shipped file.
 
 **A5-8 — the knowledge map had fallen behind the tree.**
 `Brain.MD` is described, in `AGENTS.md`, as the knowledge map of every file in
-the workspace. The four files A6 added — `LICENSING.md`, `LICENSE`,
+the workspace. The files A6 added — `LICENSING.md`, `LICENSE`,
 `.gitignore`, `.gitattributes` — were in none of its sections. Nothing failed.
 Four rows were added to §1, each stating what the file is *for* rather than
 that it exists.

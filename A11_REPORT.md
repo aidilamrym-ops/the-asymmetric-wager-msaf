@@ -102,7 +102,7 @@ phase tags) are left alone — that is the escape hatch working as designed.
 | `provenance_check.py` | P11 measures and prints age; future/malformed FAIL; policy comment |
 | `harnesses/a11_residual_inj.py` | new harness, `7/7` |
 | `harness_check.py` | harness `a11_residual_inj.py` registered (23 → 24) |
-| `Skill.md` | 23 → 24 proof harnesses |
+| `Skill.md` | 23 → 24 proof harnesses | (as of A11)
 | `Brain.MD` | v1.17; row for `A11_REPORT.md`; harness list + counts; P9 documented on `report_claim_check.py` row |
 | `README.md` | offline contract A11; roadmap A11; open items F8-R1/R2 removed |
 | `F8_REPORT.md` | residuals F8-R1/F8-R2 closed; verification matrix noted |

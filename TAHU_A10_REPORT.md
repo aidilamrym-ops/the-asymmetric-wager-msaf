@@ -105,7 +105,7 @@ Live recompute (mpmath 50 dps, 2026-10-07):
 
 | File | Change |
 |---|---|
-| `Skill.md` | 14 → 15 root gates; fifteenth → sixteenth `--with-harness` entry; 22 → 23 proof harnesses |
+| `Skill.md` | 14 → 15 root gates; fifteenth → sixteenth `--with-harness` entry; 22 → 23 proof harnesses | (as of TAHU_A10)
 | `Brain.MD` | v1.16; rows for `tahap_uji_audit.py`, `TAHU_A10_REPORT.md`; harness list includes `a10_tahu_inj`; suite/harness counts updated |
 | `README.md` | Offline contract updated to A10 counts; new achievement row; phase table entry A10 |
 | `REFERENCES.md` | Sections for the six new quantities + `WIKIPEDIA_DARK_ENERGY`; layer tally A10 = 24 records, A=10, B=12, C=2 |

@@ -286,7 +286,7 @@ the corrected rule.
 re-verified before continuing, so no file was left mutated. Fixed by keying on
 the 3-character case id.
 
-### F3-I — Bogus `evidence_id` (caught before the first gate run)
+### F3-I — Bogus `evidence_id` (caught before the first gate run) (as of F3)
 The first draft pointed `OBSERVABLE_UNIVERSE_DIAMETER` at
 `PLATT_TRUDGIAN_2021`, an unrelated paper. Replaced with a dedicated
 `PLANCK_2018_VI` evidence entry.
@@ -378,8 +378,8 @@ Rows in §8 marked **CLOSED** carry their own proof; nothing marked *open* or *d
 | encoding, all new files | byte inspection | no BOM, `CR = 0`, UTF-8 strict |
 | regression suite, root gates | `landauer_check`, `znone_check`, `zeta_pixel_producer`, `msaf_zeta_check`, `bridge_mirror_check`, `visual_check`, `msaf_visual`, `provenance_check` | all exit **0** |
 | regression suite, sub-repo gates | `gw_check_refs`, `gw_verify_results`, `gw_verify_production` | exit 0, 0, 0 |
-| `CHECKSUM.sha256` | row count | 113 tracked rows, `TOTAL FILES : 113`, mtime unchanged |
-| Anti-Circularity Gate | self-test, `gate lean`, `gate claim`, `gate check` | self-test **13/13**; all three gates **PASS** (`FAIL=0 NOT_RUN=0 SKIP=0`); auditor `GENUINE`, `core=[0]`. F3 introduces no `.lean` or `.smt2` claim, so the gate is run for completeness and to confirm no placeholder or comment-only claim entered the corpus. |
+| `CHECKSUM.sha256` | row count | 113 tracked rows, `TOTAL FILES : 113`, mtime unchanged | (as of F3)
+| Anti-Circularity Gate | self-test, `gate lean`, `gate claim`, `gate check` | self-test **13/13**; all three auditor gates **PASS** (`FAIL=0 NOT_RUN=0 SKIP=0`); auditor `GENUINE`, `core=[0]`. F3 introduces no `.lean` or `.smt2` claim, so the gate is run for completeness and to confirm no placeholder or comment-only claim entered the corpus. |
 
 ---
 
@@ -397,7 +397,7 @@ Rows in §8 marked **CLOSED** carry their own proof; nothing marked *open* or *d
    **declared and machine-enforced**, not quietly fixed and not left for an
    examiner to discover.
 4. Every external claim is now gated. Before F3 the gates covered internal
-   mathematics only; this is the first gate over the boundary between the
+   mathematics only; this gate newly crosses the boundary (as of F3) between the
    corpus and the outside world.
 5. The gate's own tolerance is now anchored rather than merely asserted. The
    first `27/27` result proved facts are checked; the vacuity probe proved the

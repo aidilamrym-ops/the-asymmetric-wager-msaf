@@ -82,6 +82,14 @@ def scan():
             continue
         if name == MANIFEST_NAME:
             continue
+        if name == ".git":
+            # A linked worktree carries its gitdir pointer as a FILE named
+            # .git; a normal clone carries a directory (already skipped
+            # above). Neither is workspace content -- the manifest must
+            # not depend on which checkout shape the runner uses.
+            # (Caught: P3 failed in a worktree with 106 files vs 105 rows
+            # while every real clone passed.)
+            continue
         if name.lower().endswith(".pyc"):
             continue
         paths.append(name.replace("\\", "/"))

@@ -212,6 +212,42 @@ def value_from_needle(needle):
 
 # ---------------------------------------------------------------- loading --
 
+# A site document that cannot be read because the TREE it lives in is
+# absent from this checkout is unverifiable, not defective. Populated by
+# absent_tree(); read by the verdict block.
+unverifiable = []
+unverifiable_trees = set()
+
+
+def absent_tree(relpath):
+    """The top-level directory of `relpath` when that directory is not in
+    this checkout, else None.
+
+    Only the FIRST path segment is tested, and only when it is a real
+    directory reference. A bare root file that is missing is always a
+    defect: there is no tree to blame."""
+    parts = str(relpath).replace("\\", "/").split("/")
+    if len(parts) < 2 or not parts[0] or parts[0] in (".", ".."):
+        return None
+    top = os.path.join(HERE, parts[0])
+    if os.path.isdir(top):
+        return None
+    return parts[0]
+
+
+def not_verifiable(cond_id, relpath, why):
+    """Record a check that could not run; print it loudly at the time."""
+    tree = absent_tree(relpath)
+    if tree is None:
+        return False
+    unverifiable_trees.add(tree)
+    line = "%s: %s (%s) -- tree %r is not in this checkout" % (
+        cond_id, why, relpath, tree)
+    unverifiable.append(line)
+    print("NOTRUN  %s" % line)
+    return True
+
+
 def load_or_die(path, label):
     if not os.path.isfile(path):
         print("FAIL  --  %s is missing: %s" % (label, path))
@@ -389,8 +425,11 @@ def main(argv):
             sid = "%s#%d" % (qid, i)
             path = os.path.join(HERE, str(s.get("file", "")))
             if not os.path.isfile(path):
-                fail("P3  SITE_FOUND: document missing for %s (%s)"
-                     % (sid, s.get("file")))
+                if not not_verifiable(
+                        "P3  SITE_FOUND", s.get("file"),
+                        "document missing for %s" % sid):
+                    fail("P3  SITE_FOUND: document missing for %s (%s)"
+                         % (sid, s.get("file")))
                 continue
             try:
                 with io.open(path, encoding="utf-8") as fh:
@@ -767,8 +806,11 @@ def main(argv):
     markers_seen = 0
     for fname in site_files:
         path = os.path.join(HERE, str(fname))
-        if not check(os.path.isfile(path),
-                     "P10  REF_MARKERS: site file %r does not exist" % fname):
+        if not os.path.isfile(path):
+            if not not_verifiable(
+                    "P10  REF_MARKERS", fname,
+                    "site file does not exist"):
+                fail("P10  REF_MARKERS: site file %r does not exist" % fname)
             continue
         with io.open(path, encoding="utf-8", newline="") as fh:
             lines = fh.read().split("\n")
@@ -1007,9 +1049,34 @@ def main(argv):
         print("")
         for f in failures:
             print("FAIL  %s" % f)
+        if unverifiable:
+            # Real defects win the exit code; the unverifiable checks are
+            # still named so nobody reads a clean FAIL list as complete.
+            print("")
+            print("NOTRUN  %d further check(s) could not run in this "
+                  "checkout:" % len(unverifiable))
+            for u in unverifiable:
+                print("NOTRUN  %s" % u)
         print("")
         print("GATE: FAIL -- %d condition(s) not met" % len(failures))
         return 1
+    if unverifiable:
+        trees = sorted(unverifiable_trees)
+        print("")
+        print("NOTRUN  %d check(s) could not be executed here: the "
+              "document tree(s) %s are not in this checkout."
+              % (len(unverifiable), ", ".join(repr(x) for x in trees)))
+        print("        They are third-party corpora excluded by "
+              ".gitignore, so a fresh clone cannot see them.")
+        print("        This is TOOL NOT RUN, never a pass and never a fail:")
+        print("        every condition that COULD run above did run and met.")
+        print("        Restore the tree(s) and re-run to obtain a verdict.")
+        for u in unverifiable:
+            print("NOTRUN  %s" % u)
+        print("")
+        print("GATE: TOOL NOT RUN -- %d condition(s) unverified"
+              % len(unverifiable))
+        return 2
     print("")
     print("GATE: PASS -- %d quantities, %d evidence snapshots, %d reference "
           "facts, %d conditions"

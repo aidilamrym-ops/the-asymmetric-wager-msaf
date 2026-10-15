@@ -38,22 +38,33 @@ SKILL = os.path.join(HERE, "Skill.md")
 BRAIN = os.path.join(HERE, "Brain.MD")
 MANIFEST = os.path.join(HERE, "CHECKSUM.sha256")
 
-# History anchors, two tiers (audit B-MW1). TIER1 entries are
-# self-dating (a date, a version, an explicit phase reference, or an
-# explicit then/as-of) and keep the established +-1-line window. Bare
-# phase tags (F4, A20) date ONLY the sentence they stand in: "F4 gates
-# are green, 14 pass" dates the gates clause, not the 14. REMOVED from
-# the old set: `now` and `->`, which assert currency or change, never
-# history -- a stale number next to "now" used to pass as dated.
+# History anchors (audit B-MW1). A TIER1 entry is self-dating: a
+# calendar date, an explicit `at F17`/`at v1.9`, an explicit
+# then/as-of, or a parenthesised era stamp `(A5)`. It keeps the
+# established +-1-line window.
+#
+# REMOVED from the old set, because they assert currency or change,
+# never history: `now` and `->`. A stale number sitting next to "now"
+# used to pass as dated.
+#
+# Bare phase tags are NOT anchors either: "F4 gates are green, 14
+# pass" dates the gates clause, not the 14. A tag only dates a claim
+# when the author brackets it -- `(A5)`, `(as of A11)` -- which is an
+# explicit stamp the writer put there on purpose.
+#
+# Case-insensitive throughout: the writer capitalises freely ("At F5's
+# start, eleven root gates ..."), and a case-sensitive matcher called
+# that properly dated sentence undated.
+I = re.IGNORECASE
 TIER1 = (
-    re.compile(r"20\d\d-\d\d-\d\d"),
-    re.compile(r"\bat\s+[FA]\d"),
-    re.compile(r"\bat\s+v\d"),
-    re.compile(r"\bthen\b"),
-    re.compile(r"\bas of\b"),
-    re.compile(r"\bat the time\b"),
+    re.compile(r"20\d\d-\d\d-\d\d", I),
+    re.compile(r"\bat\s+[FA]\d", I),
+    re.compile(r"\bat\s+v\d", I),
+    re.compile(r"\bthen\b", I),
+    re.compile(r"\bas\s+of\b", I),
+    re.compile(r"\bat\s+the\s+time\b", I),
+    re.compile(r"\(\s*(?:as\s+of\s+|phase\s+)?[FA]\d(?:\.\d+)?\s*\)", I),
 )
-PHASE_TAG = re.compile(r"\b[FA]\d\b")
 
 skips = []
 
@@ -79,24 +90,6 @@ def anchor_window(lines, i):
                 if pat.search(lines[j]):
                     return True
     return False
-
-
-def phase_in_sentence(lines, i, value):
-    window = "\n".join(
-        lines[j] for j in sorted(_window_idx(lines, i))
-        if 0 <= j < len(lines)
-    )
-    for sent in re.split(r"[.!?;\n]+", window):
-        if PHASE_TAG.search(sent) and re.search(
-            r"(?<![A-Za-z0-9-])" + re.escape(str(value)) + r"(?![A-Za-z0-9-])",
-            sent,
-        ):
-            return True
-    return False
-
-
-def is_history(lines, i, value):
-    return anchor_window(lines, i) or phase_in_sentence(lines, i, value)
 
 failures = []
 
@@ -268,8 +261,9 @@ def _window_idx(lines, i):
 
 def anchor_window(lines, i):
     """True when the claim's own line or an immediate neighbour carries a
-    TIER-1 (self-dating) anchor. Kept for compatibility; new code calls
-    is_history with the claimed value instead."""
+    TIER-1 (self-dating) anchor: a date, `at F/A<digit>`, `at v<digit>`,
+    `then`, `as of`, or `at the time`. Bare phase tags, `now`, and `->`
+    never count (audit B-MW1)."""
     for j in sorted(_window_idx(lines, i)):
         if 0 <= j < len(lines):
             for pat in TIER1:
@@ -541,7 +535,7 @@ def dated_claims(L):
             return
         suspect += 1
         want = "/".join(sorted(expected_set))
-        if is_history(lines, i, value):
+        if anchor_window(lines, i):
             ok("P5 %s:%d history, not current -- %s=%s, live %s"
                % (name, i + 1, label, value, want))
         else:
@@ -556,6 +550,12 @@ def dated_claims(L):
             continue
         lines = text.splitlines()
         for i, line in enumerate(lines):
+            # Blockquotes quote evidence; they assert nothing in the
+            # reporter's voice (same principle as fenced code blocks).
+            # A stale number inside `>` passes by design; what the gate
+            # checks is what the report itself claims.
+            if line.lstrip().startswith(">"):
+                continue
             # "N rows" is only about the manifest when the line names it; a
             # Markdown table of five rows is not a claim about CHECKSUM.sha256.
             if re.search(r"CHECKSUM|manifest", line, re.I):
@@ -807,6 +807,8 @@ def conditions_claim_check(L):
             continue
         lines = text.splitlines()
         for i, line in enumerate(lines):
+            if line.lstrip().startswith(">"):
+                continue
             if not PROV_SCOPE.search(line):
                 continue
             for m in COND_NUM.finditer(line):
@@ -816,7 +818,7 @@ def conditions_claim_check(L):
                 if value == live:
                     checked += 1
                     continue
-                if is_history(lines, i, m.group(1)):
+                if anchor_window(lines, i):
                     history += 1
                     ok("P9 %s:%d history, not current -- %d conditions, "
                        "live %d" % (name, i + 1, value, live))

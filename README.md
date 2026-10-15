@@ -140,7 +140,7 @@ These are **not** rhetorical. Each item is backed by a gate script that reads cl
 - Suite gates: **16** (`suite_check.py`)
 - `--with-harness` entry: **17**
 - Proof harnesses: **28**
-- Manifest scope: **105** files
+- Manifest scope: **106** files
 - `provenance_check.py`: **11** conditions (P1–P11); P11 prints record age
 - Full offline suite with harnesses last run: **17/17 PASS**
 - Anti-Circularity Gate self-test: **13/13**; SMT circularity auditor on Track-C + bounded_loop: **GENUINE**, not circular

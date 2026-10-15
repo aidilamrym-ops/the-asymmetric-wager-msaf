@@ -87,7 +87,7 @@ never as a bare `N files` / `N-gate` compound in a diagram:
 |---|---|---|
 | `README.md` §6.1 diagram | `Gates (14 offline suite gates…)` | `15` |
 | `README.md` §6.1 diagram | `Fault-injection harnesses (22…)` | `24` |
-| `Brain.MD:17` | `14-gate/22-harness rig`, `roadmap F0–A9`, `F8-R1..R4` | `15-gate/24-harness rig`, `F0–A16`, live residual list |
+| `Brain.MD:17` | `14-gate/22-harness rig` (as of A9), `roadmap F0–A9`, `F8-R1..R4` | `15-gate/24-harness rig` (as of A16), `F0–A16`, live residual list |
 
 The `Brain.MD` line had been passing P5 only because the same line contained the
 string `F0`, which the anchor rules accept as a date. **A gate that passes a

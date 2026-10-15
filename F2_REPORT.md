@@ -894,7 +894,7 @@ afterwards: no `CR`, no BOM, UTF-8 strict, LF only.
 - [x] gate run against the real artefact, exit 0
 - [x] the artefact's `lambda_min_lower_bound`, sha256 and row shape recorded
       in 7.10 below
-- [x] `CHECKSUM.sha256` regenerated once (113 -> 116 rows: three new run
+- [x] `CHECKSUM.sha256` regenerated once (113 -> 116 rows as of F2: three new run
       outputs, plus the refreshed `gw_verify_production.py` entry and a header
       note); the certificate's byte-hash inventory row and its superseded-hash
       note updated
@@ -1007,7 +1007,7 @@ this section is the defect, §8.3.1 is the fix.
 D1 of Fase H asked which harness proves each fault-injection count this phase
 reports. **There is none.**
 
-* `harnesses/` holds 14 harnesses covering F1, F3, F4, F5 and A1 — `f1_mut`,
+* `harnesses/` holds 14 harnesses covering F1, F3, F4, F5 and A1 — `f1_mut`, (as of F2)
   `f3_inj`, `f3_vacuity`, `f3_a1`, `f4_inj`, `f4_brittleness`,
   `f4_build_register`, `f5_1_stagea/b/c`, `f5_2_inj`, `f5_3_inj`,
   `f5_4_inj`, `p09_inj` (added 2026-10-06 by A1; 13 at the time this
