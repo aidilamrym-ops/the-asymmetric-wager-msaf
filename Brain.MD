@@ -6,7 +6,7 @@
 
 ## 0. CORPUS SUMMARY (One Paragraph)
 
-`D:\THE ASYMMETRIC WAGER` is the MSAF (*Modular Scale Arithmetic Framework*) corpus by Muhammad Aidil Amry: deconstruction of Actual Infinity into Potential Infinity, anchoring mathematics to the universe scale constant ($\Delta_{\text{univ}} \approx 1{,}836\times10^{-62}$), repositioning the Riemann Hypothesis as a Scale Axiom, plus the OMEGA-CORE v2 empirical falsification engine (Guinand-Weil matrix, interval $LDL^T$ certification via flint.arb + Z3 + Lean Track-C). Global citation: DOI `10.5281/zenodo.22791556`.
+`D:\THE ASYMMETRIC WAGER` is the MSAF (*Modular Scale Arithmetic Framework*) corpus by Muhammad Aidil Amry: deconstruction of Actual Infinity into Potential Infinity, anchoring mathematics to the universe scale constant ($\Delta_{\text{univ}} \approx 1{,}836\times10^{-62}$), repositioning the Riemann Hypothesis as a Scale Axiom, plus the OMEGA-CORE v2 empirical falsification engine (Guinand-Weil matrix, interval $LDL^T$ certification via flint.arb + Z3 + Lean Track-C). Repository archive DOI `10.5281/zenodo.23392745` (commit `66310cf`); project document DOI `10.5281/zenodo.22791556`.
 
 ---
 

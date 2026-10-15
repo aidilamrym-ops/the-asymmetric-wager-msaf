@@ -2,7 +2,8 @@
 
 **Author:** Muhammad Aidil Amry (Independent Researcher, South Sulawesi, Indonesia)  
 **ORCID:** 0009-0002-9718-9710  
-**Canonical DOI:** [10.5281/zenodo.22791556](https://doi.org/10.5281/zenodo.22791556)  
+**Repository archive DOI:** [10.5281/zenodo.23392745](https://doi.org/10.5281/zenodo.23392745) (commit `66310cf`, sha256 of the archive in the record)  
+**Project document DOI:** [10.5281/zenodo.22791556](https://doi.org/10.5281/zenodo.22791556)  
 **Repository:** `the-asymmetric-wager-msaf`  
 **Workspace of record:** `D:\THE ASYMMETRIC WAGER`  
 **Licence:** hybrid — MIT for code, CC-BY-4.0 for scholarly documents (see `LICENSING.md`)
